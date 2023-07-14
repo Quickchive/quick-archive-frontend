@@ -1,6 +1,7 @@
 #app {
   display: flex;
   font-family: Pretendard-Regular;
+  height: 100%;
 }
 
 @font-face {
@@ -28,11 +29,14 @@
   }
 }
 
+button {
+  border-style: none;
+}
+
 .btn {
   width: 398px;
   height: 56px;
   border-radius: 16px;
-  border-style: none;
   text-align: center;
   font-family: Pretendard;
   font-size: 15px;
@@ -50,6 +54,11 @@
 
 .img-btn {
   background-color: transparent;
-  border-style: none;
   padding: 0;
+}
+
+.btn__md {
+  width: 288px;
+  height: 56px;
+  display: flex;
 }
