@@ -1,0 +1,55 @@
+#app {
+  display: flex;
+  font-family: Pretendard-Regular;
+}
+
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+    format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.flex-container {
+  display: flex;
+  width: 100%;
+  &__col {
+    display: flex;
+    flex-direction: column;
+  }
+  &__row {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.btn {
+  width: 398px;
+  height: 56px;
+  border-radius: 16px;
+  border-style: none;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 160% */
+  letter-spacing: -0.3px;
+  box-sizing: border-box;
+  padding: 16px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  cursor: pointer;
+}
+
+.img-btn {
+  background-color: transparent;
+  border-style: none;
+  padding: 0;
+}

@@ -1,0 +1,106 @@
+h1 {
+  color: $color-grey-100;
+  text-align: center;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 48px; /* 150% */
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+p {
+  color: $color-grey-80;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.login-container {
+  width: 462px;
+  height: 501px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 16px;
+}
+
+.btn__kakao {
+  background-color: #fee500;
+  color: $color-grey-100;
+  img {
+    margin-right: 89px;
+  }
+}
+
+.btn__google {
+  background-color: #ffffff;
+  border: 1px solid $color-grey-10;
+  color: $color-grey-100;
+  img {
+    margin-right: 97px;
+  }
+}
+
+.btn__apple {
+  background-color: #000000;
+  color: #ffffff;
+  img {
+    margin-right: 102px;
+  }
+}
+
+.login-btn__wrapper {
+  margin: 0px 0 32px 0;
+  gap: 12px;
+}
+
+.desc__wrapper {
+  color: var(--grey-60, #909091);
+  text-align: center;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 123.077% */
+  letter-spacing: -0.3px;
+  a {
+    text-decoration-line: underline;
+    cursor: pointer;
+  }
+}
+
+.close-btn__wrapper {
+  justify-content: right;
+  width: 100%;
+}
+
+.banner__wrapper {
+  text-align: center;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 153.846% */
+  letter-spacing: -0.3px;
+  position: relative;
+  width: 157px;
+  margin-top: 56px;
+  img {
+    width: 100%;
+  }
+  span {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+    width: 157px;
+  }
+  strong {
+    color: #146eff;
+  }
+}
