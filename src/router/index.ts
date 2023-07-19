@@ -22,7 +22,7 @@ const router = createRouter({
     {
       path: '/testpage',
       name: 'test',
-      component: () => import('@/components/home/ContentsItem.vue')
+      component: () => import('@/views/HomeView.vue')
     }
   ]
 })

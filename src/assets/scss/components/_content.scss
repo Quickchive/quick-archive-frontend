@@ -3,12 +3,6 @@
   height: 112px;
   align-items: center;
 
-  .thumbnail__wrapper {
-    width: 112px;
-    height: 112px;
-    margin-right: 24px;
-  }
-
   .item__wrapper {
     h1 {
       width: 744px;
@@ -52,9 +46,19 @@
       }
     }
   }
-  button {
-    margin-left: 32px;
-    width: 32px;
-    height: 32px;
+}
+
+.contents-container {
+  .contents-num__wrapper {
+    color: $color-grey-70;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 24px; /* 171.429% */
+    letter-spacing: -0.3px;
+  }
+
+  .contents-list__wrapper {
+    gap: 20px;
+    margin-top: 16px;
   }
 }

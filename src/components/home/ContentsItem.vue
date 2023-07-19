@@ -1,6 +1,9 @@
 <template>
   <article class="flex-container__row item-container">
-    <img :src="thumbnail" class="thumbnail__wrapper" />
+    <div class="thumbnail__wrapper">
+      <img :src="thumbnail" class="thumbnail" />
+      <button class="button--transparent btn-favorite"><img :src="favoriteSelectedIcon" /></button>
+    </div>
     <article class="item__wrapper">
       <h1>{{ title }}</h1>
       <p>{{ text }}</p>
@@ -11,7 +14,7 @@
         {{ siteName }}
       </footer>
     </article>
-    <button class="img-btn"><img :src="moreIcon" /></button>
+    <button class="button--transparent btn--more"><img :src="moreIcon" /></button>
   </article>
 </template>
 
@@ -20,6 +23,8 @@ import thumbnail from '@/assets/img/thumbnail1.png'
 import categoryIcon from '@/assets/ic/ic-category.svg'
 import divider from '@/assets/img/divider_14px.svg'
 import moreIcon from '@/assets/ic/ic-more.svg'
+import favoriteSelectedIcon from '@/assets/ic/ic-favorite-seleted_32px.svg'
+import favoriteUnselectedIcon from '@/assets/ic/ic-favorite-unseleted_32px.svg'
 
 export default {
   // props: {
@@ -39,7 +44,9 @@ export default {
       divider,
       category: '브런치',
       siteName: 'Brunch',
-      moreIcon
+      moreIcon,
+      favoriteSelectedIcon,
+      favoriteUnselectedIcon
     }
   }
 }

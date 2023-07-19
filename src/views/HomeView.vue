@@ -1,37 +1,32 @@
 <template>
-  <nav class="flex-container__col">
-    <div>
-      <a>logo</a>
-      <!-- profile -->
-      <div class="flex-container__row profile__wrapper">
-        <img :src="profileImg" /><span>{{ nickname }}</span>
+  <the-nav-bar></the-nav-bar>
+  <section class="flex-container__col">
+    <title-bar></title-bar>
+    <div class="divider"></div>
+    <article class="flex-container__col contents-container">
+      <div class="contents-num__wrapper">{{ contentsNum }}개</div>
+      <div class="flex-container__col contents-list__wrapper">
+        <contents-item v-for="item in items" :key="item"></contents-item>
       </div>
-      <div class="search__wrapper">
-        <img :src="naviSearch" />
-        <input class="input__naviSearch" placeholder="제목, 메모, 카테고리명 검색" />
-      </div>
-    </div>
-    <!-- 카테고리 -->
-    <div></div>
-    <!-- 버튼 -->
-    <div class="btnAdd__wrapper">
-      <button class="btn__md btn__add"><img :src="plus" />추가하기</button>
-    </div>
-  </nav>
+    </article>
+  </section>
 </template>
 
 <script>
-import profileImg from '@/assets/img/avatar.png'
-import naviSearch from '@/assets/ic/ic-navi-search-unselected.svg'
-import plus from '@/assets/ic/ic-add.svg'
+import TheNavBar from '@/components/home/TheNavBar.vue'
+import TitleBar from '@/components/home/TitleBar.vue'
+import ContentsItem from '@/components/home/ContentsItem.vue'
 
 export default {
+  components: {
+    TheNavBar,
+    TitleBar,
+    ContentsItem
+  },
   data() {
     return {
-      profileImg,
-      naviSearch,
-      plus,
-      nickname: '퀵퀵콘텐츠마스터'
+      contentsNum: '0',
+      items: 5
     }
   }
 }
