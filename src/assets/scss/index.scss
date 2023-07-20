@@ -1,0 +1,31 @@
+// (주로 main.scss로 이름이 붙는) 메인 파일은
+// 전체 코드베이스에서 언더스코어로 시작하지 않는 유일한 Sass 파일이어야 합니다.
+// 이 파일은 @import와 주석 외에는 아무것도 포함하지 않아야 합니다.
+
+// 가독성을 유지하기 위해, 메인 파일은 이 가이드라인을 준수해야 합니다:
+
+// @import 당 파일 하나;
+// 한 줄에 하나의 @import;
+// 같은 폴더로부터의 두 import 사이는 새 줄로 띄우지 않는다;
+// 한 폴더로부터의 마지막 import 다음에는 새 줄 하나로 간격을 둔다.
+// 파일 확장자와 앞에 붙는 언더스코어는 생략한다.
+
+@import './abstracts/_mixin.scss';
+// @import './abstracts/_variable.scss';
+
+@import './base/_base.scss';
+@import './base/_typography.scss';
+
+@import './components/_buttons.scss';
+@import './components/_categorylist.scss';
+@import './components/_content.scss';
+@import './components/_divider.scss';
+@import './components/_select.scss';
+@import './components/_input.scss';
+@import './components/_thumbnails.scss';
+
+@import './layout/_layout.scss';
+@import './layout/_navbar.scss';
+
+@import './pages/_home.scss';
+@import './pages/_login.scss';

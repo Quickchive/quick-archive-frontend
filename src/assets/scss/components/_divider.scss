@@ -1,0 +1,29 @@
+.divider {
+  width: 1072px;
+  height: 16px;
+  background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.navbar__divider--top {
+  width: 368px;
+  height: 24px;
+  background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
+  position: fixed;
+  top: 198px;
+  z-index: 100;
+}
+
+.navbar__divider--bottom {
+  width: 368px;
+  height: 48px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 100%);
+  z-index: 100;
+  position: fixed;
+  bottom: 96px;
+}
+
+.category-list__divider {
+  width: 288px;
+  height: 1px;
+  margin: 24px 0;
+}

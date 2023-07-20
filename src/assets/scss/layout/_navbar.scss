@@ -1,0 +1,112 @@
+// layout/ 폴더에는 사이트나 어플리케이션의 레이아웃에 기여하는 모든 것들이 들어갑니다.
+// 이 폴더는 사이트의 주요 부분(header, footer, navigation, sidebar…),
+// 그리드 시스템 혹은 모든 폼의 스타일을 위한 스타일시트를 가질 수도 있습니다.
+
+nav {
+  width: 368px;
+  height: 100vh;
+  z-index: 1;
+  box-sizing: border-box;
+  align-items: center;
+  position: relative;
+}
+
+.navbar__top-container {
+  padding: 28px 40px 16px 40px;
+  position: fixed;
+  top: 0;
+  background-color: #ffffff;
+}
+
+.search__wrapper {
+  position: relative;
+  margin-top: 20px;
+  img {
+    position: absolute;
+    left: 16px;
+    top: 25%;
+    width: 24px;
+  }
+}
+
+.btnAdd__wrapper {
+  position: fixed;
+  bottom: 40px;
+  left: 40px;
+  // margin: 0 0 40px 0;
+}
+
+.profile__wrapper {
+  justify-content: left;
+  align-items: center;
+  margin-top: 32px;
+  span {
+    color: $color-grey-100;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 133.333% */
+    letter-spacing: -0.3px;
+  }
+  img {
+    margin-right: 12px;
+  }
+}
+
+.contents__empty {
+  width: 150px;
+  height: 158px;
+  span {
+    color: $color-grey-60;
+    text-align: center;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 30px; /* 200% */
+    letter-spacing: -0.3px;
+  }
+}
+
+section {
+  padding: 80px 64px 0px 64px;
+  gap: 8px;
+  h1 {
+    width: 944px;
+    overflow: hidden;
+    color: $color-grey-100;
+    text-overflow: ellipsis;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 48px; /* 150% */
+    letter-spacing: -0.3px;
+    text-align: left;
+    margin: 0;
+  }
+}
+
+.contents-filter__wrapper {
+  gap: 8px;
+  width: 992px;
+  height: 64px;
+  padding: 16px 0px 8px 0;
+  box-sizing: border-box;
+}
+
+.navbar-container {
+  position: absolute;
+  z-index: 0;
+  opacity: 0.05000000074505806;
+  background: #000;
+  filter: blur(25px);
+  width: 368px;
+  height: 1024px;
+  left: 0;
+  top: 0;
+}
+
+.wrapper__category-list {
+  position: absolute;
+  overflow-y: scroll;
+  top: 222px;
+  z-index: -10;
+}

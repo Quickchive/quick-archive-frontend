@@ -1,0 +1,16 @@
+// 만약 페이지에 한정된 스타일이 있다면, 그것은 pages/ 폴더 속, 페이지 이름을 딴 파일에 넣는 것이 좋습니다.
+// 예를 들면, 홈페이지에만 한정된 스타일이 있어 pages/ 폴더 속 _home.scss 파일이 필요해지는 것은 드문 일이 아닙니다.
+
+// _home.scss
+// _contact.scss
+
+// .wrapper__navbar {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+// }
+
+.wrapper__section {
+  position: fixed;
+  left: 368px;
+}

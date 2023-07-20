@@ -1,0 +1,21 @@
+.category-list__container {
+  width: 288px;
+  .category-list__top-ul {
+    padding-left: 0;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    li {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 288px;
+      height: 40px;
+    }
+  }
+}
+
+.category-icon {
+  margin-right: 10px;
+}

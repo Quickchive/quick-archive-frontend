@@ -1,7 +1,7 @@
 <template>
   <div class="flex-container__col login-container">
     <div class="flex-container__row close-btn__wrapper">
-      <button class="img-btn"><img :src="icClose" /></button>
+      <button class="button--transparent"><img :src="icClose" /></button>
     </div>
     <header class="header__login">
       <h1>Login</h1>
@@ -12,9 +12,9 @@
       <span><strong>3초만에</strong> 빠른 회원가입!</span>
     </div>
     <div class="flex-container__col login-btn__wrapper">
-      <button class="btn btn__kakao"><img :src="logoKakao" />카카오톡으로 시작하기</button>
-      <button class="btn btn__google"><img :src="logoGoogle" />Google로 시작하기</button>
-      <button class="btn btn__apple"><img :src="logoApple" />Apple로 시작하기</button>
+      <button class="button button--kakao"><img :src="logoKakao" />카카오톡으로 시작하기</button>
+      <button class="button button--google"><img :src="logoGoogle" />Google로 시작하기</button>
+      <button class="button button--apple"><img :src="logoApple" />Apple로 시작하기</button>
     </div>
     <div class="desc__wrapper"><a>서비스 이용약관 및 개인정보처리방침</a><span> 안내</span></div>
   </div>
