@@ -1,6 +1,6 @@
 <template>
   <nav class="flex-container__col">
-    <div>
+    <div class="navbar__top-container">
       <a>logo</a>
       <!-- profile -->
       <div class="flex-container__row profile__wrapper">
@@ -11,12 +11,19 @@
         <input class="input__naviSearch" placeholder="제목, 메모, 카테고리명 검색" />
       </div>
     </div>
+    <!-- divider -->
+    <div class="navbar__divider--top"></div>
     <!-- 카테고리 -->
-    <div></div>
+    <div class="wrapper__category-list">
+      <category-list></category-list>
+    </div>
+    <!-- divider -->
+    <div class="navbar__divider--bottom"></div>
     <!-- 버튼 -->
     <div class="btnAdd__wrapper">
       <button class="button--md btn__add"><img :src="plus" />추가하기</button>
     </div>
+    <div class="navbar-container"></div>
   </nav>
 </template>
 
@@ -24,8 +31,12 @@
 import profileImg from '@/assets/img/avatar.png'
 import naviSearch from '@/assets/ic/ic-navi-search-unselected.svg'
 import plus from '@/assets/ic/ic-add.svg'
+import CategoryList from '@/components/home/CategoryList.vue'
 
 export default {
+  components: {
+    CategoryList
+  },
   data() {
     return {
       profileImg,

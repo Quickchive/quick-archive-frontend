@@ -1,6 +1,8 @@
 <template>
-  <the-nav-bar></the-nav-bar>
-  <section class="flex-container__col">
+  <div class="wrapper__navbar">
+    <the-nav-bar></the-nav-bar>
+  </div>
+  <section class="flex-container__col wrapper__section">
     <title-bar></title-bar>
     <div class="divider"></div>
     <article class="flex-container__col contents-container">

@@ -12,11 +12,9 @@
       <span><strong>3초만에</strong> 빠른 회원가입!</span>
     </div>
     <div class="flex-container__col login-btn__wrapper">
-      <button class="button button--kakaoakao">
-        <img :src="logoKakao" />카카오톡으로 시작하기
-      </button>
+      <button class="button button--kakao"><img :src="logoKakao" />카카오톡으로 시작하기</button>
       <button class="button button--google"><img :src="logoGoogle" />Google로 시작하기</button>
-      <button class="button button--appleple"><img :src="logoApple" />Apple로 시작하기</button>
+      <button class="button button--apple"><img :src="logoApple" />Apple로 시작하기</button>
     </div>
     <div class="desc__wrapper"><a>서비스 이용약관 및 개인정보처리방침</a><span> 안내</span></div>
   </div>

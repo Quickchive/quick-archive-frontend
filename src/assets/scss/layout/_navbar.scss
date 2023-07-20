@@ -5,7 +5,17 @@
 nav {
   width: 368px;
   height: 100vh;
+  z-index: 1;
+  box-sizing: border-box;
+  align-items: center;
+  position: relative;
+}
+
+.navbar__top-container {
   padding: 28px 40px 16px 40px;
+  position: fixed;
+  top: 0;
+  background-color: #ffffff;
 }
 
 .search__wrapper {
@@ -20,9 +30,10 @@ nav {
 }
 
 .btnAdd__wrapper {
-  position: absolute;
-  bottom: 0%;
-  margin: 0 40px 40px 40px;
+  position: fixed;
+  bottom: 40px;
+  left: 40px;
+  // margin: 0 0 40px 0;
 }
 
 .profile__wrapper {
@@ -79,4 +90,23 @@ section {
   height: 64px;
   padding: 16px 0px 8px 0;
   box-sizing: border-box;
+}
+
+.navbar-container {
+  position: absolute;
+  z-index: 0;
+  opacity: 0.05000000074505806;
+  background: #000;
+  filter: blur(25px);
+  width: 368px;
+  height: 1024px;
+  left: 0;
+  top: 0;
+}
+
+.wrapper__category-list {
+  position: absolute;
+  overflow-y: scroll;
+  top: 222px;
+  z-index: -10;
 }
