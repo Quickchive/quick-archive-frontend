@@ -39,6 +39,30 @@ button {
   display: flex;
 }
 
+.add-category__button {
+  width: 180px;
+  height: 180px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #ff00f5;
+  color: $color-grey-100;
+  text-align: center;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 133.333% */
+  letter-spacing: -0.3px;
+  padding: 0 0 16px 0;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.close-button--top {
+  width: 32px;
+  height: 32px;
+}
+
 .chip-btn {
   display: flex;
   padding: 8px 14px;

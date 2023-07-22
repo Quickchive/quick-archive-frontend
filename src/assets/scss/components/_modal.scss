@@ -1,0 +1,35 @@
+.category-add__modal {
+  width: 500px;
+  height: 338px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  border-style: none;
+  box-sizing: border-box;
+  padding: 0 54px 54px 54px;
+  align-items: center;
+  header {
+    width: 500px;
+    height: 88px;
+    padding: 32px 28px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: right;
+    margin-bottom: 16px;
+
+    h1 {
+      width: 278px;
+      color: $color-grey-100;
+      text-align: center;
+      font-size: 17px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 24px; /* 141.176% */
+      letter-spacing: -0.3px;
+      margin-right: 51px;
+    }
+  }
+  .add-category__button__wrapper {
+    padding: 0;
+    gap: 32px;
+  }
+}
