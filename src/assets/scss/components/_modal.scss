@@ -1,9 +1,12 @@
-.category-add__modal {
+dialog {
+  border-style: none;
+}
+
+.category-modal {
   width: 500px;
   height: 338px;
   border-radius: 16px;
   background-color: #ffffff;
-  border-style: none;
   box-sizing: border-box;
   padding: 0 54px 54px 54px;
   align-items: center;
@@ -15,21 +18,86 @@
     align-items: center;
     justify-content: right;
     margin-bottom: 16px;
-
     h1 {
-      width: 278px;
-      color: $color-grey-100;
-      text-align: center;
-      font-size: 17px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 24px; /* 141.176% */
-      letter-spacing: -0.3px;
       margin-right: 51px;
     }
   }
   .add-category__button__wrapper {
     padding: 0;
     gap: 32px;
+  }
+}
+
+// 카테고리 추가 모달
+.category-add__modal {
+  width: 462px;
+  height: 466px;
+  border-radius: 16px;
+  background: #fff;
+  align-items: center;
+  padding: 0 28px 32px 28px;
+  box-sizing: border-box;
+  header {
+    width: 462px;
+    height: 88px;
+    padding: 32px 28px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: right;
+    h1 {
+      margin-right: 32px;
+    }
+  }
+}
+
+// 모달 공통 타이틀
+.modal-title {
+  width: 278px;
+  color: $color-grey-100;
+  text-align: center;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 141.176% */
+  letter-spacing: -0.3px;
+}
+
+.icon__category-change {
+  position: relative;
+
+  .icon__thumb-change {
+    position: absolute;
+    left: 62px;
+    bottom: -5px;
+  }
+}
+
+.wrapper__category-change {
+  margin: 8px 0 40px 0;
+}
+
+.wrapper__category-position {
+  margin: 28px 0 60px 0;
+  justify-content: space-between;
+  width: 100%;
+  label {
+    color: $color-grey-90;
+    font-feature-settings: 'cv12' on;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 160% */
+    letter-spacing: -0.3px;
+  }
+  button {
+    align-items: center;
+    color: $color-grey-100;
+    text-align: right;
+    font-feature-settings: 'cv12' on;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 160% */
+    letter-spacing: -0.3px;
   }
 }

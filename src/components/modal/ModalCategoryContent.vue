@@ -1,7 +1,7 @@
 <template>
-  <dialog class="flex-container__col category-add__modal">
+  <dialog class="flex-container__col category-modal">
     <header class="flex-container__row">
-      <h1>추가</h1>
+      <h1 class="modal-title">추가</h1>
       <button class="button--transparent close-button--top"><img :src="topCloseIcon" /></button>
     </header>
     <div class="flex-container__row add-category__button__wrapper">

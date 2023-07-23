@@ -1,3 +1,11 @@
+// 입력필드 힌트
+// : 입력필드 on/off와 상관없이 입력필드에 1자도 입력하지 않았을 때만 노출
+
+//      입력필드 내용 삭제 아이콘
+// 클릭 시 입력필드 포커스 ON 및 커서 노출 + 입력필드 내용 모두 삭제 + 입력필드 힌트 노출
+// 버튼 위치: 입력필드 오른편 고정
+// 입력필드 내 텍스트가 길어진 경우, 입력필드 내용 삭제 아이콘은 상단 노출 유지하되, 텍스트 좌우로 스와이프함에 따라, 가려진 텍스트 조회 가능
+
 .input__naviSearch {
   display: flex;
   width: 288px;
@@ -8,4 +16,40 @@
   background: #f5f5f5;
   border-style: none;
   text-indent: 30px;
+}
+
+.input__category-modal {
+  position: relative;
+  input {
+    display: flex;
+    width: 398px;
+    height: 50px;
+    padding: 14px 16px;
+    align-items: flex-start;
+    gap: 8px;
+    border-radius: 8px;
+    background: #f5f5f5;
+    border-style: none;
+    font-feature-settings: 'cv12' on;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px; /* 146.667% */
+    letter-spacing: -0.3px;
+    box-sizing: border-box;
+    color: $color-grey-100;
+    font-feature-settings: 'cv12' on;
+    &::placeholder {
+      color: $color-grey-60;
+    }
+    &:focus {
+      outline: none;
+      caret-color: #146eff;
+    }
+  }
+  button {
+    position: absolute;
+    top: 13px;
+    right: 16px;
+  }
 }
