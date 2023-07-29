@@ -214,3 +214,21 @@ button {
   background: transparent;
   padding: 0;
 }
+
+.button--alert-checkbox {
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.alert-cancel-button {
+  display: flex;
+  width: 326px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: $color-grey-60;
+  background-color: #fff;
+}
