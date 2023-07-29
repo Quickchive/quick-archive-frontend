@@ -160,3 +160,54 @@ dialog {
   position: absolute;
   bottom: 120px;
 }
+
+
+
+
+// 카테고리 추가 - 카테고리 선택 모달
+.category-select__modal {
+  width: 462px;
+  height: 608px;
+  background-color: #fff;
+  align-items: center;
+  border-radius: 16px;
+}
+
+
+.wrapper__category-icon {
+  width: 398px;
+  height: 290px;
+  gap: 18px;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  align-items: center;
+  margin-top: 8px;
+
+  img {
+    width: 86px;
+    height: 86px;
+  }
+}
+
+.wrapper__modal-footer {
+  width: 398px;
+  height: 120px;
+  position: absolute;
+  bottom: 0px;
+  justify-content: center;
+  background-color: #fff;
+}
+
+
+
+// 공통 헤더
+.modal-header {
+  height: 88px;
+  align-items: center;
+  padding: 28px;
+  box-sizing: border-box;
+  width: 100%;
+  h1 {
+    margin-left: 32px;
+  }
+}
