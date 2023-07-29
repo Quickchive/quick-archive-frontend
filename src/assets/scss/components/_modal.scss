@@ -101,3 +101,62 @@ dialog {
     letter-spacing: -0.3px;
   }
 }
+
+// 카테고리 위치 설정 모달
+.wrapper__confirm-button {
+  width: 398px;
+  height: 120px;
+  position: absolute;
+  bottom: 0px;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.wrapper__search-input {
+  width: 398px;
+  height: 50px;
+  margin: 16px 0 40px 0;
+}
+
+.category-set-location__modal {
+  width: 462px;
+  height: 608px;
+  border-radius: 16px;
+  background: #fff;
+  align-items: start;
+  padding: 0 28px 32px 28px;
+  box-sizing: border-box;
+  position: relative;
+  header {
+    width: 100%;
+    height: 88px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: left;
+    h1 {
+      margin-left: 32px;
+    }
+  }
+}
+
+.wrapper__add-new-category__button {
+  margin-bottom: 24px;
+}
+
+.wrapper__modal-category-list {
+  position: absolute;
+  overflow-y: scroll;
+  top: 230px;
+  z-index: 0;
+  height: 296px;
+  width: 398px;
+}
+
+.modal__divider--bottom {
+  width: 100%;
+  height: 48px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 100%);
+  z-index: 100;
+  position: absolute;
+  bottom: 120px;
+}
