@@ -39,6 +39,30 @@ button {
   display: flex;
 }
 
+.add-category__button {
+  width: 180px;
+  height: 180px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #ff00f5;
+  color: $color-grey-100;
+  text-align: center;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 133.333% */
+  letter-spacing: -0.3px;
+  padding: 0 0 16px 0;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.close-button--top {
+  width: 32px;
+  height: 32px;
+}
+
 .chip-btn {
   display: flex;
   padding: 8px 14px;
@@ -127,4 +151,84 @@ button {
   width: 24px;
   height: 24px;
   margin-right: 8px;
+}
+
+.save-button {
+  width: 398px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: $color-grey-10;
+  color: $color-grey-30;
+  text-align: center;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 160% */
+  letter-spacing: -0.3px;
+}
+
+.confirm-button--inactive {
+  border-radius: 12px;
+  background: $color-grey-10;
+  width: 100%;
+  height: 56px;
+}
+
+.confirm-button--active {
+}
+
+.add-new-category__button {
+  color: $color-grey-40;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 160% */
+  letter-spacing: -0.3px;
+  gap: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.alert-confirm-button {
+  display: flex;
+  width: 326px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: #146eff;
+  background-color: #fff;
+}
+
+.toast-button {
+  color: #fff;
+  text-align: right;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 153.846% */
+  letter-spacing: -0.3px;
+  text-decoration-line: underline;
+  background: transparent;
+  padding: 0;
+}
+
+.button--alert-checkbox {
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.alert-cancel-button {
+  display: flex;
+  width: 326px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: $color-grey-60;
+  background-color: #fff;
 }

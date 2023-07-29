@@ -7,8 +7,7 @@
         <img :src="profileImg" /><span>{{ nickname }}</span>
       </div>
       <div class="search__wrapper">
-        <img :src="naviSearch" />
-        <input class="input__naviSearch" placeholder="제목, 메모, 카테고리명 검색" />
+        <search-input :placeholderText="placeholderText"></search-input>
       </div>
     </div>
     <!-- divider -->
@@ -32,17 +31,20 @@ import profileImg from '@/assets/img/avatar.png'
 import naviSearch from '@/assets/ic/ic-navi-search-unselected.svg'
 import plus from '@/assets/ic/ic-add.svg'
 import CategoryList from '@/components/home/CategoryList.vue'
+import SearchInput from '@/components/SearchInput.vue'
 
 export default {
   components: {
-    CategoryList
+    CategoryList,
+    SearchInput
   },
   data() {
     return {
       profileImg,
       naviSearch,
       plus,
-      nickname: '퀵퀵콘텐츠마스터'
+      nickname: '퀵퀵콘텐츠마스터',
+      placeholderText: '제목, 메모, 카테고리명 검색'
     }
   }
 }
