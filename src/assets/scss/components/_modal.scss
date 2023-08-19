@@ -25,51 +25,6 @@ dialog {
   width: 500px;
 }
 
-// 헤더 close 버튼은 오른쪽에 위치하는 것이 default
-.modal-header {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  box-sizing: border-box;
-  height: 88px;
-  padding: 0 28px;
-  .modal-title {
-    width: 278px;
-    color: $color-grey-100;
-    text-align: center;
-    font-size: 17px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 24px; /* 141.176% */
-    letter-spacing: -0.3px;
-  }
-}
-
-// 헤더 close 버튼이 왼쪽일 때 - 스타일 바인딩
-.headerBtnLeft {
-  flex-direction: row;
-  justify-content: left;
-  .modal-title {
-    margin-left: 32px;
-  }
-}
-
-// 헤더 close 버튼이 오른쪽일 때 - 스타일 바인딩
-.headerBtnRight {
-  flex-direction: row-reverse;
-  justify-content: right;
-  .modal-title {
-    margin-right: 32px;
-  }
-}
-
-.modal-header--step {
-  @extend .modal-header;
-  .modal-title {
-    margin: 0 32px;
-  }
-}
-
 .wrapper__modal-footer {
   width: 398px;
   height: 120px;
@@ -301,4 +256,9 @@ dialog {
     line-height: 20px; /* 153.846% */
     letter-spacing: -0.3px;
   }
+}
+
+.wrapper__modal-input-edit {
+  position: absolute;
+  bottom: 50%;
 }

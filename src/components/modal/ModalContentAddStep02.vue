@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import ModalHeaderStep from './ModalHeaderStep.vue'
+import ModalHeaderStep from '@/components/header/ModalHeaderStep.vue'
 import nextBlackIcon from '@/assets/ic/ic-next-black.svg'
 import thumbnail from '@/assets/img/thumbnail-sm.png'
 import editIcon from '@/assets/ic/ic-edit.svg'

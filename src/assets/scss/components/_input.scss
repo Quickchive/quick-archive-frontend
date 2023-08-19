@@ -104,3 +104,33 @@ input {
     caret-color: #146eff;
   }
 }
+
+.input__edit-title {
+  color: $color-grey-100;
+  text-align: center;
+  font-feature-settings: 'cv12' on;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 34px; /* 154.545% */
+  letter-spacing: -0.3px;
+  width: 398px;
+  word-break: keep-all;
+  border: none;
+  resize: none;
+
+  &:focus {
+    outline: none;
+    caret-color: #146eff;
+  }
+  &::placeholder {
+    color: $color-grey-30;
+    text-align: center;
+    font-feature-settings: 'cv12' on;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 34px; /* 154.545% */
+    letter-spacing: -0.3px;
+  }
+}
