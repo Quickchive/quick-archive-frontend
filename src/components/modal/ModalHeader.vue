@@ -1,8 +1,8 @@
 <template>
-    <header class="flex-container__row modal-header">
-      <button class="button--transparent close-button--top"><img :src="topCloseIcon" /></button>
-      <h1 class="modal-title">{{ modalTitle }}</h1>
-    </header>
+  <header class="modal-header" :class="isBtnOnLeft ? 'headerBtnLeft' : 'headerBtnRight'">
+    <button class="button--transparent close-button--top"><img :src="topCloseIcon" /></button>
+    <h1 class="modal-title">{{ modalTitle }}</h1>
+  </header>
 </template>
 
 <script>
@@ -14,11 +14,10 @@ export default {
     }
   },
   props: {
-    modalTitle: String
+    modalTitle: String,
+    isBtnOnLeft: Boolean
   }
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -1,9 +1,6 @@
 <template>
-  <dialog class="flex-container__col category-add__modal">
-    <header class="flex-container__row">
-      <h1 class="modal-title">카테고리 추가</h1>
-      <button class="button--transparent close-button--top"><img :src="topCloseIcon" /></button>
-    </header>
+  <dialog class="category-add__modal">
+    <modal-header :modalTitle="modalTitle"></modal-header>
     <div class="wrapper__category-change">
       <button class="button--transparent category-change__button">
         <div class="icon__category-change">
@@ -26,24 +23,29 @@
         미지정<img :src="nextBlackIcon" />
       </button>
     </div>
-    <button class="save-button">저장</button>
+    <div class="modal-footer">
+      <button class="confirm-button--inactive">저장</button>
+    </div>
   </dialog>
 </template>
 
 <script>
-import topCloseIcon from '@/assets/ic/ic-top-close.svg'
 import thumbChangeIcon from '@/assets/ic/ic-thumb-change.svg'
 import categoryBoxIcon from '@/assets/ic/ic-category-box.png'
 import nextBlackIcon from '@/assets/ic/ic-next-black.svg'
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
+import ModalHeader from '@/components/modal/ModalHeader.vue'
+
 export default {
+  components: { ModalHeader },
   data() {
     return {
-      topCloseIcon,
       thumbChangeIcon,
       categoryBoxIcon,
       nextBlackIcon,
-      textfieldCancelIcon
+      textfieldCancelIcon,
+      modalTitle: '카테고리 추가',
+      isBtnOnRight: true
     }
   }
 }

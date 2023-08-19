@@ -1,65 +1,140 @@
+/********  모달 공통 ********/
+
 dialog {
   border-style: none;
 }
 
-.category-modal {
-  width: 500px;
-  height: 338px;
+.modal {
+  display: flex;
+  flex-direction: column;
   border-radius: 16px;
   background-color: #ffffff;
   box-sizing: border-box;
+  padding: 0;
+}
+
+// 모달 - sm
+.modal__sm {
+  @extend .modal;
+  width: 462px;
+}
+
+// 모달 - lg
+.modal__lg {
+  @extend .modal;
+  width: 500px;
+}
+
+// 헤더 close 버튼은 오른쪽에 위치하는 것이 default
+.modal-header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  box-sizing: border-box;
+  height: 88px;
+  padding: 0 28px;
+  .modal-title {
+    width: 278px;
+    color: $color-grey-100;
+    text-align: center;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 141.176% */
+    letter-spacing: -0.3px;
+  }
+}
+
+// 헤더 close 버튼이 왼쪽일 때 - 스타일 바인딩
+.headerBtnLeft {
+  flex-direction: row;
+  justify-content: left;
+  .modal-title {
+    margin-left: 32px;
+  }
+}
+
+// 헤더 close 버튼이 오른쪽일 때 - 스타일 바인딩
+.headerBtnRight {
+  flex-direction: row-reverse;
+  justify-content: right;
+  .modal-title {
+    margin-right: 32px;
+  }
+}
+
+.modal-header--step {
+  @extend .modal-header;
+  .modal-title {
+    margin: 0 32px;
+  }
+}
+
+.wrapper__modal-footer {
+  width: 398px;
+  height: 120px;
+  position: absolute;
+  bottom: 0px;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.modal-footer {
+  width: 398px;
+  position: absolute;
+  bottom: 32px;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.modal__divider--bottom {
+  width: 100%;
+  height: 48px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 100%);
+  z-index: 100;
+  position: absolute;
+  bottom: 120px;
+}
+
+/**** 카테고리 추가 - 카테고리 선택 모달 ****/
+.category-select__modal {
+  @extend .modal__sm;
+  height: 608px;
+  align-items: center;
+}
+
+.wrapper__category-icon {
+  width: 398px;
+  height: 290px;
+  gap: 18px;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  align-items: center;
+  margin-top: 8px;
+  img {
+    width: 86px;
+    height: 86px;
+  }
+}
+
+/********  카테고리 모달 ********/
+.category-modal {
+  @extend .modal__lg;
+  height: 338px;
   padding: 0 54px 54px 54px;
   align-items: center;
-  header {
-    width: 500px;
-    height: 88px;
-    padding: 32px 28px;
-    box-sizing: border-box;
-    align-items: center;
-    justify-content: right;
-    margin-bottom: 16px;
-    h1 {
-      margin-right: 51px;
-    }
-  }
   .add-category__button__wrapper {
     padding: 0;
     gap: 32px;
   }
 }
 
-// 카테고리 추가 모달
+/********  카테고리 추가 모달 ********/
 .category-add__modal {
-  width: 462px;
+  @extend .modal__sm;
   height: 466px;
-  border-radius: 16px;
-  background: #fff;
   align-items: center;
   padding: 0 28px 32px 28px;
-  box-sizing: border-box;
-  header {
-    width: 462px;
-    height: 88px;
-    padding: 32px 28px;
-    box-sizing: border-box;
-    align-items: center;
-    justify-content: right;
-    h1 {
-      margin-right: 32px;
-    }
-  }
-}
-
-// 모달 공통 타이틀
-.modal-title {
-  width: 278px;
-  color: $color-grey-100;
-  text-align: center;
-  font-size: 17px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 24px; /* 141.176% */
-  letter-spacing: -0.3px;
 }
 
 .icon__category-change {
@@ -102,7 +177,7 @@ dialog {
   }
 }
 
-// 카테고리 위치 설정 모달
+/**** 카테고리 위치 설정 모달 ****/
 .wrapper__confirm-button {
   width: 398px;
   height: 120px;
@@ -112,102 +187,118 @@ dialog {
   background-color: #fff;
 }
 
-.wrapper__search-input {
-  width: 398px;
-  height: 50px;
-  margin: 16px 0 40px 0;
+.category-set-location__modal {
+  @extend .modal__sm;
+  height: 608px;
+  align-items: center;
+  position: relative;
+  .wrapper__search-input {
+    width: 398px;
+    height: 50px;
+    margin: 16px 0 40px 0;
+  }
+  .wrapper__add-new-category__button {
+    margin-bottom: 24px;
+  }
+  .wrapper__modal-category-list {
+    position: absolute;
+    overflow-y: scroll;
+    top: 230px;
+    z-index: 0;
+    height: 296px;
+    width: 398px;
+  }
 }
 
-.category-set-location__modal {
-  width: 462px;
+/******** 콘텐츠 추가 모달 ********/
+.content-add__modal {
+  @extend .modal__sm;
   height: 608px;
-  border-radius: 16px;
-  background: #fff;
-  align-items: start;
-  padding: 0 28px 32px 28px;
-  box-sizing: border-box;
-  position: relative;
-  header {
-    width: 100%;
-    height: 88px;
-    box-sizing: border-box;
-    align-items: center;
-    justify-content: left;
-    h1 {
-      margin-left: 32px;
+  align-items: center;
+  .ul__content-modal {
+    width: 398px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.30000001192092896px;
+    text-align: left;
+    color: $color-grey-60;
+    margin: 12px 0;
+    padding: 0;
+    li {
+      list-style: none;
     }
   }
-}
-
-.wrapper__add-new-category__button {
-  margin-bottom: 24px;
-}
-
-.wrapper__modal-category-list {
-  position: absolute;
-  overflow-y: scroll;
-  top: 230px;
-  z-index: 0;
-  height: 296px;
-  width: 398px;
-}
-
-.modal__divider--bottom {
-  width: 100%;
-  height: 48px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 100%);
-  z-index: 100;
-  position: absolute;
-  bottom: 120px;
-}
-
-
-
-
-// 카테고리 추가 - 카테고리 선택 모달
-.category-select__modal {
-  width: 462px;
-  height: 608px;
-  background-color: #fff;
-  align-items: center;
-  border-radius: 16px;
-}
-
-
-.wrapper__category-icon {
-  width: 398px;
-  height: 290px;
-  gap: 18px;
-  flex-wrap: wrap;
-  box-sizing: border-box;
-  align-items: center;
-  margin-top: 8px;
-
-  img {
-    width: 86px;
-    height: 86px;
+  .wrapper__content-modal-input {
+    width: 398px;
   }
-}
+  .wrapper__content-modal-button {
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+  }
 
-.wrapper__modal-footer {
-  width: 398px;
-  height: 120px;
-  position: absolute;
-  bottom: 0px;
-  justify-content: center;
-  background-color: #fff;
-}
+  // 콘텐츠 추가 모달 step 02
+  .wrapper__modal-inner {
+    width: 398px;
+    margin-bottom: 24px;
+    label {
+      margin-bottom: 8px;
+    }
+  }
 
+  .wrapper__modal-thumbnail {
+    display: flex;
+    flex-direction: row;
+    width: 398px;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 36px;
+    .wrapper__thumbnail-content {
+      .box__input--content-title {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+      }
+    }
+  }
 
+  .text__contentTitle {
+    display: flex;
+    width: 282px;
+    height: 20px;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    color: var(--grey-100, #13141a);
+    font-feature-settings: 'cv12' on;
+    text-overflow: ellipsis;
+    whitespace: nowrap;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.3px;
+  }
 
-// 공통 헤더
-.modal-header {
-  height: 88px;
-  align-items: center;
-  padding: 28px;
-  box-sizing: border-box;
-  width: 100%;
-  h1 {
-    margin-left: 32px;
+  .text__contentLink {
+    display: flex;
+    width: 310px;
+    height: 20px;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    color: var(--grey-70, #79797c);
+    font-feature-settings: 'cv12' on;
+    text-overflow: ellipsis;
+    whitespace: nowrap;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 153.846% */
+    letter-spacing: -0.3px;
   }
 }
