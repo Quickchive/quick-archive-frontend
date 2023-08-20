@@ -241,6 +241,7 @@ button {
   padding: 0;
 }
 
+/******** 토글 ********/
 .toggle {
   width: 54px !important;
   height: 30px !important;
@@ -274,4 +275,15 @@ button {
     right: 1px !important;
     top: 10% !important;
   }
+}
+
+.button__confirm-modal {
+  display: flex;
+  width: 159px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: $color-grey-60;
+  background-color: #fff;
 }
