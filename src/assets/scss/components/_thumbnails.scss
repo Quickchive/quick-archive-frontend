@@ -6,3 +6,104 @@
     margin-right: 24px;
   }
 }
+
+.thumbnail__sm {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  border-radius: 9.778px;
+  border: 1px solid rgba(26, 19, 19, 0.05);
+  background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+}
+
+.wrapper__modal-thumbnail {
+  display: flex;
+  flex-direction: row;
+  width: 398px;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 36px;
+  .wrapper__thumbnail-content {
+    .box__input--content-title {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+    }
+  }
+}
+
+.text__contentTitle {
+  display: flex;
+  width: 282px;
+  height: 20px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  color: var(--grey-100, #13141a);
+  font-feature-settings: 'cv12' on;
+  text-overflow: ellipsis;
+  whitespace: nowrap;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.3px;
+}
+
+.text__contentLink {
+  display: flex;
+  width: 310px;
+  height: 20px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  color: var(--grey-70, #79797c);
+  font-feature-settings: 'cv12' on;
+  text-overflow: ellipsis;
+  whitespace: nowrap;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 153.846% */
+  letter-spacing: -0.3px;
+}
+
+.box__thumbnail {
+  display: flex;
+  flex-direction: row;
+  width: 398px;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 36px;
+
+  .box__thumbnail-img {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    .button__checkbox {
+      position: absolute;
+      z-index: 100;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      background-color: transparent;
+    }
+  }
+
+  .wrapper__thumbnail-content {
+    .box__input--content-title {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+    }
+  }
+}

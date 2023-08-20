@@ -153,11 +153,11 @@ button {
   margin-right: 8px;
 }
 
-.save-button {
-  width: 398px;
-  height: 56px;
-  flex-shrink: 0;
+.confirm-button--inactive {
   border-radius: 12px;
+  background: $color-grey-10;
+  width: 100%;
+  height: 56px;
   background: $color-grey-10;
   color: $color-grey-30;
   text-align: center;
@@ -166,13 +166,6 @@ button {
   font-weight: 600;
   line-height: 24px; /* 160% */
   letter-spacing: -0.3px;
-}
-
-.confirm-button--inactive {
-  border-radius: 12px;
-  background: $color-grey-10;
-  width: 100%;
-  height: 56px;
 }
 
 .confirm-button--active {
@@ -231,4 +224,122 @@ button {
   gap: 8px;
   color: $color-grey-60;
   background-color: #fff;
+}
+
+.button--go-next {
+  display: flex;
+  flex-direction: row;
+  background-color: transparent;
+  color: $color-grey-100;
+  text-align: right;
+  font-feature-settings: 'cv12' on;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 160% */
+  letter-spacing: -0.3px;
+  padding: 0;
+}
+
+/******** 토글 ********/
+.toggle {
+  width: 54px !important;
+  height: 30px !important;
+}
+
+.toggle-off {
+  background-color: $color-grey-20 !important;
+
+  .toggle-handle-off {
+    left: 1px;
+    top: 10%;
+  }
+}
+
+.toggle-handle {
+  background: var(--toggle-handle-enabled, #fff);
+  border-radius: 50%;
+  display: inline-block;
+  height: 24px !important;
+  position: absolute;
+  transition-duration: var(--toggle-duration, 0.15s);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  width: 24px !important;
+}
+
+.toggle-on {
+  background-color: #146eff !important;
+  .toggle-handle-on {
+    background-color: #ffffff !important;
+    right: 1px !important;
+    top: 10% !important;
+  }
+}
+
+.button__confirm-modal {
+  display: flex;
+  width: 159px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: $color-grey-60;
+  background-color: #fff;
+}
+
+/******** 라디오 버튼 ********/
+.radio-buttons-1 {
+  // align-items: center;
+  // gap: 0.5rem;
+}
+
+.radio-buttons-1 .radio-button {
+  cursor: pointer;
+  position: relative;
+  padding-left: 30px;
+}
+
+/* 기존 라디오 버튼 삭제 */
+.radio-button input[type='radio'] {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+/* 1번 그룹 라디오 버튼, 외부 원 */
+.radio-buttons-1 .radio-button .custom-radio {
+  position: absolute;
+  top: -3px;
+  height: 24px;
+  right: 0;
+  width: 24px;
+  border-radius: 50%;
+  border: 1px solid $color-grey-20;
+}
+
+/* 1번 그룹 라디오 버튼 선택 시 배경 색상 변경, 외부 원 */
+.radio-buttons-1 .radio-button input[type='radio']:checked ~ .custom-radio {
+  background-color: #146eff;
+}
+
+/* 1번 그룹 라디오 버튼, 내부 원 */
+.radio-buttons-1 .custom-radio:after {
+  content: '';
+  position: absolute;
+  /* 최초 display none */
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+}
+
+/* 1번 그룹 라디오 버튼 선택 시 화면 표출, 내부 원 */
+.radio-buttons-1 .radio-button input[type='radio']:checked ~ .custom-radio:after {
+  display: block;
 }
