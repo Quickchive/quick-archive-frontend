@@ -34,7 +34,7 @@ import thumbChangeIcon from '@/assets/ic/ic-thumb-change.svg'
 import categoryBoxIcon from '@/assets/ic/ic-category-box.png'
 import nextBlackIcon from '@/assets/ic/ic-next-black.svg'
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
-import ModalHeader from '@/components/modal/ModalHeader.vue'
+import ModalHeader from '@/components/header/ModalHeader.vue'
 
 export default {
   components: { ModalHeader },

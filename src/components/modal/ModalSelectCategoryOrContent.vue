@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ModalHeader from '@/components/modal/ModalHeader.vue'
+import  from '@/components/header/ModalHeader.vue'
 
 export default {
   components: { ModalHeader },

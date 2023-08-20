@@ -31,7 +31,7 @@ import expandLessIcon from '@/assets/ic/ic-expand-less.svg'
 import moreIcon from '@/assets/ic/ic-more.svg'
 import categoryIcon from '@/assets/ic/ic-category-list.png'
 import CategoryListUserCustom from '@/components/home/CategoryListUserCustom.vue'
-import ModalHeader from '@/components/modal/ModalHeader.vue'
+import ModalHeader from '@/components/header/ModalHeader.vue'
 
 export default {
   components: { SearchInput, CategoryListUserCustom, ModalHeader },

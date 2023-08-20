@@ -287,3 +287,59 @@ button {
   color: $color-grey-60;
   background-color: #fff;
 }
+
+/******** 라디오 버튼 ********/
+.radio-buttons-1 {
+  // align-items: center;
+  // gap: 0.5rem;
+}
+
+.radio-buttons-1 .radio-button {
+  cursor: pointer;
+  position: relative;
+  padding-left: 30px;
+}
+
+/* 기존 라디오 버튼 삭제 */
+.radio-button input[type='radio'] {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+/* 1번 그룹 라디오 버튼, 외부 원 */
+.radio-buttons-1 .radio-button .custom-radio {
+  position: absolute;
+  top: -3px;
+  height: 24px;
+  right: 0;
+  width: 24px;
+  border-radius: 50%;
+  border: 1px solid $color-grey-20;
+}
+
+/* 1번 그룹 라디오 버튼 선택 시 배경 색상 변경, 외부 원 */
+.radio-buttons-1 .radio-button input[type='radio']:checked ~ .custom-radio {
+  background-color: #146eff;
+}
+
+/* 1번 그룹 라디오 버튼, 내부 원 */
+.radio-buttons-1 .custom-radio:after {
+  content: '';
+  position: absolute;
+  /* 최초 display none */
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+}
+
+/* 1번 그룹 라디오 버튼 선택 시 화면 표출, 내부 원 */
+.radio-buttons-1 .radio-button input[type='radio']:checked ~ .custom-radio:after {
+  display: block;
+}

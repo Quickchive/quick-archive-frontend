@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import ModalHeader from '@/components/modal/ModalHeader.vue'
+import ModalHeader from '@/components/header/ModalHeader.vue'
 import categoryIcon from '@/assets/ic/ic-category-86px.svg'
 import checkboxOnIcon from '@/assets/ic/ic-control-checkbox-on.svg'
 export default {

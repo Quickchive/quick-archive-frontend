@@ -207,3 +207,19 @@ dialog {
   position: absolute;
   bottom: 50%;
 }
+
+// 콘텐츠 추가 - 카테고리 추가
+.content-add__set-new-category {
+  @extend .category-add__modal;
+  .wrapper__search-input {
+    width: 398px;
+  }
+  .wrapper__add-new-category__button {
+    width: 398px;
+    margin-top: 40px;
+  }
+  .wrapper__add-new-category-list {
+    width: 398px;
+    margin-top: 24px;
+  }
+}

@@ -14,6 +14,45 @@
       height: 40px;
     }
   }
+  .category-list-radio__top-ul {
+    padding-left: 0;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    li {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      height: 40px;
+      width: 398px;
+      span {
+        width: 274px;
+      }
+      .category-list-radio__category-button {
+        overflow: hidden;
+        color: $color-grey-100;
+        text-overflow: ellipsis;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px; /* 150% */
+        letter-spacing: -0.3px;
+        text-align: left;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: transparent;
+        .ic__expandMore {
+          margin-right: 8px;
+        }
+        .ic__category {
+          margin-right: 12px;
+        }
+      }
+    }
+  }
 }
 
 .category-icon {
