@@ -2,16 +2,7 @@
   <dialog class="content-add__modal">
     <modal-header-step :modalTitle="modalTitle" :isBtnOnLeft="isBtnOnLeft"></modal-header-step>
     <!-- 썸네일 -->
-    <div class="wrapper__modal-thumbnail">
-      <img class="thumbnail__sm" :src="thumbnail" />
-      <div class="wrapper__thumbnail-content">
-        <div class="box__input--content-title">
-          <span class="text__contentTitle">{{ contentTitle }}</span>
-          <button class="button--transparent"><img :src="editIcon" /></button>
-        </div>
-        <span class="text__contentLink">{{ contentLink }}</span>
-      </div>
-    </div>
+    <thumbnail-item></thumbnail-item>
     <!-- 카테고리 -->
     <div class="wrapper__modal-inner">
       <div class="flex-container__row--space-between">
@@ -49,9 +40,10 @@ import nextBlackIcon from '@/assets/ic/ic-next-black.svg'
 import thumbnail from '@/assets/img/thumbnail-sm.png'
 import editIcon from '@/assets/ic/ic-edit.svg'
 import ToggleButton from '@/components/ToggleButton.vue'
+import ThumbnailItem from './ThumbnailItem.vue'
 
 export default {
-  components: { ModalHeaderStep, ToggleButton },
+  components: { ModalHeaderStep, ToggleButton, ThumbnailItem },
   data() {
     return {
       modalTitle: '콘텐츠 추가',
