@@ -1,0 +1,13 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="ic_setting_profile">
+<mask id="mask0_1045_55874" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+<rect id="Bounding box" width="24" height="24" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_1045_55874)">
+<g id="Group 792">
+<path id="Vector" d="M11.4997 10.3153C13.0503 10.3153 14.3074 9.05823 14.3074 7.50753C14.3074 5.95684 13.0503 4.69975 11.4997 4.69975C9.94897 4.69975 8.69189 5.95684 8.69189 7.50753C8.69189 9.05823 9.94897 10.3153 11.4997 10.3153Z" stroke="#232329" stroke-width="1.5" stroke-miterlimit="10"/>
+<path id="Vector_2" d="M5.62229 14.33L5.05138 14.5733C4.70509 14.7231 4.48047 15.06 4.48047 15.4344V18.3638C4.48047 18.8786 4.90163 19.2998 5.41639 19.2998H17.5834C18.0981 19.2998 18.5193 18.8786 18.5193 18.3638V15.4344C18.5193 15.06 18.2947 14.7231 17.9484 14.5733L17.3775 14.33C13.6244 12.7202 9.37533 12.7202 5.62229 14.33Z" stroke="#232329" stroke-width="1.5" stroke-miterlimit="10"/>
+</g>
+</g>
+</g>
+</svg>

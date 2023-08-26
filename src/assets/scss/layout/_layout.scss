@@ -7,6 +7,11 @@
   flex-direction: column;
 }
 
+.flex-container__col--100 {
+  @extend .flex-container__col;
+  width: 100%;
+}
+
 .flex-container__row {
   @extend .flex-container;
   flex-direction: row;

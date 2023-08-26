@@ -1,0 +1,25 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="ic_setting_automatic">
+<mask id="mask0_1045_55880" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+<rect id="Bounding box" width="24" height="24" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_1045_55880)">
+<g id="Group 794">
+<rect id="Rectangle 267" x="4.75" y="7.75" width="14.5" height="11.5" rx="1.25" stroke="#232329" stroke-width="1.5"/>
+<path id="Vector 81" d="M2 12V15" stroke="#232329" stroke-width="1.5" stroke-linecap="round"/>
+<path id="Vector 82" d="M22 12V15" stroke="#232329" stroke-width="1.5" stroke-linecap="round"/>
+<path id="Vector 83" d="M12 5V7" stroke="#232329" stroke-width="1.5" stroke-linecap="round"/>
+<circle id="Ellipse 45" cx="12" cy="5" r="1.5" fill="#232329"/>
+<g id="Group 830">
+<path id="Rectangle 268" d="M9.5 14.25V14.25C9.5 15.3546 10.3954 16.25 11.5 16.25H12.5C13.6046 16.25 14.5 15.3546 14.5 14.25V14.25" stroke="#232329" stroke-width="1.5" stroke-linecap="round"/>
+<g id="Group 828">
+<g id="Group 829">
+<circle id="Ellipse 46" cx="9.5" cy="11.25" r="1" fill="#232329"/>
+<circle id="Ellipse 47" cx="14.5" cy="11.25" r="1" fill="#232329"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

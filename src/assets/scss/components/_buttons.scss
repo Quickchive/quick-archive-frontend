@@ -343,3 +343,37 @@ button {
 .radio-buttons-1 .radio-button input[type='radio']:checked ~ .custom-radio:after {
   display: block;
 }
+
+/* 세팅 뷰 버튼 */
+.setting-main-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  padding: 0;
+  color: $color-grey-100;
+  font-feature-settings: 'cv12' on;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.3px;
+  height: 48px;
+
+  .wrapper__button-icon {
+    @extend .flex-container__row--align-center;
+    gap: 8px;
+  }
+}
+
+.button--change-nickname {
+  color: #146eff;
+  font-feature-settings: 'cv12' on;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 22px; /* 169.231% */
+  letter-spacing: -0.3px;
+  background-color: transparent;
+}
