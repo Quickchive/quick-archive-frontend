@@ -63,3 +63,20 @@
     letter-spacing: -0.3px;
   }
 }
+
+.titleHeader {
+  padding: 80px 64px 16px 64px;
+  width: 100%;
+  h1 {
+    overflow: hidden;
+    color: $color-grey-100;
+    text-overflow: ellipsis;
+    whitespace: nowrap;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 48px; /* 150% */
+    letter-spacing: -0.3px;
+    text-align: left;
+  }
+}

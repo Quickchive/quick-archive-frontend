@@ -156,3 +156,14 @@ input {
     color: $color-grey-60;
   }
 }
+
+.input__sm--readonly {
+  @extend .input__sm--default;
+  color: $color-grey-30;
+  text-indent: 32px;
+}
+
+.input__sm--before-edit {
+  @extend .input__sm--default;
+  color: $color-grey-100;
+}
