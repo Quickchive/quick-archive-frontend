@@ -130,7 +130,7 @@ button {
 }
 
 .category-list__button {
-  width: 216px;
+  // width: 216px;
   height: 26px; /* 24px */
   overflow: hidden;
   color: $color-grey-100;
@@ -289,12 +289,12 @@ button {
 }
 
 /******** 라디오 버튼 ********/
-.radio-buttons-1 {
+.radio-buttons {
   // align-items: center;
   // gap: 0.5rem;
 }
 
-.radio-buttons-1 .radio-button {
+.radio-buttons .radio-button {
   cursor: pointer;
   position: relative;
   padding-left: 30px;
@@ -309,7 +309,7 @@ button {
 }
 
 /* 1번 그룹 라디오 버튼, 외부 원 */
-.radio-buttons-1 .radio-button .custom-radio {
+.radio-buttons .radio-button .custom-radio {
   position: absolute;
   top: -3px;
   height: 24px;
@@ -320,12 +320,12 @@ button {
 }
 
 /* 1번 그룹 라디오 버튼 선택 시 배경 색상 변경, 외부 원 */
-.radio-buttons-1 .radio-button input[type='radio']:checked ~ .custom-radio {
+.radio-buttons .radio-button input[type='radio']:checked ~ .custom-radio {
   background-color: #146eff;
 }
 
 /* 1번 그룹 라디오 버튼, 내부 원 */
-.radio-buttons-1 .custom-radio:after {
+.radio-buttons .custom-radio:after {
   content: '';
   position: absolute;
   /* 최초 display none */
@@ -340,7 +340,7 @@ button {
 }
 
 /* 1번 그룹 라디오 버튼 선택 시 화면 표출, 내부 원 */
-.radio-buttons-1 .radio-button input[type='radio']:checked ~ .custom-radio:after {
+.radio-buttons .radio-button input[type='radio']:checked ~ .custom-radio:after {
   display: block;
 }
 

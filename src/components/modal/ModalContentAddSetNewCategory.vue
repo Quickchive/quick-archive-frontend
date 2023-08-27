@@ -11,7 +11,7 @@
       </button>
     </div>
     <div class="wrapper__add-new-category-list">
-      <category-list-with-radio-button></category-list-with-radio-button>
+      <category-item-with-radio-button></category-item-with-radio-button>
     </div>
 
     <div class="modal-footer">
@@ -24,12 +24,12 @@
 import nextBlackIcon from '@/assets/ic/ic-next-black.svg'
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
 import ModalHeader from '@/components/header/ModalHeader.vue'
-import SearchInput from '../SearchInput.vue'
+import SearchInput from '@/components/input/SearchInput.vue'
 import addCategoryIcon from '@/assets/ic/ic-category-add.svg'
-import CategoryListWithRadioButton from '@/components/home/CategoryListWithRadioButton.vue'
+import CategoryItemWithRadioButton from '@/components/nav/CategoryItemWithRadioButton.vue'
 
 export default {
-  components: { ModalHeader, SearchInput, CategoryListWithRadioButton },
+  components: { ModalHeader, SearchInput, CategoryItemWithRadioButton },
   data() {
     return {
       nextBlackIcon,

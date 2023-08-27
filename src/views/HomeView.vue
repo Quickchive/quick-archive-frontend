@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import TheNavBar from '@/components/home/TheNavBar.vue'
+import TheNavBar from '@/components/nav/TheNavBar.vue'
 import TitleBar from '@/components/home/TitleBar.vue'
 import ContentsItem from '@/components/home/ContentsItem.vue'
 

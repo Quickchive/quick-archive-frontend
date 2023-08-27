@@ -4,7 +4,7 @@
       <a>logo</a>
       <!-- profile -->
       <div class="flex-container__row profile__wrapper">
-        <img :src="profileImg" /><span>{{ nickname }}</span>
+        <img class="img-profile" :src="profileImg" /><span>{{ nickname }}</span>
       </div>
       <div class="search__wrapper">
         <search-input :placeholderText="placeholderText"></search-input>
@@ -27,11 +27,11 @@
 </template>
 
 <script>
-import profileImg from '@/assets/img/avatar.png'
+import profileImg from '@/assets/img/img_empty_noprofile.png'
 import naviSearch from '@/assets/ic/ic-navi-search-unselected.svg'
 import plus from '@/assets/ic/ic-add.svg'
 import CategoryList from '@/components/home/CategoryList.vue'
-import SearchInput from '@/components/SearchInput.vue'
+import SearchInput from '@/components/input/SearchInput.vue'
 
 export default {
   components: {

@@ -11,7 +11,7 @@
     </div>
     <!-- 카테고리 목록 -->
     <div class="wrapper__modal-category-list">
-      <category-list-user-custom></category-list-user-custom>
+      <category-item-user-custom></category-item-user-custom>
     </div>
 
     <!-- divider -->
@@ -24,17 +24,17 @@
 </template>
 
 <script>
-import SearchInput from '@/components/SearchInput.vue'
+import SearchInput from '@/components/input/SearchInput.vue'
 import addCategoryIcon from '@/assets/ic/ic-category-add.svg'
 import expandMoreIcon from '@/assets/ic/ic-expand-more.svg'
 import expandLessIcon from '@/assets/ic/ic-expand-less.svg'
 import moreIcon from '@/assets/ic/ic-more.svg'
 import categoryIcon from '@/assets/ic/ic-category-list.png'
-import CategoryListUserCustom from '@/components/home/CategoryListUserCustom.vue'
+import CategoryItemUserCustom from '@/components/home/CategoryItemUserCustom.vue'
 import ModalHeader from '@/components/header/ModalHeader.vue'
 
 export default {
-  components: { SearchInput, CategoryListUserCustom, ModalHeader },
+  components: { SearchInput, CategoryItemUserCustom, ModalHeader },
   data() {
     return {
       placeholderText: '카테고리명 검색',

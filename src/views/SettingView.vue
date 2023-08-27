@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import TheNavBar from '@/components/home/TheNavBar.vue'
-import SettingMyInfo from '@/components/SettingMyInfo.vue'
+import TheNavBar from '@/components/nav/TheNavBar.vue'
+import SettingMyInfo from '@/components/setting/SettingMyInfo.vue'
 
 export default {
   components: {
