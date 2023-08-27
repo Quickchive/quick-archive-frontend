@@ -1,6 +1,7 @@
 .category-list {
   @extend .flex-container__col--center;
   width: 288px;
+  padding-top: 24px;
 }
 
 .category-item {

@@ -1,9 +1,9 @@
 <template>
-  <nav class="flex-container__col">
+  <nav class="thenavbar">
     <div class="navbar__top-container">
       <a>logo</a>
       <!-- profile -->
-      <div class="flex-container__row profile__wrapper">
+      <div class="profile__wrapper">
         <img class="img-profile" :src="profileImg" /><span>{{ nickname }}</span>
       </div>
       <div class="search__wrapper">
@@ -22,15 +22,15 @@
     <div class="btnAdd__wrapper">
       <button class="button--md btn__add"><img :src="plus" />추가하기</button>
     </div>
-    <div class="navbar-container"></div>
   </nav>
+  <div class="navbar-shadow"></div>
 </template>
 
 <script>
 import profileImg from '@/assets/img/img_empty_noprofile.png'
 import naviSearch from '@/assets/ic/ic-navi-search-unselected.svg'
 import plus from '@/assets/ic/ic-add.svg'
-import CategoryList from '@/components/home/CategoryList.vue'
+import CategoryList from '@/components/nav/CategoryList.vue'
 import SearchInput from '@/components/input/SearchInput.vue'
 
 export default {

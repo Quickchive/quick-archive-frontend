@@ -1,7 +1,7 @@
 <template>
   <div class="category-item">
     <!-- 1차 카테고리 -->
-    <ul v-if="categoryData.firstCategoryName" class="category-list__fist-ul">
+    <ul v-if="categoryData.firstCategoryName" class="category-list__first-ul">
       <li>
         <div class="flex-container__row--align-center">
           <button class="button--transparent expand-button">
