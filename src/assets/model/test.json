@@ -1,0 +1,26 @@
+[
+  {
+    "firstCategoryName": "1차 - 개발"
+  },
+  {
+    "firstCategoryName": "1차 카테고리 이름",
+    "secondCategoryName": "2차 카테고리",
+    "thirdCategoryName": "3차 카테"
+  },
+  {
+    "firstCategoryName": "1차 - 쇼핑",
+    "secondCategoryName": "여름 휴가",
+    "thirdCategoryName": "아이들"
+  },
+  {
+    "firstCategoryName": "전자기기",
+    "secondCategoryName": "노트북"
+  },
+  {
+    "firstCategoryName": "디저트"
+  },
+  {
+    "firstCategoryName": "카페",
+    "secondCategoryName": "노트북 카페"
+  }
+]
