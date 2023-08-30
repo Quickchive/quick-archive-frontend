@@ -31,7 +31,17 @@ const router = createRouter({
     {
       path: '/setting',
       name: 'setting',
-      component: () => import('@/views/SettingView.vue')
+      component: () => import('@/views/SettingView.vue'),
+      children: [
+        {
+          path: '/setting',
+          component: () => import('@/components/setting/SettingDefault.vue')
+        },
+        {
+          path: '/setting/myinfo',
+          component: () => import('@/components/setting/SettingMyInfo.vue')
+        }
+      ]
     },
     // 테스트용 페이지
     {
