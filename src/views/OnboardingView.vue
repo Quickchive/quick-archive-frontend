@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-container dim--default"></div>
+  <h1>온보딩 페이지</h1>
 </template>
 
 <script>

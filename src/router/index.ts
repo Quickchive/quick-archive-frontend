@@ -3,29 +3,51 @@ import { createRouter, createWebHistory } from 'vue-router'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // 온보딩 페이지
     {
       path: '/',
-      name: 'test',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('@/views/TestView.vue')
+      name: 'onboarding',
+      component: () => import('@/views/OnboardingView.vue')
     },
+    // 로그인 페이지
     {
       path: '/login',
       name: 'login',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('@/views/LoginView.vue')
     },
+    // 홈 페이지
     {
       path: '/home',
       name: 'home',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('@/views/HomeView.vue')
+    },
+    // 검색 페이지
+    {
+      path: '/search',
+      name: 'search',
+      component: () => import('@/views/SearchView.vue')
+    },
+    // 설정 페이지
+    {
+      path: '/setting',
+      name: 'setting',
+      component: () => import('@/views/SettingView.vue'),
+      children: [
+        {
+          path: '/setting',
+          component: () => import('@/components/setting/SettingDefault.vue')
+        },
+        {
+          path: '/setting/myinfo',
+          component: () => import('@/components/setting/SettingMyInfo.vue')
+        }
+      ]
+    },
+    // 테스트용 페이지
+    {
+      path: '/test',
+      name: 'test',
+      component: () => import('@/views/TestView.vue')
     }
   ]
 })

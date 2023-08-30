@@ -2,18 +2,17 @@
   <div class="wrapper__navbar">
     <the-nav-bar></the-nav-bar>
   </div>
-  <!-- <setting-default></setting-default> -->
-  <setting-my-info></setting-my-info>
+  <div class="wrapper__setting-component">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-import TheNavBar from '@/components/home/TheNavBar.vue'
-import SettingMyInfo from '@/components/SettingMyInfo.vue'
+import TheNavBar from '@/components/nav/TheNavBar.vue'
 
 export default {
   components: {
-    TheNavBar,
-    SettingMyInfo
+    TheNavBar
   },
   data() {
     return {}

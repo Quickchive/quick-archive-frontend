@@ -39,7 +39,7 @@ import ModalHeaderStep from '@/components/header/ModalHeaderStep.vue'
 import nextBlackIcon from '@/assets/ic/ic-next-black.svg'
 import thumbnail from '@/assets/img/thumbnail-sm.png'
 import editIcon from '@/assets/ic/ic-edit.svg'
-import ToggleButton from '@/components/ToggleButton.vue'
+import ToggleButton from '@/components/button/ToggleButton.vue'
 import ThumbnailItem from './ThumbnailItem.vue'
 
 export default {

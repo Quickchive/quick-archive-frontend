@@ -2,13 +2,15 @@
 // 이 폴더는 사이트의 주요 부분(header, footer, navigation, sidebar…),
 // 그리드 시스템 혹은 모든 폼의 스타일을 위한 스타일시트를 가질 수도 있습니다.
 
-nav {
+.thenavbar {
+  @extend .flex-container__col;
   width: 368px;
   height: 100vh;
   z-index: 1;
   box-sizing: border-box;
   align-items: center;
   position: relative;
+  background-color: #fff;
 }
 
 .navbar__top-container {
@@ -32,8 +34,6 @@ nav {
 
 .search-container {
   position: relative;
-  // margin-top: 20px;
-  // width: 288px;
   img {
     position: absolute;
     left: 16px;
@@ -43,13 +43,17 @@ nav {
 }
 
 .btnAdd__wrapper {
+  width: 368px;
   position: fixed;
-  bottom: 40px;
-  left: 40px;
-  // margin: 0 0 40px 0;
+  bottom: 0px;
+  justify-content: center;
+  height: 96px;
+  display: flex;
+  background-color: #fff;
 }
 
 .profile__wrapper {
+  @extend .flex-container__row;
   justify-content: left;
   align-items: center;
   margin-top: 32px;
@@ -105,14 +109,14 @@ section {
   box-sizing: border-box;
 }
 
-.navbar-container {
+.navbar-shadow {
   position: absolute;
   z-index: 0;
-  opacity: 0.05000000074505806;
+  opacity: 0.05;
   background: #000;
   filter: blur(25px);
   width: 368px;
-  height: 1024px;
+  height: 100vh;
   left: 0;
   top: 0;
 }
@@ -120,6 +124,8 @@ section {
 .wrapper__category-list {
   position: absolute;
   overflow-y: scroll;
-  top: 222px;
+  // top: 222px;
+  top: 198px;
   z-index: -10;
+  height: calc(100vh - 305px);
 }

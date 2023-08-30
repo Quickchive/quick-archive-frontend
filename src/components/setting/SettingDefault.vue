@@ -39,7 +39,7 @@ import policyIcon from '@/assets/ic/ic_setting_policy.svg'
 import errorIcon from '@/assets/ic/ic_setting_error.svg'
 import profileIcon from '@/assets/ic/ic_setting_profile.svg'
 import nextIcon from '@/assets/ic/ic_next_gray_24px.svg'
-import ToggleButton from '@/components/ToggleButton.vue'
+import ToggleButton from '@/components/button/ToggleButton.vue'
 import TitleHeader from '@/components/header/TitleHeader.vue'
 
 export default {
