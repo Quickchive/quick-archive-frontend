@@ -21,6 +21,14 @@ p {
 }
 
 .login-container {
+  display: flex;
+  width: 100%;
+  justify-content: center; /* 수평 가운데 정렬 */
+  align-items: center; /* 수직 가운데 정렬 */
+  height: 100vh; /* 화면 높이를 기준으로 모달 컨테이너의 높이를 설정 */
+}
+
+.login-form {
   width: 462px;
   height: 501px;
   border-radius: 16px;
@@ -28,6 +36,8 @@ p {
   align-items: center;
   box-sizing: border-box;
   padding: 16px;
+  // position: absolute;
+  z-index: 999;
 }
 
 .login-btn__wrapper {
@@ -36,7 +46,7 @@ p {
 }
 
 .desc__wrapper {
-  color: var(--grey-60, #909091);
+  color: $color-grey-60;
   text-align: center;
   font-size: 13px;
   font-style: normal;
@@ -46,6 +56,10 @@ p {
   a {
     text-decoration-line: underline;
     cursor: pointer;
+    color: $color-grey-100;
+    &:visited {
+      color: $color-grey-60;
+    }
   }
 }
 

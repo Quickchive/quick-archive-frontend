@@ -83,6 +83,10 @@ button {
   img {
     margin-right: 89px;
   }
+  a {
+    color: $color-grey-100;
+    text-decoration: none;
+  }
 }
 
 .button--google {
@@ -91,6 +95,10 @@ button {
   color: $color-grey-100;
   img {
     margin-right: 97px;
+  }
+  a {
+    color: $color-grey-100;
+    text-decoration: none;
   }
 }
 

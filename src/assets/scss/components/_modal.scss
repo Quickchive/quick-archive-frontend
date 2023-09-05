@@ -4,6 +4,17 @@ dialog {
   border-style: none;
 }
 
+.overlay {
+  opacity: 0.8;
+  background: #000;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
 .modal {
   display: flex;
   flex-direction: column;
