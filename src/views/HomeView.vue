@@ -15,11 +15,13 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import TheNavBar from '@/components/nav/TheNavBar.vue'
 import TitleBar from '@/components/home/TitleBar.vue'
 import ContentsItem from '@/components/home/ContentsItem.vue'
+import { useUserStore } from '@/stores/useUserStore.ts'
 
-export default {
+export default defineComponent({
   components: {
     TheNavBar,
     TitleBar,
@@ -30,6 +32,30 @@ export default {
       contentsNum: '0',
       items: 5
     }
+  },
+  setup() {
+    const userStore = useUserStore()
+    return {
+      userStore
+    }
+  },
+  async created() {
+    // 로그인
+    if (this.$route.path.includes('google')) {
+      try {
+        const code = this.$route.query.code
+        await this.userStore.googleLogin(code)
+      } catch (error) {
+        console.error(error)
+      }
+    } else {
+      try {
+        const code = this.$route.query.code
+        await this.userStore.kakaoLogin(code)
+      } catch (error) {
+        console.error(error)
+      }
+    }
   }
-}
+})
 </script>

@@ -4,7 +4,7 @@
       <a>logo</a>
       <!-- profile -->
       <div class="profile__wrapper">
-        <img class="img-profile" :src="profileImg" /><span>{{ nickname }}</span>
+        <img class="img-profile" :src="profileImg" /><span>{{ userStore.nickname }}</span>
       </div>
       <div class="search__wrapper">
         <search-input :placeholderText="placeholderText"></search-input>
@@ -20,10 +20,14 @@
     <div class="navbar__divider--bottom"></div>
     <!-- 버튼 -->
     <div class="btnAdd__wrapper">
-      <button class="button--md btn__add"><img :src="plus" />추가하기</button>
+      <button class="button--md btn__add" @click="showAddModal()">
+        <img :src="plus" />추가하기
+      </button>
     </div>
   </nav>
   <div class="navbar-shadow"></div>
+  <!-- 모달 -->
+  <modal-view v-if="this.isAddModalShow"></modal-view>
 </template>
 
 <script>
@@ -32,19 +36,38 @@ import naviSearch from '@/assets/ic/ic-navi-search-unselected.svg'
 import plus from '@/assets/ic/ic-add.svg'
 import CategoryList from '@/components/nav/CategoryList.vue'
 import SearchInput from '@/components/input/SearchInput.vue'
+import ModalView from '@/views/ModalView.vue'
+import { useUserStore } from '@/stores/useUserStore.ts'
 
 export default {
   components: {
     CategoryList,
-    SearchInput
+    SearchInput,
+    ModalView
   },
   data() {
     return {
       profileImg,
       naviSearch,
       plus,
-      nickname: '퀵퀵콘텐츠마스터',
-      placeholderText: '제목, 메모, 카테고리명 검색'
+      // nickname: '퀵퀵콘텐츠마스터',
+      placeholderText: '제목, 메모, 카테고리명 검색',
+      isAddModalShow: false
+    }
+  },
+  props: {
+    nickname: String
+  },
+  methods: {
+    showAddModal() {
+      this.isAddModalShow = true
+    }
+  },
+  setup() {
+    // counter store 가져오기
+    const userStore = useUserStore()
+    return {
+      userStore
     }
   }
 }
