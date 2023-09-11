@@ -42,6 +42,7 @@ export default defineComponent({
   async created() {
     // 로그인
     if (this.$route.fullPath.includes('google')) {
+      console.log('google login')
       try {
         const code = this.$route.query.code
         await this.userStore.googleLogin(code)
@@ -50,6 +51,7 @@ export default defineComponent({
       }
     } else {
       try {
+        console.log('kakao login')
         const code = this.$route.query.code
         await this.userStore.kakaoLogin(code)
       } catch (error) {
