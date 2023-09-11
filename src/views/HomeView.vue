@@ -41,7 +41,7 @@ export default defineComponent({
   },
   async created() {
     // 로그인
-    if (this.$route.path.includes('google')) {
+    if (this.$route.fullPath.includes('google')) {
       try {
         const code = this.$route.query.code
         await this.userStore.googleLogin(code)
