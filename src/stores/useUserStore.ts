@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { googleLogin, kakaoLogin } from '@/api/oauth'
 import { logoutUser } from '@/api/auth'
+import { getProfile } from '@/api/user'
 import {
   saveAccessTokenToCookie,
   saveRefreshTokenToCookie,
@@ -87,6 +88,19 @@ export const useUserStore = defineStore('user', {
         localStorage.removeItem('oauthInfo')
         this.isLogin = false
       } catch (error) {
+        console.error(error)
+      }
+    },
+    async getProfile() {
+      try {
+        const response = await getProfile()
+        this.nickname = response.data.name
+        this.email = response.data.email
+        if (response.status === 201 || response.status === 200) {
+          this.isLogin = true
+        }
+      } catch (error) {
+        this.isLogin = false
         console.error(error)
       }
     },

@@ -46,6 +46,7 @@ export default defineComponent({
       try {
         const code = this.$route.query.code
         await this.userStore.googleLogin(code)
+        await this.userStore.getProfile()
       } catch (error) {
         console.error(error)
       }
@@ -54,6 +55,7 @@ export default defineComponent({
         console.log('kakao login')
         const code = this.$route.query.code
         await this.userStore.kakaoLogin(code)
+        await this.userStore.getProfile()
       } catch (error) {
         console.error(error)
       }
