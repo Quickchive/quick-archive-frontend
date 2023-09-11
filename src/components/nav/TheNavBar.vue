@@ -50,13 +50,9 @@ export default {
       profileImg,
       naviSearch,
       plus,
-      // nickname: '퀵퀵콘텐츠마스터',
       placeholderText: '제목, 메모, 카테고리명 검색',
       isAddModalShow: false
     }
-  },
-  props: {
-    nickname: String
   },
   methods: {
     showAddModal() {
