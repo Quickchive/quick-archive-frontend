@@ -94,8 +94,9 @@ export const useUserStore = defineStore('user', {
     async getProfile() {
       try {
         const response = await getProfile()
-        this.nickname = response.data.name
-        this.email = response.data.email
+        console.log(response)
+        // this.nickname = response.data.name
+        // this.email = response.data.email
         if (response.status === 201 || response.status === 200) {
           this.isLogin = true
         }
