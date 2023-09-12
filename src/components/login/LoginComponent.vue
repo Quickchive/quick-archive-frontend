@@ -14,18 +14,18 @@
         <span><strong>3초만에</strong> 빠른 회원가입!</span>
       </div>
       <div class="flex-container__col login-btn__wrapper">
-        <button class="button button--kakao">
-          <img :src="logoKakao" />
-          <a href="https://test.quickarchive.co.kr/api/oauth/kakao-auth" target="_blank"
-            >카카오톡으로 시작하기</a
-          >
-        </button>
-        <button class="button button--google">
-          <img :src="logoGoogle" />
-          <a href="https://test.quickarchive.co.kr/api/oauth/google-auth" target="_blank"
-            >Google로 시작하기</a
-          >
-        </button>
+        <a href="https://test.quickarchive.co.kr/api/oauth/kakao-auth" target="_blank">
+          <button class="button button--kakao">
+            <img :src="logoKakao" />
+            카카오톡으로 시작하기
+          </button>
+        </a>
+        <a href="https://test.quickarchive.co.kr/api/oauth/google-auth" target="_blank">
+          <button class="button button--google">
+            <img :src="logoGoogle" />
+            Google로 시작하기
+          </button>
+        </a>
         <button class="button button--apple"><img :src="logoApple" />Apple로 시작하기</button>
       </div>
       <div class="desc__wrapper">
