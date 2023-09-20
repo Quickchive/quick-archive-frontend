@@ -15,7 +15,12 @@
       </button>
     </div>
     <label class="input__category-modal">
-      <input class="input__category-modal" placeholder="카테고리 이름(2~15글자)" maxlength="15" />
+      <input
+        v-model="this.categoryName"
+        class="input__category-modal"
+        placeholder="카테고리 이름(2~15글자)"
+        maxlength="15"
+      />
       <button class="button--transparent">
         <img :src="textfieldCancelIcon" />
       </button>
@@ -52,7 +57,8 @@ export default {
       nextBlackIcon,
       textfieldCancelIcon,
       modalTitle: '카테고리 추가',
-      isBtnOnRight: true
+      isBtnOnRight: true,
+      categoryName: ''
     }
   },
   setup() {
@@ -69,9 +75,10 @@ export default {
       this.modalStore.openSelectCategoryModal()
     },
     async addCategories() {
+      console.log(this.categoryName)
       try {
         const categoryData = {
-          categoryName: '테스트카테고리'
+          categoryName: this.categoryName
         }
         await addCategories(categoryData)
       } catch (error) {
