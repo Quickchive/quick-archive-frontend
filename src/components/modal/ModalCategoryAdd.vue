@@ -27,7 +27,7 @@
       </button>
     </div>
     <div class="modal-footer">
-      <button class="confirm-button--inactive" @click="addCategories()">저장</button>
+      <button class="confirm-button--active" @click="addCategories()">저장</button>
     </div>
   </dialog>
 </template>
