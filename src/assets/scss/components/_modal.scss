@@ -82,6 +82,7 @@ dialog {
 }
 
 .wrapper__category-icon {
+  display: flex;
   width: 398px;
   height: 290px;
   gap: 18px;
@@ -89,10 +90,6 @@ dialog {
   box-sizing: border-box;
   align-items: center;
   margin-top: 8px;
-  img {
-    width: 86px;
-    height: 86px;
-  }
 }
 
 /********  카테고리 모달 ********/

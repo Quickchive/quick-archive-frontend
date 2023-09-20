@@ -44,7 +44,6 @@ button {
   height: 180px;
   flex-shrink: 0;
   border-radius: 8px;
-  background: #ff00f5;
   color: $color-grey-100;
   text-align: center;
   font-size: 15px;
@@ -56,6 +55,10 @@ button {
   box-sizing: border-box;
   align-items: center;
   justify-content: flex-end;
+  position: relative;
+  span {
+    position: absolute;
+  }
 }
 
 .close-button--top {
@@ -166,7 +169,6 @@ button {
   background: $color-grey-10;
   width: 100%;
   height: 56px;
-  background: $color-grey-10;
   color: $color-grey-30;
   text-align: center;
   font-size: 15px;
@@ -174,9 +176,22 @@ button {
   font-weight: 600;
   line-height: 24px; /* 160% */
   letter-spacing: -0.3px;
+  cursor: auto;
 }
 
 .confirm-button--active {
+  border-radius: 12px;
+  background: #146eff;
+  color: white;
+  width: 100%;
+  height: 56px;
+  text-align: center;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 160% */
+  letter-spacing: -0.3px;
+  // cursor: auto;
 }
 
 .add-new-category__button {
@@ -384,4 +399,29 @@ button {
   line-height: 22px; /* 169.231% */
   letter-spacing: -0.3px;
   background-color: transparent;
+}
+
+.button--category-icon {
+  padding: 0;
+  border-radius: 8px;
+  width: 86px;
+  height: 86px;
+  position: relative;
+  .isSelected {
+    width: 86px;
+    height: 86px;
+    border-radius: 8px;
+    background: rgba(19, 20, 26, 0.5);
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    .controlCheckbox {
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 }

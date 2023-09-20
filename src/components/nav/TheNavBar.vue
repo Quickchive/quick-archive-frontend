@@ -27,7 +27,7 @@
   </nav>
   <div class="navbar-shadow"></div>
   <!-- 모달 -->
-  <modal-view v-if="this.isAddModalShow"></modal-view>
+  <modal-view v-if="this.modalStore.overlay"></modal-view>
 </template>
 
 <script>
@@ -38,6 +38,7 @@ import CategoryList from '@/components/nav/CategoryList.vue'
 import SearchInput from '@/components/input/SearchInput.vue'
 import ModalView from '@/views/ModalView.vue'
 import { useUserStore } from '@/stores/useUserStore.ts'
+import { useModalStore } from '@/stores/useModalStore.ts'
 
 export default {
   components: {
@@ -56,14 +57,16 @@ export default {
   },
   methods: {
     showAddModal() {
-      this.isAddModalShow = true
+      this.modalStore.openSelectModal()
     }
   },
   setup() {
     // counter store 가져오기
     const userStore = useUserStore()
+    const modalStore = useModalStore()
     return {
-      userStore
+      userStore,
+      modalStore
     }
   }
 }
