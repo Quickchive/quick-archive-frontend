@@ -34,7 +34,7 @@
 
 <script>
 import thumbChangeIcon from '@/assets/ic/ic-thumb-change.svg'
-import categoryWatchIcon from '@/assets/category/img_category_watch.png'
+import categoryWatchIcon from '@/assets/img/category/img_category_watch.png'
 import nextBlackIcon from '@/assets/ic/ic-next-black.svg'
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
 import ModalHeader from '@/components/header/ModalHeader.vue'
