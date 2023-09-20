@@ -1,27 +1,54 @@
 <template>
   <dialog class="category-select__modal">
-    <modal-header :modalTitle="modalTitle"></modal-header>
+    <modal-header :modalTitle="modalTitle" :isBtnOnLeft="true"></modal-header>
     <article class="flex-container__row wrapper__category-icon">
-      <img :src="categoryIcon" v-for="num in categoryNum" :key="num" />
+      <button
+        :key="categoryIcon"
+        v-for="categoryIcon in this.categoryStore.defaultCategory"
+        class="button--category-icon"
+        @click="selectCategory(categoryIcon)"
+      >
+        <img :src="categoryIcon.img" class="category-default-icon" />
+        <div v-if="categoryIcon.selected" class="isSelected">
+          <img :src="controlCheckbox" class="controlCheckbox" v-if="categoryIcon.selected" />
+        </div>
+      </button>
     </article>
     <div class="modal-footer">
-      <button class="confirm-button--inactive">완료</button>
+      <button class="confirm-button--active" @click="closeSelectCategoryModal()">완료</button>
     </div>
   </dialog>
 </template>
 
 <script>
 import ModalHeader from '@/components/header/ModalHeader.vue'
-import categoryIcon from '@/assets/ic/ic-category-86px.svg'
-import checkboxOnIcon from '@/assets/ic/ic-control-checkbox-on.svg'
+import controlCheckbox from '@/assets/ic/ic-control-checkbox-on.svg'
+import { useModalStore } from '@/stores/useModalStore.ts'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+
 export default {
   components: { ModalHeader },
   data() {
     return {
       modalTitle: '카테고리 아이콘 선택',
-      categoryIcon,
-      categoryNum: 12,
-      checkboxOnIcon
+      controlCheckbox
+    }
+  },
+  setup() {
+    const modalStore = useModalStore()
+    const categoryStore = useCategoryStore()
+
+    return {
+      modalStore,
+      categoryStore
+    }
+  },
+  methods: {
+    selectCategory(i) {
+      this.categoryStore.selectCategory(i)
+    },
+    closeSelectCategoryModal() {
+      this.modalStore.closeSelectCategoryModal()
     }
   }
 }
