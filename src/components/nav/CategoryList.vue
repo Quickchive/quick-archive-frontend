@@ -6,7 +6,7 @@
     <div class="category-list__divider"></div>
     <!-- 유저 카테고리 -->
     <category-item-user-custom
-      v-for="categoryItem in userCategoryList"
+      v-for="categoryItem in categoryStore.userCategoryList"
       :key="categoryItem"
       :categoryData="categoryItem"
     ></category-item-user-custom>
@@ -40,7 +40,7 @@ export default {
     }
   },
   mounted() {
-    this.useCategoryList = this.categoryStore.getUserCategoryList()
+    this.categoryStore.getUserCategoryList()
   }
 }
 </script>
