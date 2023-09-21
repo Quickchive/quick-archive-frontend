@@ -79,7 +79,104 @@ export const useCategoryStore = defineStore('category', {
           selected: false
         }
       ],
-      userCategoryList: []
+      userCategoryList: [
+        {
+          id: 23,
+          createdAt: '2023-09-20T14:43:26.954Z',
+          updatedAt: '2023-09-20T14:43:26.954Z',
+          name: '테스트카테고리',
+          slug: '테스트카테고리',
+          parentId: null,
+          userId: 7
+        },
+        {
+          id: 33,
+          createdAt: '2023-09-20T23:36:28.027Z',
+          updatedAt: '2023-09-20T23:36:28.027Z',
+          name: '쇼핑',
+          slug: '쇼핑',
+          parentId: null,
+          userId: 7
+        },
+        {
+          id: 34,
+          createdAt: '2023-09-20T23:36:35.059Z',
+          updatedAt: '2023-09-20T23:36:35.059Z',
+          name: '맛집',
+          slug: '맛집',
+          parentId: null,
+          userId: 7,
+          children: [
+            {
+              id: 41,
+              createdAt: '2023-09-20T23:39:41.268Z',
+              updatedAt: '2023-09-20T23:39:41.268Z',
+              name: '서울 맛집',
+              slug: '서울-맛집',
+              parentId: 34,
+              userId: 7
+            }
+          ]
+        },
+        {
+          id: 35,
+          createdAt: '2023-09-20T23:36:38.288Z',
+          updatedAt: '2023-09-20T23:36:38.288Z',
+          name: '문서',
+          slug: '문서',
+          parentId: null,
+          userId: 7
+        },
+        {
+          id: 36,
+          createdAt: '2023-09-20T23:37:17.774Z',
+          updatedAt: '2023-09-20T23:37:17.774Z',
+          name: '여행',
+          slug: '여행',
+          parentId: null,
+          userId: 7,
+          children: [
+            {
+              id: 38,
+              createdAt: '2023-09-20T23:38:52.899Z',
+              updatedAt: '2023-09-20T23:38:52.899Z',
+              name: '국내 여행',
+              slug: '국내-여행',
+              parentId: 36,
+              userId: 7,
+              children: [
+                {
+                  id: 40,
+                  createdAt: '2023-09-20T23:39:21.779Z',
+                  updatedAt: '2023-09-20T23:39:21.779Z',
+                  name: '파리',
+                  slug: '파리',
+                  parentId: 38,
+                  userId: 7
+                }
+              ]
+            },
+            {
+              id: 39,
+              createdAt: '2023-09-20T23:39:01.686Z',
+              updatedAt: '2023-09-20T23:39:01.686Z',
+              name: '해외 여행',
+              slug: '해외-여행',
+              parentId: 36,
+              userId: 7
+            }
+          ]
+        },
+        {
+          id: 37,
+          createdAt: '2023-09-20T23:37:23.377Z',
+          updatedAt: '2023-09-20T23:37:23.377Z',
+          name: '게임',
+          slug: '게임',
+          parentId: null,
+          userId: 7
+        }
+      ]
     }
   },
   getters: {
@@ -93,7 +190,6 @@ export const useCategoryStore = defineStore('category', {
       return state.defaultCategory[0].img
     }
   },
-
   actions: {
     selectCategory(i: { id: number; img: string; selected: boolean }) {
       i.selected = true

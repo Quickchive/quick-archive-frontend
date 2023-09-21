@@ -6,43 +6,26 @@
     <div class="category-list__divider"></div>
     <!-- 유저 카테고리 -->
     <category-item-user-custom
-      v-for="categoryItem in categoryStore.userCategoryList"
+      v-for="categoryItem in categoryList"
       :key="categoryItem"
-      :categoryData="categoryStore.userCategoryList"
+      :categoryData="categoryItem"
     ></category-item-user-custom>
   </div>
 </template>
 
-<script>
-import expandMoreIcon from '@/assets/ic/ic-expand-more.svg'
-import expandLessIcon from '@/assets/ic/ic-expand-less.svg'
-import moreIcon from '@/assets/ic/ic-more.svg'
+<script setup>
 import CategoryItemUserCustom from '@/components/nav/CategoryItemUserCustom.vue'
 import CategoryItemDefault from '@/components/nav/CategoryItemDefault.vue'
-// import testJSON from '@/assets/model/test.json'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+import { isProxy, toRaw } from 'vue'
 
-export default {
-  components: { CategoryItemUserCustom, CategoryItemDefault },
-  data() {
-    return {
-      expandMoreIcon,
-      expandLessIcon,
-      moreIcon,
-      // userCategoryList: testJSON
-      useCategoryList: []
-    }
-  },
-  setup() {
-    const categoryStore = useCategoryStore()
-    return {
-      categoryStore
-    }
-  },
-  mounted() {
-    this.categoryStore.getUserCategoryList()
-  }
+const categoryStore = useCategoryStore()
+categoryStore.getUserCategoryList()
+let categoryList = categoryStore.userCategoryList
+if (isProxy(categoryStore.userCategoryList)) {
+  categoryList = toRaw(categoryStore.userCategoryList)
 }
+console.log(categoryList)
 </script>
 
 <style></style>
