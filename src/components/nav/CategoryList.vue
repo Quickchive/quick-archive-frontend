@@ -8,7 +8,7 @@
     <category-item-user-custom
       v-for="categoryItem in categoryStore.userCategoryList"
       :key="categoryItem"
-      :categoryData="categoryItem"
+      :categoryData="categoryStore.userCategoryList"
     ></category-item-user-custom>
   </div>
 </template>
