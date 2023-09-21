@@ -146,11 +146,11 @@ export const useCategoryStore = defineStore('category', {
               userId: 7,
               children: [
                 {
-                  id: 40,
+                  id: 42,
                   createdAt: '2023-09-20T23:39:21.779Z',
                   updatedAt: '2023-09-20T23:39:21.779Z',
-                  name: '파리',
-                  slug: '파리',
+                  name: '부산',
+                  slug: '부산',
                   parentId: 38,
                   userId: 7
                 }
@@ -163,7 +163,27 @@ export const useCategoryStore = defineStore('category', {
               name: '해외 여행',
               slug: '해외-여행',
               parentId: 36,
-              userId: 7
+              userId: 7,
+              children: [
+                {
+                  id: 40,
+                  createdAt: '2023-09-20T23:39:21.779Z',
+                  updatedAt: '2023-09-20T23:39:21.779Z',
+                  name: '파리',
+                  slug: '파리',
+                  parentId: 39,
+                  userId: 7
+                },
+                {
+                  id: 41,
+                  createdAt: '2023-09-20T23:39:21.779Z',
+                  updatedAt: '2023-09-20T23:39:21.779Z',
+                  name: '프랑스',
+                  slug: '프랑스',
+                  parentId: 39,
+                  userId: 7
+                }
+              ]
             }
           ]
         },
