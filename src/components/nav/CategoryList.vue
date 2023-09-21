@@ -19,7 +19,8 @@ import expandLessIcon from '@/assets/ic/ic-expand-less.svg'
 import moreIcon from '@/assets/ic/ic-more.svg'
 import CategoryItemUserCustom from '@/components/nav/CategoryItemUserCustom.vue'
 import CategoryItemDefault from '@/components/nav/CategoryItemDefault.vue'
-import testJSON from '@/assets/model/test.json'
+// import testJSON from '@/assets/model/test.json'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 
 export default {
   components: { CategoryItemUserCustom, CategoryItemDefault },
@@ -28,8 +29,18 @@ export default {
       expandMoreIcon,
       expandLessIcon,
       moreIcon,
-      userCategoryList: testJSON
+      // userCategoryList: testJSON
+      useCategoryList: []
     }
+  },
+  setup() {
+    const categoryStore = useCategoryStore()
+    return {
+      categoryStore
+    }
+  },
+  mounted() {
+    this.useCategoryList = this.categoryStore.getUserCategoryList()
   }
 }
 </script>

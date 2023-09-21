@@ -11,6 +11,7 @@ import categoryShopping from '@/assets/img/category/img_category_shopping.png'
 import categoryStar from '@/assets/img/category/img_category_star.png'
 import categoryTrip from '@/assets/img/category/img_category_trip.png'
 import categoryWatch from '@/assets/img/category/img_category_watch.png'
+import { getCategories } from '@/api/category'
 
 export const useCategoryStore = defineStore('category', {
   // 화살표 함수는 전체 유형 유추을 위해 권장됨.
@@ -77,7 +78,8 @@ export const useCategoryStore = defineStore('category', {
           img: categoryTrip,
           selected: false
         }
-      ]
+      ],
+      userCategoryList: []
     }
   },
   getters: {
@@ -91,6 +93,7 @@ export const useCategoryStore = defineStore('category', {
       return state.defaultCategory[0].img
     }
   },
+
   actions: {
     selectCategory(i: { id: number; img: string; selected: boolean }) {
       i.selected = true
@@ -99,6 +102,17 @@ export const useCategoryStore = defineStore('category', {
           e.selected = false
         }
       })
+    },
+    async getUserCategoryList() {
+      try {
+        const response = await getCategories()
+        console.log(response)
+        if (response.statusCode == 200) {
+          this.userCategoryList = response.categoriesTree
+        }
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 })
