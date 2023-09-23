@@ -27,8 +27,8 @@
                 class="button--transparent expand-button"
                 @click="controlSecondCategory(index)"
               >
-                <img v-if="thirdCategory.show" :src="expandLessIcon" />
-                <img v-if="!thirdCategory.show" :src="expandMoreIcon" />
+                <img v-if="thirdCategoryArr[index]" :src="expandLessIcon" />
+                <img v-if="!thirdCategoryArr[index]" :src="expandMoreIcon" />
               </button>
               <button class="button--transparent category-list__button">
                 <img :src="categoryIcon" class="category-icon img-category-icon" />{{
