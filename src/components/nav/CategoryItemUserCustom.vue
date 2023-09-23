@@ -11,7 +11,10 @@
             <img v-if="secondCategory.show" :src="expandLessIcon" />
             <img v-if="!secondCategory.show" :src="expandMoreIcon" />
           </button>
-          <button class="button--transparent category-list__button">
+          <button
+            class="button--transparent category-list__button"
+            @click="toCategoryPage(categoryData.id)"
+          >
             <img :src="categoryIcon" class="category-icon img-category-icon" />
             {{ categoryData.name }}
           </button>
@@ -30,7 +33,10 @@
                 <img v-if="thirdCategoryArr[index]" :src="expandLessIcon" />
                 <img v-if="!thirdCategoryArr[index]" :src="expandMoreIcon" />
               </button>
-              <button class="button--transparent category-list__button">
+              <button
+                class="button--transparent category-list__button"
+                @click="toCategoryPage(categoryItem2.id)"
+              >
                 <img :src="categoryIcon" class="category-icon img-category-icon" />{{
                   categoryItem2.name
                 }}
@@ -46,7 +52,10 @@
                   <button class="button--transparent expand-button">
                     <img :src="expandMoreIcon" />
                   </button>
-                  <button class="button--transparent category-list__button">
+                  <button
+                    class="button--transparent category-list__button"
+                    @click="toCategoryPage(categoryItem3.id)"
+                  >
                     <img :src="categoryIcon" class="category-icon img-category-icon" />{{
                       categoryItem3.name
                     }}
@@ -68,12 +77,16 @@ import expandLessIcon from '@/assets/ic/ic-expand-less.svg'
 import moreIcon from '@/assets/ic/ic-more.svg'
 import categoryIcon from '@/assets/img/category/img_category_cook.png'
 import { defineProps, reactive } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const props = defineProps({
   categoryData: Object
 })
 
 let thirdCategoryArr = reactive([])
+const secondCategory = reactive({ show: false })
 
 if (props.categoryData.children) {
   thirdCategoryArr.length = Number(props.categoryData.children.length)
@@ -83,8 +96,6 @@ if (props.categoryData.children) {
   console.log('thirdCategoryArr', thirdCategoryArr)
 }
 
-const secondCategory = reactive({ show: false })
-const thirdCategory = reactive({ show: false })
 const controlFirstCategory = (children) => {
   if (children) {
     secondCategory.show = !secondCategory.show
@@ -97,6 +108,11 @@ const controlSecondCategory = (index) => {
   thirdCategoryArr[index] = !thirdCategoryArr[index]
   console.log('thirdCategoryArr', thirdCategoryArr[index])
   // }
+}
+
+const toCategoryPage = (categoryId) => {
+  router.push(`/category/${categoryId}`)
+  console.log('tocategorypage', categoryId)
 }
 </script>
 

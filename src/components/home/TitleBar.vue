@@ -1,19 +1,15 @@
 <template>
-  <h1>전체 콘텐츠</h1>
+  <h1>{{ categoryName }}</h1>
   <the-filter></the-filter>
 </template>
 
-<script>
+<script setup>
 import TheFilter from '@/components/home/TheFilter.vue'
+import { defineProps } from 'vue'
 
-export default {
-  components: {
-    TheFilter
-  },
-  data() {
-    return {}
-  }
-}
+const props = defineProps({
+  categoryName: String
+})
 </script>
 
 <style></style>

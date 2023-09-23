@@ -3,36 +3,20 @@
     <the-nav-bar></the-nav-bar>
   </div>
   <section class="flex-container__col wrapper__section">
-    <title-bar></title-bar>
-    <div class="divider"></div>
-    <article class="flex-container__col contents-container">
-      <div class="contents-num__wrapper">{{ contentsNum }}개</div>
-      <div class="flex-container__col contents-list__wrapper">
-        <contents-item v-for="item in items" :key="item"></contents-item>
-      </div>
-    </article>
+    <router-view></router-view>
   </section>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
 import TheNavBar from '@/components/nav/TheNavBar.vue'
-import TitleBar from '@/components/home/TitleBar.vue'
-import ContentsItem from '@/components/home/ContentsItem.vue'
 import { useUserStore } from '@/stores/useUserStore.ts'
 
 export default defineComponent({
   components: {
-    TheNavBar,
-    TitleBar,
-    ContentsItem
+    TheNavBar
   },
-  data() {
-    return {
-      contentsNum: '0',
-      items: 5
-    }
-  },
+
   setup() {
     const userStore = useUserStore()
     return {

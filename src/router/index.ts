@@ -27,6 +27,20 @@ const router = createRouter({
       name: 'search',
       component: () => import('@/views/SearchView.vue')
     },
+    {
+      path: '/category',
+      component: () => import('@/views/HomeView.vue'),
+      children: [
+        {
+          path: '/category',
+          component: () => import('@/components/category/DefaultCategoryPage.vue')
+        },
+        {
+          path: '/category/:id',
+          component: () => import('@/components/category/CustomCategoryPage.vue')
+        }
+      ]
+    },
     // 설정 페이지
     {
       path: '/setting',
