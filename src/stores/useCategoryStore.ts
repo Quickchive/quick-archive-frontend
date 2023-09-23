@@ -222,7 +222,7 @@ export const useCategoryStore = defineStore('category', {
     async getUserCategoryList() {
       try {
         const response = await getCategories()
-        console.log(response)
+        console.log('store', response)
         if (response.statusCode == 200) {
           this.userCategoryList = response.categoriesTree
         }
