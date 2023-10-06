@@ -1,6 +1,10 @@
 <template>
   <dialog class="category-modal">
-    <modal-header :modalTitle="modalTitle" :isBtnOnRight="isBtnOnRight"></modal-header>
+    <modal-header
+      :modalTitle="modalTitle"
+      :isBtnOnRight="isBtnOnRight"
+      :closeModal="closeModal"
+    ></modal-header>
     <div class="flex-container__row add-category__button__wrapper">
       <button class="flex-container__col add-category__button" @click="showAddContentModal()">
         <img :src="addContent" class="img-add-content" />
@@ -39,8 +43,10 @@ export default {
   },
   methods: {
     showAddCategoryModal() {
-      this.modalStore.closeSelectModal()
       this.modalStore.openAddCategoryModal()
+    },
+    closeModal() {
+      this.modalStore.closeSelectModal()
     }
   }
 }

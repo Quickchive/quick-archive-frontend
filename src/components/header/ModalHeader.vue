@@ -9,7 +9,6 @@
 
 <script>
 import topCloseIcon from '@/assets/ic/ic-top-close.svg'
-import { useModalStore } from '@/stores/useModalStore.ts'
 
 export default {
   data() {
@@ -19,19 +18,8 @@ export default {
   },
   props: {
     modalTitle: String,
-    isBtnOnLeft: Boolean
-  },
-  setup() {
-    // counter store 가져오기
-    const modalStore = useModalStore()
-    return {
-      modalStore
-    }
-  },
-  methods: {
-    closeModal() {
-      this.modalStore.closeSelectModal()
-    }
+    isBtnOnLeft: Boolean,
+    closeModal: Function
   }
 }
 </script>

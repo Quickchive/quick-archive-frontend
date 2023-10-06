@@ -19,19 +19,18 @@
             {{ categoryData.name }}
           </button>
         </div>
-        <button class="button--transparent"><img :src="moreIcon" /></button>
+        <button class="button--transparent moreButton" @click="showMoreButton()">
+          <img :src="moreIcon" /> <more-button v-if="moreButton.first"></more-button>
+        </button>
       </li>
       <!-- 2차 카테고리 -->
       <template v-if="secondCategory.show">
-        <ul v-for="(categoryItem2, index) in categoryData.children" :key="index">
+        <ul v-for="(categoryItem2, i) in categoryData.children" :key="i">
           <li>
             <div class="flex-container__row--align-center">
-              <button
-                class="button--transparent expand-button"
-                @click="controlSecondCategory(index)"
-              >
-                <img v-if="thirdCategoryArr[index]" :src="expandLessIcon" />
-                <img v-if="!thirdCategoryArr[index]" :src="expandMoreIcon" />
+              <button class="button--transparent expand-button" @click="controlSecondCategory(i)">
+                <img v-if="thirdCategoryArr[i]" :src="expandLessIcon" />
+                <img v-if="!thirdCategoryArr[i]" :src="expandMoreIcon" />
               </button>
               <button
                 class="button--transparent category-list__button"
@@ -42,11 +41,13 @@
                 }}
               </button>
             </div>
-            <button class="button--transparent"><img :src="moreIcon" /></button>
+            <button class="button--transparent moreButton" @click="showSecondMoreButton(i)">
+              <!-- <more-button v-if="moreButton.second[i]"></more-button><img :src="moreIcon" /> -->
+            </button>
           </li>
           <!-- 3차 카테고리 -->
-          <template v-if="thirdCategoryArr[index]">
-            <ul v-for="categoryItem3 in categoryItem2.children" :key="categoryItem3">
+          <template v-if="thirdCategoryArr[i]">
+            <ul v-for="(categoryItem3, k) in categoryItem2.children" :key="k">
               <li>
                 <div class="flex-container__row--align-center">
                   <button class="button--transparent expand-button">
@@ -61,7 +62,11 @@
                     }}
                   </button>
                 </div>
-                <button class="button--transparent"><img :src="moreIcon" /></button>
+                <button class="button--transparent moreButton" @click="showThirdMoreButton(i, k)">
+                  <img :src="moreIcon" />
+                  <!-- <more-button v-if="moreButton.second[i].third[k]"></more-button -->
+                  ><img :src="moreIcon" />
+                </button>
               </li>
             </ul>
           </template>
@@ -78,6 +83,8 @@ import moreIcon from '@/assets/ic/ic-more.svg'
 import categoryIcon from '@/assets/img/category/img_category_cook.png'
 import { defineProps, reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import MoreButton from '@/components/button/MoreButton.vue'
+import { isProxy, toRaw } from 'vue'
 
 const router = useRouter()
 
@@ -87,13 +94,40 @@ const props = defineProps({
 
 let thirdCategoryArr = reactive([])
 const secondCategory = reactive({ show: false })
+// let addMoreButton = reactive([])
+// let secondMoreButton = reactive([])
+// let thirdMoreButton = reactive([])
+
+let moreButton = reactive({
+  // first: false,
+  // second: [
+  //   {
+  //     show: false,
+  //     third: [
+  //       {
+  //         show: false
+  //       }
+  //     ]
+  //   }
+  // ]
+})
+
+moreButton.first = false
 
 if (props.categoryData.children) {
+  console.log(toRaw(props.categoryData), '카테고리데이터터터터터')
   thirdCategoryArr.length = Number(props.categoryData.children.length)
   for (let i = 0; i < props.categoryData.children.length; i++) {
+    console.log(props.categoryData.children.length)
     thirdCategoryArr[i] = false
+    // moreButton.second[i].show = false
+    // if (props.categoryData.children[i].children.length !== 0) {
+    // for (let j = 0; j < props.categoryData.children[i].children.length; j++) {
+    // moreButton.second[i].third[j].show = false
+    // }
+    // }
   }
-  console.log('thirdCategoryArr', thirdCategoryArr)
+  console.log('morebutton', toRaw(moreButton))
 }
 
 const controlFirstCategory = (children) => {
@@ -113,6 +147,20 @@ const controlSecondCategory = (index) => {
 const toCategoryPage = (categoryId) => {
   router.push(`/category/${categoryId}`)
   console.log('tocategorypage', categoryId)
+}
+
+const showMoreButton = (index) => {
+  if (!index) {
+    moreButton.first = !moreButton.first
+  }
+}
+
+const showSecondMoreButton = (index) => {
+  moreButton.second[index].show = !moreButton.second[index].show
+}
+
+const showThirdMoreButton = (i, k) => {
+  moreButton.second[i].third[k].show = !moreButton.second[i].third[k].show
 }
 </script>
 

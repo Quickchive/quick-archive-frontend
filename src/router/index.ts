@@ -16,11 +16,11 @@ const router = createRouter({
       component: () => import('@/views/LoginView.vue')
     },
     // 홈 페이지
-    {
-      path: '/home',
-      name: 'home',
-      component: () => import('@/views/HomeView.vue')
-    },
+    // {
+    //   path: '/home',
+    //   name: 'home',
+    //   component: () => import('@/views/HomeView.vue')
+    // },
     // 검색 페이지
     {
       path: '/search',
@@ -28,15 +28,15 @@ const router = createRouter({
       component: () => import('@/views/SearchView.vue')
     },
     {
-      path: '/category',
+      path: '/home',
       component: () => import('@/views/HomeView.vue'),
       children: [
         {
-          path: '/category',
+          path: '/home',
           component: () => import('@/components/category/DefaultCategoryPage.vue')
         },
         {
-          path: '/category/:id',
+          path: '/home/:id',
           component: () => import('@/components/category/CustomCategoryPage.vue')
         }
       ]

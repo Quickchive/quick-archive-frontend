@@ -7,7 +7,7 @@
         <img class="img-profile" :src="profileImg" /><span>{{ userStore.nickname }}</span>
       </div>
       <div class="search__wrapper">
-        <search-input :placeholderText="placeholderText"></search-input>
+        <search-input :placeholderText="placeholderText" :isSizeSm="true"></search-input>
       </div>
     </div>
     <!-- divider -->

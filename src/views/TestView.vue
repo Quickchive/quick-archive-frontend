@@ -1,15 +1,9 @@
 <template>
-  <!-- <category-List></category-List> -->
-  <modal-content-add-set-new-category></modal-content-add-set-new-category>
-  <div class="navbar-shadow"></div>
+  <more-button></more-button>
 </template>
 
-<script>
-import ModalContentAddSetNewCategory from '@/components/modal/ModalContentAddSetNewCategory.vue'
-
-export default {
-  components: { ModalContentAddSetNewCategory }
-}
+<script setup>
+import MoreButton from '@/components/button/MoreButton.vue'
 </script>
 
 <style></style>

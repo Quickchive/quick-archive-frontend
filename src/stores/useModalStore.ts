@@ -17,34 +17,47 @@ export const useModalStore = defineStore('modal', {
       selectModal: false,
       addCategoryModal: false,
       selectCategoryModal: false,
-      overlay: false
+      overlay: false,
+      categoryLocationModal: false
     }
   },
   getters: {},
   actions: {
+    // step 1
+    openSelectModal() {
+      this.selectModal = true
+      this.overlay = true
+    },
+    closeSelectModal() {
+      this.selectModal = false
+      this.addCategoryModal = false
+      this.selectCategoryModal = false
+      this.overlay = false
+    },
+    // step 2 - 카테고리
     openAddCategoryModal() {
+      this.selectModal = false
       this.addCategoryModal = true
       this.overlay = true
     },
     closeAddCategoryModal() {
       this.addCategoryModal = false
-      this.selectModal = false
-      this.overlay = false
-    },
-    closeSelectModal() {
-      this.selectModal = false
-      this.addCategoryModal = false
-      this.overlay = false
-    },
-    openSelectModal() {
       this.selectModal = true
-      this.overlay = true
+      // this.overlay = true
     },
+    // step 2-1
     openSelectCategoryModal() {
       this.selectCategoryModal = true
     },
     closeSelectCategoryModal() {
       this.selectCategoryModal = false
+    },
+    // 생성 위치
+    openSetCategoryLocationModal() {
+      this.categoryLocationModal = true
+    },
+    closeSetCategoryLocationModal() {
+      this.categoryLocationModal = false
     }
   }
 })

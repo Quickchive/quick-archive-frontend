@@ -174,14 +174,18 @@ dialog {
   }
   .wrapper__add-new-category__button {
     margin-bottom: 24px;
+    width: 398px;
   }
   .wrapper__modal-category-list {
     position: absolute;
     overflow-y: scroll;
     top: 230px;
     z-index: 0;
-    height: 296px;
+    height: 254px;
     width: 398px;
+  }
+  .wrapper__modal-category-list::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
   }
 }
 
