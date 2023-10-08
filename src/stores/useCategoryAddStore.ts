@@ -108,7 +108,7 @@ export const useCategoryAddStore = defineStore('categoryAdd', {
     },
     // 카테고리 생성 위치 라디오 버튼 선택 이벤트
     selectCategoryLocation(categoryName: string) {
-      this.selectedLocation = categoryName
+      this.selectedLocation.name = categoryName
     }
   }
 })
