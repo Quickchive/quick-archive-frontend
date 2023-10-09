@@ -74,9 +74,9 @@ const closeModal = () => {
   // categoryAddStore.resetCategoryLocation()
 }
 
-onMounted(() => {
-  categoryStore.getUserCategoryList()
-  if (isProxy(categoryStore.userCategoryList).length > 0) {
+onMounted(async () => {
+  await categoryStore.getUserCategoryList()
+  if (toRaw(categoryStore.userCategoryList).length > 0) {
     categoryList.value = toRaw(categoryStore.userCategoryList)
   } else {
     categoryList.value = categoryListDummy

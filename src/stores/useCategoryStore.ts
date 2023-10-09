@@ -64,7 +64,7 @@ export const useCategoryStore = defineStore('category', {
     async getUserCategoryList() {
       try {
         const response = await getCategories()
-        console.log('store', response)
+        console.log('store', response.data.categoriesTree)
         if (response.data.statusCode == 200) {
           this.userCategoryList = response.data.categoriesTree
         }
