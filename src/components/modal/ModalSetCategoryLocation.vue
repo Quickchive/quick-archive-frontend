@@ -18,8 +18,7 @@
       <category-item-with-radio-button
         v-for="categoryItem in categoryList"
         :key="categoryItem"
-        :categoryData="categoryItem"
-        @radio-value="selectCategory"
+        :categoryDepth1="categoryItem"
       ></category-item-with-radio-button>
     </div>
 
@@ -29,8 +28,12 @@
     <div class="modal-footer">
       <button
         class="confirm-button--inactive"
-        :class="isCategorySelected ? 'confirm-button--active' : 'confirm-button--inactive'"
-        :disabled="!isCategorySelected"
+        :class="
+          categoryAddStore.isSelectedCategory
+            ? 'confirm-button--active'
+            : 'confirm-button--inactive'
+        "
+        :disabled="!categoryAddStore.isSelectedCategory"
         @click="setLocation()"
       >
         완료
@@ -48,8 +51,7 @@ import ModalHeader from '@/components/header/ModalHeader.vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useCategoryAddStore } from '@/stores/useCategoryAddStore.ts'
 import { useModalStore } from '@/stores/useModalStore.ts'
-import { isProxy, toRaw, onMounted } from 'vue'
-import { ref, computed } from 'vue'
+import { isProxy, toRaw, onMounted, ref } from 'vue'
 
 const placeholderText = '카테고리명 검색'
 const modalTitle = '생성 위치'
@@ -60,36 +62,40 @@ const categoryStore = useCategoryStore()
 const modalStore = useModalStore()
 const categoryAddStore = useCategoryAddStore()
 
-let selectedCategoryName = ref('미지정')
+// let selectedCategoryName = ref('미지정')
 
 categoryStore.getUserCategoryList()
-let categoryList = categoryStore.userCategoryList
+const categoryList = ref(categoryStore.userCategoryList)
 
 const closeModal = () => {
+  categoryAddStore.resetCategoryLocation()
   modalStore.closeSetCategoryLocationModal()
+  // categoryAddStore.resetCategoryLocation()
 }
 
 onMounted(() => {
   if (isProxy(categoryStore.userCategoryList)) {
-    categoryList = toRaw(categoryStore.userCategoryList)
+    categoryList.value = toRaw(categoryStore.userCategoryList)
   }
   console.log('생성 위치', categoryList)
 })
 
+// categoryAddStore.$subscribe(() => {
+//   categoryList = toRaw(categoryStore.userCategoryList)
+// })
+
 // 카테고리 선택 유효성 검사
-const isCategorySelected = computed(() => {
-  categoryAddStore.$subscribe(() => {
-    selectedCategoryName.value = categoryAddStore.selectedLocation
-  })
-  return selectedCategoryName.value !== '미지정' ? true : false
-})
+// const isCategorySelected = computed(() => {
+//   // categoryAddStore.$subscribe((mutation, state) => {
+//   //   state.selectedCategoryName.value = categoryAddStore.selectedLocation.name
+//   // })
+//   return selectedCategoryName.value !== '미지정' ? true : false
+// })
 
-// 카테고리 감시
-
-const selectCategory = (value) => {
-  selectedCategoryName.value = value
-  console.log(value, selectCategory.value)
-}
+// const selectCategory = (value) => {
+//   selectedCategoryName.value = value
+//   console.log(value, selectCategory.value)
+// }
 
 // 완료 버튼 클릭
 const setLocation = () => {

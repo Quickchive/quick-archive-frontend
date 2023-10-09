@@ -94,7 +94,8 @@ export const useCategoryAddStore = defineStore('categoryAdd', {
       })
       console.log('선택된 아이콘', selectedCategory)
       return selectedCategory
-    }
+    },
+    isSelectedCategory: (state) => state.selectedLocation.name !== '미지정'
   },
   actions: {
     // 카테고리 아이콘 선택 이벤트
@@ -109,6 +110,9 @@ export const useCategoryAddStore = defineStore('categoryAdd', {
     // 카테고리 생성 위치 라디오 버튼 선택 이벤트
     selectCategoryLocation(categoryName: string) {
       this.selectedLocation.name = categoryName
+    },
+    resetCategoryLocation() {
+      this.selectedLocation = { name: '미지정' }
     }
   }
 })

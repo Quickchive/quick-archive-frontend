@@ -32,7 +32,7 @@
         class="button--transparent flex-container__row"
         @click="openSetCategoryLocationModal()"
       >
-        {{ categoryLocationName }}<img :src="nextBlackIcon" />
+        {{ categoryAddStore.selectedLocation.name }}<img :src="nextBlackIcon" />
       </button>
     </div>
     <div class="modal-footer">
