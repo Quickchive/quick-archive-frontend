@@ -52,6 +52,7 @@ import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useCategoryAddStore } from '@/stores/useCategoryAddStore.ts'
 import { useModalStore } from '@/stores/useModalStore.ts'
 import { isProxy, toRaw, onMounted, ref } from 'vue'
+import categoryListDummy from '@/assets/model/categoryList.json'
 
 const placeholderText = '카테고리명 검색'
 const modalTitle = '생성 위치'
@@ -64,7 +65,7 @@ const categoryAddStore = useCategoryAddStore()
 
 // let selectedCategoryName = ref('미지정')
 
-categoryStore.getUserCategoryList()
+// categoryStore.getUserCategoryList()
 const categoryList = ref(categoryStore.userCategoryList)
 
 const closeModal = () => {
@@ -74,8 +75,11 @@ const closeModal = () => {
 }
 
 onMounted(() => {
-  if (isProxy(categoryStore.userCategoryList)) {
+  categoryStore.getUserCategoryList()
+  if (isProxy(categoryStore.userCategoryList).length > 0) {
     categoryList.value = toRaw(categoryStore.userCategoryList)
+  } else {
+    categoryList.value = categoryListDummy
   }
   console.log('생성 위치', categoryList)
 })

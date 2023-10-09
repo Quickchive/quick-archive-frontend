@@ -17,20 +17,21 @@
 import CategoryItemUserCustom from '@/components/nav/CategoryItemUserCustom.vue'
 import CategoryItemDefault from '@/components/nav/CategoryItemDefault.vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
-import { isProxy, toRaw, onMounted } from 'vue'
+import { isProxy, toRaw, onMounted, ref } from 'vue'
+import categoryListDummy from '@/assets/model/categoryList.json'
 
 const categoryStore = useCategoryStore()
-categoryStore.getUserCategoryList()
-let categoryList = categoryStore.userCategoryList
+const categoryList = ref(categoryStore.userCategoryList)
 
 onMounted(() => {
-  if (isProxy(categoryStore.userCategoryList)) {
-    categoryList = toRaw(categoryStore.userCategoryList)
+  categoryStore.getUserCategoryList()
+  if (isProxy(categoryStore.userCategoryList).length > 0) {
+    categoryList.value = toRaw(categoryStore.userCategoryList)
+  } else {
+    categoryList.value = categoryListDummy
   }
   console.log('navBar', categoryList)
 })
-
-// categoryStore.getUserCategoryList()
 </script>
 
 <style></style>
