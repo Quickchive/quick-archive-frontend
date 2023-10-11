@@ -43,7 +43,6 @@ export const useModalStore = defineStore('modal', {
     closeAddCategoryModal() {
       this.addCategoryModal = false
       this.selectModal = true
-      // this.overlay = true
     },
     // step 2-1
     openSelectCategoryModal() {

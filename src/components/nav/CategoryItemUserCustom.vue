@@ -65,7 +65,6 @@
                 <button class="button--transparent moreButton" @click="showThirdMoreButton(i, k)">
                   <img :src="moreIcon" />
                   <!-- <more-button v-if="moreButton.second[i].third[k]"></more-button -->
-                  ><img :src="moreIcon" />
                 </button>
               </li>
             </ul>

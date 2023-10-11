@@ -17,7 +17,7 @@
 import CategoryItemUserCustom from '@/components/nav/CategoryItemUserCustom.vue'
 import CategoryItemDefault from '@/components/nav/CategoryItemDefault.vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
-import { isProxy, toRaw, onMounted, ref } from 'vue'
+import { toRaw, onMounted, ref } from 'vue'
 import categoryListDummy from '@/assets/model/categoryList.json'
 
 const categoryStore = useCategoryStore()
@@ -31,6 +31,11 @@ onMounted(async () => {
     categoryList.value = categoryListDummy
   }
   console.log('navBar', categoryList)
+})
+
+// 카테고리 데이터 감시
+categoryStore.$subscribe(() => {
+  categoryList.value = toRaw(categoryStore.userCategoryList)
 })
 </script>
 

@@ -107,10 +107,12 @@ const addCategory = async () => {
     if (categoryAddStore.selectedLocation.name !== '미지정') {
       categoryData.parentId = categoryAddStore.selectedLocation.id
     }
-    console.log('서버전송할 categoryData', categoryData)
-    await addCategories(categoryData)
+    const response = await addCategories(categoryData)
+    console.log('카테고리 추가 서버 전송 응답', response)
     // 상태코드로 에러 처리 하기
-    modalStore.closeSelectCategoryModal()
+    if (response.data.statusCode === 201) {
+      modalStore.closeAddCategoryModal()
+    }
   } catch (error) {
     console.log(error)
   }
