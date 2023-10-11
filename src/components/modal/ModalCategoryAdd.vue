@@ -112,6 +112,8 @@ const addCategory = async () => {
     // 상태코드로 에러 처리 하기
     if (response.data.statusCode === 201) {
       modalStore.closeAddCategoryModal()
+      modalStore.closeSelectModal()
+      await categoryStore.getUserCategoryList()
     }
   } catch (error) {
     console.log(error)
