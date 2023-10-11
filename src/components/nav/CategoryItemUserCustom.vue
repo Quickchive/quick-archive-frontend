@@ -83,7 +83,7 @@ import categoryIcon from '@/assets/img/category/img_category_cook.png'
 import { defineProps, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import MoreButton from '@/components/button/MoreButton.vue'
-import { isProxy, toRaw } from 'vue'
+import { toRaw, watch } from 'vue'
 
 const router = useRouter()
 
