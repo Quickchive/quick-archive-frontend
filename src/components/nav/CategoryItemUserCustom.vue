@@ -97,18 +97,13 @@ const secondCategory = reactive({ show: false })
 // let secondMoreButton = reactive([])
 // let thirdMoreButton = reactive([])
 
-let moreButton = reactive({
-  // first: false,
-  // second: [
-  //   {
-  //     show: false,
-  //     third: [
-  //       {
-  //         show: false
-  //       }
-  //     ]
-  //   }
-  // ]
+let moreButton = reactive({})
+
+watch(props.categoryData, {
+  deep: true,
+  handler: (value) => {
+    console.log(value)
+  }
 })
 
 moreButton.first = false
@@ -126,7 +121,6 @@ if (props.categoryData.children) {
     // }
     // }
   }
-  console.log('morebutton', toRaw(moreButton))
 }
 
 const controlFirstCategory = (children) => {
@@ -137,10 +131,8 @@ const controlFirstCategory = (children) => {
 
 const controlSecondCategory = (index) => {
   console.log(index, 'index')
-  // if (index) {
   thirdCategoryArr[index] = !thirdCategoryArr[index]
   console.log('thirdCategoryArr', thirdCategoryArr[index])
-  // }
 }
 
 const toCategoryPage = (categoryId) => {
