@@ -1,16 +1,21 @@
 <template>
   <dialog class="content-add__modal">
-    <modal-header-step :modalTitle="modalTitle" :isBtnOnLeft="isBtnOnLeft"></modal-header-step>
+    <modal-header-step
+      :modalTitle="modalTitle"
+      :isBtnOnLeft="isBtnOnLeft"
+      :closeModal="closeModal"
+    ></modal-header-step>
     <!-- 썸네일 -->
     <thumbnail-item></thumbnail-item>
     <!-- 카테고리 -->
     <div class="wrapper__modal-inner">
       <div class="flex-container__row--space-between">
         <label class="label__modal"> 카테고리 </label>
-        <button class="button--go-next">미지정<img :src="nextBlackIcon" /></button>
+        <button class="button--go-next" @click="modalStore.openSetContentLocationModal()">
+          미지정<img :src="nextBlackIcon" />
+        </button>
       </div>
     </div>
-
     <!-- 즐겨찾기 -->
     <div class="wrapper__modal-inner">
       <div class="flex-container__row--space-between">
@@ -27,36 +32,28 @@
         </div>
       </div>
     </div>
-
     <div class="modal-footer">
       <button class="confirm-button--inactive">저장</button>
     </div>
   </dialog>
 </template>
 
-<script>
+<script setup>
 import ModalHeaderStep from '@/components/header/ModalHeaderStep.vue'
 import nextBlackIcon from '@/assets/ic/ic-next-black.svg'
-import thumbnail from '@/assets/img/thumbnail-sm.png'
-import editIcon from '@/assets/ic/ic-edit.svg'
 import ToggleButton from '@/components/button/ToggleButton.vue'
-import ThumbnailItem from './ThumbnailItem.vue'
+import ThumbnailItem from '../ThumbnailItem.vue'
+import { useModalStore } from '@/stores/useModalStore.ts'
 
-export default {
-  components: { ModalHeaderStep, ToggleButton, ThumbnailItem },
-  data() {
-    return {
-      modalTitle: '콘텐츠 추가',
-      isBtnOnLeft: true,
-      nextBlackIcon,
-      thumbnail,
-      editIcon,
-      contentTitle:
-        '작은집으로 이사가야 해서 미니멀리즘을 열...' /*'작은집으로 이사가야 해서 미니멀리즘을 열심히 실천한다',*/,
-      contentLink: 'https://brunch.co.kr/@21d3b3e76882478/32',
-      value: false
-    }
-  }
+const modalTitle = '콘텐츠 추가'
+const isBtnOnLeft = true
+const modalStore = useModalStore()
+const value = false
+
+const closeModal = () => {
+  modalStore.closeAddContentDetailModal()
+  modalStore.closeAddContentModal()
+  modalStore.closeSelectModal()
 }
 </script>
 

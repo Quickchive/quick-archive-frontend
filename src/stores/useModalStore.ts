@@ -15,10 +15,15 @@ export const useModalStore = defineStore('modal', {
   state: () => {
     return {
       selectModal: false,
+      // 카테고리 모달
       addCategoryModal: false,
       selectCategoryModal: false,
       overlay: false,
-      categoryLocationModal: false
+      categoryLocationModal: false,
+      // 콘텐츠 모달
+      addContentModal: false,
+      addContentDetailModal: false,
+      contentLocationModal: false
     }
   },
   getters: {},
@@ -34,7 +39,7 @@ export const useModalStore = defineStore('modal', {
       this.selectCategoryModal = false
       this.overlay = false
     },
-    // step 2 - 카테고리
+    // step 1.2 - 카테고리
     openAddCategoryModal() {
       this.selectModal = false
       this.addCategoryModal = true
@@ -44,19 +49,47 @@ export const useModalStore = defineStore('modal', {
       this.addCategoryModal = false
       this.selectModal = true
     },
-    // step 2-1
+    // step 1.2.1
     openSelectCategoryModal() {
       this.selectCategoryModal = true
     },
     closeSelectCategoryModal() {
       this.selectCategoryModal = false
     },
-    // 생성 위치
+    // step 1.2.2 - 생성 위치
     openSetCategoryLocationModal() {
       this.categoryLocationModal = true
     },
     closeSetCategoryLocationModal() {
       this.categoryLocationModal = false
+    },
+    // step 1.1 - 콘텐츠
+    openAddContentModal() {
+      this.selectModal = false
+      this.addContentModal = true
+      this.overlay = true
+    },
+    closeAddContentModal() {
+      this.addContentModal = false
+      this.selectModal = true
+    },
+    openAddContentDetailModal() {
+      this.addContentDetailModal = true
+      this.overlay = true
+    },
+    closeAddContentDetailModal() {
+      this.addContentDetailModal = false
+    },
+    returnAddContentModal() {
+      this.addContentDetailModal = false
+    },
+    openSetContentLocationModal() {
+      this.addContentModal = false
+      this.addContentDetailModal = false
+      this.contentLocationModal = true
+    },
+    closeSetContentLocationModal() {
+      this.contentLocationModal = false
     }
   }
 })

@@ -93,9 +93,6 @@ const props = defineProps({
 
 let thirdCategoryArr = reactive([])
 const secondCategory = reactive({ show: false })
-// let addMoreButton = reactive([])
-// let secondMoreButton = reactive([])
-// let thirdMoreButton = reactive([])
 
 let moreButton = reactive({})
 
@@ -114,12 +111,6 @@ if (props.categoryData.children) {
   for (let i = 0; i < props.categoryData.children.length; i++) {
     console.log(props.categoryData.children.length)
     thirdCategoryArr[i] = false
-    // moreButton.second[i].show = false
-    // if (props.categoryData.children[i].children.length !== 0) {
-    // for (let j = 0; j < props.categoryData.children[i].children.length; j++) {
-    // moreButton.second[i].third[j].show = false
-    // }
-    // }
   }
 }
 

@@ -45,13 +45,12 @@
 <script setup>
 import SearchInput from '@/components/input/SearchInput.vue'
 import addCategoryIcon from '@/assets/ic/ic-category-add.svg'
-// import CategoryItemUserCustom from '@/components/nav/CategoryItemUserCustom.vue'
 import CategoryItemWithRadioButton from '@/components/nav/CategoryItemWithRadioButton.vue'
 import ModalHeader from '@/components/header/ModalHeader.vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useCategoryAddStore } from '@/stores/useCategoryAddStore.ts'
 import { useModalStore } from '@/stores/useModalStore.ts'
-import { isProxy, toRaw, onMounted, ref } from 'vue'
+import { toRaw, onMounted, ref } from 'vue'
 import categoryListDummy from '@/assets/model/categoryList.json'
 
 const placeholderText = '카테고리명 검색'
@@ -63,15 +62,11 @@ const categoryStore = useCategoryStore()
 const modalStore = useModalStore()
 const categoryAddStore = useCategoryAddStore()
 
-// let selectedCategoryName = ref('미지정')
-
-// categoryStore.getUserCategoryList()
 const categoryList = ref(categoryStore.userCategoryList)
 
 const closeModal = () => {
   categoryAddStore.resetCategoryLocation()
   modalStore.closeSetCategoryLocationModal()
-  // categoryAddStore.resetCategoryLocation()
 }
 
 onMounted(async () => {
@@ -83,23 +78,6 @@ onMounted(async () => {
   }
   console.log('생성 위치', categoryList)
 })
-
-// categoryAddStore.$subscribe(() => {
-//   categoryList = toRaw(categoryStore.userCategoryList)
-// })
-
-// 카테고리 선택 유효성 검사
-// const isCategorySelected = computed(() => {
-//   // categoryAddStore.$subscribe((mutation, state) => {
-//   //   state.selectedCategoryName.value = categoryAddStore.selectedLocation.name
-//   // })
-//   return selectedCategoryName.value !== '미지정' ? true : false
-// })
-
-// const selectCategory = (value) => {
-//   selectedCategoryName.value = value
-//   console.log(value, selectCategory.value)
-// }
 
 // 완료 버튼 클릭
 const setLocation = () => {

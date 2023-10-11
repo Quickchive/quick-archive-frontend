@@ -2,7 +2,9 @@
   <header class="modal-header--step">
     <button class="button--transparent"><img :src="topBackIcon" /></button>
     <h1 class="modal-title">{{ modalTitle }}</h1>
-    <button class="button--transparent close-button--top"><img :src="topCloseIcon" /></button>
+    <button class="button--transparent close-button--top" @click="closeModal()">
+      <img :src="topCloseIcon" />
+    </button>
   </header>
 </template>
 
@@ -18,7 +20,8 @@ export default {
   },
   props: {
     modalTitle: String,
-    isBtnOnLeft: Boolean
+    isBtnOnLeft: Boolean,
+    closeModal: Function
   }
 }
 </script>

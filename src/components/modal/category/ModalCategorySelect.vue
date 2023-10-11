@@ -49,7 +49,6 @@ const submitCategoryIcon = () => {
 // 닫기 이벤트 - 카테고리 아이콘 기본값으로 저장 후 닫기
 const closeModal = () => {
   modalStore.closeSelectCategoryModal()
-  // modalStore.selectCategoryIcon(0)
 }
 </script>
 
