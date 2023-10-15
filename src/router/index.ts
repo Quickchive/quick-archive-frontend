@@ -33,11 +33,11 @@ const router = createRouter({
       children: [
         {
           path: '/home',
-          component: () => import('@/components/category/DefaultCategoryPage.vue')
+          component: () => import('@/components/home/DefaultCategoryPage.vue')
         },
         {
           path: '/home/:id',
-          component: () => import('@/components/category/CustomCategoryPage.vue')
+          component: () => import('@/components/home/CustomCategoryPage.vue')
         }
       ]
     },

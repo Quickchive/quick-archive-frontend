@@ -106,7 +106,7 @@ watch(props.categoryData, {
 moreButton.first = false
 
 if (props.categoryData.children) {
-  console.log(toRaw(props.categoryData), '카테고리데이터터터터터')
+  // console.log(toRaw(props.categoryData), '카테고리데이터터터터터')
   thirdCategoryArr.length = Number(props.categoryData.children.length)
   for (let i = 0; i < props.categoryData.children.length; i++) {
     console.log(props.categoryData.children.length)
@@ -127,8 +127,8 @@ const controlSecondCategory = (index) => {
 }
 
 const toCategoryPage = (categoryId) => {
-  router.push(`/category/${categoryId}`)
-  console.log('tocategorypage', categoryId)
+  router.push(`/home/${categoryId}`)
+  console.log('home', categoryId)
 }
 
 const showMoreButton = (index) => {

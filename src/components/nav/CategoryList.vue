@@ -30,7 +30,7 @@ onMounted(async () => {
   } else {
     categoryList.value = categoryListDummy
   }
-  console.log('navBar', categoryList)
+  // console.log('navBar', categoryList)
 })
 
 // 카테고리 데이터 감시

@@ -1,53 +1,51 @@
 <template>
   <article class="flex-container__row item-container">
     <div class="thumbnail__wrapper">
-      <img :src="thumbnail" class="thumbnail" />
-      <button class="button--transparent btn-favorite"><img :src="favoriteSelectedIcon" /></button>
+      <img :src="item.coverImg" class="thumbnail" />
+      <button class="button--transparent btn-favorite" @click="favoriteEvent()">
+        <img :src="favoriteSelectedIcon" v-if="item.favorite" />
+        <img :src="favoriteUnselectedIcon" v-if="!item.favorite" />
+      </button>
     </div>
     <article class="item__wrapper">
-      <h1>{{ title }}</h1>
-      <p>{{ text }}</p>
+      <h1>{{ item.title }}</h1>
+      <p>{{ item.description }}</p>
       <footer class="flex-container__row">
         <img class="ic-category" :src="categoryIcon" />
-        {{ category }}
+        {{ item.category || '미지정' }}
         <img :src="divider" />
-        {{ siteName }}
+        {{ item.siteName }}
       </footer>
     </article>
     <button class="button--transparent btn--more"><img :src="moreIcon" /></button>
   </article>
 </template>
 
-<script>
-import thumbnail from '@/assets/img/thumbnail1.png'
-import categoryIcon from '@/assets/ic/ic-category.svg'
+<script setup>
+import categoryIcon from '@/assets/img/category/img_category_watch.png'
 import divider from '@/assets/img/divider_14px.svg'
 import moreIcon from '@/assets/ic/ic-more.svg'
 import favoriteSelectedIcon from '@/assets/ic/ic-favorite-seleted_32px.svg'
 import favoriteUnselectedIcon from '@/assets/ic/ic-favorite-unseleted_32px.svg'
+// import { defineProps } from 'vue'
+import { addFavorite } from '@/api/contents.js'
+import { useContentStore } from '@/stores/useContentStore.ts'
 
-export default {
-  // props: {
-  //   thumbnail: String,
-  //   categoryIcon,
-  //   title: String,
-  //   text: String
-  //   category: '브런치',
-  //   siteName: 'Brunch',
-  // },
-  data() {
-    return {
-      thumbnail,
-      categoryIcon,
-      title: '돈 있어도 못 사는 건 샤넬백만이 아니다',
-      text: '샤넬백이 없지만 어린이집 등원시킬 때, 학원에 데리러 갈 때 그 백을 맬 필요는 없으니 됐다고 했다. 그 백을 사려면 돈만 있다고 되는 게 아니라고 했다. 경차 한 대 값 정도의 그 백은 백화점 문도 열기 전 새벽부터 줄을 서서 사야 한다고 했다. 재테크 좋아해서 "주식하는 아주머니"라면서 샤테크도 모르냐고 그 백이 있는 친구는 말했다. 하나 사라고. 값이 더 오를 거라고. 중고로 팔아도 된다고.',
-      divider,
-      category: '브런치',
-      siteName: 'Brunch',
-      moreIcon,
-      favoriteSelectedIcon,
-      favoriteUnselectedIcon
+const contentStore = useContentStore()
+
+const props = defineProps({
+  item: Object
+})
+
+const favoriteEvent = async () => {
+  try {
+    const response = await addFavorite(props.item.id)
+    console.log(response)
+    if (response.statusCode === 201) {
+      contentStore.getContents()
     }
+  } catch (error) {
+    console.log(error)
   }
 }
 </script>

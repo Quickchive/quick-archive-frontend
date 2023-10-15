@@ -43,6 +43,7 @@
       .ic-category {
         width: 20px;
         margin-right: 6px;
+        border-radius: 10px;
       }
     }
   }
@@ -60,5 +61,7 @@
   .contents-list__wrapper {
     gap: 20px;
     margin-top: 16px;
+    height: 100vh;
+    overflow-y: scroll;
   }
 }
