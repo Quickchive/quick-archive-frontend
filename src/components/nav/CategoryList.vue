@@ -8,7 +8,7 @@
     <category-item-user-custom
       v-for="categoryItem in categoryList"
       :key="categoryItem"
-      :categoryData="categoryItem"
+      :categoryDepth1="categoryItem"
     ></category-item-user-custom>
   </div>
 </template>
@@ -30,7 +30,6 @@ onMounted(async () => {
   } else {
     categoryList.value = categoryListDummy
   }
-  // console.log('navBar', categoryList)
 })
 
 // 카테고리 데이터 감시

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <title-bar :categoryName="categoryName"></title-bar>
+    <title-bar></title-bar>
     <div class="divider"></div>
     <article class="flex-container__col contents-container">
       <div class="contents-num__wrapper">{{ contentStore.userContentList.length }}개</div>
@@ -29,11 +29,8 @@ import { useContentStore } from '@/stores/useContentStore.ts'
 import { ref, onMounted, toRaw } from 'vue'
 import emptyImg from '@/assets/img/img-empty-nocontent.png'
 
-const categoryName = '전체 콘텐츠'
 const contentStore = useContentStore()
 const contentList = ref({})
-
-// contentList.value = contentListDummy.contents
 
 onMounted(async () => {
   await contentStore.getContents()

@@ -1,22 +1,22 @@
 <template>
   <div class="category-item">
     <!-- 1차 카테고리 -->
-    <ul v-if="categoryData.name" class="category-list__first-ul">
+    <ul v-if="categoryDepth1.name" class="category-list__first-ul">
       <li>
         <div class="flex-container__row--align-center">
           <button
             class="button--transparent expand-button"
-            @click="controlFirstCategory(categoryData.children)"
+            @click="controlCategoryDepth1(categoryDepth1.children)"
           >
-            <img v-if="secondCategory.show" :src="expandLessIcon" />
-            <img v-if="!secondCategory.show" :src="expandMoreIcon" />
+            <img v-if="categoryDepth2.show" :src="expandLessIcon" />
+            <img v-if="!categoryDepth2.show" :src="expandMoreIcon" />
           </button>
           <button
             class="button--transparent category-list__button"
-            @click="toCategoryPage(categoryData.id)"
+            @click="toCategoryPage(categoryDepth1.id, categoryDepth1.name)"
           >
             <img :src="categoryIcon" class="category-icon img-category-icon" />
-            {{ categoryData.name }}
+            {{ categoryDepth1.name }}
           </button>
         </div>
         <button class="button--transparent moreButton" @click="showMoreButton()">
@@ -24,17 +24,17 @@
         </button>
       </li>
       <!-- 2차 카테고리 -->
-      <template v-if="secondCategory.show">
-        <ul v-for="(categoryItem2, i) in categoryData.children" :key="i">
+      <template v-if="categoryDepth2.show">
+        <ul v-for="(categoryItem2, i) in categoryDepth1.children" :key="i">
           <li>
             <div class="flex-container__row--align-center">
-              <button class="button--transparent expand-button" @click="controlSecondCategory(i)">
-                <img v-if="thirdCategoryArr[i]" :src="expandLessIcon" />
-                <img v-if="!thirdCategoryArr[i]" :src="expandMoreIcon" />
+              <button class="button--transparent expand-button" @click="controlCategoryDepth2(i)">
+                <img v-if="categoryDepth3[i]" :src="expandLessIcon" />
+                <img v-if="!categoryDepth3[i]" :src="expandMoreIcon" />
               </button>
               <button
                 class="button--transparent category-list__button"
-                @click="toCategoryPage(categoryItem2.id)"
+                @click="toCategoryPage(categoryItem2.id, categoryItem2.name)"
               >
                 <img :src="categoryIcon" class="category-icon img-category-icon" />{{
                   categoryItem2.name
@@ -46,7 +46,7 @@
             </button>
           </li>
           <!-- 3차 카테고리 -->
-          <template v-if="thirdCategoryArr[i]">
+          <template v-if="categoryDepth3[i]">
             <ul v-for="(categoryItem3, k) in categoryItem2.children" :key="k">
               <li>
                 <div class="flex-container__row--align-center">
@@ -55,7 +55,7 @@
                   </button>
                   <button
                     class="button--transparent category-list__button"
-                    @click="toCategoryPage(categoryItem3.id)"
+                    @click="toCategoryPage(categoryItem3.id, categoryItem3.name)"
                   >
                     <img :src="categoryIcon" class="category-icon img-category-icon" />{{
                       categoryItem3.name
@@ -82,21 +82,23 @@ import moreIcon from '@/assets/ic/ic-more.svg'
 import categoryIcon from '@/assets/img/category/img_category_cook.png'
 import { defineProps, reactive } from 'vue'
 import { useRouter } from 'vue-router'
-import MoreButton from '@/components/button/MoreButton.vue'
-import { toRaw, watch } from 'vue'
+import { watch } from 'vue'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+
+const categoryStore = useCategoryStore()
 
 const router = useRouter()
 
 const props = defineProps({
-  categoryData: Object
+  categoryDepth1: Object
 })
 
-let thirdCategoryArr = reactive([])
-const secondCategory = reactive({ show: false })
+let categoryDepth3 = reactive([])
+const categoryDepth2 = reactive({ show: false })
 
 let moreButton = reactive({})
 
-watch(props.categoryData, {
+watch(props.categoryDepth1, {
   deep: true,
   handler: (value) => {
     console.log(value)
@@ -105,30 +107,30 @@ watch(props.categoryData, {
 
 moreButton.first = false
 
-if (props.categoryData.children) {
-  // console.log(toRaw(props.categoryData), '카테고리데이터터터터터')
-  thirdCategoryArr.length = Number(props.categoryData.children.length)
-  for (let i = 0; i < props.categoryData.children.length; i++) {
-    console.log(props.categoryData.children.length)
-    thirdCategoryArr[i] = false
+if (props.categoryDepth1.children) {
+  categoryDepth3.length = Number(props.categoryDepth1.children.length)
+  for (let i = 0; i < props.categoryDepth1.children.length; i++) {
+    console.log(props.categoryDepth1.children.length)
+    categoryDepth3[i] = false
   }
 }
 
-const controlFirstCategory = (children) => {
+const controlCategoryDepth1 = (children) => {
   if (children) {
-    secondCategory.show = !secondCategory.show
+    categoryDepth2.show = !categoryDepth2.show
   }
 }
 
-const controlSecondCategory = (index) => {
+const controlCategoryDepth2 = (index) => {
   console.log(index, 'index')
-  thirdCategoryArr[index] = !thirdCategoryArr[index]
-  console.log('thirdCategoryArr', thirdCategoryArr[index])
+  categoryDepth3[index] = !categoryDepth3[index]
+  console.log('categoryDepth3', categoryDepth3[index])
 }
 
-const toCategoryPage = (categoryId) => {
+const toCategoryPage = (categoryId, categoryName) => {
   router.push(`/home/${categoryId}`)
-  console.log('home', categoryId)
+  categoryStore.setCategoryName(categoryName)
+  console.log('home', categoryId, categoryName)
 }
 
 const showMoreButton = (index) => {

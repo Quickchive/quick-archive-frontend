@@ -1,15 +1,13 @@
 <template>
-  <h1>{{ categoryName }}</h1>
+  <h1>{{ categoryStore.curCategoryName }}</h1>
   <the-filter></the-filter>
 </template>
 
 <script setup>
 import TheFilter from '@/components/home/TheFilter.vue'
-import { defineProps } from 'vue'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 
-const props = defineProps({
-  categoryName: String
-})
+const categoryStore = useCategoryStore()
 </script>
 
 <style></style>
