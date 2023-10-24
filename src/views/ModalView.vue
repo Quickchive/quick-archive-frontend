@@ -16,6 +16,8 @@
       v-if="modalStore.contentLocationModal"
     ></modal-content-add-set-new-category>
     <modal-content-add-step-02 v-if="modalStore.addContentDetailModal"></modal-content-add-step-02>
+    <!-- 얼럿 모달 -->
+    <alert-duplicated-category v-if="modalStore.alertModal"></alert-duplicated-category>
   </div>
 </template>
 
@@ -28,6 +30,7 @@ import ModalSetCategoryLocation from '@/components/modal/category/ModalSetCatego
 import ModalContentAdd from '@/components/modal/content/ModalContentAdd.vue'
 import ModalContentAddSetNewCategory from '@/components/modal/content/ModalContentAddSetNewCategory.vue'
 import ModalContentAddStep02 from '@/components/modal/content/ModalContentAddStep02.vue'
+import AlertDuplicatedCategory from '@/components/alert/AlertDuplicatedCategory.vue'
 
 // counter store 가져오기
 const modalStore = useModalStore()

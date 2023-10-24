@@ -27,7 +27,6 @@ import divider from '@/assets/img/divider_14px.svg'
 import moreIcon from '@/assets/ic/ic-more.svg'
 import favoriteSelectedIcon from '@/assets/ic/ic-favorite-seleted_32px.svg'
 import favoriteUnselectedIcon from '@/assets/ic/ic-favorite-unseleted_32px.svg'
-// import { defineProps } from 'vue'
 import { addFavorite } from '@/api/contents.js'
 import { useContentStore } from '@/stores/useContentStore.ts'
 

@@ -23,7 +23,9 @@ export const useModalStore = defineStore('modal', {
       // 콘텐츠 모달
       addContentModal: false,
       addContentDetailModal: false,
-      contentLocationModal: false
+      contentLocationModal: false,
+      alertModal: false,
+      duplicatedCategoryLocation: '올리비아..'
     }
   },
   getters: {},
@@ -90,6 +92,16 @@ export const useModalStore = defineStore('modal', {
     },
     closeSetContentLocationModal() {
       this.contentLocationModal = false
+    },
+    openAlertModal() {
+      this.alertModal = true
+    },
+    closeAlertModal() {
+      this.alertModal = false
+      this.overlay = false
+    },
+    setDuplicatedCategoryName(categoryName: string) {
+      this.duplicatedCategoryLocation = categoryName
     }
   }
 })
