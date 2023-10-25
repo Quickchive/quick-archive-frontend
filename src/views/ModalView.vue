@@ -18,6 +18,7 @@
     <modal-content-add-step-02 v-if="modalStore.addContentDetailModal"></modal-content-add-step-02>
     <!-- 얼럿 모달 -->
     <alert-duplicated-category v-if="modalStore.alertModal"></alert-duplicated-category>
+    <alert-confirm v-if="modalStore.deleteCategoryModal"></alert-confirm>
   </div>
 </template>
 
@@ -30,7 +31,20 @@ import ModalSetCategoryLocation from '@/components/modal/category/ModalSetCatego
 import ModalContentAdd from '@/components/modal/content/ModalContentAdd.vue'
 import ModalContentAddSetNewCategory from '@/components/modal/content/ModalContentAddSetNewCategory.vue'
 import ModalContentAddStep02 from '@/components/modal/content/ModalContentAddStep02.vue'
-import AlertDuplicatedCategory from '@/components/alert/AlertDuplicatedCategory.vue'
+import AlertDuplicatedCategory from '@/components/modal/alert/AlertDuplicatedCategory.vue'
+import AlertConfirm from '@/components/modal/alert/AlertConfirm.vue'
+// import ToastDefault from '@/components/toast/ToastDefault.vue'
+// import { useToast } from 'vue-toastification'
+
+// const toast = useToast()
+// // Or set it per toast
+// toast(ToastDefault)
+
+// app.use(ToastDefault, {
+//   // Setting the global default position
+//   position: POSITION.TOP_LEFT,
+//   timeout: 1000
+// })
 
 // counter store 가져오기
 const modalStore = useModalStore()

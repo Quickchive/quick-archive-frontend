@@ -19,7 +19,7 @@
             {{ categoryDepth1.name }}
           </button>
         </div>
-        <button class="button--transparent moreButton" @click="showMoreButton()">
+        <button class="button--transparent moreButton" @click="showFirstMoreButton()">
           <img :src="moreIcon" /> <more-button v-if="moreButton.first"></more-button>
         </button>
       </li>
@@ -84,6 +84,7 @@ import { defineProps, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { watch } from 'vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+import MoreButton from '@/components/button/MoreButton.vue'
 
 const categoryStore = useCategoryStore()
 
@@ -133,10 +134,12 @@ const toCategoryPage = (categoryId, categoryName) => {
   console.log('home', categoryId, categoryName)
 }
 
-const showMoreButton = (index) => {
-  if (!index) {
-    moreButton.first = !moreButton.first
-  }
+const showFirstMoreButton = () => {
+  moreButton.first = !moreButton.first
+  // 카테고리 삭제/수정을 위해 더보기 버튼 클릭한 카테고리 아이디를 세팅함
+  console.log(props.categoryDepth1.id)
+
+  categoryStore.setFocusedCategory(props.categoryDepth1.id)
 }
 
 const showSecondMoreButton = (index) => {

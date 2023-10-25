@@ -10,6 +10,8 @@
   border-radius: 16px;
   padding: 40px 24px 20px 24px;
   z-index: 0;
+  width: 374px;
+  align-items: center;
   .alert-content {
     width: 326px;
     font-size: 14px;
@@ -27,6 +29,16 @@
     line-height: 24px; /* 141.176% */
     letter-spacing: -0.3px;
   }
+  .alert-confirm-button {
+    display: flex;
+    // width: 326px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    color: #146eff;
+    background-color: #fff;
+  }
 }
 
 .dim--default {
@@ -37,9 +49,17 @@
   z-index: -100;
 }
 
-.wrapper__alert-button {
+.wrapper__alert-button--single {
+  button {
+    width: 326px;
+  }
+}
+.wrapper__alert-button--double {
   gap: 8px;
   margin-top: 20px;
+  button {
+    width: 159px;
+  }
 }
 
 .select-alert-content {

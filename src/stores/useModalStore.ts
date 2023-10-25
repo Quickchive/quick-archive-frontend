@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
 
+// Or set it per toast
+
 // `defineStore()`의 반환 값(함수)을 할당할 변수의 이름은 원하는 대로 지정할 수 있지만,
 // 스토어 이름을 사용하고 `use`와 `Store`로 묶는 것이 가장 좋습니다.
 // 예: `useUserStore`, `useCartStore`, `useProductStore`
@@ -25,7 +27,11 @@ export const useModalStore = defineStore('modal', {
       addContentDetailModal: false,
       contentLocationModal: false,
       alertModal: false,
-      duplicatedCategoryLocation: '올리비아..'
+      duplicatedCategoryLocation: '올리비아..',
+      // 카테고리 삭제/수정 모달
+      editCategoryModal: false,
+      deleteCategoryModal: false,
+      toastMessage: ''
     }
   },
   getters: {},
@@ -102,6 +108,28 @@ export const useModalStore = defineStore('modal', {
     },
     setDuplicatedCategoryName(categoryName: string) {
       this.duplicatedCategoryLocation = categoryName
+    },
+    // 카테고리 삭제 모달
+    openDeleteCategoryModal() {
+      this.deleteCategoryModal = true
+      this.overlay = true
+    },
+    closeDeleteCategoryModal() {
+      this.deleteCategoryModal = false
+      this.overlay = false
+    },
+    // 카테고리 수정 모달
+    openEditCategoryModal() {
+      this.editCategoryModal = true
+      this.overlay = true
+    },
+    closeEditCategoryModal() {
+      this.editCategoryModal = false
+      this.overlay = false
+    },
+    // 토스트 메시지
+    setToastMessage(toastMessage: string) {
+      this.toastMessage = toastMessage
     }
   }
 })

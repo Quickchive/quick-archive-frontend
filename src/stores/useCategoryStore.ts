@@ -25,10 +25,13 @@ export const useCategoryStore = defineStore('category', {
           userId: 7
         }
       ],
-      curCategoryName: '전체 콘텐츠'
+      curCategoryName: '전체 콘텐츠',
+      focusedCategoryId: -1
     }
   },
-  getters: {},
+  getters: {
+    getFocusedCategoryId: (state) => state.focusedCategoryId
+  },
   actions: {
     async getUserCategoryList() {
       try {
@@ -43,6 +46,9 @@ export const useCategoryStore = defineStore('category', {
     },
     setCategoryName(categoryName: string) {
       this.curCategoryName = categoryName
+    },
+    setFocusedCategory(categoryId: number) {
+      this.focusedCategoryId = categoryId
     }
   }
 })
