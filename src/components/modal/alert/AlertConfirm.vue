@@ -35,7 +35,7 @@ const deleteCategory = async () => {
     const focusedCategoryId = categoryStore.getFocusedCategoryId
     const response = await deleteCategories(focusedCategoryId, isChecked.value)
     console.log(response)
-    if (response.statusCode === (200 || 201)) {
+    if (response.data.statusCode === (200 || 201)) {
       modalStore.closeDeleteCategoryModal()
     }
   } catch (error) {
