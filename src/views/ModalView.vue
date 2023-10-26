@@ -16,13 +16,13 @@
       v-if="modalStore.contentLocationModal"
     ></modal-content-add-set-new-category>
     <modal-content-add-step-02 v-if="modalStore.addContentDetailModal"></modal-content-add-step-02>
+    <alert-confirm v-if="modalStore.deleteCategoryModal"></alert-confirm>
   </div>
   <div class="alert-overlay" v-if="modalStore.alertOverlay"></div>
   <div class="alert-view" v-if="modalStore.alertModal">
     <!-- 얼럿 모달 -->
     <alert-duplicated-category></alert-duplicated-category>
   </div>
-  <alert-confirm v-if="modalStore.deleteCategoryModal"></alert-confirm>
 </template>
 
 <script setup>
