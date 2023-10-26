@@ -20,13 +20,14 @@ export const useModalStore = defineStore('modal', {
       // 카테고리 모달
       addCategoryModal: false,
       selectCategoryModal: false,
+      alertOverlay: true,
       overlay: false,
       categoryLocationModal: false,
       // 콘텐츠 모달
       addContentModal: false,
       addContentDetailModal: false,
       contentLocationModal: false,
-      alertModal: false,
+      alertModal: true,
       duplicatedCategoryLocation: '올리비아..',
       // 카테고리 삭제/수정 모달
       editCategoryModal: false,
@@ -101,10 +102,11 @@ export const useModalStore = defineStore('modal', {
     },
     openAlertModal() {
       this.alertModal = true
+      this.alertOverlay = true
     },
     closeAlertModal() {
       this.alertModal = false
-      this.overlay = false
+      this.alertOverlay = false
     },
     setDuplicatedCategoryName(categoryName: string) {
       this.duplicatedCategoryLocation = categoryName
