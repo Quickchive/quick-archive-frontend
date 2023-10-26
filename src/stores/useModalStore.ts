@@ -20,14 +20,14 @@ export const useModalStore = defineStore('modal', {
       // 카테고리 모달
       addCategoryModal: false,
       selectCategoryModal: false,
-      alertOverlay: true,
+      alertOverlay: false,
       overlay: false,
       categoryLocationModal: false,
       // 콘텐츠 모달
       addContentModal: false,
       addContentDetailModal: false,
       contentLocationModal: false,
-      alertModal: true,
+      alertModal: false,
       duplicatedCategoryLocation: '올리비아..',
       // 카테고리 삭제/수정 모달
       editCategoryModal: false,
