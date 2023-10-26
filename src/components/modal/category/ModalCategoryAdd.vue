@@ -117,7 +117,7 @@ const addCategory = async () => {
     }
   } catch (error) {
     console.log(error)
-    if (error.response.statusCode === 409) {
+    if (error.response.data.statusCode === 409) {
       modalStore.setDuplicatedCategoryName(categoryAddStore.selectedLocation.name)
       modalStore.openAlertModal()
     }
