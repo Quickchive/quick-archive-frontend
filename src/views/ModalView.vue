@@ -5,11 +5,25 @@
     <modal-select-category-or-content
       v-if="modalStore.selectModal"
     ></modal-select-category-or-content>
-    <modal-category-add v-if="modalStore.addCategoryModal"></modal-category-add>
+    <!-- 카테고리 추가 모달 -->
+    <modal-category-add
+      :modalTitle="modalAddCategory"
+      :closeModal="closeAddCategoryModal"
+      :apiName="addCategory"
+      v-if="modalStore.addCategoryModal"
+    ></modal-category-add>
     <modal-category-select v-if="modalStore.selectCategoryModal"></modal-category-select>
     <modal-set-category-location
       v-if="modalStore.categoryLocationModal"
     ></modal-set-category-location>
+    <!-- 카테고리 수정 모달 -->
+    <modal-category-add
+      :modalTitle="modalEditCategory"
+      :closeModal="closeEditCategoryModal"
+      :apiName="editCategory"
+      v-if="modalStore.editCategoryModal"
+    ></modal-category-add>
+
     <!-- 콘텐츠 모달 -->
     <modal-content-add v-if="modalStore.addContentModal"></modal-content-add>
     <modal-content-add-set-new-category
@@ -36,21 +50,24 @@ import ModalContentAddSetNewCategory from '@/components/modal/content/ModalConte
 import ModalContentAddStep02 from '@/components/modal/content/ModalContentAddStep02.vue'
 import AlertDuplicatedCategory from '@/components/modal/alert/AlertDuplicatedCategory.vue'
 import AlertConfirm from '@/components/modal/alert/AlertConfirm.vue'
-// import ToastDefault from '@/components/toast/ToastDefault.vue'
-// import { useToast } from 'vue-toastification'
+import { addCategories, updateCategories } from '@/api/category.js'
 
-// const toast = useToast()
-// // Or set it per toast
-// toast(ToastDefault)
-
-// app.use(ToastDefault, {
-//   // Setting the global default position
-//   position: POSITION.TOP_LEFT,
-//   timeout: 1000
-// })
+const modalAddCategory = '카테고리 추가'
+const modalEditCategory = '카테고리 수정'
 
 // counter store 가져오기
 const modalStore = useModalStore()
+
+const closeAddCategoryModal = () => {
+  modalStore.closeAddCategoryModal()
+}
+
+const closeEditCategoryModal = () => {
+  modalStore.closeEditCategoryModal()
+}
+
+const addCategory = 'addCategory'
+const editCategory = 'editCategory'
 </script>
 
 <style></style>

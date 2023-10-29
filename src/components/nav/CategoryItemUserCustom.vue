@@ -89,9 +89,10 @@ import moreIcon from '@/assets/ic/ic-more.svg'
 import categoryIcon from '@/assets/img/category/img_category_cook.png'
 import { defineProps, reactive } from 'vue'
 import { useRouter } from 'vue-router'
-import { watch } from 'vue'
+import { watch, toRaw } from 'vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import MoreButton from '@/components/button/MoreButton.vue'
+import { searchCategoryDataById } from '@/utils/search.js'
 
 const categoryStore = useCategoryStore()
 
@@ -139,22 +140,37 @@ const toCategoryPage = (categoryId, categoryName) => {
   console.log('home', categoryId, categoryName)
 }
 
-// const showFirstMoreButton = (id) => {
-//   // moreButton.first = !moreButton.first
-//   // 카테고리 삭제/수정을 위해 더보기 버튼 클릭한 카테고리 아이디를 세팅함
-//   // console.log(props.categoryDepth1.id)
-//   console.log('더보기 버튼', id)
-//   moreButton[id] = !moreButton[id]
-
-//   categoryStore.setFocusedCategory(props.categoryDepth1.id)
-// }
-
 const showMoreButton = (id) => {
   console.log('더보기 버튼', id)
   moreButton[id] = !moreButton[id]
 
   categoryStore.setFocusedCategory(props.categoryDepth1.id)
+
+  const focusedCategoryData = searchCategoryDataById(categoryStore.userCategoryList, id)
+
+  categoryStore.setFocusedCategoryData(toRaw(focusedCategoryData))
+  console.log(toRaw(focusedCategoryData))
 }
+
+// 카테고리 id로 특정 카테고리 데이터를 검색
+// const searchCategoryDataById = (categoryData, categoryId) => {
+//   const selectedCategoryData = categoryData.find((e) => {
+//     return e.id == categoryId
+//   })
+//   console.log('selectedCategoryData', selectedCategoryData)
+// }
+
+// const searchCategoryDataById = (arr, id) => {
+//   const result = arr.find((item) => item.id === id)
+//   if (result) return result
+//   for (const item of arr) {
+//     if (item.children) {
+//       const found = searchCategoryDataById(item.children, id)
+//       if (found) return found
+//     }
+//   }
+//   return null
+// }
 </script>
 
 <style></style>

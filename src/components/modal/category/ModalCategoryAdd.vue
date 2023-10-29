@@ -39,7 +39,7 @@
       <button
         class="confirm-button--inactive"
         :class="{ 'confirm-button--active': isCategoryNameValid }"
-        @click="addCategory()"
+        @click="saveCategory()"
         :disabled="!isCategoryNameValid"
       >
         저장
@@ -57,10 +57,32 @@ import ModalHeader from '@/components/header/ModalHeader.vue'
 import { useModalStore } from '@/stores/useModalStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useCategoryAddStore } from '@/stores/useCategoryAddStore.ts'
-import { addCategories } from '@/api/category.js'
-import { ref, computed } from 'vue'
+// import { addCategories } from '@/api/category.js'
+import { addCategories, updateCategories } from '@/api/category.js'
+import { ref, computed, defineProps, onMounted } from 'vue'
+import { searchCategoryDataById } from '@/utils/search.js'
 
-const modalTitle = '카테고리 추가'
+const props = defineProps({
+  modalTitle: String,
+  closeModal: Function,
+  apiName: String
+})
+
+onMounted(async () => {
+  if (props.apiName === 'editCategory') {
+    console.log('editCategory')
+    categoryName.value = categoryStore.focusedCategoryData.name
+    if (categoryStore.focusedCategoryData.parentId !== null) {
+      const parentData = searchCategoryDataById(
+        categoryStore.userCategoryList,
+        categoryStore.focusedCategoryData.parentId
+      )
+      console.log('parentData', parentData)
+      categoryAddStore.selectedLocation.name = parentData.name
+    }
+  }
+})
+
 const categoryName = ref('')
 let categoryIcon = ref(categoryWatchIcon)
 let categoryLocationName = ref('미지정')
@@ -76,10 +98,6 @@ const openSelectCategoryModal = () => {
 
 const openSetCategoryLocationModal = () => {
   modalStore.openSetCategoryLocationModal()
-}
-
-const closeModal = () => {
-  modalStore.closeAddCategoryModal()
 }
 
 // 카테고리 명 유효성 검사
@@ -98,28 +116,61 @@ categoryAddStore.$subscribe(() => {
   categoryLocationName.value = categoryAddStore.selectedLocation.name
 })
 
-// 저장 버튼 클릭
-const addCategory = async () => {
-  try {
-    let categoryData = {
-      categoryName: categoryName.value
+const saveCategory = async () => {
+  // 카테고리 추가
+  if (props.apiName === 'addCategory') {
+    // 저장 버튼 클릭
+    // const addCategory = async () => {
+    try {
+      let categoryData = {
+        categoryName: categoryName.value
+      }
+      if (categoryAddStore.selectedLocation.name !== '미지정') {
+        categoryData.parentId = categoryAddStore.selectedLocation.id
+      }
+      const response = await addCategories(categoryData)
+      console.log('카테고리 추가 서버 전송 응답', response)
+      // 상태코드로 에러 처리 하기
+      if (response.data.statusCode === 201) {
+        modalStore.closeAddCategoryModal()
+        modalStore.closeSelectModal()
+        await categoryStore.getUserCategoryList()
+      }
+    } catch (error) {
+      console.log(error)
+      if (error.response.data.statusCode === 409) {
+        modalStore.setDuplicatedCategoryName(categoryAddStore.selectedLocation.name)
+        modalStore.openAlertModal()
+      }
     }
-    if (categoryAddStore.selectedLocation.name !== '미지정') {
-      categoryData.parentId = categoryAddStore.selectedLocation.id
-    }
-    const response = await addCategories(categoryData)
-    console.log('카테고리 추가 서버 전송 응답', response)
-    // 상태코드로 에러 처리 하기
-    if (response.data.statusCode === 201) {
-      modalStore.closeAddCategoryModal()
-      modalStore.closeSelectModal()
-      await categoryStore.getUserCategoryList()
-    }
-  } catch (error) {
-    console.log(error)
-    if (error.response.data.statusCode === 409) {
-      modalStore.setDuplicatedCategoryName(categoryAddStore.selectedLocation.name)
-      modalStore.openAlertModal()
+    // }
+  }
+  // 카테고리 수정
+  if (props.apiName === 'editCategory') {
+    try {
+      let categoryData = {
+        categoryName: categoryName.value,
+        parentId: categoryAddStore.selectedLocation.id,
+        categoryId: categoryStore.focusedCategoryData.id
+      }
+      if (categoryAddStore.selectedLocation.name !== '미지정') {
+        categoryData.parentId = categoryAddStore.selectedLocation.id
+      }
+
+      const response = await updateCategories(categoryData)
+      console.log('카테고리 수정 서버 전송 응답', response)
+      // 상태코드로 에러 처리 하기
+      if (response.data.statusCode === 201) {
+        modalStore.closeAddCategoryModal()
+        modalStore.closeSelectModal()
+        await categoryStore.getUserCategoryList()
+      }
+    } catch (error) {
+      console.log(error)
+      if (error.response.data.statusCode === 409) {
+        modalStore.setDuplicatedCategoryName(categoryAddStore.selectedLocation.name)
+        modalStore.openAlertModal()
+      }
     }
   }
 }

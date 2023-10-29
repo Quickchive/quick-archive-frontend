@@ -19,6 +19,7 @@ export const useModalStore = defineStore('modal', {
       selectModal: false,
       // 카테고리 모달
       addCategoryModal: false,
+      // 카테고리 수정 모달
       selectCategoryModal: false,
       alertOverlay: false,
       overlay: false,

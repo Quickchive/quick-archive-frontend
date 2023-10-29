@@ -26,7 +26,8 @@ export const useCategoryStore = defineStore('category', {
         }
       ],
       curCategoryName: '전체 콘텐츠',
-      focusedCategoryId: -1
+      focusedCategoryId: -1,
+      focusedCategoryData: {}
     }
   },
   getters: {
@@ -49,6 +50,9 @@ export const useCategoryStore = defineStore('category', {
     },
     setFocusedCategory(categoryId: number) {
       this.focusedCategoryId = categoryId
+    },
+    setFocusedCategoryData(categoryData: object) {
+      this.focusedCategoryData = categoryData
     }
   }
 })
