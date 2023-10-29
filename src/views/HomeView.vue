@@ -7,42 +7,38 @@
   </section>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
 import TheNavBar from '@/components/nav/TheNavBar.vue'
 import { useUserStore } from '@/stores/useUserStore.ts'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 
-export default defineComponent({
-  components: {
-    TheNavBar
-  },
+const userStore = useUserStore()
+const categoryStore = useCategoryStore()
+const route = useRoute()
 
-  setup() {
-    const userStore = useUserStore()
-    return {
-      userStore
+onMounted(async () => {
+  // 로그인
+  if (route.fullPath.includes('google')) {
+    console.log('google login')
+    try {
+      const code = route.query.code
+      await userStore.googleLogin(code)
+      await userStore.getProfile()
+      await categoryStore.getUserCategoryList()
+    } catch (error) {
+      console.error(error)
     }
-  },
-  async created() {
-    // 로그인
-    if (this.$route.fullPath.includes('google')) {
-      console.log('google login')
-      try {
-        const code = this.$route.query.code
-        await this.userStore.googleLogin(code)
-        await this.userStore.getProfile()
-      } catch (error) {
-        console.error(error)
-      }
-    } else {
-      try {
-        console.log('kakao login')
-        const code = this.$route.query.code
-        await this.userStore.kakaoLogin(code)
-        await this.userStore.getProfile()
-      } catch (error) {
-        console.error(error)
-      }
+  } else {
+    try {
+      console.log('kakao login')
+      const code = route.query.code
+      await userStore.kakaoLogin(code)
+      await userStore.getProfile()
+      await categoryStore.getUserCategoryList()
+    } catch (error) {
+      console.error(error)
     }
   }
 })
