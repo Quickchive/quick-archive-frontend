@@ -19,8 +19,8 @@
             {{ categoryDepth1.name }}
           </button>
         </div>
-        <button class="button--transparent moreButton" @click="showFirstMoreButton()">
-          <img :src="moreIcon" /> <more-button v-if="moreButton.first"></more-button>
+        <button class="button--transparent moreButton" @click="showMoreButton(categoryDepth1.id)">
+          <img :src="moreIcon" /> <more-button v-if="moreButton[categoryDepth1.id]"></more-button>
         </button>
       </li>
       <!-- 2차 카테고리 -->
@@ -41,8 +41,12 @@
                 }}
               </button>
             </div>
-            <button class="button--transparent moreButton" @click="showSecondMoreButton(i)">
-              <!-- <more-button v-if="moreButton.second[i]"></more-button><img :src="moreIcon" /> -->
+            <button
+              class="button--transparent moreButton"
+              @click="showMoreButton(categoryItem2.id)"
+            >
+              <img :src="moreIcon" />
+              <more-button v-if="moreButton[categoryItem2.id]"></more-button>
             </button>
           </li>
           <!-- 3차 카테고리 -->
@@ -62,9 +66,12 @@
                     }}
                   </button>
                 </div>
-                <button class="button--transparent moreButton" @click="showThirdMoreButton(i, k)">
+                <button
+                  class="button--transparent moreButton"
+                  @click="showMoreButton(categoryItem3.id)"
+                >
                   <img :src="moreIcon" />
-                  <!-- <more-button v-if="moreButton.second[i].third[k]"></more-button -->
+                  <more-button v-if="moreButton[categoryItem3.id]"></more-button>
                 </button>
               </li>
             </ul>
@@ -94,10 +101,10 @@ const props = defineProps({
   categoryDepth1: Object
 })
 
-let categoryDepth3 = reactive([])
+const categoryDepth3 = reactive([])
 const categoryDepth2 = reactive({ show: false })
 
-let moreButton = reactive({})
+const moreButton = reactive([])
 
 watch(props.categoryDepth1, {
   deep: true,
@@ -105,8 +112,6 @@ watch(props.categoryDepth1, {
     console.log(value)
   }
 })
-
-moreButton.first = false
 
 if (props.categoryDepth1.children) {
   categoryDepth3.length = Number(props.categoryDepth1.children.length)
@@ -134,20 +139,21 @@ const toCategoryPage = (categoryId, categoryName) => {
   console.log('home', categoryId, categoryName)
 }
 
-const showFirstMoreButton = () => {
-  moreButton.first = !moreButton.first
-  // 카테고리 삭제/수정을 위해 더보기 버튼 클릭한 카테고리 아이디를 세팅함
-  console.log(props.categoryDepth1.id)
+// const showFirstMoreButton = (id) => {
+//   // moreButton.first = !moreButton.first
+//   // 카테고리 삭제/수정을 위해 더보기 버튼 클릭한 카테고리 아이디를 세팅함
+//   // console.log(props.categoryDepth1.id)
+//   console.log('더보기 버튼', id)
+//   moreButton[id] = !moreButton[id]
+
+//   categoryStore.setFocusedCategory(props.categoryDepth1.id)
+// }
+
+const showMoreButton = (id) => {
+  console.log('더보기 버튼', id)
+  moreButton[id] = !moreButton[id]
 
   categoryStore.setFocusedCategory(props.categoryDepth1.id)
-}
-
-const showSecondMoreButton = (index) => {
-  moreButton.second[index].show = !moreButton.second[index].show
-}
-
-const showThirdMoreButton = (i, k) => {
-  moreButton.second[i].third[k].show = !moreButton.second[i].third[k].show
 }
 </script>
 
