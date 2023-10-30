@@ -8,7 +8,7 @@
       "link": "ex.com",
       "title": "string",
       "siteName": "string",
-      "coverImg": "src/assets/img/thumbnail1.png",
+      "coverImg": "/src/assets/img/thumbnail1.png",
       "description": "string",
       "comment": "string",
       "reminder": "2022-08-20",
@@ -22,7 +22,7 @@
       "link": "naver.com",
       "title": "돈 있어도 못 사는 건 샤넬백만이 아니다",
       "siteName": "Brunch",
-      "coverImg": "src/assets/img/thumbnail2.png",
+      "coverImg": "/src/assets/img/thumbnail2.png",
       "description": "샤넬백이 없지만 어린이집 등원시킬 때, 학원에 데리러 갈 때 그 백을 맬 필요는 없으니 됐다고 했다. 그 백을 사려면 돈만 있다고 되는 게 아니라고 했다. 경차 한 대 값 정도의 그 백은 백화점 문도 열기 전 새벽부터 줄을 서서 사야 한다고 했다. 재테크 좋아해서 '주식하는 아주머니'라면서 샤테크도 모르냐고 그 백이 있는 친구는 말했다. 하나 사라고. 값이 더 오를 거라고. 중고로 팔아도 된다고.",
       "favorite": true,
       "userId": 0
@@ -34,7 +34,7 @@
       "link": "naver.com",
       "title": "서울 브런치 카페 7곳 추천",
       "siteName": "네이버 프리미엄콘텐츠",
-      "coverImg": "src/assets/img/thumbnail3.png",
+      "coverImg": "/src/assets/img/thumbnail3.png",
       "description": "여유롭게 브런치를 즐기기 좋은 서울 브런치 카페 7곳을 추천합니다. 서울에서 브런치 즐기기 좋은 카페를 찾고 계신다면 이 콘텐츠를 통해 가볼만한 곳을 찾아보세요! 이 콘텐츠는 카페 좋아하는 사람들의 커뮤니티 카페플렉스 멤버들의 솔직한 후기로 만들어졌습니다. 상세 후기를 확인하고 싶은 분은 원본 링크를 확인하시면 더 좋답니다.",
       "favorite": true,
       "userId": 0
@@ -46,7 +46,7 @@
       "link": "naver.com",
       "title": "브런치에 쓴 첫 소설이 11만부… 작가 황보름이 만든 기적[플랫]",
       "siteName": "경향신문",
-      "coverImg": "src/assets/img/thumbnail4.png",
+      "coverImg": "/src/assets/img/thumbnail4.png",
       "description": "무명의 작가가 쓴 첫 소설이 5개월여 만에 13쇄를 찍었다. 1월 17일 초판 3000부가 금세 동나더니 2쇄 5000부도 빠른 속도로 판매됐다. 3쇄부터 1만부씩 찍었고, 6월 28일 13쇄가 나왔다. 지금까지 11만부가 팔려나갔다. 유명 출판사도 아니고 1인 출판사에서 펴낸 책이다. 순전히 독자의 입소문으로만 이룬 성과다.",
       "favorite": false,
       "userId": 0
@@ -58,7 +58,7 @@
       "link": "naver.com",
       "title": "간단히 즐기는 미국식브런치간단히 즐기는 미국식브런치간단히 즐기는 미국식브런치간단히 즐기는 미국식브런치간단히 즐기는 미국식브런치간단히 즐기는 미국식브런치 미국식브런치 미국식브런치 미국식브런치 미국식브런치 미국식브런치 미국식브런치 미국식브런치 미국식브런치",
       "siteName": "만개의레시피",
-      "coverImg": "src/assets/img/thumbnail5.png",
+      "coverImg": "/src/assets/img/thumbnail5.png",
       "favorite": true,
       "userId": 0
     },
@@ -69,7 +69,7 @@
       "link": "naver.com",
       "title": "WEEKLY PLACE : 서울 브런치가 맛있는 브런치 카페 WEEKLY PLACE : 서울 브런치가 맛있는 브런치 카페WEEKLY PLACE : 서울 브런치가 맛있는 브런치 카페",
       "siteName": "경향신문",
-      "coverImg": "src/assets/img/thumbnail3.png",
+      "coverImg": "/src/assets/img/thumbnail3.png",
       "description": "무명의 작가가 쓴 첫 소설이 5개월여 만에 13쇄를 찍었다. 1월 17일 초판 3000부가 금세 동나더니 2쇄 5000부도 빠른 속도로 판매됐다. 3쇄부터 1만부씩 찍었고, 6월 28일 13쇄가 나왔다. 지금까지 11만부가 팔려나갔다. 유명 출판사도 아니고 1인 출판사에서 펴낸 책이다. 순전히 독자의 입소문으로만 이룬 성과다.",
       "favorite": true,
       "category": {
@@ -90,7 +90,7 @@
       "link": "naver.com",
       "title": "서울 브런치 카페 7곳 추천",
       "siteName": "네이버 프리미엄콘텐츠",
-      "coverImg": "src/assets/img/thumbnail2.png",
+      "coverImg": "/src/assets/img/thumbnail2.png",
       "description": "여유롭게 브런치를 즐기기 좋은 서울 브런치 카페 7곳을 추천합니다. 서울에서 브런치 즐기기 좋은 카페를 찾고 계신다면 이 콘텐츠를 통해 가볼만한 곳을 찾아보세요! 이 콘텐츠는 카페 좋아하는 사람들의 커뮤니티 카페플렉스 멤버들의 솔직한 후기로 만들어졌습니다. 상세 후기를 확인하고 싶은 분은 원본 링크를 확인하시면 더 좋답니다.",
       "favorite": true,
       "userId": 0
@@ -102,7 +102,7 @@
       "link": "naver.com",
       "title": "서울 브런치 카페 7곳 추천",
       "siteName": "네이버 프리미엄콘텐츠",
-      "coverImg": "src/assets/img/thumbnail2.png",
+      "coverImg": "/src/assets/img/thumbnail2.png",
       "description": "여유롭게 브런치를 즐기기 좋은 서울 브런치 카페 7곳을 추천합니다. 서울에서 브런치 즐기기 좋은 카페를 찾고 계신다면 이 콘텐츠를 통해 가볼만한 곳을 찾아보세요! 이 콘텐츠는 카페 좋아하는 사람들의 커뮤니티 카페플렉스 멤버들의 솔직한 후기로 만들어졌습니다. 상세 후기를 확인하고 싶은 분은 원본 링크를 확인하시면 더 좋답니다.",
       "favorite": true,
       "userId": 0
@@ -114,7 +114,7 @@
       "link": "naver.com",
       "title": "서울 브런치 카페 7곳 추천",
       "siteName": "네이버 프리미엄콘텐츠",
-      "coverImg": "src/assets/img/thumbnail2.png",
+      "coverImg": "/src/assets/img/thumbnail2.png",
       "description": "여유롭게 브런치를 즐기기 좋은 서울 브런치 카페 7곳을 추천합니다. 서울에서 브런치 즐기기 좋은 카페를 찾고 계신다면 이 콘텐츠를 통해 가볼만한 곳을 찾아보세요! 이 콘텐츠는 카페 좋아하는 사람들의 커뮤니티 카페플렉스 멤버들의 솔직한 후기로 만들어졌습니다. 상세 후기를 확인하고 싶은 분은 원본 링크를 확인하시면 더 좋답니다.",
       "favorite": true,
       "userId": 0
@@ -126,7 +126,7 @@
       "link": "naver.com",
       "title": "서울 브런치 카페 7곳 추천",
       "siteName": "네이버 프리미엄콘텐츠",
-      "coverImg": "src/assets/img/thumbnail2.png",
+      "coverImg": "/src/assets/img/thumbnail2.png",
       "description": "여유롭게 브런치를 즐기기 좋은 서울 브런치 카페 7곳을 추천합니다. 서울에서 브런치 즐기기 좋은 카페를 찾고 계신다면 이 콘텐츠를 통해 가볼만한 곳을 찾아보세요! 이 콘텐츠는 카페 좋아하는 사람들의 커뮤니티 카페플렉스 멤버들의 솔직한 후기로 만들어졌습니다. 상세 후기를 확인하고 싶은 분은 원본 링크를 확인하시면 더 좋답니다.",
       "favorite": true,
       "userId": 0

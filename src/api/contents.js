@@ -12,7 +12,12 @@ function updateContents(contentsData) {
 
 // 콘텐츠 조회
 function getContents(categoryId) {
-  return authInstance.get(`contents/load-contents?categoryId=${categoryId}`)
+  return authInstance.get(`contents/contents?categoryId=${categoryId}`)
+}
+
+// 전체 콘텐츠
+function getAllContents() {
+  return authInstance.get('contents')
 }
 
 // 콘텐츠 추가(다수)
@@ -54,5 +59,6 @@ export {
   deleteContents,
   getFavorites,
   getReminderCount,
-  summarizeContents
+  summarizeContents,
+  getAllContents
 }

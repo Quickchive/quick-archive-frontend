@@ -33,14 +33,14 @@ const contentStore = useContentStore()
 const contentList = ref({})
 
 onMounted(async () => {
-  await contentStore.getContents()
+  await contentStore.getAllContents()
+
   if (contentStore.userContentList.length > 0) {
     contentList.value = toRaw(contentStore.userContentList)
     console.log(contentList, 'contentList')
+  } else {
+    contentStore.setUserContentList(contentListDummy.contents)
   }
-  // else {
-  //   contentList.value = contentListDummy.contents
-  // }
 })
 
 // 콘텐츠 데이터 감시
