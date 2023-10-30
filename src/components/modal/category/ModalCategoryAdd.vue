@@ -77,9 +77,13 @@ onMounted(async () => {
         categoryStore.userCategoryList,
         categoryStore.focusedCategoryData.parentId
       )
-      console.log('parentData', parentData)
       categoryAddStore.selectedLocation.name = parentData.name
+      categoryAddStore.selectedLocation.id = parentData.id
     }
+    if (categoryStore.focusedCategoryData.parentId === null) {
+      categoryAddStore.selectedLocation.name = '미지정'
+    }
+    console.log('parentData', parentData)
   }
 })
 
@@ -143,23 +147,20 @@ const saveCategory = async () => {
         modalStore.openAlertModal()
       }
     }
-    // }
   }
   // 카테고리 수정
   if (props.apiName === 'editCategory') {
     try {
       let categoryData = {
         categoryName: categoryName.value,
-        parentId: categoryAddStore.selectedLocation.id,
+        // parentId: categoryAddStore.selectedLocation.id,
         categoryId: categoryStore.focusedCategoryData.id
       }
       if (categoryAddStore.selectedLocation.name !== '미지정') {
         categoryData.parentId = categoryAddStore.selectedLocation.id
       }
-
       const response = await updateCategories(categoryData)
       console.log('카테고리 수정 서버 전송 응답', response)
-      // 상태코드로 에러 처리 하기
       if (response.data.statusCode === 201) {
         modalStore.closeAddCategoryModal()
         modalStore.closeSelectModal()
