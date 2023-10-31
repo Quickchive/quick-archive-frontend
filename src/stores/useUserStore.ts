@@ -10,6 +10,8 @@ import {
 } from '@/utils/cookies'
 import { useRouter } from 'vue-router'
 const router = useRouter()
+import { useModalStore } from '@/stores/useModalStore.ts'
+const modalStore = useModalStore()
 
 // `defineStore()`의 반환 값(함수)을 할당할 변수의 이름은 원하는 대로 지정할 수 있지만,
 // 스토어 이름을 사용하고 `use`와 `Store`로 묶는 것이 가장 좋습니다.
@@ -84,7 +86,8 @@ export const useUserStore = defineStore('user', {
           refresh_token: getRefreshTokenFromCookie()
         }
         const response = await logoutUser(refreshToken)
-        if (response.data.status === 201 || response.data.status === 200) {
+        if (response.data.statusCode === 201 || response.data.statusCode === 200) {
+          modalStore.closeLogoutModal()
           router.push('/login')
         }
         this.nickname = ''
@@ -118,7 +121,8 @@ export const useUserStore = defineStore('user', {
       try {
         const response = await deleteProfile()
         console.log(response)
-        if (response.data.status === 201 || response.data.status === 200) {
+        if (response.data.statusCode === 201 || response.data.statusCode === 200) {
+          modalStore.closeWithdrawalModal()
           router.push('/login')
         }
       } catch (error) {
