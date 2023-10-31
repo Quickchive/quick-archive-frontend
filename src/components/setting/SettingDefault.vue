@@ -4,16 +4,19 @@
     <div class="divider"></div>
     <section class="setting-list">
       <article class="main-button-list">
-        <button class="setting-main-button">
+        <button class="setting-main-button" @click="toMyInfoPage()">
           <div class="wrapper__button-icon"><img :src="automaticIcon" />내정보</div>
           <div class="flex-container__row--align-center">
-            <span class="setting-nickname">{{ nickname }}</span>
+            <span class="setting-nickname">{{ userStore.nickname }}</span>
             <img :src="nextIcon" />
           </div>
         </button>
         <div class="setting-main-button">
           <div class="wrapper__button-icon"><img :src="makerIcon" />카테고리 추천</div>
-          <toggle-button></toggle-button>
+          <toggle-button
+            :value="userStore.recommendationMode"
+            :toggleOn="userStore.enableRecommendationMode"
+          ></toggle-button>
         </div>
         <button class="setting-main-button">
           <div class="wrapper__button-icon"><img :src="policyIcon" />오류신고</div>
@@ -32,7 +35,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import automaticIcon from '@/assets/ic/ic_setting_automatic.svg'
 import makerIcon from '@/assets/ic/ic_setting_maker.svg'
 import policyIcon from '@/assets/ic/ic_setting_policy.svg'
@@ -41,24 +44,17 @@ import profileIcon from '@/assets/ic/ic_setting_profile.svg'
 import nextIcon from '@/assets/ic/ic_next_gray_24px.svg'
 import ToggleButton from '@/components/button/ToggleButton.vue'
 import TitleHeader from '@/components/header/TitleHeader.vue'
+import { useUserStore } from '@/stores/useUserStore.ts'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-export default {
-  components: {
-    ToggleButton,
-    TitleHeader
-  },
-  data() {
-    return {
-      automaticIcon,
-      makerIcon,
-      policyIcon,
-      errorIcon,
-      profileIcon,
-      nextIcon,
-      nickname: '2seul25',
-      title: '설정'
-    }
-  }
+const userStore = useUserStore()
+const router = useRouter()
+
+const title = ref('설정')
+
+const toMyInfoPage = () => {
+  router.push('/setting/myinfo')
 }
 </script>
 
