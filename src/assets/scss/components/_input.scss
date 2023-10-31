@@ -147,6 +147,10 @@ input {
   @extend .input__sm--default;
   color: $color-grey-30;
   text-indent: 32px;
+  cursor: auto;
+  &:focus {
+    outline: none;
+  }
 }
 
 .input__sm--before-edit {

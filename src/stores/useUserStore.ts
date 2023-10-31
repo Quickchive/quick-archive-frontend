@@ -1,13 +1,15 @@
 import { defineStore } from 'pinia'
 import { googleLogin, kakaoLogin } from '@/api/oauth'
 import { logoutUser } from '@/api/auth'
-import { getProfile } from '@/api/user'
+import { getProfile, deleteProfile } from '@/api/user'
 import {
   saveAccessTokenToCookie,
   saveRefreshTokenToCookie,
   getRefreshTokenFromCookie,
   deleteCookie
 } from '@/utils/cookies'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 // `defineStore()`의 반환 값(함수)을 할당할 변수의 이름은 원하는 대로 지정할 수 있지만,
 // 스토어 이름을 사용하고 `use`와 `Store`로 묶는 것이 가장 좋습니다.
@@ -27,7 +29,10 @@ export const useUserStore = defineStore('user', {
       refreshToken: '',
       isLogin: false,
       nickname: 'testnickname',
-      email: ''
+      email: 'tester@naver.com',
+      // 마이페이지
+      recommendationMode: true,
+      socialLogin: 'google'
     }
   },
   getters: {
@@ -78,7 +83,10 @@ export const useUserStore = defineStore('user', {
         const refreshToken = {
           refresh_token: getRefreshTokenFromCookie()
         }
-        await logoutUser(refreshToken)
+        const response = await logoutUser(refreshToken)
+        if (response.data.status === 201 || response.data.status === 200) {
+          router.push('/login')
+        }
         this.nickname = ''
         this.email = ''
         this.accessToken = ''
@@ -105,6 +113,18 @@ export const useUserStore = defineStore('user', {
         console.error(error)
       }
     },
+    // 회원 탈퇴
+    async withdrawal() {
+      try {
+        const response = await deleteProfile()
+        console.log(response)
+        if (response.data.status === 201 || response.data.status === 200) {
+          router.push('/login')
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    },
     // 액세스 토큰 갱신
     renewAccessToken(accessToken: string) {
       this.accessToken = accessToken
@@ -114,6 +134,12 @@ export const useUserStore = defineStore('user', {
     renewRefreshToken(refreshToken: string) {
       this.refreshToken = refreshToken
       saveRefreshTokenToCookie(refreshToken)
+    },
+    /******* 마이 페이지 ********/
+    // 카테고리 추천
+    enableRecommendationMode() {
+      this.recommendationMode = !this.recommendationMode
+      // 카테고리 추천 모드 요청 로직
     }
   }
 })

@@ -1,5 +1,9 @@
 import { defineStore } from 'pinia'
 import { getCategories } from '@/api/category'
+import { deleteCategories } from '@/api/category.js'
+import { useModalStore } from '@/stores/useModalStore.ts'
+
+const modalStore = useModalStore()
 
 export const useCategoryStore = defineStore('category', {
   // 화살표 함수는 전체 유형 유추을 위해 권장됨.
@@ -27,7 +31,8 @@ export const useCategoryStore = defineStore('category', {
       ],
       curCategoryName: '전체 콘텐츠',
       focusedCategoryId: -1,
-      focusedCategoryData: {}
+      focusedCategoryData: {},
+      deleteContentsChecked: false
     }
   },
   getters: {
@@ -53,6 +58,23 @@ export const useCategoryStore = defineStore('category', {
     },
     setFocusedCategoryData(categoryData: object) {
       this.focusedCategoryData = categoryData
+    },
+
+    async deleteCategory() {
+      try {
+        const focusedCategoryId = this.getFocusedCategoryId
+        const response = await deleteCategories(focusedCategoryId, this.deleteContentsChecked)
+        console.log(response)
+        if (response.data.statusCode === (200 || 201)) {
+          this.getUserCategoryList()
+          modalStore.closeDeleteCategoryModal()
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    deleteContentsInCategory() {
+      this.deleteContentsChecked = !this.deleteContentsChecked
     }
   }
 })

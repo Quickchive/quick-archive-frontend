@@ -1,18 +1,14 @@
 <template>
-  <Toggle v-model="value" class="toggle-button" />
+  <Toggle :value="value" class="toggle-button" @click="toggleOn()" />
 </template>
 
-<script>
+<script setup>
 import Toggle from '@vueform/toggle'
-export default {
-  components: {
-    Toggle
-  },
-  data: function () {
-    return {
-      value: false
-    }
-  }
-}
+import { defineProps } from 'vue'
+
+const props = defineProps({
+  value: Boolean,
+  toggleOn: Function
+})
 </script>
 <style src="@vueform/toggle/themes/default.css"></style>

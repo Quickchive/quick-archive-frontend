@@ -33,7 +33,11 @@ export const useModalStore = defineStore('modal', {
       // 카테고리 삭제/수정 모달
       editCategoryModal: false,
       deleteCategoryModal: false,
-      toastMessage: ''
+      toastMessage: '',
+      // 마이 페이지
+      logoutModal: false,
+      withdrawalModal: false,
+      settingAlertOverlay: false
     }
   },
   getters: {},
@@ -133,6 +137,24 @@ export const useModalStore = defineStore('modal', {
     // 토스트 메시지
     setToastMessage(toastMessage: string) {
       this.toastMessage = toastMessage
+    },
+    // 로그아웃 모달
+    openLogoutModal() {
+      this.logoutModal = true
+      this.settingAlertOverlay = true
+    },
+    closeLogoutModal() {
+      this.logoutModal = false
+      this.settingAlertOverlay = false
+    },
+    // 회원탈퇴 모달
+    openWithdrawalModal() {
+      this.withdrawalModal = true
+      this.settingAlertOverlay = true
+    },
+    closeWithdrawalModal() {
+      this.withdrawalModal = false
+      this.settingAlertOverlay = false
     }
   }
 })
