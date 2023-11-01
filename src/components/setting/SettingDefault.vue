@@ -19,15 +19,24 @@
           ></toggle-button>
         </div>
         <button class="setting-main-button">
-          <div class="wrapper__button-icon"><img :src="policyIcon" />오류신고</div>
+          <div class="wrapper__button-icon"><img :src="policyIcon" /><a href="">오류신고</a></div>
           <img :src="nextIcon" />
         </button>
         <button class="setting-main-button">
-          <div class="wrapper__button-icon"><img :src="errorIcon" />서비스 만든 사람들</div>
+          <div class="wrapper__button-icon">
+            <img :src="errorIcon" /><a href="https://www.notion.so/6bf8991d981b440bafe3c6bb9dfe3ba1"
+              >서비스 만든 사람들</a
+            >
+          </div>
           <img :src="nextIcon" />
         </button>
         <button class="setting-main-button">
-          <div class="wrapper__button-icon"><img :src="profileIcon" />약관 및 정책</div>
+          <div class="wrapper__button-icon">
+            <img :src="profileIcon" /><a
+              href="https://www.notion.so/fabc4b39c85b446bab8f2bb8549926b7"
+              >약관 및 정책</a
+            >
+          </div>
           <img :src="nextIcon" />
         </button>
       </article>

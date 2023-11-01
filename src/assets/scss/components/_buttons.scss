@@ -399,7 +399,9 @@ button {
   line-height: 24px; /* 150% */
   letter-spacing: -0.3px;
   height: 48px;
-
+  a {
+    color: #13141a;
+  }
   .wrapper__button-icon {
     @extend .flex-container__row--align-center;
     gap: 8px;

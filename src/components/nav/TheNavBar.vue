@@ -3,9 +3,12 @@
     <div class="navbar__top-container">
       <a>logo</a>
       <!-- profile -->
-      <div class="profile__wrapper">
-        <img class="img-profile" :src="profileImg" /><span>{{ userStore.nickname }}</span>
-      </div>
+      <router-link to="/setting">
+        <div class="profile__wrapper">
+          <img class="img-profile" :src="profileImg" /><span>{{ userStore.nickname }}</span>
+        </div>
+      </router-link>
+
       <div class="search__wrapper">
         <search-input :placeholderText="placeholderText" :isSizeSm="true"></search-input>
       </div>
