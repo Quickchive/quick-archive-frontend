@@ -14,8 +14,13 @@
         <div class="myinfo-list">
           <label class="label__modal">닉네임</label>
           <div class="wrapper__input-right-icon">
-            <input class="input__sm--before-edit" readonly v-model="userStore.nickname" />
-            <button class="button--change-nickname" @click="editNickname">변경하기</button>
+            <input class="input__sm--before-edit" v-model="nickname" :disabled="disabled" />
+            <button v-show="clearButtonShow" class="button-clear" @click="clearText()">
+              <img :src="textfieldCancelIcon" />
+            </button>
+            <button class="button--change-nickname" @click="editNickname()">
+              {{ editNicknameButton }}
+            </button>
           </div>
         </div>
         <div class="wrapper__logout">
@@ -45,10 +50,40 @@ import nextIcon from '@/assets/ic/ic_next_gray_24px.svg'
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/useUserStore.ts'
 import { useModalStore } from '@/stores/useModalStore.ts'
+import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
 
 const title = ref('내정보')
+const disabled = ref(true)
+const clearButtonShow = ref(false)
+const editNicknameButton = ref('변경하기')
+
 const userStore = useUserStore()
 const modalStore = useModalStore()
+const nickname = ref(userStore.nickname)
+
+const clearText = () => {
+  nickname.value = ''
+}
+
+const editNickname = async () => {
+  // 수정모드 on
+  if (disabled.value === true) {
+    console.log('닉네임 수정 모드 On')
+    disabled.value = false
+    editNicknameButton.value = '수정완료'
+    clearButtonShow.value = true
+    return
+  }
+  // 수정모드 off -> 닉네임 수정 요청
+  if (disabled.value === false) {
+    disabled.value = true
+    console.log('닉네임 수정 모드 Off -> 닉네임 수정 요청 전송')
+    userStore.editNickname(nickname.value)
+    editNicknameButton.value = '변경하기'
+    clearButtonShow.value = false
+    return
+  }
+}
 </script>
 
 <style></style>

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { googleLogin, kakaoLogin } from '@/api/oauth'
 import { logoutUser } from '@/api/auth'
-import { getProfile, deleteProfile } from '@/api/user'
+import { getProfile, deleteProfile, editProfile } from '@/api/user'
 import {
   saveAccessTokenToCookie,
   saveRefreshTokenToCookie,
@@ -144,6 +144,18 @@ export const useUserStore = defineStore('user', {
     enableRecommendationMode() {
       this.recommendationMode = !this.recommendationMode
       // 카테고리 추천 모드 요청 로직
+    },
+    // 프로필 수정(닉네임 수정)
+    async editNickname(nickname: string) {
+      const profileData = {
+        name: nickname
+      }
+      try {
+        const response = await editProfile(profileData)
+        console.log(response)
+      } catch (error) {
+        console.error(error)
+      }
     }
   }
 })
