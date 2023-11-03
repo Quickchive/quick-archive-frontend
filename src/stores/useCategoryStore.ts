@@ -17,7 +17,8 @@ export const useCategoryStore = defineStore('category', {
           name: '쇼핑',
           slug: '쇼핑',
           parentId: null,
-          userId: 7
+          userId: 7,
+          iconName: 'Cake'
         },
         {
           id: 1,
@@ -26,7 +27,8 @@ export const useCategoryStore = defineStore('category', {
           name: '꿀팁',
           slug: '꿀팁',
           parentId: null,
-          userId: 7
+          userId: 7,
+          iconName: 'Watch'
         }
       ],
       curCategoryName: '전체 콘텐츠',

@@ -28,12 +28,12 @@
 import ModalHeader from '@/components/header/ModalHeader.vue'
 import controlCheckbox from '@/assets/ic/ic-control-checkbox-on.svg'
 import { useModalStore } from '@/stores/useModalStore.ts'
-import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+// import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useCategoryAddStore } from '@/stores/useCategoryAddStore.ts'
 
 const modalTitle = '카테고리 아이콘 선택'
 const modalStore = useModalStore()
-const categoryStore = useCategoryStore()
+// const categoryStore = useCategoryStore()
 const categoryAddStore = useCategoryAddStore()
 
 // 카테고리 아이콘 선택

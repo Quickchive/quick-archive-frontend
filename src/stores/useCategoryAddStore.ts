@@ -22,62 +22,74 @@ export const useCategoryAddStore = defineStore('categoryAdd', {
         {
           id: 0,
           img: categoryFolder,
-          selected: true
+          selected: true,
+          iconName: 'Folder'
         },
         {
           id: 1,
           img: categoryCook,
-          selected: false
+          selected: false,
+          iconName: 'Cook'
         },
         {
           id: 2,
           img: categoryCafe,
-          selected: false
+          selected: false,
+          iconName: 'Cafe'
         },
         {
           id: 3,
           img: categoryCake,
-          selected: false
+          selected: false,
+          iconName: 'Cake'
         },
         {
           id: 4,
           img: categoryWatch,
-          selected: false
+          selected: false,
+          iconName: 'Watch'
         },
         {
           id: 5,
           img: categoryStar,
-          selected: false
+          selected: false,
+          iconName: 'Star'
         },
         {
           id: 6,
           img: categoryGift,
-          selected: false
+          selected: false,
+          iconName: 'Gift'
         },
         {
           id: 7,
           img: categoryShopping,
-          selected: false
+          selected: false,
+          iconName: 'Shopping'
         },
         {
           id: 8,
           img: categoryDocument,
-          selected: false
+          selected: false,
+          iconName: 'Document'
         },
         {
           id: 9,
           img: categoryBook,
-          selected: false
+          selected: false,
+          iconName: 'Book'
         },
         {
           id: 10,
           img: categoryGame,
-          selected: false
+          selected: false,
+          iconName: 'Game'
         },
         {
           id: 11,
           img: categoryTrip,
-          selected: false
+          selected: false,
+          iconName: 'Trip'
         }
       ],
       // step 01 - 카테고리 추가 모달
@@ -95,7 +107,14 @@ export const useCategoryAddStore = defineStore('categoryAdd', {
       console.log('선택된 아이콘', selectedCategory)
       return selectedCategory
     },
-    isSelectedCategory: (state) => state.selectedLocation.name !== '미지정'
+    isSelectedCategory: (state) => state.selectedLocation.name !== '미지정',
+    getCategoryImgByIconName(state) {
+      return (iconName: string) => {
+        const icon: any = state.defaultCategory.find((e) => e.iconName === iconName)
+        console.log(icon)
+        return icon.img
+      }
+    }
   },
   actions: {
     // 카테고리 아이콘 선택 이벤트

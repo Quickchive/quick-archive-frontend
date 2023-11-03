@@ -12,7 +12,10 @@
             <img v-if="!categoryDepth1.show" :src="expandMoreIcon" />
           </button>
           <button class="button--transparent category-list__button--radio">
-            <img :src="categoryIcon" class="img-category-icon--lg" />
+            <img
+              :src="getCategoryImgByIconName(categoryDepth1.iconName)"
+              class="img-category-icon--lg"
+            />
             {{ categoryDepth1.name }}
           </button>
         </div>
@@ -49,9 +52,10 @@
                 <img v :src="expandMoreIcon" />
               </button>
               <button class="button--transparent category-list__button--radio">
-                <img :src="categoryIcon" class="category-icon img-category-icon--lg" />{{
-                  categoryDepth2.name
-                }}
+                <img
+                  :src="getCategoryImgByIconName(categoryDepth2.iconName)"
+                  class="category-icon img-category-icon--lg"
+                />{{ categoryDepth2.name }}
               </button>
             </div>
             <!-- 라디오 버튼 -->
@@ -86,9 +90,12 @@ import expandLessIcon from '@/assets/ic/ic-expand-less.svg'
 import categoryIcon from '@/assets/img/category/img_category_cook.png'
 import { defineProps, reactive, watch } from 'vue'
 import { useCategoryAddStore } from '@/stores/useCategoryAddStore.ts'
+import { storeToRefs } from 'pinia'
 
 // 스토어 선언
 const categoryAddStore = useCategoryAddStore()
+
+const { getCategoryImgByIconName } = storeToRefs(categoryAddStore)
 
 const props = defineProps({
   // categoryData: Object

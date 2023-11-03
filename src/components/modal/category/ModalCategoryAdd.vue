@@ -7,7 +7,7 @@
         @click="openSelectCategoryModal()"
       >
         <div class="icon__category-change">
-          <img class="img-category-custom" :src="categoryIcon" /><img
+          <img class="img-category-custom" :src="categoryAddStore.getSelectedCategory.img" /><img
             class="icon__thumb-change"
             :src="thumbChangeIcon"
           />
@@ -127,7 +127,8 @@ const saveCategory = async () => {
     // const addCategory = async () => {
     try {
       let categoryData = {
-        categoryName: categoryName.value
+        categoryName: categoryName.value,
+        iconName: categoryAddStore.getSelectedCategory.iconName
       }
       if (categoryAddStore.selectedLocation.name !== '미지정') {
         categoryData.parentId = categoryAddStore.selectedLocation.id
@@ -153,6 +154,7 @@ const saveCategory = async () => {
     try {
       let categoryData = {
         categoryName: categoryName.value,
+        iconName: categoryAddStore.getSelectedCategory.iconName,
         // parentId: categoryAddStore.selectedLocation.id,
         categoryId: categoryStore.focusedCategoryData.id
       }
