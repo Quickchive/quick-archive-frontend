@@ -7,7 +7,9 @@
         <div class="myinfo-list">
           <label class="label__modal">이메일</label>
           <div class="wrapper__input-left-icon">
-            <img :src="googleIcon" />
+            <img :src="googleIcon" v-if="userStore.socialLoginInfo === google" />
+            <img :src="kakaoIcon" v-if="userStore.socialLoginInfo === kakao" />
+            <!-- <img :src="appleIcon" v-if="userStore.socialLoginInfo === apple" /> -->
             <input class="input__sm--readonly" readonly :placeholder="userStore.email" />
           </div>
         </div>
@@ -46,6 +48,7 @@
 <script setup>
 import TitleHeader from '@/components/header/TitleHeader.vue'
 import googleIcon from '@/assets/ic/logo_google.svg'
+import kakaoIcon from '@/assets/ic/logo_kakao.png'
 import nextIcon from '@/assets/ic/ic_next_gray_24px.svg'
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/useUserStore.ts'

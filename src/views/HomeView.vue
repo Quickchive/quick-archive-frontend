@@ -22,6 +22,7 @@ onMounted(async () => {
   // 로그인
   if (route.fullPath.includes('google')) {
     console.log('google login')
+    userStore.setSocialLoginInfo(google)
     try {
       const code = route.query.code
       await userStore.googleLogin(code)
@@ -33,6 +34,7 @@ onMounted(async () => {
   } else {
     try {
       console.log('kakao login')
+      userStore.setSocialLoginInfo(kakao)
       const code = route.query.code
       await userStore.kakaoLogin(code)
       await userStore.getProfile()

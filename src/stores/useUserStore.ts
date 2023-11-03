@@ -34,7 +34,7 @@ export const useUserStore = defineStore('user', {
       email: 'tester@naver.com',
       // 마이페이지
       recommendationMode: true,
-      socialLogin: 'google'
+      socialLoginInfo: 'google'
     }
   },
   getters: {
@@ -156,6 +156,9 @@ export const useUserStore = defineStore('user', {
       } catch (error) {
         console.error(error)
       }
+    },
+    setSocialLoginInfo(snsName: string) {
+      this.socialLoginInfo = snsName
     }
   }
 })
