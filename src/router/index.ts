@@ -15,12 +15,6 @@ const router = createRouter({
       name: 'login',
       component: () => import('@/views/LoginView.vue')
     },
-    // 홈 페이지
-    // {
-    //   path: '/home',
-    //   name: 'home',
-    //   component: () => import('@/views/HomeView.vue')
-    // },
     // 검색 페이지
     {
       path: '/search',

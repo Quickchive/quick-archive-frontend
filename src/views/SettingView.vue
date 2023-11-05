@@ -1,7 +1,7 @@
 <template>
-  <div class="wrapper__navbar">
+  <!-- <div class="wrapper__navbar">
     <the-nav-bar></the-nav-bar>
-  </div>
+  </div> -->
   <div class="wrapper__setting-component">
     <router-view></router-view>
   </div>
@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import TheNavBar from '@/components/nav/TheNavBar.vue'
+// import TheNavBar from '@/components/nav/TheNavBar.vue'
 import AlertConfirm from '@/components/modal/alert/AlertConfirm.vue'
 import { useModalStore } from '@/stores/useModalStore.ts'
 import { useUserStore } from '@/stores/useUserStore.ts'
