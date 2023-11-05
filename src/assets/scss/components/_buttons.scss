@@ -281,14 +281,25 @@ button {
 }
 
 /******** 토글 ********/
-.toggle {
-  width: 54px !important;
-  height: 30px !important;
+:root {
+  --toggle-border-on: #146eff !important;
+  --toggle-bg-on: #146eff !important;
+  --toggle-width: 54px;
+  --toggle-height: 30px;
+  --toggle-handle-enabled: #ffffff;
+  --toggle-handle-disabled: $color-grey-20;
+}
+
+.toggle-container {
+  &:focus {
+    border-style: none;
+    outline: none;
+    box-shadow: none;
+  }
 }
 
 .toggle-off {
   background-color: $color-grey-20 !important;
-
   .toggle-handle-off {
     left: 1px;
     top: 10%;
@@ -296,7 +307,6 @@ button {
 }
 
 .toggle-handle {
-  background: var(--toggle-handle-enabled, #fff);
   border-radius: 50%;
   display: inline-block;
   height: 24px !important;
@@ -308,9 +318,7 @@ button {
 }
 
 .toggle-on {
-  background-color: #146eff !important;
   .toggle-handle-on {
-    background-color: #ffffff !important;
     right: 1px !important;
     top: 10% !important;
   }
