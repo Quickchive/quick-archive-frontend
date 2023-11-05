@@ -26,7 +26,7 @@ onMounted(async () => {
     try {
       const code = route.query.code
       await userStore.googleLogin(code)
-      await userStore.getProfile()
+      await userStore.getUserProfile()
       await categoryStore.getUserCategoryList()
     } catch (error) {
       console.error(error)
@@ -36,8 +36,8 @@ onMounted(async () => {
       console.log('kakao login')
       userStore.setSocialLoginInfo(kakao)
       const code = route.query.code
-      await userStore.kakaoLogin(code)
-      await userStore.getProfile()
+      await userStore.kakaoSocialLogin(code)
+      await userStore.getUserProfile()
       await categoryStore.getUserCategoryList()
     } catch (error) {
       console.error(error)
