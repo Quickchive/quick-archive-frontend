@@ -16,7 +16,7 @@
             @click="toCategoryPage(categoryDepth1.id, categoryDepth1.name)"
           >
             <img
-              :src="getCategoryImgByIconName(categoryDepth1.iconName)"
+              :src="categoryAddStore.getCategoryImgByIconName(categoryDepth1.iconName)"
               class="category-icon img-category-icon"
             />
             {{ categoryDepth1.name }}
@@ -40,7 +40,7 @@
                 @click="toCategoryPage(categoryItem2.id, categoryItem2.name)"
               >
                 <img
-                  :src="getCategoryImgByIconName(categoryDepth2.iconName)"
+                  :src="categoryAddStore.getCategoryImgByIconName(categoryDepth2.iconName)"
                   class="category-icon img-category-icon"
                 />{{ categoryItem2.name }}
               </button>
@@ -66,7 +66,7 @@
                     @click="toCategoryPage(categoryItem3.id, categoryItem3.name)"
                   >
                     <img
-                      :src="getCategoryImgByIconName(categoryDepth3.iconName)"
+                      :src="categoryAddStore.getCategoryImgByIconName(categoryDepth3.iconName)"
                       class="category-icon img-category-icon"
                     />{{ categoryItem3.name }}
                   </button>
@@ -98,12 +98,11 @@ import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useCategoryAddStore } from '@/stores/useCategoryAddStore.ts'
 import MoreButton from '@/components/button/MoreButton.vue'
 import { searchCategoryDataById } from '@/utils/search.js'
-import { storeToRefs } from 'pinia'
 
 const categoryStore = useCategoryStore()
 const categoryAddStore = useCategoryAddStore()
 
-const { getCategoryImgByIconName } = storeToRefs(categoryAddStore)
+// const { getCategoryImgByIconName } = storeToRefs(categoryAddStore)
 
 const router = useRouter()
 
