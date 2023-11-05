@@ -113,6 +113,9 @@ export const useCategoryAddStore = defineStore('categoryAdd', () => {
   const getCategoryImgByIconName = (iconName: string) => {
     const icon: any = defaultCategory.find((e) => e.iconName === iconName)
     console.log(icon)
+    if (icon === undefined) {
+      return categoryWatch
+    }
     return icon.img
   }
 
