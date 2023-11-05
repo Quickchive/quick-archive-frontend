@@ -409,6 +409,9 @@ button {
   height: 48px;
   a {
     color: #13141a;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
   }
   .wrapper__button-icon {
     @extend .flex-container__row--align-center;
