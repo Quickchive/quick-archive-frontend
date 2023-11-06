@@ -1,9 +1,9 @@
 <template>
-  <h1>검색</h1>
+  <search-result></search-result>
 </template>
 
-<script>
-export default {}
+<script setup>
+import SearchResult from '@/components/search/SearchResult.vue'
 </script>
 
 <style></style>

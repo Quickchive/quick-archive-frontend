@@ -10,6 +10,20 @@
 }
 
 .wrapper__section {
+  padding: 80px 64px 0px 64px;
+  gap: 8px;
   position: fixed;
   left: 368px;
+  h1 {
+    width: 944px;
+    overflow: hidden;
+    color: $color-grey-100;
+    text-overflow: ellipsis;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 48px; /* 150% */
+    letter-spacing: -0.3px;
+    text-align: left;
+    margin: 0;
+  }
 }

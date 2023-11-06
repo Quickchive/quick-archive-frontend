@@ -7,15 +7,11 @@
       @click="categoryStore.deleteContentsInCategory()"
       v-if="checkbox"
     >
-      <img
-        :src="checkboxOffIcon"
-        v-if="!categoryStore.deleteContentsChecked"
-        class="icon-ex-small"
-      />
+      <img :src="checkboxOffIcon" v-if="!categoryStore.deleteContentsChecked" class="icon-small" />
       <img
         :src="checkboxOnIcon"
         v-if="categoryStore.deleteContentsChecked"
-        class="icon-ex-small"
+        class="icon-small"
       />카테고리 내 콘텐츠도 함께 삭제하기
     </button>
     <div class="flex-container__row wrapper__alert-button--double">

@@ -50,18 +50,18 @@
 }
 
 .contents-container {
-  .contents-num__wrapper {
-    color: $color-grey-70;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 24px; /* 171.429% */
-    letter-spacing: -0.3px;
-  }
-
   .contents-list__wrapper {
     gap: 20px;
     margin-top: 16px;
     height: 100vh;
     overflow-y: scroll;
   }
+}
+
+.contents-num__wrapper {
+  color: $color-grey-70;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px; /* 171.429% */
+  letter-spacing: -0.3px;
 }

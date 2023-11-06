@@ -7,7 +7,7 @@
       "updatedAt": "2023-10-06T13:00:00.693Z",
       "link": "ex.com",
       "title": "string",
-      "siteName": "string",
+      "siteName": "Brunch",
       "coverImg": "/src/assets/img/thumbnail1.png",
       "description": "string",
       "comment": "string",
@@ -72,15 +72,6 @@
       "coverImg": "/src/assets/img/thumbnail3.png",
       "description": "무명의 작가가 쓴 첫 소설이 5개월여 만에 13쇄를 찍었다. 1월 17일 초판 3000부가 금세 동나더니 2쇄 5000부도 빠른 속도로 판매됐다. 3쇄부터 1만부씩 찍었고, 6월 28일 13쇄가 나왔다. 지금까지 11만부가 팔려나갔다. 유명 출판사도 아니고 1인 출판사에서 펴낸 책이다. 순전히 독자의 입소문으로만 이룬 성과다.",
       "favorite": true,
-      "category": {
-        "id": 0,
-        "createdAt": "2023-10-12T12:13:14.515Z",
-        "updatedAt": "2023-10-12T12:13:14.515Z",
-        "name": "string",
-        "slug": "string",
-        "parentId": 0,
-        "userId": 0
-      },
       "userId": 0
     },
     {

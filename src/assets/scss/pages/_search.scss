@@ -1,0 +1,167 @@
+.search-container {
+  width: calc(100% - 368px);
+  overflow-x: hidden;
+  // 카테고리
+  .wrapper__searchResult-category {
+    display: flex;
+    flex-direction: column;
+    margin: 16px 0 40px 0;
+    gap: 20px;
+    .wrapper__searchResult-category-item {
+      @extend .flex-container__row;
+      justify-content: space-between;
+      .searchResult-category-item {
+        @extend .flex-container__row;
+        gap: 16px;
+        .searchResult-category-text-box {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 6px;
+          .searchResult-category-title {
+            overflow: hidden;
+            color: $color-grey-100;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 24px; /* 150% */
+            letter-spacing: -0.3px;
+            text-align: start;
+          }
+
+          .searchResult-category-detail {
+            color: $color-grey-60;
+            font-size: 13px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 18px; /* 138.462% */
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+  .wrapper__show-more-button {
+    width: 100%;
+    button {
+      border-radius: 12px;
+      border: 1px solid var(--grey-20, #dcdcde);
+      height: 56px;
+      width: 100%;
+      background: transparent;
+    }
+  }
+  // 콘텐츠
+  .wrapper__searchResult-content {
+    display: flex;
+    flex-direction: column;
+    margin: 16px 0 40px 0;
+    gap: 20px;
+
+    .wrapper__searchResult-content-item {
+      height: 112px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      .thumbnail__wrapper {
+        position: relative;
+        .thumbnail {
+          width: 112px;
+          height: 112px;
+          margin-right: 24px;
+        }
+      }
+      .item__wrapper {
+        width: 100%;
+        h1 {
+          width: 100%;
+          height: 24px;
+          text-align: left;
+          overflow: hidden;
+          color: $color-grey-100;
+          text-overflow: ellipsis;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 24px; /* 150% */
+          letter-spacing: -0.3px;
+        }
+        p {
+          width: 100%;
+          height: 42px;
+          text-align: left;
+          overflow: hidden;
+          color: $color-grey-70;
+          text-overflow: ellipsis;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 21px; /* 150% */
+          letter-spacing: -0.3px;
+          margin: 4px 0 12px 0;
+        }
+
+        footer {
+          align-items: center;
+          color: $color-grey-60;
+          font-size: 13px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 18px; /* 138.462% */
+          letter-spacing: -0.3px;
+          .ic-category {
+            width: 20px;
+            margin-right: 6px;
+            border-radius: 10px;
+          }
+        }
+      }
+    }
+
+    // 메모
+    .searhResult-content-memo {
+      width: 100%;
+      border-radius: 8px;
+      background: #f5f5f5;
+      padding: 24px;
+      box-sizing: border-box;
+      .searhResult-content-memo__title {
+        text-align: left;
+        color: $color-grey-60;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 24px; /* 150% */
+        letter-spacing: -0.3px;
+      }
+      .searhResult-content-memo__content {
+        overflow: hidden;
+        color: $color-grey-100;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 22px; /* 157.143% */
+        letter-spacing: -0.3px;
+        margin: 4px 0 16px 0;
+      }
+      .searchResult-content-memo__button {
+        color: $color-grey-80;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 16px; /* 114.286% */
+        letter-spacing: -0.3px;
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        padding: 0;
+      }
+    }
+  }
+}
