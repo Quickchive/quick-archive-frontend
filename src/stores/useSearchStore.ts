@@ -1,6 +1,14 @@
 import { defineStore } from 'pinia'
-import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 
 export const useSearchStore = defineStore('search', () => {
-  return {}
+  const keyword = ref('')
+  const searchedCategoryCount = ref(0)
+  const searchedContentCount = ref(0)
+
+  function clearSearchText() {
+    keyword.value = ''
+  }
+
+  return { keyword, searchedCategoryCount, searchedContentCount, clearSearchText }
 })

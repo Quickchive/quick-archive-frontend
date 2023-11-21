@@ -1,6 +1,9 @@
 <template>
   <div class="flex-container__col--100">
-    <title-header :title="title"></title-header>
+    <header class="titleHeader" id="search-titleHeader">
+      <h1>{{ keyword }} 검색 결과</h1>
+    </header>
+    <!-- <title-header id="search-titleHeader" :title="title"></title-header> -->
     <div class="divider"></div>
     <!-- 검색 결과 -->
     <article class="flex-container__col search-container">
@@ -125,7 +128,7 @@
 
 <script setup>
 import TitleHeader from '../header/TitleHeader.vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useSearchStore } from '@/stores/useSearchStore.ts'
 import emptyContentImg from '@/assets/img/img_empty_nocontent.png'
 import emptyCategoryImg from '@/assets/img/img_empty_nocategory.png'
@@ -139,11 +142,14 @@ import moreIcon from '@/assets/ic/ic-more.svg'
 import favoriteSelectedIcon from '@/assets/ic/ic-favorite-seleted_32px.svg'
 import favoriteUnselectedIcon from '@/assets/ic/ic-favorite-unseleted_32px.svg'
 import viewMoreIcon from '@/assets/ic/ic_view-more.svg'
+import { storeToRefs } from 'pinia'
 
-const keyword = ref('')
-const title = `${keyword.value} 검색 결과`
-
+// const keyword = ref('')
 const searchStore = useSearchStore()
+const { keyword } = storeToRefs(searchStore)
+// const title = `${searchStore.keyword.value} 검색 결과`
+
+const filterItem = computed(() => keyword)
 </script>
 
 <style></style>

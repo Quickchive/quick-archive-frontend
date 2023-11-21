@@ -30,48 +30,33 @@
   </nav>
   <div class="navbar-shadow"></div>
   <!-- 모달 -->
-  <modal-view v-if="this.modalStore.overlay"></modal-view>
+  <modal-view v-if="modalStore.overlay"></modal-view>
 </template>
 
-<script>
+<script setup>
 import profileImg from '@/assets/img/img_empty_noprofile.png'
-import naviSearch from '@/assets/ic/ic-navi-search-unselected.svg'
 import plus from '@/assets/ic/ic-add.svg'
 import CategoryList from '@/components/nav/CategoryList.vue'
 import SearchInput from '@/components/input/SearchInput.vue'
 import ModalView from '@/views/ModalView.vue'
 import { useUserStore } from '@/stores/useUserStore.ts'
 import { useModalStore } from '@/stores/useModalStore.ts'
+import { useSearchStore } from '@/stores/useSearchStore.ts'
+import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
 
-export default {
-  components: {
-    CategoryList,
-    SearchInput,
-    ModalView
-  },
-  data() {
-    return {
-      profileImg,
-      naviSearch,
-      plus,
-      placeholderText: '제목, 메모, 카테고리명 검색',
-      isAddModalShow: false
-    }
-  },
-  methods: {
-    showAddModal() {
-      this.modalStore.openSelectModal()
-    }
-  },
-  setup() {
-    // counter store 가져오기
-    const userStore = useUserStore()
-    const modalStore = useModalStore()
-    return {
-      userStore,
-      modalStore
-    }
-  }
+const userStore = useUserStore()
+const modalStore = useModalStore()
+const searchStore = useSearchStore()
+
+// const { keyword } = storeToRefs(searchStore)
+
+const keyword = ref(searchStore.keyword)
+
+const placeholderText = ref('제목, 메모, 카테고리명 검색')
+// const isAddModalShow = ref(false)
+const showAddModal = () => {
+  modalStore.openSelectModal()
 }
 </script>
 
