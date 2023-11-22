@@ -19,63 +19,59 @@ const getContentIdWithKeyword = (keyword, contentData) => {
     .filter((data) => data.title.toLowerCase().includes(keyword))
     .map((data) => data.id)
 
-  const commentWithKeyword = contentData.filter((data) =>
-    data.comment
-      .toLowerCase()
-      .includes(keyword)
-      .map((data) => data.id)
-  )
+  const commentWithKeyword = contentData
+    .filter((data) => data.comment && data.comment.toLowerCase().includes(keyword))
+    .map((data) => data.id)
 
-  const categoryWithKeyword = contentData.filter((data) =>
-    data.category.name
-      .toLowerCase()
-      .includes(keyword)
-      .map((data) => data.id)
-  )
+  const categoryWithKeyword = contentData
+    .filter((data) => data.category && data.category.name.toLowerCase().includes(keyword))
+    .map((data) => data.id)
 
   const contentIdListWithKeyword = [
     ...titleWithKeyword,
     ...commentWithKeyword,
     ...categoryWithKeyword
   ]
+
   const set = new Set(contentIdListWithKeyword)
   const result = [...set]
   return result
 }
 
 const getCategoryIdWithKeyword = (keyword, categoryData) => {
+  const categoryListWithKeyword = []
+
   // 1차 카테고리 검색
-  const categoryDepth1WithKeyword = categoryData.filter((data) =>
-    data.name
-      .toLowerCase()
-      .includes(keyword)
-      .map((data) => data.id)
-  )
+  const categoryDepth1WithKeyword = categoryData
+    .filter((data) => data.name.toLowerCase().includes(keyword))
+    .map((data) => data.id)
 
-  let categoryDepth2WithKeyword
-  let categoryDepth3WithKeyword
+  categoryListWithKeyword.push(...categoryDepth1WithKeyword)
 
-  for (let i = 0; i < categoryData.length; i++) {
-    // 2차 카테고리 검색
-    categoryDepth2WithKeyword = categoryData[i].children.name
-      .toLowerCase()
-      .includes(keyword)
-      .map((data) => data.id)
-    for (let j = 0; j < categoryData[i].length; j++) {
-      // 3차 카테고리 검색
-      categoryDepth3WithKeyword = categoryData[i].children[j].name
-        .toLowerCase()
-        .includes(keyword)
-        .map((data) => data.id)
+  // 2차, 3차 카테고리 검색
+  categoryData.forEach((category) => {
+    if (category.children) {
+      const categoryDepth2WithKeyword = category.children
+        .filter((child) => child && child.name.toLowerCase().includes(keyword))
+        .map((child) => child.id)
+
+      categoryListWithKeyword.push(...categoryDepth2WithKeyword)
+
+      if (category.children.length > 0) {
+        category.children.forEach((child) => {
+          // 3차 카테고리 검색
+          const categoryDepth3WithKeyword = (child.children || [])
+            .filter((grandChild) => grandChild.name.toLowerCase().includes(keyword))
+            .map((grandChild) => grandChild.id)
+
+          categoryListWithKeyword.push(...categoryDepth3WithKeyword)
+        })
+      }
     }
-  }
+  })
 
-  const categoryIdListWithKeyword = [
-    ...categoryDepth1WithKeyword,
-    ...categoryDepth2WithKeyword,
-    ...categoryDepth3WithKeyword
-  ]
-  const set = new Set(categoryIdListWithKeyword)
+  // 중복 제거
+  const set = new Set(categoryListWithKeyword)
   const result = [...set]
   return result
 }
