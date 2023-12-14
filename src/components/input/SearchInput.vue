@@ -6,7 +6,7 @@
       :placeholder="props.placeholderText"
       v-model="searchStore.keyword"
     />
-    <button v-show="isInputValid" class="button-clear" @click="searchStore.clearSearchText()">
+    <button v-show="isInputValid" class="button-clear" @click="searchStore.$reset()">
       <img :src="textfieldCancelIcon" />
     </button>
   </div>
@@ -15,7 +15,7 @@
 <script setup>
 import naviSearch from '@/assets/ic/ic-navi-search-unselected.svg'
 import { ref, computed } from 'vue'
-import { defineProps } from 'vue'
+// import { defineProps } from 'vue'
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
 import { useSearchStore } from '@/stores/useSearchStore.ts'
 const searchStore = useSearchStore()

@@ -1,5 +1,8 @@
 .search-container {
-  width: calc(100% - 368px);
+  // width: calc(100% - 368px);
+  padding: 0 64px;
+  // width: 100%;
+  box-sizing: border-box;
   overflow-x: hidden;
   // 카테고리
   .wrapper__searchResult-category {

@@ -15,17 +15,20 @@ const searchCategoryDataById = (arr, id) => {
 // 검색결과 정렬 순서: 검색조건에 맞는 콘텐츠 및 카테고리가 최근 추가된 순서대로 노출
 
 const getContentIdWithKeyword = (keyword, contentData) => {
+  if (keyword == '') {
+    return []
+  }
   const titleWithKeyword = contentData
     .filter((data) => data.title.toLowerCase().includes(keyword))
-    .map((data) => data.id)
+    .map((data) => data)
 
   const commentWithKeyword = contentData
     .filter((data) => data.comment && data.comment.toLowerCase().includes(keyword))
-    .map((data) => data.id)
+    .map((data) => data)
 
   const categoryWithKeyword = contentData
     .filter((data) => data.category && data.category.name.toLowerCase().includes(keyword))
-    .map((data) => data.id)
+    .map((data) => data)
 
   const contentIdListWithKeyword = [
     ...titleWithKeyword,
@@ -35,16 +38,21 @@ const getContentIdWithKeyword = (keyword, contentData) => {
 
   const set = new Set(contentIdListWithKeyword)
   const result = [...set]
+  // console.log('content', result)
   return result
 }
 
 const getCategoryIdWithKeyword = (keyword, categoryData) => {
+  if (keyword == '') {
+    return []
+  }
+
   const categoryListWithKeyword = []
 
   // 1차 카테고리 검색
   const categoryDepth1WithKeyword = categoryData
     .filter((data) => data.name.toLowerCase().includes(keyword))
-    .map((data) => data.id)
+    .map((data) => data)
 
   categoryListWithKeyword.push(...categoryDepth1WithKeyword)
 
@@ -53,7 +61,7 @@ const getCategoryIdWithKeyword = (keyword, categoryData) => {
     if (category.children) {
       const categoryDepth2WithKeyword = category.children
         .filter((child) => child && child.name.toLowerCase().includes(keyword))
-        .map((child) => child.id)
+        .map((child) => child)
 
       categoryListWithKeyword.push(...categoryDepth2WithKeyword)
 
@@ -62,7 +70,7 @@ const getCategoryIdWithKeyword = (keyword, categoryData) => {
           // 3차 카테고리 검색
           const categoryDepth3WithKeyword = (child.children || [])
             .filter((grandChild) => grandChild.name.toLowerCase().includes(keyword))
-            .map((grandChild) => grandChild.id)
+            .map((grandChild) => grandChild)
 
           categoryListWithKeyword.push(...categoryDepth3WithKeyword)
         })
@@ -73,6 +81,7 @@ const getCategoryIdWithKeyword = (keyword, categoryData) => {
   // 중복 제거
   const set = new Set(categoryListWithKeyword)
   const result = [...set]
+  // console.log(result)
   return result
 }
 

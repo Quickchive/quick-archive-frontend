@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia'
 import { getContents, getAllContents } from '@/api/contents'
+import contentListDummy from '@/assets/model/contentList.json'
 
 export const useContentStore = defineStore('content', {
   // 화살표 함수는 전체 유형 유추을 위해 권장됨.
   state: () => {
     return {
       // 더미
-      userContentList: []
+      userContentList: contentListDummy.contents
     }
   },
   getters: {},
@@ -14,7 +15,7 @@ export const useContentStore = defineStore('content', {
     async getAllContents() {
       try {
         const response = await getAllContents()
-        console.log('store', response)
+        // console.log('store', response)
         if (response.data.statusCode === 200 || response.data.statusCode === 201) {
           this.userContentList = response.data.contents
         }
@@ -25,7 +26,7 @@ export const useContentStore = defineStore('content', {
     async getContents(categoryId: number) {
       try {
         const response = await getContents(categoryId)
-        console.log('store', response)
+        // console.log('store', response)
         if (response.data.statusCode === 200 || response.data.statusCode === 201) {
           this.userContentList = response.data.contents
         }

@@ -106,13 +106,13 @@ export const useCategoryAddStore = defineStore('categoryAdd', () => {
     const selectedCategory = defaultCategory.find((e) => {
       return e.selected == true
     })
-    console.log('선택된 아이콘', selectedCategory)
+    // console.log('선택된 아이콘', selectedCategory)
     return selectedCategory
   })
   const isSelectedCategory = () => selectedLocation.value.name !== '미지정'
   const getCategoryImgByIconName = (iconName: string) => {
     const icon: any = defaultCategory.find((e) => e.iconName === iconName)
-    console.log(icon)
+    // console.log(icon)
     if (icon === undefined) {
       return categoryWatch
     }

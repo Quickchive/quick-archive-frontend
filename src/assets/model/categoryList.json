@@ -1,24 +1,26 @@
 [
   {
-    "id": 23,
+    "id": 0,
     "createdAt": "2023-09-20T14:43:26.954Z",
     "updatedAt": "2023-09-20T14:43:26.954Z",
-    "name": "테스트더미카테고리",
-    "slug": "테스트카테고리",
-    "parentId": null,
-    "userId": 7
-  },
-  {
-    "id": 33,
-    "createdAt": "2023-09-20T23:36:28.027Z",
-    "updatedAt": "2023-09-20T23:36:28.027Z",
     "name": "쇼핑",
     "slug": "쇼핑",
     "parentId": null,
-    "userId": 7
+    "userId": 7,
+    "iconName": "Cake"
   },
   {
-    "id": 34,
+    "id": 1,
+    "createdAt": "2023-09-20T23:36:28.027Z",
+    "updatedAt": "2023-09-20T23:36:28.027Z",
+    "name": "꿀팁",
+    "slug": "꿀팁",
+    "parentId": null,
+    "userId": 7,
+    "iconName": "Watch"
+  },
+  {
+    "id": 2,
     "createdAt": "2023-09-20T23:36:35.059Z",
     "updatedAt": "2023-09-20T23:36:35.059Z",
     "name": "맛집",
@@ -27,18 +29,18 @@
     "userId": 7,
     "children": [
       {
-        "id": 41,
+        "id": 3,
         "createdAt": "2023-09-20T23:39:41.268Z",
         "updatedAt": "2023-09-20T23:39:41.268Z",
         "name": "서울 맛집",
         "slug": "서울-맛집",
-        "parentId": 34,
+        "parentId": 2,
         "userId": 7
       }
     ]
   },
   {
-    "id": 35,
+    "id": 4,
     "createdAt": "2023-09-20T23:36:38.288Z",
     "updatedAt": "2023-09-20T23:36:38.288Z",
     "name": "문서",
@@ -47,7 +49,7 @@
     "userId": 7
   },
   {
-    "id": 36,
+    "id": 5,
     "createdAt": "2023-09-20T23:37:17.774Z",
     "updatedAt": "2023-09-20T23:37:17.774Z",
     "name": "여행",
@@ -56,27 +58,27 @@
     "userId": 7,
     "children": [
       {
-        "id": 38,
+        "id": 6,
         "createdAt": "2023-09-20T23:38:52.899Z",
         "updatedAt": "2023-09-20T23:38:52.899Z",
         "name": "국내 여행",
         "slug": "국내-여행",
-        "parentId": 36,
+        "parentId": 5,
         "userId": 7,
         "children": [
           {
-            "id": 42,
+            "id": 7,
             "createdAt": "2023-09-20T23:39:21.779Z",
             "updatedAt": "2023-09-20T23:39:21.779Z",
             "name": "부산",
             "slug": "부산",
-            "parentId": 38,
+            "parentId": 6,
             "userId": 7
           }
         ]
       },
       {
-        "id": 39,
+        "id": 8,
         "createdAt": "2023-09-20T23:39:01.686Z",
         "updatedAt": "2023-09-20T23:39:01.686Z",
         "name": "해외 여행",
@@ -85,21 +87,21 @@
         "userId": 7,
         "children": [
           {
-            "id": 40,
+            "id": 9,
             "createdAt": "2023-09-20T23:39:21.779Z",
             "updatedAt": "2023-09-20T23:39:21.779Z",
             "name": "파리",
             "slug": "파리",
-            "parentId": 39,
+            "parentId": 8,
             "userId": 7
           },
           {
-            "id": 41,
+            "id": 10,
             "createdAt": "2023-09-20T23:39:21.779Z",
             "updatedAt": "2023-09-20T23:39:21.779Z",
             "name": "프랑스",
             "slug": "프랑스",
-            "parentId": 39,
+            "parentId": 8,
             "userId": 7
           }
         ]
@@ -107,7 +109,7 @@
     ]
   },
   {
-    "id": 37,
+    "id": 11,
     "createdAt": "2023-09-20T23:37:23.377Z",
     "updatedAt": "2023-09-20T23:37:23.377Z",
     "name": "게임",
