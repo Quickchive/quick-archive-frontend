@@ -133,12 +133,14 @@ export const useUserStore = defineStore('user', () => {
     // 카테고리 추천 모드 요청 로직
   }
   // 프로필 수정(닉네임 수정)
-  async function editNickname(nickname: string) {
+  async function editNickname(newNickname: string) {
     const profileData = {
-      name: nickname
+      name: newNickname
     }
+
     try {
       const response = await editProfile(profileData)
+      nickname.value = newNickname
       console.log(response)
     } catch (error) {
       console.error(error)

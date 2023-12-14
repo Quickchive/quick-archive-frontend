@@ -47,14 +47,8 @@ import { storeToRefs } from 'pinia'
 
 const userStore = useUserStore()
 const modalStore = useModalStore()
-const searchStore = useSearchStore()
-
-// const { keyword } = storeToRefs(searchStore)
-
-const keyword = ref(searchStore.keyword)
 
 const placeholderText = ref('제목, 메모, 카테고리명 검색')
-// const isAddModalShow = ref(false)
 const showAddModal = () => {
   modalStore.openSelectModal()
 }
