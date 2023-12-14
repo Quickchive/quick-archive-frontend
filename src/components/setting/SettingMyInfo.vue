@@ -16,7 +16,12 @@
         <div class="myinfo-list">
           <label class="label__modal">닉네임</label>
           <div class="wrapper__input-right-icon">
-            <input class="input__sm--before-edit" v-model="nickname" :disabled="disabled" />
+            <input
+              class="input__sm--before-edit"
+              :value="nickname"
+              @input="setNickName"
+              :disabled="disabled"
+            />
             <button v-show="clearButtonShow" class="button-clear" @click="clearText()">
               <img :src="textfieldCancelIcon" />
             </button>
@@ -86,6 +91,10 @@ const editNickname = async () => {
     clearButtonShow.value = false
     return
   }
+}
+
+const setNickName = (e) => {
+  nickname.value = e.target.value
 }
 </script>
 

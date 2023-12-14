@@ -16,7 +16,8 @@
     </div>
     <label class="input__category-modal">
       <input
-        v-model="categoryName"
+        :value="categoryName"
+        @input="setCategoryName"
         class="input__category-modal"
         placeholder="카테고리 이름(2~15글자)"
         autofocus
@@ -176,6 +177,10 @@ const saveCategory = async () => {
       }
     }
   }
+}
+
+const setCategoryName = (e) => {
+  categoryName.value = e.target.value
 }
 </script>
 

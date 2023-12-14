@@ -5,7 +5,8 @@
       <input
         class="input__content-modal"
         placeholder="링크를 입력해주세요"
-        v-model="link"
+        :value="link"
+        @input="setLink"
         autofocus
       />
     </div>
@@ -42,6 +43,10 @@ const isLinkValid = computed(() => {
 const closeModal = () => {
   modalStore.closeAddContentModal()
   modalStore.closeSelectModal()
+}
+
+const setLink = (e) => {
+  link.value = e.target.value
 }
 </script>
 

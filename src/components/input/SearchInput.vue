@@ -4,7 +4,8 @@
     <input
       class="input__naviSearch"
       :placeholder="props.placeholderText"
-      v-model="searchStore.keyword"
+      :value="searchStore.keyword"
+      @input="setKeyword"
     />
     <button v-show="isInputValid" class="button-clear" @click="searchStore.$reset()">
       <img :src="textfieldCancelIcon" />
@@ -14,14 +15,10 @@
 
 <script setup>
 import naviSearch from '@/assets/ic/ic-navi-search-unselected.svg'
-import { ref, computed } from 'vue'
-// import { defineProps } from 'vue'
+import { computed } from 'vue'
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
 import { useSearchStore } from '@/stores/useSearchStore.ts'
 const searchStore = useSearchStore()
-
-// const searchText = ref('')
-// const searchText = ref(searchStore.keyword)
 
 const props = defineProps({
   placeholderText: String,
@@ -29,10 +26,14 @@ const props = defineProps({
 })
 
 // 카테고리 명 유효성 검사
-
 const isInputValid = computed(() => {
   return searchStore.keyword.length >= 1 ? true : false
 })
+
+const setKeyword = (e) => {
+  console.log(e.target.value)
+  searchStore.keyword = e.target.value
+}
 </script>
 
 <style></style>
