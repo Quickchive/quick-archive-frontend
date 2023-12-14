@@ -91,7 +91,7 @@
 import expandMoreIcon from '@/assets/ic/ic-expand-more.svg'
 import expandLessIcon from '@/assets/ic/ic-expand-less.svg'
 import moreIcon from '@/assets/ic/ic-more.svg'
-import { defineProps, reactive } from 'vue'
+import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { watch, toRaw } from 'vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'

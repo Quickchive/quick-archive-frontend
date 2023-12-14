@@ -59,7 +59,7 @@ import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useCategoryAddStore } from '@/stores/useCategoryAddStore.ts'
 // import { addCategories } from '@/api/category.js'
 import { addCategories, updateCategories } from '@/api/category.js'
-import { ref, computed, defineProps, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { searchCategoryDataById } from '@/utils/search.js'
 
 const props = defineProps({

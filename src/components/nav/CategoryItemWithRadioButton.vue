@@ -87,7 +87,7 @@
 <script setup>
 import expandMoreIcon from '@/assets/ic/ic-expand-more.svg'
 import expandLessIcon from '@/assets/ic/ic-expand-less.svg'
-import { defineProps, reactive, watch } from 'vue'
+import { reactive, watch } from 'vue'
 import { useCategoryAddStore } from '@/stores/useCategoryAddStore.ts'
 
 // 스토어 선언

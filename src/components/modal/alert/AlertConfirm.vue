@@ -31,7 +31,7 @@ import checkboxOnIcon from '@/assets/ic/ic-control-checkbox-on.svg'
 // import { deleteCategories } from '@/api/category.js'
 // import { useModalStore } from '@/stores/useModalStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
-import { ref, defineProps } from 'vue'
+import { ref } from 'vue'
 // const isChecked = ref(false)
 // const modalStore = useModalStore()
 const categoryStore = useCategoryStore()
