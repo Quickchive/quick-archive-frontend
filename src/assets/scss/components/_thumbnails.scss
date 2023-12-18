@@ -107,3 +107,71 @@
     }
   }
 }
+
+#thumbnail-category {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  // justify-content: center;
+}
+
+// 메모
+.searhResult-content-memo {
+  // width: 100%;
+  border-radius: 8px;
+  background: #f5f5f5;
+  padding: 24px;
+  box-sizing: border-box;
+  // height: 152px;
+  // margin-top: 16px;
+
+  .searhResult-content-memo__title {
+    text-align: left;
+    color: $color-grey-60;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.3px;
+  }
+  .searhResult-content-memo__content {
+    color: $color-grey-70;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px; /* 157.143% */
+    letter-spacing: -0.3px;
+    margin: 4px 0 16px 0;
+    // white-space: nowrap;
+    text-align: start;
+    // text-overflow: ellipsis;
+
+    // white-space: normal;
+    // display: -webkit-box;
+    // -webkit-line-clamp: 2;
+    // -webkit-box-orient: vertical;
+  }
+
+  .hideMemo {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .searchResult-content-memo__button {
+    color: $color-grey-80;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px; /* 114.286% */
+    letter-spacing: -0.3px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
+}
