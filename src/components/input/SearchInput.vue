@@ -18,7 +18,10 @@ import naviSearch from '@/assets/ic/ic-navi-search-unselected.svg'
 import { computed } from 'vue'
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
 import { useSearchStore } from '@/stores/useSearchStore.ts'
+import { useRouter } from 'vue-router'
+
 const searchStore = useSearchStore()
+const router = useRouter()
 
 const props = defineProps({
   placeholderText: String,
@@ -33,6 +36,7 @@ const isInputValid = computed(() => {
 const setKeyword = (e) => {
   console.log(e.target.value)
   searchStore.keyword = e.target.value
+  router.push('/search')
 }
 </script>
 
