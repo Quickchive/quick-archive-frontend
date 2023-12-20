@@ -1,7 +1,7 @@
 <template>
   <nav class="thenavbar">
     <div class="navbar__top-container">
-      <a>logo</a>
+      <button @click="toMainPage()" class="button--transparent"><img :src="mainLogo" /></button>
       <!-- profile -->
       <router-link to="/setting">
         <div class="profile__wrapper">
@@ -41,16 +41,21 @@ import SearchInput from '@/components/input/SearchInput.vue'
 import ModalView from '@/views/ModalView.vue'
 import { useUserStore } from '@/stores/useUserStore.ts'
 import { useModalStore } from '@/stores/useModalStore.ts'
-import { useSearchStore } from '@/stores/useSearchStore.ts'
+import { useRouter } from 'vue-router'
 import { ref } from 'vue'
-import { storeToRefs } from 'pinia'
+import mainLogo from '@/assets/logo/logo_black_20px.svg'
 
 const userStore = useUserStore()
 const modalStore = useModalStore()
+const router = useRouter()
 
 const placeholderText = ref('제목, 메모, 카테고리명 검색')
 const showAddModal = () => {
   modalStore.openSelectModal()
+}
+
+const toMainPage = () => {
+  router.push('/home')
 }
 </script>
 
