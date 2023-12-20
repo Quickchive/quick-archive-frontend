@@ -22,28 +22,8 @@
     </footer>
     <button class="button--transparent btn--more"><img :src="moreIcon" /></button>
   </article>
-  <!-- <div class="flex-container__row item-container"> -->
-  <article v-if="item.comment" class="searhResult-content-memo">
-    <h1 class="searhResult-content-memo__title">메모</h1>
-    <p
-      class="searhResult-content-memo__content"
-      ref="paragraphElement"
-      :class="{ hideMemo: !isMemoShowAll }"
-    >
-      {{ item.comment }}
-    </p>
-    <button class="searchResult-content-memo__button" v-if="isMemoShowAll" @click="toggleMemo()">
-      접기<img :src="viewFoldIcon" />
-    </button>
-    <button
-      class="searchResult-content-memo__button"
-      v-if="paragraphHeight >= 44 && !isMemoShowAll"
-      @click="toggleMemo()"
-    >
-      더보기<img :src="viewMoreIcon" />
-    </button>
-  </article>
-  <!-- </div> -->
+  <!-- 메모 -->
+  <memo-item :comment="comment"></memo-item>
 </template>
 
 <script setup>
@@ -55,9 +35,8 @@ import favoriteUnselectedIcon from '@/assets/ic/ic-favorite-unseleted_32px.svg'
 import { addFavorite } from '@/api/contents.js'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import { useRouter } from 'vue-router'
-import viewMoreIcon from '@/assets/ic/ic_view-more.svg'
-import viewFoldIcon from '@/assets/ic/ic_view-fold.svg'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
+import MemoItem from '@/components/home/MemoItem.vue'
 
 const contentStore = useContentStore()
 const router = useRouter()
@@ -65,6 +44,8 @@ const router = useRouter()
 const props = defineProps({
   item: Object
 })
+
+const comment = ref(props.item.comment)
 
 const favoriteEvent = async () => {
   try {
@@ -80,21 +61,6 @@ const favoriteEvent = async () => {
 
 const toCategoryPage = (categoryId) => {
   router.push(`/home/${categoryId}`)
-}
-
-const isMemoShowAll = ref(false)
-const paragraphElement = ref(null)
-const paragraphHeight = ref(22)
-
-onMounted(() => {
-  if (paragraphElement.value) {
-    const computedStyle = window.getComputedStyle(paragraphElement.value)
-    paragraphHeight.value = parseInt(computedStyle.height, 10)
-  }
-})
-
-const toggleMemo = () => {
-  isMemoShowAll.value = !isMemoShowAll.value
 }
 </script>
 <style></style>

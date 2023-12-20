@@ -1,7 +1,5 @@
 .search-container {
-  // width: calc(100% - 368px);
   padding: 0 64px;
-  // width: 100%;
   box-sizing: border-box;
   overflow-x: hidden;
   // 카테고리
@@ -33,7 +31,6 @@
             letter-spacing: -0.3px;
             text-align: start;
           }
-
           .searchResult-category-detail {
             color: $color-grey-60;
             font-size: 13px;
@@ -107,7 +104,6 @@
           letter-spacing: -0.3px;
           margin: 4px 0 12px 0;
         }
-
         footer {
           align-items: center;
           color: $color-grey-60;
@@ -122,48 +118,6 @@
             border-radius: 10px;
           }
         }
-      }
-    }
-
-    // 메모
-    .searhResult-content-memo {
-      width: 100%;
-      border-radius: 8px;
-      background: #f5f5f5;
-      padding: 24px;
-      box-sizing: border-box;
-      .searhResult-content-memo__title {
-        text-align: left;
-        color: $color-grey-60;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 24px; /* 150% */
-        letter-spacing: -0.3px;
-      }
-      .searhResult-content-memo__content {
-        overflow: hidden;
-        color: $color-grey-100;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 22px; /* 157.143% */
-        letter-spacing: -0.3px;
-        margin: 4px 0 16px 0;
-      }
-      .searchResult-content-memo__button {
-        color: $color-grey-80;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 16px; /* 114.286% */
-        letter-spacing: -0.3px;
-        background-color: transparent;
-        display: flex;
-        align-items: center;
-        padding: 0;
       }
     }
   }

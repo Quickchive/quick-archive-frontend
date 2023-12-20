@@ -16,38 +16,7 @@
             v-for="content in searchStore.searchedContent"
             :key="content.id"
           >
-            <article class="wrapper__searchResult-content-item">
-              <div class="wrapper__searchResult-content-item">
-                <div class="thumbnail__wrapper">
-                  <img :src="content.coverImg" class="thumbnail" />
-                  <button class="button--transparent btn-favorite" @click="favoriteEvent()">
-                    <img :src="favoriteSelectedIcon" v-if="content.favorite" />
-                    <img :src="favoriteUnselectedIcon" v-if="!content.favorite" />
-                  </button>
-                </div>
-                <article class="item__wrapper">
-                  <h1>{{ content.title }}</h1>
-                  <p>{{ content.description }}</p>
-                  <footer class="flex-container__row">
-                    <img class="ic-category" :src="categoryWatch" />
-                    {{ content.category || '미지정' }}
-                    <img :src="dividerIcon" />
-                    {{ content.siteName }}
-                  </footer>
-                </article>
-                <button class="button--transparent btn--more"><img :src="moreIcon" /></button>
-              </div>
-            </article>
-            <!-- 메모 -->
-            <article v-if="content.comment" class="searhResult-content-memo">
-              <h1 class="searhResult-content-memo__title">메모</h1>
-              <p class="searhResult-content-memo__content">
-                {{ content.comment }}
-              </p>
-              <button class="searchResult-content-memo__button">
-                더보기<img :src="viewMoreIcon" />
-              </button>
-            </article>
+            <ContentsItem :item="content"></ContentsItem>
           </div>
           <!-- 더보기 버튼 -->
           <div
@@ -92,7 +61,6 @@
                     <span>454개 콘텐츠</span>
                   </div>
                 </div>
-
                 <!-- 1차 카테고리 && 2차 카테고리 존재 -->
                 <div
                   class="searchResult-category-text-box"
@@ -156,19 +124,14 @@ import { useSearchStore } from '@/stores/useSearchStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import { useCategoryAddStore } from '@/stores/useCategoryAddStore.ts'
-
 import emptyContentImg from '@/assets/img/img_empty_nocontent.png'
 import emptyCategoryImg from '@/assets/img/img_empty_nocategory.png'
-import ContentsItem from '@/components/home/ContentsItem.vue'
-import categoryWatch from '@/assets/img/category/img_category_watch.png'
 import dividerIcon from '@/assets/ic/divider_14px.svg'
 import nextIcon from '@/assets/ic/ic_next_gray_24px.svg'
 import moreIcon from '@/assets/ic/ic-more.svg'
-import favoriteSelectedIcon from '@/assets/ic/ic-favorite-seleted_32px.svg'
-import favoriteUnselectedIcon from '@/assets/ic/ic-favorite-unseleted_32px.svg'
-import viewMoreIcon from '@/assets/ic/ic_view-more.svg'
 import { getCategoryIdWithKeyword, getContentIdWithKeyword } from '@/utils/search.js'
 import { toRaw } from 'vue'
+import ContentsItem from '@/components/home/ContentsItem.vue'
 
 const searchStore = useSearchStore()
 const categoryStore = useCategoryStore()
