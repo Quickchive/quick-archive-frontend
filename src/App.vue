@@ -1,7 +1,7 @@
 <template>
-  <!-- <div class="flex-container__col"> -->
-  <div class="wrapper__navbar">
-    <the-nav-bar></the-nav-bar>
+  <div class="flex-container__col">
+    <!-- <div class="wrapper__navbar"> -->
+    <!-- <the-nav-bar></the-nav-bar> -->
   </div>
   <RouterView />
   <!-- </div> -->

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <title-bar></title-bar>
+    <!-- <title-bar></title-bar> -->
+    <h1>전체 콘텐츠</h1>
+    <the-filter></the-filter>
     <div class="divider"></div>
     <article class="flex-container__col contents-container">
       <div class="contents-num__wrapper">{{ contentStore.userContentList.length }}개</div>
@@ -28,6 +30,7 @@ import contentListDummy from '@/assets/model/contentList.json'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import { ref, onMounted, toRaw } from 'vue'
 import emptyImg from '@/assets/img/img-empty-nocontent.png'
+import TheFilter from '@/components/home/TheFilter.vue'
 
 const contentStore = useContentStore()
 const contentList = ref({})
