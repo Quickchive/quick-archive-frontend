@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { googleLogin, kakaoLogin } from '@/api/oauth'
-import { logoutUser } from '@/api/auth'
+import { logoutUser, loginUser } from '@/api/auth'
 import { getProfile, deleteProfile, editProfile } from '@/api/user'
 import {
   saveAccessTokenToCookie,
@@ -24,6 +24,21 @@ export const useUserStore = defineStore('user', () => {
   // 마이페이지
   const recommendationMode = ref(true)
   const socialLoginInfo = ref('google')
+
+  // 로그인
+  async function testerLogin(userData: any) {
+    try {
+      const response: any = await loginUser(userData)
+      saveRefreshTokenToCookie(response.data.refresh_token)
+      saveAccessTokenToCookie(response.data.access_token)
+      const profileResponse = await getProfile()
+      nickname.value = profileResponse.data.name
+      email.value = profileResponse.data.email
+      isLogin.value = true
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   async function kakaoSocialLogin(code: any) {
     try {
@@ -168,6 +183,7 @@ export const useUserStore = defineStore('user', () => {
     renewRefreshToken,
     enableRecommendationMode,
     editNickname,
-    setSocialLoginInfo
+    setSocialLoginInfo,
+    testerLogin
   }
 })

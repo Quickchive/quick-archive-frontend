@@ -5,41 +5,41 @@ const router = createRouter({
   routes: [
     // 로그인 되었을 때만 접근 가능한 페이지
     {
-      path: '/main',
+      path: '/home',
       component: () => import('@/views/AuthenticatedView.vue'),
       children: [
         {
-          path: '/main',
+          path: '/home',
           component: () => import('@/views/HomeView.vue'),
           children: [
             {
-              path: '/main',
+              path: '/home',
               component: () => import('@/components/home/DefaultCategoryPage.vue')
             },
             {
-              path: '/main/:id',
+              path: '/home/:id',
               component: () => import('@/components/home/CustomCategoryPage.vue')
             }
           ]
         },
         // 검색 페이지
         {
-          path: '/main/search',
+          path: '/home/search',
           name: 'search',
           component: () => import('@/views/SearchView.vue')
         },
         // 설정 페이지
         {
-          path: '/main/setting',
+          path: '/home/setting',
           name: 'setting',
           component: () => import('@/views/SettingView.vue'),
           children: [
             {
-              path: '/setting',
+              path: '/home/setting',
               component: () => import('@/components/setting/SettingDefault.vue')
             },
             {
-              path: '/setting/myinfo',
+              path: '/home/setting/myinfo',
               component: () => import('@/components/setting/SettingMyInfo.vue')
             }
           ]
@@ -58,6 +58,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: () => import('@/views/LoginView.vue')
+    },
+    {
+      path: '/login/tester',
+      name: 'logintester',
+      component: () => import('@/views/TesterLogin.vue')
     }
   ]
 })
