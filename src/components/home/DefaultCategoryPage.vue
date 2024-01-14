@@ -36,7 +36,7 @@ const contentStore = useContentStore()
 const contentList = ref({})
 
 onMounted(async () => {
-  await contentStore.getAllContents()
+  await contentStore.fetchAllContents()
 
   if (contentStore.userContentList.length > 0) {
     contentList.value = toRaw(contentStore.userContentList)

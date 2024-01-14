@@ -16,7 +16,7 @@
             @click="toCategoryPage(categoryDepth1.id, categoryDepth1.name)"
           >
             <img
-              :src="categoryAddStore.getCategoryImgByIconName(categoryDepth1.iconName)"
+              :src="modalDataStore.getCategoryImgByIconName(categoryDepth1.iconName)"
               class="category-icon img-category-icon"
             />
             {{ categoryDepth1.name }}
@@ -40,7 +40,7 @@
                 @click="toCategoryPage(categoryItem2.id, categoryItem2.name)"
               >
                 <img
-                  :src="categoryAddStore.getCategoryImgByIconName(categoryDepth2.iconName)"
+                  :src="modalDataStore.getCategoryImgByIconName(categoryDepth2.iconName)"
                   class="category-icon img-category-icon"
                 />{{ categoryItem2.name }}
               </button>
@@ -66,7 +66,7 @@
                     @click="toCategoryPage(categoryItem3.id, categoryItem3.name)"
                   >
                     <img
-                      :src="categoryAddStore.getCategoryImgByIconName(categoryDepth3.iconName)"
+                      :src="modalDataStore.getCategoryImgByIconName(categoryDepth3.iconName)"
                       class="category-icon img-category-icon"
                     />{{ categoryItem3.name }}
                   </button>
@@ -95,14 +95,14 @@ import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { watch, toRaw } from 'vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
-import { useCategoryAddStore } from '@/stores/useCategoryAddStore.ts'
+import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import MoreButton from '@/components/button/MoreButton.vue'
 import { searchCategoryDataById } from '@/utils/search.js'
 
 const categoryStore = useCategoryStore()
-const categoryAddStore = useCategoryAddStore()
+const modalDataStore = useModalDataStore()
 
-// const { getCategoryImgByIconName } = storeToRefs(categoryAddStore)
+// const { getCategoryImgByIconName } = storeToRefs(modalDataStore)
 
 const router = useRouter()
 

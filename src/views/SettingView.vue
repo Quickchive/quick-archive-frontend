@@ -7,8 +7,8 @@
   </div>
 
   <!-- 얼럿 모달: 로그아웃 -->
-  <div class="alert-overlay" v-if="modalStore.settingAlertOverlay"></div>
-  <div class="alert-view" v-if="modalStore.logoutModal">
+  <div class="alert-overlay" v-if="modalViewStore.settingAlertOverlay"></div>
+  <div class="alert-view" v-if="modalViewStore.logoutModal">
     <alert-confirm
       :message="logoutMessage"
       :closeModal="closeLogoutModal"
@@ -20,7 +20,7 @@
   </div>
 
   <!-- 얼럿 모달: 회원 탈퇴 -->
-  <div class="alert-view" v-if="modalStore.withdrawalModal">
+  <div class="alert-view" v-if="modalViewStore.withdrawalModal">
     <alert-confirm
       :message="withdrawalMessage"
       :closeModal="withdrawal"
@@ -35,7 +35,7 @@
 <script setup>
 // import TheNavBar from '@/components/nav/TheNavBar.vue'
 import AlertConfirm from '@/components/modal/alert/AlertConfirm.vue'
-import { useModalStore } from '@/stores/useModalStore.ts'
+import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useUserStore } from '@/stores/useUserStore.ts'
 
 const logoutMessage = '정말 로그아웃 하시겠어요?'
@@ -50,11 +50,11 @@ const withdrawalCheckbox = false
 const withdrawalCloseButtonMessage = '탈퇴'
 const withdrawalConfirmButtonMessage = '닫기'
 
-const modalStore = useModalStore()
+const modalViewStore = useModalViewStore()
 const userStore = useUserStore()
 
 const closeLogoutModal = () => {
-  modalStore.closeLogoutModal()
+  modalViewStore.closeLogoutModal()
 }
 
 const logout = () => {
@@ -62,7 +62,7 @@ const logout = () => {
 }
 
 const closeWithdrawalModal = () => {
-  modalStore.closeWithdrawalModal()
+  modalViewStore.closeWithdrawalModal()
 }
 
 const withdrawal = () => {

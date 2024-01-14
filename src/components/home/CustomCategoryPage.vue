@@ -35,12 +35,12 @@ import emptyImg from '@/assets/img/img-empty-nocontent.png'
 const categoryStore = useCategoryStore()
 const contentStore = useContentStore()
 const route = useRoute()
-const contentList = ref(contentStore.getContents)
+const contentList = ref(contentStore.fetchContents)
 
 categoryStore.getUserCategoryList()
 
 onMounted(async () => {
-  await contentStore.getContents(route.params.id)
+  await contentStore.fetchContents(route.params.id)
   if (toRaw(contentStore.userContentList).length > 0) {
     contentList.value = toRaw(contentStore.userContentList)
     console.log(contentList, 'contentList')

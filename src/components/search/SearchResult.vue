@@ -50,7 +50,7 @@
             <article class="wrapper__searchResult-category-item">
               <div class="searchResult-category-item">
                 <img
-                  :src="categoryAddStore.getCategoryImgByIconName(category.iconName)"
+                  :src="modalDataStore.getCategoryImgByIconName(category.iconName)"
                   class="img-search-category-result"
                 />
                 <!-- 1차 카테고리만 존재 -->
@@ -123,7 +123,7 @@
 import { useSearchStore } from '@/stores/useSearchStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
-import { useCategoryAddStore } from '@/stores/useCategoryAddStore.ts'
+import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import emptyContentImg from '@/assets/img/img_empty_nocontent.png'
 import emptyCategoryImg from '@/assets/img/img_empty_nocategory.png'
 import dividerIcon from '@/assets/ic/divider_14px.svg'
@@ -136,7 +136,7 @@ import ContentsItem from '@/components/home/ContentsItem.vue'
 const searchStore = useSearchStore()
 const categoryStore = useCategoryStore()
 const contentStore = useContentStore()
-const categoryAddStore = useCategoryAddStore()
+const modalDataStore = useModalDataStore()
 
 searchStore.$subscribe(() => {
   if (searchStore.keyword.value !== '') {

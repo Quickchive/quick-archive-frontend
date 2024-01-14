@@ -3,7 +3,7 @@
     <div class="navbar__top-container">
       <button @click="toMainPage()" class="button--transparent"><img :src="mainLogo" /></button>
       <!-- profile -->
-      <router-link to="/setting">
+      <router-link to="/home/setting">
         <div class="profile__wrapper">
           <img class="img-profile" :src="profileImg" /><span>{{ userStore.nickname }}</span>
         </div>
@@ -30,7 +30,7 @@
   </nav>
   <div class="navbar-shadow"></div>
   <!-- 모달 -->
-  <modal-view v-if="modalStore.overlay"></modal-view>
+  <modal-view v-if="modalViewStore.overlay"></modal-view>
 </template>
 
 <script setup>
@@ -40,18 +40,19 @@ import CategoryList from '@/components/nav/CategoryList.vue'
 import SearchInput from '@/components/input/SearchInput.vue'
 import ModalView from '@/views/ModalView.vue'
 import { useUserStore } from '@/stores/useUserStore.ts'
-import { useModalStore } from '@/stores/useModalStore.ts'
+import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import mainLogo from '@/assets/logo/logo_black_20px.svg'
 
 const userStore = useUserStore()
-const modalStore = useModalStore()
+const modalViewStore = useModalViewStore()
 const router = useRouter()
 
 const placeholderText = ref('제목, 메모, 카테고리명 검색')
 const showAddModal = () => {
-  modalStore.openSelectModal()
+  console.log('open')
+  modalViewStore.openSelectModal()
 }
 
 const toMainPage = () => {

@@ -9,12 +9,12 @@ import {
   deleteCookie
 } from '@/utils/cookies'
 import { useRouter } from 'vue-router'
-import { useModalStore } from '@/stores/useModalStore.ts'
+import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { ref } from 'vue'
 
 export const useUserStore = defineStore('user', () => {
   const router = useRouter()
-  const modalStore = useModalStore()
+  const modalViewStore = useModalViewStore()
 
   const accessToken = ref('')
   const refreshToken = ref('')
@@ -34,6 +34,7 @@ export const useUserStore = defineStore('user', () => {
       const profileResponse = await getProfile()
       nickname.value = profileResponse.data.name
       email.value = profileResponse.data.email
+      refreshToken.value = response.data.refresh_token
       isLogin.value = true
     } catch (error) {
       console.error(error)
@@ -88,7 +89,7 @@ export const useUserStore = defineStore('user', () => {
       }
       const response = await logoutUser(refresh_token)
       if (response.data.statusCode === 201 || response.data.statusCode === 200) {
-        modalStore.closeLogoutModal()
+        modalViewStore.closeLogoutModal()
         router.push('/login')
       }
       nickname.value = ''
@@ -124,7 +125,7 @@ export const useUserStore = defineStore('user', () => {
       const response = await deleteProfile()
       console.log(response)
       if (response.data.statusCode === 201 || response.data.statusCode === 200) {
-        modalStore.closeWithdrawalModal()
+        modalViewStore.closeWithdrawalModal()
         router.push('/login')
       }
     } catch (error) {

@@ -3,33 +3,26 @@
     <img class="thumbnail__sm" :src="thumbnail" />
     <div class="wrapper__thumbnail-content">
       <div class="box__input--content-title">
-        <span class="text__contentTitle">{{ contentTitle }}</span>
-        <button class="button--transparent"><img :src="editIcon" /></button>
+        <span class="text__contentTitle">{{ modalDataStore.addContentData.title }}</span>
+        <button class="button--transparent" @click="modalViewStore.openEditContentTitleModal">
+          <img :src="editIcon" />
+        </button>
       </div>
-      <span class="text__contentLink">{{ contentLink }}</span>
+      <span class="text__contentLink">{{ modalDataStore.addContentData.link }}</span>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import thumbnail from '@/assets/img/thumbnail-sm.png'
 import editIcon from '@/assets/ic/ic-edit.svg'
 import checkboxOn from '@/assets/ic/ic-control-checkbox-on.svg'
 import checkboxOff from '@/assets/ic/ic-control-checkbox-off.svg'
+import { useModalDataStore } from '@/stores/useModalDataStore.ts'
+import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 
-export default {
-  data() {
-    return {
-      thumbnail,
-      editIcon,
-      checkboxOn,
-      checkboxOff,
-      contentTitle:
-        '작은집으로 이사가야 해서 미니멀리즘을 열...' /*'작은집으로 이사가야 해서 미니멀리즘을 열심히 실천한다',*/,
-      contentLink: 'https://brunch.co.kr/@21d3b3e76882478/32'
-    }
-  }
-}
+const modalDataStore = useModalDataStore()
+const modalViewStore = useModalViewStore()
 </script>
 
 <style></style>

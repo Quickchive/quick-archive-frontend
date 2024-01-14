@@ -11,14 +11,9 @@ import categoryShopping from '@/assets/img/category/img_category_shopping.png'
 import categoryStar from '@/assets/img/category/img_category_star.png'
 import categoryTrip from '@/assets/img/category/img_category_trip.png'
 import categoryWatch from '@/assets/img/category/img_category_watch.png'
-// import { getCategories } from '@/api/category'
-// import { getContents } from '@/api/contents'
 import { ref, reactive, computed } from 'vue'
 
-export const useCategoryAddStore = defineStore('categoryAdd', () => {
-  // 화살표 함수는 전체 유형 유추을 위해 권장됨.
-  // state: () => {
-  //   return {
+export const useModalDataStore = defineStore('modalData', () => {
   const defaultCategory = reactive([
     {
       id: 0,
@@ -94,32 +89,38 @@ export const useCategoryAddStore = defineStore('categoryAdd', () => {
     }
   ])
 
-  // step 01 - 카테고리 추가 모달
+  // 카테고리 추가 모달
   const newCategoryName = ref('')
+
+  // 카테고리 추가 & 콘텐츠 추가 모달 공통
   const selectedLocation: any = ref({
     name: '미지정'
   })
-  // }
-  // },
-  // getters: {
+
+  // 콘텐츠 추가 모달 데이터
+  const addContentData = reactive({
+    category: selectedLocation.value,
+    favorite: false,
+    memo: '',
+    link: '',
+    title: '작은집으로 이사가야 해서 미니멀리즘을 열...'
+  })
+
   const getSelectedCategory = computed(() => {
     const selectedCategory = defaultCategory.find((e) => {
       return e.selected == true
     })
-    // console.log('선택된 아이콘', selectedCategory)
     return selectedCategory
   })
   const isSelectedCategory = () => selectedLocation.value.name !== '미지정'
   const getCategoryImgByIconName = (iconName: string) => {
     const icon: any = defaultCategory.find((e) => e.iconName === iconName)
-    // console.log(icon)
     if (icon === undefined) {
       return categoryWatch
     }
     return icon.img
   }
 
-  // actions: {
   // 카테고리 아이콘 선택 이벤트
   function selectCategoryIcon(i: { id: number; img: string; selected: boolean }) {
     i.selected = true
@@ -138,6 +139,30 @@ export const useCategoryAddStore = defineStore('categoryAdd', () => {
     selectedLocation.value = { name: '미지정' }
   }
 
+  function clickRadioButton(category: any) {
+    selectedLocation.value = category
+  }
+
+  // 콘텐츠 추가
+  function setAddContentData(contentData: any) {
+    addContentData.category = contentData.category ? contentData.category : addContentData.category
+    addContentData.memo = contentData.memo ? contentData.memo : addContentData.memo
+    addContentData.link = contentData.link ? contentData.link : addContentData.link
+    addContentData.title = contentData.title ? contentData.title : addContentData.title
+  }
+  function setFavoriteToggle() {
+    addContentData.favorite = !addContentData.favorite
+  }
+  function setMemo(contentAddMemo: string) {
+    addContentData.memo = contentAddMemo
+  }
+  function setLink(link: string) {
+    addContentData.link = link
+  }
+  function setTitle(title: string) {
+    addContentData.title = title
+  }
+
   return {
     defaultCategory,
     newCategoryName,
@@ -147,6 +172,13 @@ export const useCategoryAddStore = defineStore('categoryAdd', () => {
     getCategoryImgByIconName,
     selectCategoryIcon,
     selectCategoryLocation,
-    resetCategoryLocation
+    resetCategoryLocation,
+    clickRadioButton,
+    addContentData,
+    setAddContentData,
+    setFavoriteToggle,
+    setMemo,
+    setLink,
+    setTitle
   }
 })

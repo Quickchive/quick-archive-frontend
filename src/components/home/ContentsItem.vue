@@ -52,7 +52,7 @@ const favoriteEvent = async () => {
     const response = await addFavorite(props.item.id)
     console.log(response)
     if (response.statusCode === 201) {
-      contentStore.getContents()
+      contentStore.fetchContents()
     }
   } catch (error) {
     console.log(error)

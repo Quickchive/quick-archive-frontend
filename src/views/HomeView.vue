@@ -27,7 +27,8 @@ onMounted(async () => {
     } catch (error) {
       console.error(error)
     }
-  } else {
+  }
+  if (route.fullPath.includes('kakao')) {
     try {
       console.log('kakao login')
       userStore.setSocialLoginInfo('kakao')
@@ -38,6 +39,10 @@ onMounted(async () => {
     } catch (error) {
       console.error(error)
     }
+  } else {
+    //     await userStore.kakaoSocialLogin(code)
+    // await userStore.getUserProfile()
+    // await categoryStore.getUserCategoryList()
   }
 })
 </script>

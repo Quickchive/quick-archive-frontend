@@ -8,7 +8,7 @@
     <article class="flex-container__row wrapper__category-icon">
       <button
         :key="categoryIcon"
-        v-for="categoryIcon in categoryAddStore.defaultCategory"
+        v-for="categoryIcon in modalDataStore.defaultCategory"
         class="button--category-icon"
         @click="selectCategoryIcon(categoryIcon)"
       >
@@ -27,28 +27,28 @@
 <script setup>
 import ModalHeader from '@/components/header/ModalHeader.vue'
 import controlCheckbox from '@/assets/ic/ic-control-checkbox-on.svg'
-import { useModalStore } from '@/stores/useModalStore.ts'
+import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 // import { useCategoryStore } from '@/stores/useCategoryStore.ts'
-import { useCategoryAddStore } from '@/stores/useCategoryAddStore.ts'
+import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 
 const modalTitle = '카테고리 아이콘 선택'
-const modalStore = useModalStore()
+const modalViewStore = useModalViewStore()
 // const categoryStore = useCategoryStore()
-const categoryAddStore = useCategoryAddStore()
+const modalDataStore = useModalDataStore()
 
 // 카테고리 아이콘 선택
 const selectCategoryIcon = (i) => {
-  categoryAddStore.selectCategoryIcon(i)
+  modalDataStore.selectCategoryIcon(i)
 }
 // 완료 버튼 이벤트 - 카테고리 아이콘 셋 후 저장
 const submitCategoryIcon = () => {
   // 1. 카테고리 아이콘 저장 로직
   // 2. 1번 완료 후 모달 닫기 로직
-  modalStore.closeSelectCategoryModal()
+  modalViewStore.closeSelectCategoryModal()
 }
 // 닫기 이벤트 - 카테고리 아이콘 기본값으로 저장 후 닫기
 const closeModal = () => {
-  modalStore.closeSelectCategoryModal()
+  modalViewStore.closeSelectCategoryModal()
 }
 </script>
 

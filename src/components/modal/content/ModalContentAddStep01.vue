@@ -18,7 +18,7 @@
       <button
         class="confirm-button--inactive"
         :class="{ 'confirm-button--active': isLinkValid }"
-        @click="modalStore.openAddContentDetailModal()"
+        @click="toModalContentAddStep02"
         :disabled="!isLinkValid"
       >
         다음
@@ -29,11 +29,17 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { useModalStore } from '@/stores/useModalStore.ts'
+import { useModalViewStore } from '@/stores/useModalViewStore.ts'
+import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import ModalHeader from '@/components/header/ModalHeader.vue'
 const modalTitle = '콘텐츠 추가'
+const modalViewStore = useModalViewStore()
+const modalDataStore = useModalDataStore()
 const link = ref('')
-const modalStore = useModalStore()
+
+const setLink = (e) => {
+  link.value = e.target.value
+}
 
 // 카테고리 명 유효성 검사
 const isLinkValid = computed(() => {
@@ -41,12 +47,13 @@ const isLinkValid = computed(() => {
 })
 
 const closeModal = () => {
-  modalStore.closeAddContentModal()
-  modalStore.closeSelectModal()
+  modalViewStore.closeAddContentModal()
+  modalViewStore.closeSelectModal()
 }
 
-const setLink = (e) => {
-  link.value = e.target.value
+const toModalContentAddStep02 = () => {
+  modalDataStore.setLink(link.value)
+  modalViewStore.openAddContentDetailModal()
 }
 </script>
 

@@ -36,7 +36,7 @@ const isInputValid = computed(() => {
 const setKeyword = (e) => {
   console.log(e.target.value)
   searchStore.keyword = e.target.value
-  router.push('/search')
+  router.push('/home/search')
 }
 </script>
 

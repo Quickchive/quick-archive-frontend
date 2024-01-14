@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
 import { getCategories } from '@/api/category'
 import { deleteCategories } from '@/api/category.js'
-import { useModalStore } from '@/stores/useModalStore.ts'
-import { ref, toRaw } from 'vue'
+import { useModalViewStore } from '@/stores/useModalViewStore.ts'
+import { ref } from 'vue'
 
 export const useCategoryStore = defineStore('category', () => {
-  const modalStore = useModalStore()
+  const modalViewStore = useModalViewStore()
 
   const userCategoryList = ref([
     {
@@ -205,7 +205,7 @@ export const useCategoryStore = defineStore('category', () => {
       // console.log(response)
       if (response.data.statusCode === (200 || 201)) {
         getUserCategoryList()
-        modalStore.closeDeleteCategoryModal()
+        modalViewStore.closeDeleteCategoryModal()
       }
     } catch (error) {
       console.log(error)
@@ -214,6 +214,7 @@ export const useCategoryStore = defineStore('category', () => {
   function deleteContentsInCategory() {
     deleteContentsChecked.value = !deleteContentsChecked.value
   }
+
   return {
     userCategoryList,
     curCategoryName,

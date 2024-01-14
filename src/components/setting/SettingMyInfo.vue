@@ -33,7 +33,7 @@
         <div class="wrapper__logout">
           <button
             class="flex-container__row--space-between button--transparent"
-            @click="modalStore.openLogoutModal()"
+            @click="modalViewStore.openLogoutModal()"
           >
             <label class="label__md">로그아웃</label>
             <img :src="nextIcon" />
@@ -42,8 +42,8 @@
       </article>
       <div class="wrapper__withdraw">
         <label
-          >회원 탈퇴를 원하시면 <button @click="modalStore.openWithdrawalModal()">이곳</button>을
-          눌러주세요
+          >회원 탈퇴를 원하시면
+          <button @click="modalViewStore.openWithdrawalModal()">이곳</button>을 눌러주세요
         </label>
       </div>
     </section>
@@ -57,7 +57,7 @@ import kakaoIcon from '@/assets/ic/logo_kakao.png'
 import nextIcon from '@/assets/ic/ic_next_gray_24px.svg'
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/useUserStore.ts'
-import { useModalStore } from '@/stores/useModalStore.ts'
+import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
 
 const title = ref('내정보')
@@ -66,7 +66,7 @@ const clearButtonShow = ref(false)
 const editNicknameButton = ref('변경하기')
 
 const userStore = useUserStore()
-const modalStore = useModalStore()
+const modalViewStore = useModalViewStore()
 const nickname = ref(userStore.nickname)
 
 const clearText = () => {

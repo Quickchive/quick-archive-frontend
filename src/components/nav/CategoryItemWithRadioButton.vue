@@ -13,7 +13,7 @@
           </button>
           <button class="button--transparent category-list__button--radio">
             <img
-              :src="categoryAddStore.getCategoryImgByIconName(categoryDepth1.iconName)"
+              :src="modalDataStore.getCategoryImgByIconName(categoryDepth1.iconName)"
               class="img-category-icon--lg"
             />
             {{ categoryDepth1.name }}
@@ -26,14 +26,8 @@
               type="radio"
               :id="categoryDepth1.id"
               name="grades"
-              :checked="categoryDepth1.name === categoryAddStore.selectedLocation.name"
-              @click="
-                () => {
-                  categoryAddStore.$patch((state) => {
-                    state.selectedLocation = categoryDepth1
-                  })
-                }
-              "
+              :checked="categoryDepth1.name === modalDataStore.selectedLocation.name"
+              @click="selectRadioButton(categoryDepth1)"
             />
             <span class="custom-radio"></span>
           </label>
@@ -53,7 +47,7 @@
               </button>
               <button class="button--transparent category-list__button--radio">
                 <img
-                  :src="categoryAddStore.getCategoryImgByIconName(categoryDepth2.iconName)"
+                  :src="modalDataStore.getCategoryImgByIconName(categoryDepth2.iconName)"
                   class="category-icon img-category-icon--lg"
                 />{{ categoryDepth2.name }}
               </button>
@@ -65,14 +59,8 @@
                   type="radio"
                   :id="categoryDepth2.id"
                   name="grades"
-                  :checked="categoryDepth2.name === categoryAddStore.selectedLocation.name"
-                  @click="
-                    () => {
-                      categoryAddStore.$patch((state) => {
-                        state.selectedLocation = categoryDepth2
-                      })
-                    }
-                  "
+                  :checked="categoryDepth2.name === modalDataStore.selectedLocation.name"
+                  @click="selectRadioButton(categoryDepth2)"
                 />
                 <span class="custom-radio"></span>
               </label>
@@ -88,14 +76,14 @@
 import expandMoreIcon from '@/assets/ic/ic-expand-more.svg'
 import expandLessIcon from '@/assets/ic/ic-expand-less.svg'
 import { reactive, watch } from 'vue'
-import { useCategoryAddStore } from '@/stores/useCategoryAddStore.ts'
+import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 
 // 스토어 선언
-const categoryAddStore = useCategoryAddStore()
+const modalDataStore = useModalDataStore()
 
 const props = defineProps({
-  // categoryData: Object
-  categoryDepth1: Object
+  categoryDepth1: Object,
+  clickRadioButton: Function
 })
 
 const secondCategory = reactive({ show: false })
@@ -114,24 +102,9 @@ watch(props.categoryDepth1, {
   }
 })
 
-// watch(selectedLocation, {
-//   handler: () => {
-//     console.log('watch', selectedLocation)
-// categoryAddStore.$patch((state) => {
-//   state.selectedLocation = selectedLocation
-// })
-//   },
-//   deep: true
-// })
-
-// categoryAddStore.$patch((state) => {
-//   state.selectedLocation = selectedLocation
-// })
-
-// const selectCategory = (categoryName) => {
-//   categoryAddStore.selectCategoryLocation(categoryName)
-//   console.log(categoryName)
-// }
+const selectRadioButton = (categoryDepth) => {
+  modalDataStore.clickRadioButton(categoryDepth)
+}
 </script>
 
 <style></style>

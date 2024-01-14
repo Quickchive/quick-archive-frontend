@@ -7,7 +7,7 @@
         @click="openSelectCategoryModal()"
       >
         <div class="icon__category-change">
-          <img class="img-category-custom" :src="categoryAddStore.getSelectedCategory.img" /><img
+          <img class="img-category-custom" :src="modalDataStore.getSelectedCategory.img" /><img
             class="icon__thumb-change"
             :src="thumbChangeIcon"
           />
@@ -33,7 +33,7 @@
         class="button--transparent flex-container__row"
         @click="openSetCategoryLocationModal()"
       >
-        {{ categoryAddStore.selectedLocation.name }}<img :src="nextBlackIcon" />
+        {{ modalDataStore.selectedLocation.name }}<img :src="nextBlackIcon" />
       </button>
     </div>
     <div class="modal-footer">
@@ -55,9 +55,9 @@ import categoryWatchIcon from '@/assets/img/category/img_category_watch.png'
 import nextBlackIcon from '@/assets/ic/ic-next-black.svg'
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
 import ModalHeader from '@/components/header/ModalHeader.vue'
-import { useModalStore } from '@/stores/useModalStore.ts'
+import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
-import { useCategoryAddStore } from '@/stores/useCategoryAddStore.ts'
+import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 // import { addCategories } from '@/api/category.js'
 import { addCategories, updateCategories } from '@/api/category.js'
 import { ref, computed, onMounted } from 'vue'
@@ -78,11 +78,11 @@ onMounted(async () => {
         categoryStore.userCategoryList,
         categoryStore.focusedCategoryData.parentId
       )
-      categoryAddStore.selectedLocation.name = parentData.name
-      categoryAddStore.selectedLocation.id = parentData.id
+      modalDataStore.selectedLocation.name = parentData.name
+      modalDataStore.selectedLocation.id = parentData.id
     }
     if (categoryStore.focusedCategoryData.parentId === null) {
-      categoryAddStore.selectedLocation.name = '미지정'
+      modalDataStore.selectedLocation.name = '미지정'
     }
     console.log('parentData', parentData)
   }
@@ -93,16 +93,16 @@ let categoryIcon = ref(categoryWatchIcon)
 let categoryLocationName = ref('미지정')
 
 // store 선언
-const modalStore = useModalStore()
+const modalViewStore = useModalViewStore()
 const categoryStore = useCategoryStore()
-const categoryAddStore = useCategoryAddStore()
+const modalDataStore = useModalDataStore()
 
 const openSelectCategoryModal = () => {
-  modalStore.openSelectCategoryModal()
+  modalViewStore.openSelectCategoryModal()
 }
 
 const openSetCategoryLocationModal = () => {
-  modalStore.openSetCategoryLocationModal()
+  modalViewStore.openSetCategoryLocationModal()
 }
 
 // 카테고리 명 유효성 검사
@@ -116,9 +116,9 @@ const clearCategoryName = () => {
 }
 
 // 카테고리 아이콘 감시
-categoryAddStore.$subscribe(() => {
-  categoryIcon.value = categoryAddStore.getSelectedCategory.img
-  categoryLocationName.value = categoryAddStore.selectedLocation.name
+modalDataStore.$subscribe(() => {
+  categoryIcon.value = modalDataStore.getSelectedCategory.img
+  categoryLocationName.value = modalDataStore.selectedLocation.name
 })
 
 const saveCategory = async () => {
@@ -129,24 +129,24 @@ const saveCategory = async () => {
     try {
       let categoryData = {
         categoryName: categoryName.value,
-        iconName: categoryAddStore.getSelectedCategory.iconName
+        iconName: modalDataStore.getSelectedCategory.iconName
       }
-      if (categoryAddStore.selectedLocation.name !== '미지정') {
-        categoryData.parentId = categoryAddStore.selectedLocation.id
+      if (modalDataStore.selectedLocation.name !== '미지정') {
+        categoryData.parentId = modalDataStore.selectedLocation.id
       }
       const response = await addCategories(categoryData)
       console.log('카테고리 추가 서버 전송 응답', response)
       // 상태코드로 에러 처리 하기
       if (response.data.statusCode === 201) {
-        modalStore.closeAddCategoryModal()
-        modalStore.closeSelectModal()
+        modalViewStore.closeAddCategoryModal()
+        modalViewStore.closeSelectModal()
         await categoryStore.getUserCategoryList()
       }
     } catch (error) {
       console.log(error)
       if (error.response.data.statusCode === 409) {
-        modalStore.setDuplicatedCategoryName(categoryAddStore.selectedLocation.name)
-        modalStore.openAlertModal()
+        modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
+        modalViewStore.openAlertModal()
       }
     }
   }
@@ -155,25 +155,25 @@ const saveCategory = async () => {
     try {
       let categoryData = {
         categoryName: categoryName.value,
-        iconName: categoryAddStore.getSelectedCategory.iconName,
-        // parentId: categoryAddStore.selectedLocation.id,
+        iconName: modalDataStore.getSelectedCategory.iconName,
+        // parentId: modalDataStore.selectedLocation.id,
         categoryId: categoryStore.focusedCategoryData.id
       }
-      if (categoryAddStore.selectedLocation.name !== '미지정') {
-        categoryData.parentId = categoryAddStore.selectedLocation.id
+      if (modalDataStore.selectedLocation.name !== '미지정') {
+        categoryData.parentId = modalDataStore.selectedLocation.id
       }
       const response = await updateCategories(categoryData)
       console.log('카테고리 수정 서버 전송 응답', response)
       if (response.data.statusCode === 201) {
-        modalStore.closeAddCategoryModal()
-        modalStore.closeSelectModal()
+        modalViewStore.closeAddCategoryModal()
+        modalViewStore.closeSelectModal()
         await categoryStore.getUserCategoryList()
       }
     } catch (error) {
       console.log(error)
       if (error.response.data.statusCode === 409) {
-        modalStore.setDuplicatedCategoryName(categoryAddStore.selectedLocation.name)
-        modalStore.openAlertModal()
+        modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
+        modalViewStore.openAlertModal()
       }
     }
   }

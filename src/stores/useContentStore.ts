@@ -1,41 +1,40 @@
 import { defineStore } from 'pinia'
 import { getContents, getAllContents } from '@/api/contents'
 import contentListDummy from '@/assets/model/contentList.json'
+import { ref } from 'vue'
 
-export const useContentStore = defineStore('content', {
-  // 화살표 함수는 전체 유형 유추을 위해 권장됨.
-  state: () => {
-    return {
-      // 더미
-      userContentList: contentListDummy.contents
-    }
-  },
-  getters: {},
-  actions: {
-    async getAllContents() {
-      try {
-        const response = await getAllContents()
-        // console.log('store', response)
-        if (response.data.statusCode === 200 || response.data.statusCode === 201) {
-          this.userContentList = response.data.contents
-        }
-      } catch (error) {
-        console.log(error)
+export const useContentStore = defineStore('content', () => {
+  // 더미
+  const userContentList = ref(contentListDummy.contents)
+
+  async function fetchAllContents() {
+    try {
+      const response: any = await getAllContents()
+      if (response.data.statusCode === 200 || response.data.statusCode === 201) {
+        userContentList.value = response.data.contents
       }
-    },
-    async getContents(categoryId: number) {
-      try {
-        const response = await getContents(categoryId)
-        // console.log('store', response)
-        if (response.data.statusCode === 200 || response.data.statusCode === 201) {
-          this.userContentList = response.data.contents
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    },
-    setUserContentList(contentList: never[]) {
-      this.userContentList = contentList
+    } catch (error) {
+      console.log(error)
     }
+  }
+  async function fetchContents(categoryId: number) {
+    try {
+      const response: any = await getContents(categoryId)
+      if (response.data.statusCode === 200 || response.data.statusCode === 201) {
+        userContentList.value = response.data.contents
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  function setUserContentList(contentList: never[]) {
+    userContentList.value = contentList
+  }
+
+  return {
+    userContentList,
+    fetchAllContents,
+    fetchContents,
+    setUserContentList
   }
 })

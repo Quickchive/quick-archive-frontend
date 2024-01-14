@@ -28,27 +28,9 @@
 <script setup>
 import checkboxOffIcon from '@/assets/ic/ic-control-checkbox-off.svg'
 import checkboxOnIcon from '@/assets/ic/ic-control-checkbox-on.svg'
-// import { deleteCategories } from '@/api/category.js'
-// import { useModalStore } from '@/stores/useModalStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
-import { ref } from 'vue'
-// const isChecked = ref(false)
-// const modalStore = useModalStore()
-const categoryStore = useCategoryStore()
 
-// const deleteCategory = async () => {
-//   try {
-//     const focusedCategoryId = categoryStore.getFocusedCategoryId
-//     const response = await deleteCategories(focusedCategoryId, isChecked.value)
-//     console.log(response)
-//     if (response.data.statusCode === (200 || 201)) {
-//       categoryStore.getUserCategoryList()
-//       modalStore.closeDeleteCategoryModal()
-//     }
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
+const categoryStore = useCategoryStore()
 
 const props = defineProps({
   message: String,

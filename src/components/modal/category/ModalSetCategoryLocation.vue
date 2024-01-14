@@ -29,11 +29,9 @@
       <button
         class="confirm-button--inactive"
         :class="
-          categoryAddStore.isSelectedCategory
-            ? 'confirm-button--active'
-            : 'confirm-button--inactive'
+          modalDataStore.isSelectedCategory ? 'confirm-button--active' : 'confirm-button--inactive'
         "
-        :disabled="!categoryAddStore.isSelectedCategory"
+        :disabled="!modalDataStore.isSelectedCategory"
         @click="setLocation()"
       >
         완료
@@ -48,8 +46,8 @@ import addCategoryIcon from '@/assets/ic/ic-category-add.svg'
 import CategoryItemWithRadioButton from '@/components/nav/CategoryItemWithRadioButton.vue'
 import ModalHeader from '@/components/header/ModalHeader.vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
-import { useCategoryAddStore } from '@/stores/useCategoryAddStore.ts'
-import { useModalStore } from '@/stores/useModalStore.ts'
+import { useModalDataStore } from '@/stores/useModalDataStore.ts'
+import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { toRaw, onMounted, ref } from 'vue'
 import categoryListDummy from '@/assets/model/categoryList.json'
 
@@ -59,14 +57,14 @@ const isBtnOnLeft = true
 
 // 스토어 선언
 const categoryStore = useCategoryStore()
-const modalStore = useModalStore()
-const categoryAddStore = useCategoryAddStore()
+const modalViewStore = useModalViewStore()
+const modalDataStore = useModalDataStore()
 
 const categoryList = ref(categoryStore.userCategoryList)
 
 const closeModal = () => {
-  categoryAddStore.resetCategoryLocation()
-  modalStore.closeSetCategoryLocationModal()
+  modalDataStore.resetCategoryLocation()
+  modalViewStore.closeSetCategoryLocationModal()
 }
 
 onMounted(async () => {
@@ -82,7 +80,7 @@ onMounted(async () => {
 // 완료 버튼 클릭
 const setLocation = () => {
   console.log('완료 버튼 클릭')
-  modalStore.closeSetCategoryLocationModal()
+  modalViewStore.closeSetCategoryLocationModal()
 }
 </script>
 <style></style>
