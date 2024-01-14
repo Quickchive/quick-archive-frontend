@@ -88,6 +88,8 @@
   position: absolute;
   overflow-y: scroll;
   // top: 222px;
+  overscroll-behavior: none;
+
   top: 198px;
   z-index: -10;
   height: calc(100vh - 305px);
