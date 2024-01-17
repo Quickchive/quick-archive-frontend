@@ -177,14 +177,14 @@ dialog {
 }
 
 /**** 카테고리 위치 설정 모달 ****/
-.wrapper__confirm-button {
-  width: 398px;
-  height: 120px;
-  position: absolute;
-  bottom: 0px;
-  justify-content: center;
-  background-color: #fff;
-}
+// .wrapper__confirm-button {
+//   width: 398px;
+//   height: 120px;
+//   position: absolute;
+//   bottom: 0px;
+//   justify-content: center;
+//   background-color: #fff;
+// }
 
 .category-set-location__modal {
   @extend .modal__sm;

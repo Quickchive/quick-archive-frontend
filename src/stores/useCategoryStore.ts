@@ -3,9 +3,12 @@ import { getCategories } from '@/api/category'
 import { deleteCategories } from '@/api/category.js'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { ref } from 'vue'
+import { addCategories } from '@/api/category.js'
+import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 
 export const useCategoryStore = defineStore('category', () => {
   const modalViewStore = useModalViewStore()
+  const modalDataStore = useModalDataStore()
 
   const userCategoryList = ref([
     {
@@ -214,7 +217,31 @@ export const useCategoryStore = defineStore('category', () => {
   function deleteContentsInCategory() {
     deleteContentsChecked.value = !deleteContentsChecked.value
   }
-
+  async function addCategory(categoryData: any) {
+    // 카테고리 추가
+    try {
+      // let categoryData = {
+      //   categoryName: categoryName.value,
+      //  iconName: modalDataStore.getSelectedCategory.iconName
+      // }
+      // if (modalDataStore.selectedLocation.name !== '미지정') {
+      //   categoryData.parentId = modalDataStore.selectedLocation.id
+      // }
+      const response = await addCategories(categoryData)
+      // if (response.data.statusCode === 201) {
+      // modalViewStore.closeAddCategoryModal()
+      // modalViewStore.closeSelectModal()
+      // await categoryStore.getUserCategoryList()
+      return response.data.statusCode
+      // }
+    } catch (error: any) {
+      console.log(error)
+      // if (error.response.data.statusCode === 409) {
+      //   modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
+      //   modalViewStore.openAlertModal()
+      // }
+    }
+  }
   return {
     userCategoryList,
     curCategoryName,
@@ -229,6 +256,7 @@ export const useCategoryStore = defineStore('category', () => {
     setFocusedCategoryData,
     getCategoryDepth3NameById,
     isCategoryDepth3,
-    getCategoryDepth2NameById
+    getCategoryDepth2NameById,
+    addCategory
   }
 })

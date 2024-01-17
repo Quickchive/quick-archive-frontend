@@ -25,10 +25,15 @@ export const useUserStore = defineStore('user', () => {
   const recommendationMode = ref(true)
   const socialLoginInfo = ref('google')
 
+  function getRefreshToken() {
+    return refreshToken.value
+  }
+
   // 로그인
   async function testerLogin(userData: any) {
     try {
       const response: any = await loginUser(userData)
+      console.log('로그인 응답', response)
       saveRefreshTokenToCookie(response.data.refresh_token)
       saveAccessTokenToCookie(response.data.access_token)
       const profileResponse = await getProfile()
@@ -185,6 +190,7 @@ export const useUserStore = defineStore('user', () => {
     enableRecommendationMode,
     editNickname,
     setSocialLoginInfo,
-    testerLogin
+    testerLogin,
+    getRefreshToken
   }
 })

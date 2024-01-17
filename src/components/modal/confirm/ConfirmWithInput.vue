@@ -6,27 +6,73 @@
       생성 위치는 카테고리 수정 시 변경할 수 있어요.
     </p>
     <div class="wrapper__confirm-input">
-      <input class="input__sm--default" placeholder="이름을 입력해주세요(2~15글자)" />
-      <button class="button--transparent">
+      <input
+        class="input__sm--default"
+        placeholder="이름을 입력해주세요(2~15글자)"
+        :value="categoryName"
+        @input="setNewCategory"
+      />
+      <button class="button--transparent" @click="clearInput()">
         <img :src="textfieldCancelIcon" />
       </button>
     </div>
     <div class="wrapper__confirm-button">
-      <button class="button__confirm-modal">닫기</button>
-      <button class="button__confirm-modal">저장</button>
+      <button class="button__confirm-modal" @click="modalViewStore.closeSetNewCategoryModal()">
+        닫기
+      </button>
+      <button
+        class="button__confirm-modal--inactive"
+        :class="{ 'button__confirm-modal--active': isCategoryNameValid }"
+        :disabled="!isCategoryNameValid"
+        @click="saveNewCategory()"
+      >
+        저장
+      </button>
     </div>
   </dialog>
 </template>
 
-<script>
+<script setup>
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
+import { ref, computed } from 'vue'
+import { useModalViewStore } from '@/stores/useModalViewStore.ts'
+import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 
-export default {
-  data() {
-    return {
-      textfieldCancelIcon
-    }
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+
+const modalViewStore = useModalViewStore()
+const categoryStore = useCategoryStore()
+const modalDataStore = useModalDataStore()
+
+const categoryName = ref('')
+
+const setNewCategory = (e) => {
+  categoryName.value = e.target.value
+}
+
+// 카테고리 명 유효성 검사
+const isCategoryNameValid = computed(() => {
+  return 2 <= categoryName.value.length && categoryName.value.length <= 15 ? true : false
+})
+
+const clearInput = () => {
+  categoryName.value = ''
+}
+
+const saveNewCategory = async () => {
+  modalViewStore.closeSetNewCategoryModal()
+  modalViewStore.openDeleteCategoryModal()
+
+  // 카테고리 생성
+  const categoryData = {
+    categoryName: categoryName.value
+    // iconName: modalDataStore.getSelectedCategory.iconName
   }
+  // const response = await categoryStore.addCategory(categoryData)
+  // if (response.data.statusCode === 201) {
+  //   // 카테고리 생성 완료 얼럿 띄우기
+  //   modalViewStore.deleteCategoryModal()
+  // }
 }
 </script>
 

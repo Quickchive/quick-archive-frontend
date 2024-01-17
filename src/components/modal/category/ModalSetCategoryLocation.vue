@@ -9,7 +9,10 @@
       <search-input :placeholderText="placeholderText" :isSizeSm="false"></search-input>
     </div>
     <div class="wrapper__add-new-category__button">
-      <button class="add-new-category__button button--transparent">
+      <button
+        class="add-new-category__button button--transparent"
+        @click="modalViewStore.openSetNewCategoryModal()"
+      >
         <img :src="addCategoryIcon" />새 카테고리 만들기
       </button>
     </div>
