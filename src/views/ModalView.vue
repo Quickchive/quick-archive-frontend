@@ -37,13 +37,10 @@
     ></modal-edit-content-title>
     <alert-confirm
       v-if="modalViewStore.deleteCategoryModal"
-      :message="message"
-      :closeModal="closeDeleteCategoryModal"
-      :confirm="deleteCategory"
-      :checkbox="checkbox"
-      :confirmButtonMessage="confirmButtonMessage"
-      :closeButtonMessage="closeButtonMessage"
+      :alertData="alertDataStore.deleteCategoryAlertData"
     ></alert-confirm>
+    <!-- 새 카테고리 추가 컨펌 -->
+    <confirm-with-input v-if="modalViewStore.addNewCategoryModal"></confirm-with-input>
   </div>
   <div class="alert-overlay" v-if="modalViewStore.alertOverlay"></div>
   <div class="alert-view" v-if="modalViewStore.alertModal">
@@ -56,7 +53,7 @@
 import ModalCategoryAdd from '@/components/modal/category/ModalCategoryAdd.vue'
 import ModalSelectCategoryOrContent from '@/components/modal/ModalSelectCategoryOrContent.vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
-import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
 import ModalCategorySelect from '@/components/modal/category/ModalCategorySelect.vue'
 import ModalSetCategoryLocation from '@/components/modal/category/ModalSetCategoryLocation.vue'
 import ModalContentAddStep01 from '@/components/modal/content/ModalContentAddStep01.vue'
@@ -64,19 +61,14 @@ import ModalContentAddStep02 from '@/components/modal/content/ModalContentAddSte
 import AlertDuplicatedCategory from '@/components/modal/alert/AlertDuplicatedCategory.vue'
 import AlertConfirm from '@/components/modal/alert/AlertConfirm.vue'
 import ModalEditContentTitle from '@/components/modal/content/ModalEditContentTitle.vue'
+import ConfirmWithInput from '@/components/modal/confirm/ConfirmWithInput.vue'
 
 const modalAddCategory = '카테고리 추가'
 const modalEditCategory = '카테고리 수정'
 
-// confirmModal props
-const message = '카테고리를 삭제할까요?'
-const checkbox = true
-const closeButtonMessage = '닫기'
-const confirmButtonMessage = '삭제'
-
 // counter store 가져오기
 const modalViewStore = useModalViewStore()
-const categoryStore = useCategoryStore()
+const alertDataStore = useAlertDataStore()
 
 const closeAddCategoryModal = () => {
   modalViewStore.closeAddCategoryModal()
@@ -88,14 +80,6 @@ const closeEditCategoryModal = () => {
 
 const addCategory = 'addCategory'
 const editCategory = 'editCategory'
-
-const closeDeleteCategoryModal = () => {
-  modalViewStore.closeDeleteCategoryModal()
-}
-
-const deleteCategory = () => {
-  categoryStore.deleteCategory()
-}
 </script>
 
 <style></style>
