@@ -56,12 +56,18 @@
   ul {
     list-style: none;
     margin: 0;
+    padding: 0;
+
     li {
+      width: 100%;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
       height: 56px;
+      padding: 0;
+      margin-top: 4px;
+
       .category-list-radio__category-button {
         overflow: hidden;
         color: $color-grey-100;
@@ -83,6 +89,10 @@
           margin-right: 12px;
         }
       }
+    }
+    .liDepth2 {
+      padding-left: 32px;
+      box-sizing: border-box;
     }
   }
 }

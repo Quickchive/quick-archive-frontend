@@ -1,110 +1,65 @@
 <template>
-  <div class="category-item-radio">
-    <!-- 1차 카테고리 -->
-    <ul v-if="categoryDepth1.name" class="category-list__first-ul">
-      <li>
-        <div class="flex-container__row--align-center">
-          <button
-            class="button--transparent expand-button"
-            @click="controlFirstCategory(categoryDepth1.children)"
-          >
-            <img v-if="categoryDepth1.show" :src="expandLessIcon" />
-            <img v-if="!categoryDepth1.show" :src="expandMoreIcon" />
-          </button>
-          <button class="button--transparent category-list__button--radio">
-            <img
-              :src="modalDataStore.getCategoryImgByIconName(categoryDepth1.iconName)"
-              class="img-category-icon--lg"
-            />
-            {{ categoryDepth1.name }}
-          </button>
-        </div>
-        <!-- 라디오 버튼 -->
-        <div class="radio-buttons">
-          <label :for="categoryDepth1.id" class="radio-button">
-            <input
-              type="radio"
-              :id="categoryDepth1.id"
-              name="grades"
-              :checked="categoryDepth1.name === modalDataStore.selectedLocation.name"
-              @click="selectRadioButton(categoryDepth1)"
-            />
-            <span class="custom-radio"></span>
-          </label>
-        </div>
-      </li>
-      <!-- 2차 카테고리 -->
-      <template v-if="secondCategory.show">
+  <div
+    class="category-tree"
+    v-for="categoryItem1 in categoryTreeRadioStore.userCategoryList"
+    :key="categoryItem1"
+  >
+    <div class="category-item-radio">
+      <!-- 1차 카테고리 -->
+      <ul v-if="categoryItem1.name" class="category-list__first-ul">
+        <li>
+          <single-category-tree-with-radio-button
+            :category="categoryItem1"
+            :children="categoryItem1.children ? categoryItem1.children : null"
+            :activeExpandButton="true"
+          ></single-category-tree-with-radio-button>
+        </li>
+        <!-- 2차 카테고리 -->
         <ul
           class="category-list__second-ul"
-          v-for="(categoryDepth2, i) in categoryDepth1.children"
-          :key="i"
+          v-for="categoryItem2 in categoryItem1.children"
+          :key="categoryItem2"
         >
-          <li>
-            <div class="flex-container__row--align-center">
-              <button class="button--transparent expand-button">
-                <img v :src="expandMoreIcon" />
-              </button>
-              <button class="button--transparent category-list__button--radio">
-                <img
-                  :src="modalDataStore.getCategoryImgByIconName(categoryDepth2.iconName)"
-                  class="category-icon img-category-icon--lg"
-                />{{ categoryDepth2.name }}
-              </button>
-            </div>
-            <!-- 라디오 버튼 -->
-            <div class="radio-buttons">
-              <label :for="categoryDepth2.id" class="radio-button">
-                <input
-                  type="radio"
-                  :id="categoryDepth2.id"
-                  name="grades"
-                  :checked="categoryDepth2.name === modalDataStore.selectedLocation.name"
-                  @click="selectRadioButton(categoryDepth2)"
-                />
-                <span class="custom-radio"></span>
-              </label>
-            </div>
-          </li>
+          <template v-if="categoryTreeRadioStore.categoryIdTree[categoryItem2.id]">
+            <li>
+              <single-category-tree-with-radio-button
+                :category="categoryItem2"
+                :children="categoryItem2.children ? categoryItem2.children : null"
+                :treeWidth="treeWidth2"
+                :activeExpandButton="false"
+              ></single-category-tree-with-radio-button>
+            </li>
+          </template>
         </ul>
-      </template>
-    </ul>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script setup>
-import expandMoreIcon from '@/assets/ic/ic-expand-more.svg'
-import expandLessIcon from '@/assets/ic/ic-expand-less.svg'
-import { reactive, watch } from 'vue'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
+import SingleCategoryTreeWithRadioButton from '@/components/nav/SingleCategoryTreeWithRadioButton.vue'
+import { useCategoryTreeRadioStore } from '@/stores/useCategoryTreeRadioStore.ts'
+import { onMounted } from 'vue'
 
 // 스토어 선언
-const modalDataStore = useModalDataStore()
+const categoryTreeRadioStore = useCategoryTreeRadioStore()
 
-const props = defineProps({
-  categoryDepth1: Object,
-  clickRadioButton: Function
+onMounted(async () => {
+  // 카테고리 id맵을 생성
+  const createIdMap = (items) => {
+    return items.reduce((acc, item) => {
+      acc[item.id] = false
+      if (item.children && Array.isArray(item.children)) {
+        const nestedMap = createIdMap(item.children)
+        Object.assign(acc, nestedMap)
+      }
+      return acc
+    }, {})
+  }
+  categoryTreeRadioStore.createCategoryIdTree(createIdMap(categoryTreeRadioStore.userCategoryList))
 })
 
-const secondCategory = reactive({ show: false })
-
-// 카테고리 열고/닫기
-const controlFirstCategory = (children) => {
-  if (children) {
-    secondCategory.show = !secondCategory.show
-  }
-}
-
-watch(props.categoryDepth1, {
-  deep: true,
-  handler: (value) => {
-    console.log(value)
-  }
-})
-
-const selectRadioButton = (categoryDepth) => {
-  modalDataStore.clickRadioButton(categoryDepth)
-}
+const treeWidth2 = 'liDepth2'
 </script>
 
 <style></style>

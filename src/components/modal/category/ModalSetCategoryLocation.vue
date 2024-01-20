@@ -18,16 +18,10 @@
     </div>
     <!-- 카테고리 목록 (라디오 버튼) -->
     <div class="wrapper__modal-category-list">
-      <category-item-with-radio-button
-        v-for="categoryItem in categoryList"
-        :key="categoryItem"
-        :categoryDepth1="categoryItem"
-      ></category-item-with-radio-button>
+      <category-item-with-radio-button></category-item-with-radio-button>
     </div>
-
     <!-- divider -->
     <div class="modal__divider--bottom"></div>
-
     <div class="modal-footer">
       <button
         class="confirm-button--inactive"
@@ -77,12 +71,10 @@ onMounted(async () => {
   } else {
     categoryList.value = categoryListDummy
   }
-  console.log('생성 위치', categoryList)
 })
 
 // 완료 버튼 클릭
 const setLocation = () => {
-  console.log('완료 버튼 클릭')
   modalViewStore.closeSetCategoryLocationModal()
 }
 </script>
