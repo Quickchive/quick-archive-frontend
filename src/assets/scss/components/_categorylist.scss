@@ -4,19 +4,33 @@
   padding-top: 24px;
 }
 
+.category-tree {
+  width: 100%;
+}
 .category-item {
-  width: 288px;
+  width: 100%;
   @extend .flex-container__col;
   ul {
     list-style: none;
     margin: 0;
+    padding: 0;
     li {
+      width: 100%;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
       height: 40px;
+      margin-top: 4px;
       padding: 0;
+    }
+    .liDepth2 {
+      padding-left: 32px;
+      box-sizing: border-box;
+    }
+    .liDepth3 {
+      padding-left: 64px;
+      box-sizing: border-box;
     }
   }
 }
