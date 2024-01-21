@@ -1,19 +1,13 @@
 .label__modal {
   color: $color-grey-90, #232329;
   font-feature-settings: 'cv12' on;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px; /* 160% */
+  @include font(15px, 500, 24px);
   letter-spacing: -0.3px;
 }
 
 .label__md {
   color: $color-grey-100;
   font-feature-settings: 'cv12' on;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px; /* 150% */
+  @include font(16px, 500, 24px);
   letter-spacing: -0.3px;
 }

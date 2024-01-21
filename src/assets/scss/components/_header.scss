@@ -1,19 +1,15 @@
 // 헤더 close 버튼은 오른쪽에 위치하는 것이 default
 .modal-header {
+  @include size(100%, 88px);
   display: flex;
-  width: 100%;
   align-items: center;
   box-sizing: border-box;
-  height: 88px;
   padding: 0 28px;
   .modal-title {
     width: 278px;
     color: $color-grey-100;
     text-align: center;
-    font-size: 17px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 24px; /* 141.176% */
+    @include font(17px, 700, 24px);
     letter-spacing: -0.3px;
   }
 }
@@ -44,22 +40,16 @@
 }
 
 .modal-header--edit-title {
-  display: flex;
+  @include flex(space-between, center);
   flex-direction: row;
-  width: 100%;
-  justify-content: space-between;
+  @include size(100%, 88px);
   padding: 0 28px;
-  height: 88px;
-  align-items: center;
   box-sizing: border-box;
   button {
     color: $color-grey-80;
     text-align: right;
     font-feature-settings: 'cv12' on;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px; /* 160% */
+    @include font(15px, 500, 24px);
     letter-spacing: -0.3px;
   }
 }
@@ -72,10 +62,7 @@
     color: $color-grey-100;
     text-overflow: ellipsis;
     whitespace: nowrap;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 48px; /* 150% */
+    @include font(32px, 700, 48px);
     letter-spacing: -0.3px;
     text-align: left;
   }

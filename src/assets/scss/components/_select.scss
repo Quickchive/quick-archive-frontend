@@ -1,16 +1,12 @@
 .selectbox__contents-filter {
-  display: flex;
+  @include flex;
   padding: 8px 8px 8px 14px;
   width: 94px;
-  align-items: center;
   border-radius: 100px;
   border: 1px solid var(--grey-10, #eeeef0);
   color: var(--grey-80, #515253);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 24px; /* 171.429% */
+  @include font(14px, 600, 24px);
   letter-spacing: -0.3px;
-  justify-content: center;
   /* 화살표 커스텀 */
   -o-appearance: none;
   -webkit-appearance: none;

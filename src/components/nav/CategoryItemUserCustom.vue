@@ -11,6 +11,7 @@
           <single-category-tree
             :category="categoryItem1"
             :children="categoryItem1.children ? categoryItem1.children : null"
+            :treeWidth="treeWidth1"
           ></single-category-tree>
         </li>
         <!-- 2차 카테고리 -->
@@ -47,8 +48,9 @@ import SingleCategoryTree from '@/components/nav/SingleCategoryTree.vue'
 import { onMounted } from 'vue'
 
 const categoryTreeStore = useCategoryTreeStore()
-const treeWidth2 = 'liDepth2'
-const treeWidth3 = 'liDepth3'
+const treeWidth1 = 'category-list__first-ul'
+const treeWidth2 = 'category-list__second-ul'
+const treeWidth3 = 'category-list__third-ul'
 
 onMounted(async () => {
   // 카테고리 id맵을 생성

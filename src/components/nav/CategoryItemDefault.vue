@@ -11,7 +11,7 @@
           <button class="button--transparent category-list__button">전체 콘텐츠</button>
         </div>
       </li>
-      <ul v-if="allCategory.show">
+      <ul v-if="allCategory.show" class="category-list__second-ul">
         <!-- 즐겨찾기한 콘텐츠 -->
         <li>
           <div class="flex-container__row--align-center">

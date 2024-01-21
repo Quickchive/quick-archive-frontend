@@ -1,35 +1,30 @@
 .divider {
-  width: 100%;
-  height: 16px;
+  @include size(100%, 16px);
   background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
 }
 
 .navbar__divider--top {
-  width: 368px;
-  height: 24px;
+  @include size(368px, 24px);
   background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
   position: fixed;
   top: 198px;
 }
 
 .navbar__divider--bottom {
-  width: 368px;
-  height: 48px;
+  @include size(368px, 24px);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 100%);
   position: fixed;
   bottom: 96px;
 }
 
 .category-list__divider {
-  width: 288px;
-  height: 1px;
+  @include size(288px, 1px);
   margin: 24px 0;
   background: #f4f3f3;
 }
 
 .searchpage-divider {
   background: $color-grey-10;
-  width: 100%;
-  height: 1px;
+  @include size(100%, 1px);
   margin-bottom: 48px;
 }

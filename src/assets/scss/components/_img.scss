@@ -1,70 +1,52 @@
 .img-profile {
-  width: 40px;
-  height: 40px;
+  @include size(40px, 40px);
   border-radius: 1000px;
   border: 1px solid rgba(19, 22, 26, 0.03);
 }
 
 .img-category-icon {
-  width: 24px;
-  height: 24px;
+  @include size(24px, 24px);
   border-radius: 6px;
 }
 
 .img-category-icon--lg {
+  @include size(40px, 40px);
   border-radius: 6px;
   margin-right: 12px;
-  width: 40px;
-  height: 40px;
 }
 
 .img-add-category,
 .img-add-content {
-  width: 180px;
-  height: 180px;
+  @include size(180px, 180px);
   border-radius: 8px;
   position: absolute;
   top: 0;
 }
 
 .img-category-custom {
-  display: flex;
-  width: 80px;
-  height: 80px;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
+  @include flex;
+  @include size(80px, 80px);
   border-radius: 10px;
 }
 
 .category-default-icon {
-  width: 86px;
-  height: 86px;
+  @include size(86px, 86px);
   border-radius: 8px;
 }
 
 .img-empty {
-  width: 120px;
-  height: 120px;
+  @include size(120px, 120px);
 }
 
 .icon-small {
-  width: 20px;
-  height: 20px;
+  @include size(20px, 20px);
 }
 
 .icon-ex-small {
-  width: 14px;
-  height: 14px;
-}
-.img-search-category-result {
-  width: 56px;
-  height: 56px;
-  border-radius: 8px;
+  @include size(14px, 14px);
 }
 
-// .img-add-content {
-//   width: 180px;
-//   height: 180px;
-//   border-radius: 8px;
-// }
+.img-search-category-result {
+  @include size(56px, 56px);
+  border-radius: 8px;
+}

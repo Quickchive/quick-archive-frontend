@@ -4,8 +4,7 @@
 
 .thenavbar {
   @extend .flex-container__col;
-  width: 368px;
-  height: 100vh;
+  @include size(368px, 100vh);
   z-index: 1;
   box-sizing: border-box;
   align-items: center;
@@ -37,11 +36,8 @@
   margin-top: 32px;
   span {
     color: $color-grey-100;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 24px; /* 133.333% */
     letter-spacing: -0.3px;
+    @include font(18px, 700, 24px);
   }
   img {
     margin-right: 12px;
@@ -49,25 +45,20 @@
 }
 
 .contents__empty {
-  width: 100%;
-  height: 560px;
+  @include size(100%, 560px);
   align-items: center;
   justify-content: center;
   span {
     color: $color-grey-60;
     text-align: center;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 30px; /* 200% */
+    @include font(15px, 500, 30px);
     letter-spacing: -0.3px;
   }
 }
 
 .contents-filter__wrapper {
   gap: 8px;
-  width: 992px;
-  height: 64px;
+  @include size(992px, 64px);
   padding: 16px 0px 8px 0;
   box-sizing: border-box;
 }
@@ -78,8 +69,7 @@
   opacity: 0.05;
   background: #000;
   filter: blur(25px);
-  width: 368px;
-  height: 100vh;
+  @include size(368px, 100vh);
   left: 0;
   top: 0;
 }

@@ -1,10 +1,7 @@
 h1 {
   color: $color-grey-100;
   text-align: center;
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 48px; /* 150% */
+  @include font(32px, 600, 48px);
   letter-spacing: -0.3px;
   margin: 0;
 }
@@ -12,25 +9,18 @@ h1 {
 p {
   color: $color-grey-80;
   text-align: center;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 24px; /* 171.429% */
+  @include font(14px, 400, 24px);
   letter-spacing: -0.3px;
   margin: 0;
 }
 
 .login-container {
-  display: flex;
-  width: 100%;
-  justify-content: center; /* 수평 가운데 정렬 */
-  align-items: center; /* 수직 가운데 정렬 */
-  height: 100vh; /* 화면 높이를 기준으로 모달 컨테이너의 높이를 설정 */
+  @include flex;
+  @include size(100%, 100vh);
 }
 
 .login-form {
-  width: 462px;
-  height: 501px;
+  @include size(462px, 501px);
   border-radius: 16px;
   background-color: #ffffff;
   align-items: center;
@@ -52,10 +42,7 @@ p {
 .desc__wrapper {
   color: $color-grey-60;
   text-align: center;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px; /* 123.077% */
+  @include font(13px, 500, 16px);
   letter-spacing: -0.3px;
   a {
     text-decoration-line: underline;
@@ -74,10 +61,7 @@ p {
 
 .banner__wrapper {
   text-align: center;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px; /* 153.846% */
+  @include font(13px, 500, 20px);
   letter-spacing: -0.3px;
   position: relative;
   width: 157px;

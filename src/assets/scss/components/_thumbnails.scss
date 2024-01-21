@@ -1,15 +1,13 @@
 .thumbnail__wrapper {
   position: relative;
   .thumbnail {
-    width: 112px;
-    height: 112px;
+    @include size(112px, 112px);
     margin-right: 24px;
   }
 }
 
 .thumbnail__sm {
-  width: 72px;
-  height: 72px;
+  @include size(72px, 72px);
   flex-shrink: 0;
   border-radius: 9.778px;
   border: 1px solid rgba(26, 19, 19, 0.05);
@@ -17,12 +15,10 @@
 }
 
 .wrapper__modal-thumbnail {
-  display: flex;
+  @include flex(space-between, center);
   flex-direction: row;
   width: 398px;
-  justify-content: space-between;
   gap: 8px;
-  align-items: center;
   margin-bottom: 36px;
   .wrapper__thumbnail-content {
     .box__input--content-title {
@@ -35,8 +31,7 @@
 
 .text__contentTitle {
   display: flex;
-  width: 282px;
-  height: 20px;
+  @include size(282px, 20px);
   flex-direction: column;
   justify-content: center;
   flex-shrink: 0;
@@ -45,10 +40,7 @@
   font-feature-settings: 'cv12' on;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px; /* 150% */
+  @include font(16px, 600, 24px);
   letter-spacing: -0.3px;
 }
 
@@ -64,25 +56,19 @@
   font-feature-settings: 'cv12' on;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px; /* 153.846% */
+  @include font(13px, 400, 20px);
   letter-spacing: -0.3px;
 }
 
 .box__thumbnail {
-  display: flex;
+  @include flex(space-between, center);
   flex-direction: row;
   width: 398px;
-  justify-content: space-between;
   gap: 8px;
-  align-items: center;
   margin-bottom: 36px;
   .box__thumbnail-img {
     position: relative;
-    width: 72px;
-    height: 72px;
+    @include size(72px, 72px);
     .button__checkbox {
       position: absolute;
       z-index: 100;
@@ -91,8 +77,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       padding: 0;
-      width: 24px;
-      height: 24px;
+      @include size(24px, 24px);
       background-color: transparent;
     }
   }
@@ -123,18 +108,12 @@
   .searhResult-content-memo__title {
     text-align: left;
     color: $color-grey-60;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 24px; /* 150% */
+    @include font(16px, 600, 24px);
     letter-spacing: -0.3px;
   }
   .searhResult-content-memo__content {
     color: $color-grey-70;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 22px; /* 157.143% */
+    @include font(14px, 500, 22px);
     letter-spacing: -0.3px;
     margin: 4px 0 16px 0;
     text-align: start;
@@ -149,10 +128,7 @@
   }
   .searchResult-content-memo__button {
     color: $color-grey-80;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px; /* 114.286% */
+    @include font(14px, 500, 16px);
     letter-spacing: -0.3px;
     background-color: transparent;
     display: flex;

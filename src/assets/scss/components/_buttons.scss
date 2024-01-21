@@ -13,19 +13,14 @@ button {
 }
 
 .button {
-  width: 398px;
-  height: 56px;
+  @include flex(left, center);
+  @include font(15px, 600, 24px);
+  @include size(398px, 56px);
   border-radius: 16px;
   text-align: center;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 24px; /* 160% */
   letter-spacing: -0.3px;
   box-sizing: border-box;
   padding: 16px;
-  display: flex;
-  justify-content: left;
-  align-items: center;
 }
 
 .button--transparent {
@@ -34,27 +29,21 @@ button {
 }
 
 .button--md {
-  width: 288px;
-  height: 56px;
   display: flex;
+  @include size(288px, 56px);
 }
 
 .add-category__button {
-  width: 180px;
-  height: 180px;
+  @include flex(flex-end, center);
+  @include font(15px, 500, 20px);
+  @include size(180px, 180px);
   flex-shrink: 0;
   border-radius: 8px;
   color: $color-grey-100;
   text-align: center;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px; /* 133.333% */
   letter-spacing: -0.3px;
   padding: 0 0 16px 0;
   box-sizing: border-box;
-  align-items: center;
-  justify-content: flex-end;
   position: relative;
   span {
     position: absolute;
@@ -62,11 +51,11 @@ button {
 }
 
 .close-button--top {
-  width: 32px;
-  height: 32px;
+  @include size(32px, 32px);
 }
 
 .chip-btn {
+  @include font(14px, 600, 24px);
   display: flex;
   padding: 8px 14px;
   align-items: flex-start;
@@ -74,15 +63,11 @@ button {
   border: 1px solid $color-grey-10;
   color: $color-grey-80;
   background-color: transparent;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 24px; /* 171.429% */
   letter-spacing: -0.3px;
 }
 
 .button--kakao {
-  background-color: #fee500;
-  color: $color-grey-100;
+  @include color($color-grey-100, #fee500);
   img {
     margin-right: 89px;
   }
@@ -93,9 +78,8 @@ button {
 }
 
 .button--google {
-  background-color: #ffffff;
+  @include color($color-grey-100, #ffffff);
   border: 1px solid $color-grey-10;
-  color: $color-grey-100;
   img {
     margin-right: 97px;
   }
@@ -106,31 +90,24 @@ button {
 }
 
 .button--apple {
-  background-color: #000000;
-  color: #ffffff;
+  @include color(#ffffff, #000000);
   img {
     margin-right: 102px;
   }
 }
 
 .btn__add {
+  @include flex;
+  @include font(15px, 600, 24px);
+  @include color(#ffffff, #146eff);
   border-radius: 12px;
-  background-color: #146eff;
-  color: #fff;
   text-align: center;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px; /* 160% */
   letter-spacing: -0.3px;
-  justify-content: center;
-  align-items: center;
 }
 
 .btn--more {
+  @include size(32px, 32px);
   margin-left: 32px;
-  width: 32px;
-  height: 32px;
 }
 
 .btn-favorite {
@@ -141,15 +118,11 @@ button {
 }
 
 .category-list__button {
-  // width: 216px;
+  @include font(16px, 500, 24px);
   height: 26px; /* 24px */
   overflow: hidden;
   color: $color-grey-100;
   text-overflow: ellipsis;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px; /* 150% */
   letter-spacing: -0.3px;
   text-align: left;
   margin: 0px 16px 0px 0px;
@@ -159,13 +132,10 @@ button {
 }
 
 .category-list__button--radio {
+  @include font(16px, 500, 24px);
   overflow: hidden;
   color: $color-grey-100;
   text-overflow: ellipsis;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px; /* 150% */
   letter-spacing: -0.3px;
   text-align: left;
   margin: 0px 16px 0px 0px;
@@ -175,47 +145,33 @@ button {
 }
 
 .expand-button {
-  width: 24px;
-  height: 24px;
+  @include size(24px, 24px);
   margin-right: 8px;
 }
 
 .confirm-button--inactive {
+  @include size(100%, 56px);
+  @include color($color-grey-30, $color-grey-10);
+  @include font(15px, 600, 24px);
   border-radius: 12px;
-  background: $color-grey-10;
-  width: 100%;
-  height: 56px;
-  color: $color-grey-30;
   text-align: center;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px; /* 160% */
   letter-spacing: -0.3px;
   cursor: auto;
 }
 
 .confirm-button--active {
+  @include size(100%, 56px);
+  @include color(white, #146eff);
+  @include font(15px, 600, 24px);
   border-radius: 12px;
-  background: #146eff;
-  color: white;
-  width: 100%;
-  height: 56px;
   text-align: center;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px; /* 160% */
   letter-spacing: -0.3px;
   cursor: pointer;
 }
 
 .add-new-category__button {
+  @include font(15px, 600, 24px);
   color: $color-grey-40;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px; /* 160% */
   letter-spacing: -0.3px;
   gap: 8px;
   display: flex;
@@ -224,58 +180,41 @@ button {
 }
 
 .alert-confirm-button {
-  display: flex;
-  width: 326px;
-  height: 48px;
-  justify-content: center;
-  align-items: center;
+  @include flex;
+  @include size(326px, 48px);
+  @include color(#146eff, #fff);
   gap: 8px;
-  color: #146eff;
-  background-color: #fff;
 }
 
 .toast-button {
-  color: #fff;
+  @include font(13px, 500, 20px);
+  @include color(#fff, transparent);
   text-align: right;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px; /* 153.846% */
   letter-spacing: -0.3px;
   text-decoration-line: underline;
-  background: transparent;
   padding: 0;
 }
 
 .button--alert-checkbox {
+  @include flex;
   gap: 8px;
-  justify-content: center;
-  align-items: center;
   background-color: transparent;
 }
 
 .alert-cancel-button {
-  display: flex;
-  width: 326px;
-  height: 48px;
-  justify-content: center;
-  align-items: center;
+  @include flex;
+  @include size(326px, 48px);
+  @include color($color-grey-60, #fff);
   gap: 8px;
-  color: $color-grey-60;
-  background-color: #fff;
 }
 
 .button--go-next {
+  @include font(15px, 600, 24px);
+  @include color($color-grey-100, transparent);
   display: flex;
   flex-direction: row;
-  background-color: transparent;
-  color: $color-grey-100;
   text-align: right;
   font-feature-settings: 'cv12' on;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px; /* 160% */
   letter-spacing: -0.3px;
   padding: 0;
 }
@@ -325,45 +264,29 @@ button {
 }
 
 .button__confirm-modal {
-  display: flex;
-  width: 159px;
-  height: 48px;
-  justify-content: center;
-  align-items: center;
+  @include flex;
+  @include size(159px, 48px);
+  @include color($color-grey-60, #fff);
   gap: 8px;
-  color: $color-grey-60;
-  background-color: #fff;
 }
 
 .button__confirm-modal--inactive {
-  display: flex;
-  width: 159px;
-  height: 48px;
-  justify-content: center;
-  align-items: center;
+  @include flex;
+  @include size(159px, 48px);
+  @include color($color-grey-20, #fff);
   gap: 8px;
-  color: $color-grey-20;
-  background-color: #fff;
   cursor: auto;
 }
 
 .button__confirm-modal--active {
-  display: flex;
-  width: 159px;
-  height: 48px;
-  justify-content: center;
-  align-items: center;
+  @include flex;
+  @include size(159px, 48px);
+  @include color(#146eff, #fff);
   gap: 8px;
-  color: #146eff;
-  background-color: #fff;
   cursor: pointer;
 }
 
 /******** 라디오 버튼 ********/
-.radio-buttons {
-  // align-items: center;
-  // gap: 0.5rem;
-}
 
 .radio-buttons .radio-button {
   cursor: pointer;
@@ -375,17 +298,18 @@ button {
 .radio-button input[type='radio'] {
   position: absolute;
   opacity: 0;
+  @include size(0, 0);
+
   height: 0;
   width: 0;
 }
 
 /* 1번 그룹 라디오 버튼, 외부 원 */
 .radio-buttons .radio-button .custom-radio {
+  @include size(24px, 24px);
   position: absolute;
   top: -3px;
-  height: 24px;
   right: 0;
-  width: 24px;
   border-radius: 50%;
   border: 1px solid $color-grey-20;
 }
@@ -397,6 +321,7 @@ button {
 
 /* 1번 그룹 라디오 버튼, 내부 원 */
 .radio-buttons .custom-radio:after {
+  @include size(10px, 10px);
   content: '';
   position: absolute;
   /* 최초 display none */
@@ -404,8 +329,6 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 10px;
-  height: 10px;
   border-radius: 50%;
   background: white;
 }
@@ -417,18 +340,12 @@ button {
 
 /* 세팅 뷰 버튼 */
 .setting-main-button {
-  display: flex;
+  @include flex(space-between, center);
+  @include color($color-grey-100, transparent);
+  @include font(16px, 500, 24px);
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  background: transparent;
   padding: 0;
-  color: $color-grey-100;
   font-feature-settings: 'cv12' on;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px; /* 150% */
   letter-spacing: -0.3px;
   height: 48px;
   a {
@@ -444,33 +361,26 @@ button {
 }
 
 .button--change-nickname {
-  color: #146eff;
+  @include color(#146eff, transparent);
+  @include font(13px, 600, 22px);
   font-feature-settings: 'cv12' on;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 22px; /* 169.231% */
   letter-spacing: -0.3px;
-  background-color: transparent;
 }
 
 .button--category-icon {
+  @include size(86px, 86px);
   padding: 0;
   border-radius: 8px;
-  width: 86px;
-  height: 86px;
   position: relative;
   .isSelected {
-    width: 86px;
-    height: 86px;
+    @include size(86px, 86px);
     border-radius: 8px;
     background: rgba(19, 20, 26, 0.5);
     position: absolute;
     z-index: 1;
     top: 0;
     .controlCheckbox {
-      width: 24px;
-      height: 24px;
+      @include size(24px, 24px);
       position: absolute;
       top: 50%;
       left: 50%;
@@ -484,42 +394,32 @@ button {
 }
 
 .more-button {
+  @include flex(space-between, center);
+  @include size(112px, 88px);
   position: absolute;
   z-index: 100;
   top: 28px;
   right: 0;
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   box-sizing: border-box;
   padding: 8px;
-  width: 112px;
-  height: 88px;
   border-radius: 8px;
   background: #fff;
   box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
   button {
+    @include font(14px, 600, 20px);
+    @include size(96px, 36px);
+    @include color($color-grey-100, #fff);
     border-radius: 4px;
-    background: #fff;
-    width: 96px;
-    height: 36px;
     flex-shrink: 0;
     padding: 0;
-    color: $color-grey-100;
     text-align: center;
     font-feature-settings: 'cv12' on;
     text-overflow: ellipsis;
     whitespace: nowrap;
-    font-family: Pretendard;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 20px; /* 142.857% */
     letter-spacing: -0.3px;
     &:hover {
-      background: #146eff;
-      color: #fff;
+      @include color(#fff, #146eff);
     }
   }
 }
