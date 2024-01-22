@@ -4,7 +4,7 @@
     <div class="wrapper__thumbnail-content">
       <div class="box__input--content-title">
         <span class="text__contentTitle">{{ modalDataStore.addContentData.title }}</span>
-        <button class="button--transparent" @click="modalViewStore.openEditContentTitleModal">
+        <button class="btn--transparent" @click="modalViewStore.openEditContentTitleModal">
           <img :src="editIcon" />
         </button>
       </div>

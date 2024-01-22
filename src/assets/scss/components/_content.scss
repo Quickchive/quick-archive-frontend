@@ -1,8 +1,7 @@
 .item-container {
-  // width: 944px;
+  @include flex(row, _, _);
   height: 112px;
   align-items: center;
-  // padding: 0 64px;
 
   .item__wrapper {
     h1 {
@@ -36,6 +35,10 @@
         border-radius: 10px;
       }
     }
+  }
+
+  .contents-item__btn__wrapper {
+    margin-left: 32px;
   }
 }
 

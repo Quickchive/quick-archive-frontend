@@ -5,18 +5,12 @@
       :isBtnOnRight="isBtnOnRight"
       :closeModal="closeModal"
     ></modal-header>
-    <div class="flex-container__row add-category__button__wrapper">
-      <button
-        class="flex-container__col add-category__button"
-        @click="modalViewStore.openAddContentModal()"
-      >
+    <div class="category-modal__btn__wrapper">
+      <button class="category-modal__btn" @click="modalViewStore.openAddContentModal()">
         <img :src="addContent" class="img-add-content" />
         <span>콘텐츠</span>
       </button>
-      <button
-        class="flex-container__col add-category__button"
-        @click="modalViewStore.openAddCategoryModal()"
-      >
+      <button class="category-modal__btn" @click="modalViewStore.openAddCategoryModal()">
         <img :src="addCategory" class="img-add-category" />
         <span>카테고리</span>
       </button>

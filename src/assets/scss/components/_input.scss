@@ -16,16 +16,15 @@ input {
     display: flex;
     @include size(398px, 50px);
     @include font(15px, 500, 22px);
+    @include color($color-grey-100, #f5f5f5);
     padding: 14px 16px;
     align-items: flex-start;
     gap: 8px;
     border-radius: 8px;
-    background: #f5f5f5;
     border-style: none;
     font-feature-settings: 'cv12' on;
     letter-spacing: -0.3px;
     box-sizing: border-box;
-    color: $color-grey-100;
     font-feature-settings: 'cv12' on;
     &::placeholder {
       color: $color-grey-60;
@@ -51,13 +50,14 @@ input {
   gap: 8px;
   letter-spacing: -0.30000001192092896px;
   text-align: left;
-  color: $color-grey-60;
-  background-color: #f5f5f5;
+  @include color($color-grey-60, #f5f5f5);
   box-sizing: border-box;
 }
 
 .textarea__memo {
   @include size(398px, 100%);
+  @include color($color-grey-100, #f5f5f5);
+  @include font(15px, 500, 22px);
   display: flex;
   min-height: 140px;
   max-height: 248px;
@@ -66,12 +66,9 @@ input {
   gap: 8px;
   flex-shrink: 0;
   border-radius: 8px;
-  background: #f5f5f5;
   border-style: none;
   box-sizing: border-box;
-  color: $color-grey-100;
   font-feature-settings: 'cv12' on;
-  @include font(15px, 500, 22px);
   letter-spacing: -0.3px;
   &:focus {
     outline: none;

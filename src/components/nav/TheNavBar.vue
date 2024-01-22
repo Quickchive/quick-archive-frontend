@@ -1,7 +1,7 @@
 <template>
   <nav class="thenavbar">
     <div class="navbar__top-container">
-      <button @click="toMainPage()" class="button--transparent"><img :src="mainLogo" /></button>
+      <button @click="toMainPage()" class="btn--transparent"><img :src="mainLogo" /></button>
       <!-- profile -->
       <router-link to="/home/setting">
         <div class="profile__wrapper">
@@ -22,8 +22,8 @@
     <!-- divider -->
     <div class="navbar__divider--bottom"></div>
     <!-- 버튼 -->
-    <div class="btnAdd__wrapper">
-      <button class="button--md btn__add" @click="showAddModal()">
+    <div class="navbar__btn__wrapper">
+      <button class="navbar__btn btn-56" @click="showAddModal()">
         <img :src="plus" />추가하기
       </button>
     </div>

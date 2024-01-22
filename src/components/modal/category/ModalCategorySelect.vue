@@ -19,7 +19,7 @@
       </button>
     </article>
     <div class="modal-footer">
-      <button class="confirm-button--active" @click="submitCategoryIcon()">완료</button>
+      <button class="btn-confirm active" @click="submitCategoryIcon()">완료</button>
     </div>
   </dialog>
 </template>

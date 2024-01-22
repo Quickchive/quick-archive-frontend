@@ -1,13 +1,10 @@
 <template>
   <dialog class="content-add__modal">
     <header class="modal-header--edit-title">
-      <button
-        class="button--transparent close-button--top"
-        @click="modalViewStore.closeEditContentTitleModal()"
-      >
+      <button class="btn--transparent btn-32" @click="modalViewStore.closeEditContentTitleModal()">
         <img :src="topCloseIcon" />
       </button>
-      <button class="button--transparent" @click="clearTitle()">내용 전체삭제</button>
+      <button class="btn--transparent" @click="clearTitle()">내용 전체삭제</button>
     </header>
     <modal-header-edit-title></modal-header-edit-title>
     <div class="wrapper__modal-input-edit">
@@ -21,8 +18,8 @@
     </div>
     <div class="modal-footer">
       <button
-        class="confirm-button--inactive"
-        :class="{ 'confirm-button--active': isTitleValid }"
+        class="btn-confirm"
+        :class="isTitleValid ? 'active' : 'inactive'"
         @click="saveContentTitle()"
         :disabled="!isTitleValid"
       >

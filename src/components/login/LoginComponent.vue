@@ -1,9 +1,9 @@
 <template>
   <div class="overlay"></div>
   <div class="login-container">
-    <div class="flex-container__col login-form">
-      <div class="flex-container__row close-btn__wrapper">
-        <button class="button--transparent"><img :src="icClose" /></button>
+    <div class="login-form">
+      <div class="close-btn__wrapper">
+        <button class="btn--transparent"><img :src="icClose" /></button>
       </div>
       <header class="header__login">
         <h1>Login</h1>
@@ -13,20 +13,20 @@
         <img :src="union" />
         <span><strong>3초만에</strong> 빠른 회원가입!</span>
       </div>
-      <div class="flex-container__col login-btn__wrapper">
+      <div class="login__btn__wrapper">
         <a href="https://test.quickarchive.co.kr/api/oauth/kakao-auth" target="_blank">
-          <button class="button button--kakao">
+          <button class="btn--kakao btn-56">
             <img :src="logoKakao" />
             카카오톡으로 시작하기
           </button>
         </a>
         <a href="https://test.quickarchive.co.kr/api/oauth/google-auth" target="_blank">
-          <button class="button button--google">
+          <button class="btn--google btn-56">
             <img :src="logoGoogle" />
             Google로 시작하기
           </button>
         </a>
-        <button class="button button--apple"><img :src="logoApple" />Apple로 시작하기</button>
+        <button class="btn--apple btn-56"><img :src="logoApple" />Apple로 시작하기</button>
       </div>
       <div class="desc__wrapper">
         <a href="https://www.notion.so/fabc4b39c85b446bab8f2bb8549926b7"

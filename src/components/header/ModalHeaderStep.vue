@@ -1,8 +1,8 @@
 <template>
   <header class="modal-header--step">
-    <button class="button--transparent"><img :src="topBackIcon" /></button>
+    <button class="btn--transparent"><img :src="topBackIcon" /></button>
     <h1 class="modal-title">{{ modalTitle }}</h1>
-    <button class="button--transparent close-button--top" @click="closeModal()">
+    <button class="btn--transparent btn-32" @click="closeModal()">
       <img :src="topCloseIcon" />
     </button>
   </header>

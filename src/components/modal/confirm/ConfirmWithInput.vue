@@ -12,22 +12,26 @@
         :value="categoryName"
         @input="setNewCategory"
       />
-      <button class="button--transparent" @click="clearInput()">
+      <button class="btn--transparent" @click="clearInput()">
         <img :src="textfieldCancelIcon" />
       </button>
     </div>
     <div class="wrapper__confirm-button">
-      <button class="button__confirm-modal" @click="modalViewStore.closeSetNewCategoryModal()">
-        닫기
-      </button>
-      <button
-        class="button__confirm-modal--inactive"
-        :class="{ 'button__confirm-modal--active': isCategoryNameValid }"
-        :disabled="!isCategoryNameValid"
-        @click="saveNewCategory()"
-      >
-        저장
-      </button>
+      <div class="alert-btn__wrapper">
+        <button class="alert-btn cancel btn-48" @click="modalViewStore.closeSetNewCategoryModal()">
+          닫기
+        </button>
+      </div>
+      <div class="alert-btn__wrapper">
+        <button
+          class="alert-btn btn-48"
+          :class="isCategoryNameValid ? 'confirm' : 'inactive'"
+          :disabled="!isCategoryNameValid"
+          @click="saveNewCategory()"
+        >
+          저장
+        </button>
+      </div>
     </div>
   </dialog>
 </template>

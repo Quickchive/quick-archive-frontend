@@ -40,7 +40,7 @@
 }
 
 .modal-header--edit-title {
-  @include flex(space-between, center);
+  @include flex(column, space-between, center);
   flex-direction: row;
   @include size(100%, 88px);
   padding: 0 28px;

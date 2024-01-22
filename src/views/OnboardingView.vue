@@ -1,7 +1,7 @@
 <template>
   <div class="onboarding">
     <header class="header">
-      <button @click="toMainPage()" class="button--transparent"><img :src="mainLogo" /></button>
+      <button @click="toMainPage()" class="btn--transparent"><img :src="mainLogo" /></button>
     </header>
     <div class="wrapper__article">
       <article class="wrapper__article-main">

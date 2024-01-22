@@ -25,8 +25,7 @@
   }
   button {
     margin-top: 10px;
-    background-color: rgba(72, 232, 247, 0.842);
-    color: rgb(46, 46, 46);
+    @include color(rgb(46, 46, 46), rgba(72, 232, 247, 0.842));
     @include size(100%, 40px);
     border-radius: 4px;
     padding: 1px 2px;

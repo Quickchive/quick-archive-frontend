@@ -1,11 +1,11 @@
 <template>
   <li :class="props.treeWidth">
     <div class="flex-container__row--align-center">
-      <button class="button--transparent expand-button" @click="clickArrowEvent()">
+      <button class="btn--transparent expand-button" @click="clickArrowEvent()">
         <img v-if="isChildrenCategoryShow" :src="expandLessIcon" />
         <img v-if="!isChildrenCategoryShow" :src="expandMoreIcon" />
       </button>
-      <button class="button--transparent category-list__button--radio">
+      <button class="btn--transparent category-list__btn--radio">
         <img
           :src="modalDataStore.getCategoryImgByIconName(props.category.iconName)"
           class="category-icon img-category-icon--lg"

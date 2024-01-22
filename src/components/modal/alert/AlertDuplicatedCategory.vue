@@ -6,9 +6,7 @@
       <br />카테고리 이름을 변경해주세요.
     </p>
     <div class="flex-container__row wrapper__alert-button--single">
-      <button class="flex-container alert-confirm-button" @click="modalViewStore.closeAlertModal()">
-        확인
-      </button>
+      <button class="alert-btn confirm" @click="modalViewStore.closeAlertModal()">확인</button>
     </div>
   </dialog>
 </template>

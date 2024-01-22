@@ -2,7 +2,7 @@
   <div class="flex-container__row toast">
     <img :src="doneIcon" />
     <span class="toast-content">{{ toastText }}</span>
-    <button class="toast-button">보러가기</button>
+    <button class="btn-toast">보러가기</button>
   </div>
 </template>
 

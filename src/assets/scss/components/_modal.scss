@@ -115,7 +115,8 @@ dialog {
   height: 338px;
   padding: 0 54px 54px 54px;
   align-items: center;
-  .add-category__button__wrapper {
+  .category-modal__btn__wrapper {
+    @include flex;
     padding: 0;
     gap: 32px;
   }
@@ -269,5 +270,14 @@ dialog {
     button {
       width: 398px;
     }
+  }
+}
+
+.alert-btn--checkbox__wrapper {
+  @include flex;
+  gap: 8px;
+  span {
+    font-size: 14px;
+    color: black;
   }
 }

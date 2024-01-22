@@ -10,7 +10,7 @@
     <div class="wrapper__thumbnail-content">
       <div class="box__input--content-title">
         <span class="text__contentTitle">{{ contentTitle }}</span>
-        <button class="button--transparent"><img :src="editIcon" /></button>
+        <button class="btn--transparent"><img :src="editIcon" /></button>
       </div>
       <span class="text__contentLink">{{ contentLink }}</span>
     </div>

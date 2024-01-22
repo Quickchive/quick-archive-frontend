@@ -32,7 +32,7 @@
         </div>
         <div class="wrapper__logout">
           <button
-            class="flex-container__row--space-between button--transparent"
+            class="flex-container__row--space-between btn--transparent"
             @click="modalViewStore.openLogoutModal()"
           >
             <label class="label__md">로그아웃</label>

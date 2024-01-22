@@ -19,13 +19,10 @@
   background-color: #ffffff;
 }
 
-.btnAdd__wrapper {
-  width: 368px;
+.navbar__btn__wrapper {
+  @include size(288px, 96px);
   position: fixed;
   bottom: 0px;
-  justify-content: center;
-  height: 96px;
-  display: flex;
   background-color: #fff;
 }
 
@@ -57,8 +54,9 @@
 }
 
 .contents-filter__wrapper {
-  gap: 8px;
+  @include flex(_, left, center);
   @include size(992px, 64px);
+  gap: 8px;
   padding: 16px 0px 8px 0;
   box-sizing: border-box;
 }

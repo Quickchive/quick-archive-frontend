@@ -1,8 +1,8 @@
 <template>
-  <article class="flex-container__row item-container">
+  <article class="item-container">
     <div class="thumbnail__wrapper">
       <img :src="item.coverImg" class="thumbnail" />
-      <button class="button--transparent btn-favorite" @click="favoriteEvent()">
+      <button class="btn--transparent btn-favorite" @click="favoriteEvent()">
         <img :src="favoriteSelectedIcon" v-if="item.favorite" />
         <img :src="favoriteUnselectedIcon" v-if="!item.favorite" />
       </button>
@@ -20,7 +20,9 @@
         {{ item.siteName }}
       </footer>
     </footer>
-    <button class="button--transparent btn--more"><img :src="moreIcon" /></button>
+    <div class="contents-item__btn__wrapper">
+      <button class="btn--transparent btn-32"><img :src="moreIcon" /></button>
+    </div>
   </article>
   <!-- 메모 -->
   <memo-item :comment="comment"></memo-item>

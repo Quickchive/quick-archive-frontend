@@ -1,6 +1,6 @@
 <template>
   <header class="modal-header" :class="isBtnOnLeft ? 'headerBtnLeft' : 'headerBtnRight'">
-    <button class="button--transparent close-button--top" @click="closeModal()">
+    <button class="btn--transparent btn-32" @click="closeModal()">
       <img :src="topCloseIcon" />
     </button>
     <h1 class="modal-title">{{ modalTitle }}</h1>

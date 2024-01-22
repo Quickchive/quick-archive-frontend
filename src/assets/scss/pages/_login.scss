@@ -20,17 +20,18 @@ p {
 }
 
 .login-form {
+  @include flex(column, _, center);
   @include size(462px, 501px);
   border-radius: 16px;
   background-color: #ffffff;
-  align-items: center;
   box-sizing: border-box;
   padding: 16px;
-  // position: absolute;
   z-index: 999;
 }
 
-.login-btn__wrapper {
+.login__btn__wrapper {
+  @include flex(column, _, _);
+  width: 398px;
   margin: 0px 0 32px 0;
   gap: 12px;
   a {
@@ -55,7 +56,8 @@ p {
 }
 
 .close-btn__wrapper {
-  justify-content: right;
+  @include flex(_, right, _);
+  // justify-content: right;
   width: 100%;
 }
 

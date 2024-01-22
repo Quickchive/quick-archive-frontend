@@ -36,9 +36,13 @@
     }
   }
   .wrapper__confirm-button {
-    display: flex;
-    flex-direction: row;
+    @include flex(_, space-between, center);
     gap: 8px;
     margin-top: 20px;
+    width: 100%;
+    .alert-btn__wrapper {
+      @include flex;
+      width: 100%;
+    }
   }
 }

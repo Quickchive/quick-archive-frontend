@@ -92,7 +92,7 @@
                   </div>
                 </div>
               </div>
-              <button class="button--transparent"><img :src="moreIcon" /></button>
+              <button class="btn--transparent"><img :src="moreIcon" /></button>
             </article>
           </div>
           <!-- 더보기 버튼 -->

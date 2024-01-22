@@ -1,12 +1,12 @@
 <template>
   <li :class="props.treeWidth">
     <div class="flex-container__row--align-center">
-      <button class="button--transparent expand-button" @click="clickArrowEvent()">
+      <button class="btn--transparent expand-button" @click="clickArrowEvent()">
         <img v-if="isChildrenCategoryShow" :src="expandLessIcon" />
         <img v-if="!isChildrenCategoryShow" :src="expandMoreIcon" />
       </button>
       <button
-        class="button--transparent category-list__button"
+        class="btn--transparent category-list__btn"
         @click="toCategoryPage(props.category.id, props.category.name)"
       >
         <img
@@ -16,7 +16,7 @@
         {{ props.category.name }}
       </button>
     </div>
-    <button class="button--transparent moreButton" @click="showMoreButton(props.category.id)">
+    <button class="btn--transparent moreButton" @click="showMoreButton(props.category.id)">
       <img :src="moreIcon" />
       <more-button v-if="isMoreButtonShow"></more-button>
     </button>

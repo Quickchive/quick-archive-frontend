@@ -2,26 +2,28 @@
   <dialog class="flex-container__col alert-modal">
     <h1 class="alert-title">알림</h1>
     <p class="select-alert-content">{{ props.alertData.message }}</p>
-    <button
-      class="flex-container__row button--alert-checkbox"
-      @click="props.alertData.checkboxEvent()"
-      v-if="props.alertData.checkbox"
-    >
-      <img :src="checkboxOffIcon" v-if="!categoryStore.deleteContentsChecked" class="icon-small" />
-      <img
-        :src="checkboxOnIcon"
-        v-if="categoryStore.deleteContentsChecked"
-        class="icon-small"
-      />카테고리 내 콘텐츠도 함께 삭제하기
-    </button>
-    <div class="flex-container__row wrapper__alert-button--double">
-      <button class="flex-container alert-cancel-button" @click="props.alertData.leftButtonEvent()">
+
+    <div class="alert-btn--checkbox__wrapper">
+      <button
+        class="alert-btn--checkbox"
+        @click="props.alertData.checkboxEvent()"
+        v-if="props.alertData.checkbox"
+      >
+        <img
+          :src="checkboxOffIcon"
+          v-if="!categoryStore.deleteContentsChecked"
+          class="icon-small"
+        />
+        <img :src="checkboxOnIcon" v-if="categoryStore.deleteContentsChecked" class="icon-small" />
+      </button>
+      <span>카테고리 내 콘텐츠도 함께 삭제하기</span>
+    </div>
+
+    <div class="wrapper__alert-button--double">
+      <button class="alert-btn cancel btn-48" @click="props.alertData.leftButtonEvent()">
         {{ props.alertData.leftButtonMessage }}
       </button>
-      <button
-        class="flex-container alert-confirm-button"
-        @click="props.alertData.rightButtonEvent()"
-      >
+      <button class="alert-btn confirm btn-48" @click="props.alertData.rightButtonEvent()">
         {{ props.alertData.rightButtonMessage }}
       </button>
     </div>

@@ -16,8 +16,8 @@
     </ul>
     <div class="modal-footer">
       <button
-        class="confirm-button--inactive"
-        :class="{ 'confirm-button--active': isLinkValid }"
+        class="btn-confirm"
+        :class="isLinkValid ? 'active' : 'inactive'"
         @click="toModalContentAddStep02"
         :disabled="!isLinkValid"
       >

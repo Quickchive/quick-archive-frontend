@@ -11,12 +11,16 @@
 .category-item {
   width: 100%;
   @extend .flex-container__col;
+
   ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    .category-item__btn__wrapper {
+      @include flex;
+    }
     li {
-      @include flex(space-between, center);
+      @include flex(column, space-between, center);
       @include size(100%, 40px);
       flex-direction: row;
       margin-top: 4px;
@@ -41,8 +45,8 @@
     li {
       height: 56px;
       .category-list-radio__category-button {
+        @include color($color-grey-100, transparent);
         overflow: hidden;
-        color: $color-grey-100;
         text-overflow: ellipsis;
         @include font(16px, 500, 24px);
         letter-spacing: -0.3px;
@@ -50,7 +54,6 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        background-color: transparent;
         .ic__expandMore {
           margin-right: 8px;
         }

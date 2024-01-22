@@ -40,7 +40,7 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="confirm-button--inactive">저장</button>
+      <button class="btn-confirm inactive">저장</button>
     </div>
   </dialog>
 </template>

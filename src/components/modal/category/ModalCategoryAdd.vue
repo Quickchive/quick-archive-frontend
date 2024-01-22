@@ -2,10 +2,7 @@
   <dialog class="category-add__modal">
     <modal-header :modalTitle="modalTitle" :closeModal="closeModal"></modal-header>
     <div class="wrapper__category-change">
-      <button
-        class="button--transparent category-change__button"
-        @click="openSelectCategoryModal()"
-      >
+      <button class="btn--transparent category-change__button" @click="openSelectCategoryModal()">
         <div class="icon__category-change">
           <img class="img-category-custom" :src="modalDataStore.getSelectedCategory.img" /><img
             class="icon__thumb-change"
@@ -23,23 +20,20 @@
         autofocus
         maxlength="15"
       />
-      <button class="button--transparent" @click="clearCategoryName()">
+      <button class="btn--transparent" @click="clearCategoryName()">
         <img :src="textfieldCancelIcon" />
       </button>
     </label>
     <div class="flex-container__row wrapper__category-position">
       <label>생성 위치</label>
-      <button
-        class="button--transparent flex-container__row"
-        @click="openSetCategoryLocationModal()"
-      >
+      <button class="btn--transparent flex-container__row" @click="openSetCategoryLocationModal()">
         {{ modalDataStore.selectedLocation.name }}<img :src="nextBlackIcon" />
       </button>
     </div>
     <div class="modal-footer">
       <button
-        class="confirm-button--inactive"
-        :class="{ 'confirm-button--active': isCategoryNameValid }"
+        class="btn-confirm"
+        :class="isCategoryNameValid ? 'active' : 'inactive'"
         @click="saveCategory()"
         :disabled="!isCategoryNameValid"
       >

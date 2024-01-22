@@ -40,6 +40,8 @@
   }
 }
 .wrapper__alert-button--double {
+  @include flex;
+  width: 326px;
   gap: 8px;
   margin-top: 20px;
   button {
