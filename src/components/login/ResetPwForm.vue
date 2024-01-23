@@ -16,9 +16,7 @@
             />
           </div>
           <!-- 1.2 비밀번호 유효성 검사 -->
-          <span v-if="validatePw == false" class="error-msg"
-            >8자 이상 문자와 숫자를 포함하여 입력해주세요.</span
-          >
+          <span class="error-msg">8자 이상 문자와 숫자를 포함하여 입력해주세요.</span>
 
           <!-- 2.1 비밀번호 확인 인풋 -->
           <div class="register-form__wrapper">
@@ -53,13 +51,7 @@ export default {
   },
   computed: {
     // 비밀번호 유효성 검사
-    validatePw() {
-      if (this.pw != '') {
-        return validatePw(this.pw)
-      } else {
-        return null
-      }
-    },
+
     // 비밀번호 일치 확인
     checkPw() {
       if (this.pwCheck == '') {
@@ -71,15 +63,8 @@ export default {
           return true
         }
       }
-    },
-    // 버튼 활성화
-    isValid() {
-      if (this.validatePw == true && this.checkPw == true) {
-        return true
-      } else {
-        return false
-      }
     }
+    // 버튼 활성화
   },
   methods: {
     // 비밀번호 재설정
