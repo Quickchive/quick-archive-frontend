@@ -1,15 +1,16 @@
 import { defineStore } from 'pinia'
 import { getCategories } from '@/api/category'
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import categoryList from '@/assets/model/categoryList.json'
 import type { CategoryIdMap } from '@/utils/interface'
 
 export const useCategoryTreeStore = defineStore('categoryTree', () => {
   // 더미 값 들어있음
-  const userCategoryList = ref(categoryList)
+  const userCategoryList = ref([])
 
   // 카테고리 트리 depth show/hide 컨트롤 용
   const categoryIdTree = ref<CategoryIdMap>({})
+  const categoryIdTreeRadio = ref<CategoryIdMap>({})
 
   // 카테고리 트리 depth show/hide 컨트롤 용
   function showChildrenCategory(children: any) {
@@ -22,26 +23,66 @@ export const useCategoryTreeStore = defineStore('categoryTree', () => {
     }
   }
 
-  // async function getUserCategoryList() {
-  //   try {
-  //     const response = await getCategories()
-  //     if (response.data.statusCode === 200) {
-  //       userCategoryList = response.data.categoriesTree
-  //     }
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
+  // 카테고리 트리 depth show/hide 컨트롤 용
+  function showChildrenCategoryRadio(children: any) {
+    if (children) {
+      for (const child of children) {
+        if (child.id in categoryIdTreeRadio.value) {
+          categoryIdTreeRadio.value[child.id] = !categoryIdTreeRadio.value[child.id]
+        }
+      }
+    }
+  }
 
-  function createCategoryIdTree(categoryIdMap: any) {
-    categoryIdTree.value = categoryIdMap
+  async function getUserCategoryList() {
+    try {
+      const response = await getCategories()
+      if (response.data.statusCode === 200) {
+        userCategoryList.value = response.data.categoriesTree
+        const categoryIdMap = createCategoryIdMap(userCategoryList.value)
+        categoryIdTree.value = categoryIdMap
+        categoryIdTreeRadio.value = categoryIdMap
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async function updateUserCategoryList() {
+    try {
+      const response = await getCategories()
+      if (response.data.statusCode === 200) {
+        userCategoryList.value = response.data.categoriesTree
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  function createCategoryIdMap(items: any[]) {
+    return items.reduce((acc, item) => {
+      acc[item.id] = false
+      if (item.children && Array.isArray(item.children)) {
+        const nestedMap = createCategoryIdMap(item.children)
+        Object.assign(acc, nestedMap)
+      }
+      return acc
+    }, {})
+  }
+
+  function updateCategoryIdTree(categoryIdMap: any, targetMap: any) {
+    targetMap.value = categoryIdMap
   }
 
   return {
     userCategoryList,
     categoryIdTree,
-    createCategoryIdTree,
-    showChildrenCategory
-    // getUserCategoryList
+    categoryIdTreeRadio,
+    createCategoryIdMap,
+    showChildrenCategory,
+    getUserCategoryList,
+    updateCategoryIdTree,
+    showChildrenCategoryRadio,
+    updateUserCategoryList
   }
 })
