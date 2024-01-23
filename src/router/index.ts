@@ -63,6 +63,10 @@ const router = createRouter({
       path: '/login/tester',
       name: 'logintester',
       component: () => import('@/views/TesterLogin.vue')
+    },
+    {
+      path: '/reset/:code',
+      component: () => import('@/components/login/ResetPwForm.vue')
     }
   ]
 })
