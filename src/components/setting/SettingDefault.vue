@@ -62,7 +62,7 @@ const router = useRouter()
 const title = ref('설정')
 
 const toMyInfoPage = () => {
-  router.push('/setting/myinfo')
+  router.push('/home/setting/myinfo')
 }
 </script>
 
