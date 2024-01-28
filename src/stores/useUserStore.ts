@@ -36,9 +36,6 @@ export const useUserStore = defineStore('user', () => {
       console.log('로그인 응답', response)
       saveRefreshTokenToCookie(response.data.refresh_token)
       saveAccessTokenToCookie(response.data.access_token)
-      const profileResponse = await getProfile()
-      nickname.value = profileResponse.data.name
-      email.value = profileResponse.data.email
       refreshToken.value = response.data.refresh_token
       isLogin.value = true
     } catch (error) {

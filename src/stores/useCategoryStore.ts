@@ -3,12 +3,14 @@ import { getCategories } from '@/api/category'
 import { deleteCategories } from '@/api/category.js'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { ref } from 'vue'
-import { addCategories } from '@/api/category.js'
+import { addCategories, updateCategories } from '@/api/category.js'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
+import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 
 export const useCategoryStore = defineStore('category', () => {
   const modalViewStore = useModalViewStore()
   const modalDataStore = useModalDataStore()
+  const categoryTreeStore = useCategoryTreeStore()
 
   const userCategoryList = ref([
     {
@@ -204,10 +206,9 @@ export const useCategoryStore = defineStore('category', () => {
   async function deleteCategory() {
     try {
       const focusedCategory_id = focusedCategoryId.value
-      const response = await deleteCategories(focusedCategory_id, deleteContentsChecked)
-      // console.log(response)
+      const response = await deleteCategories(focusedCategory_id, deleteContentsChecked.value)
       if (response.data.statusCode === (200 || 201)) {
-        getUserCategoryList()
+        await categoryTreeStore.updateUserCategoryList()
         modalViewStore.closeDeleteCategoryModal()
       }
     } catch (error) {
@@ -220,28 +221,38 @@ export const useCategoryStore = defineStore('category', () => {
   async function addCategory(categoryData: any) {
     // 카테고리 추가
     try {
-      // let categoryData = {
-      //   categoryName: categoryName.value,
-      //  iconName: modalDataStore.getSelectedCategory.iconName
-      // }
-      // if (modalDataStore.selectedLocation.name !== '미지정') {
-      //   categoryData.parentId = modalDataStore.selectedLocation.id
-      // }
       const response = await addCategories(categoryData)
-      // if (response.data.statusCode === 201) {
-      // modalViewStore.closeAddCategoryModal()
-      // modalViewStore.closeSelectModal()
-      // await categoryStore.getUserCategoryList()
-      return response.data.statusCode
-      // }
+      // 상태코드로 에러 처리 하기
+      if (response.data.statusCode === 201) {
+        modalViewStore.closeAddCategoryModal()
+        modalViewStore.closeSelectModal()
+        await categoryTreeStore.updateUserCategoryList()
+      }
     } catch (error: any) {
-      console.log(error)
-      // if (error.response.data.statusCode === 409) {
-      //   modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
-      //   modalViewStore.openAlertModal()
-      // }
+      if (error.response.data.statusCode === 409) {
+        modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
+        modalViewStore.openAlertModal()
+      }
     }
   }
+
+  async function editCategory(categoryData: any) {
+    console.log(categoryData)
+    try {
+      const response = await updateCategories(categoryData)
+      if (response.data.statusCode === 200) {
+        modalViewStore.closeEditCategoryModal()
+        // modalViewStore.closeSelectModal()
+        await categoryTreeStore.updateUserCategoryList()
+      }
+    } catch (error: any) {
+      if (error.response.data.statusCode === 409) {
+        modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
+        modalViewStore.openAlertModal()
+      }
+    }
+  }
+
   return {
     userCategoryList,
     curCategoryName,
@@ -257,6 +268,7 @@ export const useCategoryStore = defineStore('category', () => {
     getCategoryDepth3NameById,
     isCategoryDepth3,
     getCategoryDepth2NameById,
-    addCategory
+    addCategory,
+    editCategory
   }
 })

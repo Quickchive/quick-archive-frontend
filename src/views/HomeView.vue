@@ -6,12 +6,12 @@
 
 <script setup>
 import { useUserStore } from '@/stores/useUserStore.ts'
-import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
 const userStore = useUserStore()
-const categoryStore = useCategoryStore()
+const categoryTreeStore = useCategoryTreeStore()
 const route = useRoute()
 
 onMounted(async () => {
@@ -23,7 +23,7 @@ onMounted(async () => {
       const code = route.query.code
       await userStore.googleLogin(code)
       await userStore.getUserProfile()
-      await categoryStore.getUserCategoryList()
+      await categoryTreeStore.getUserCategoryList()
     } catch (error) {
       console.error(error)
     }
@@ -35,14 +35,14 @@ onMounted(async () => {
       const code = route.query.code
       await userStore.kakaoSocialLogin(code)
       await userStore.getUserProfile()
-      await categoryStore.getUserCategoryList()
+      await categoryTreeStore.getUserCategoryList()
     } catch (error) {
       console.error(error)
     }
   } else {
-    //     await userStore.kakaoSocialLogin(code)
-    // await userStore.getUserProfile()
-    // await categoryStore.getUserCategoryList()
+    console.log('테스터 로그인')
+    await userStore.getUserProfile()
+    await categoryTreeStore.getUserCategoryList()
   }
 })
 </script>
