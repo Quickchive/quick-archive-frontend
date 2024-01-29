@@ -1,7 +1,7 @@
 <template>
   <div
     class="category-tree"
-    v-for="categoryItem1 in categoryTreeRadioStore.userCategoryList"
+    v-for="categoryItem1 in categoryTreeStore.userCategoryList"
     :key="categoryItem1"
   >
     <div class="category-item-radio">
@@ -20,7 +20,7 @@
           v-for="categoryItem2 in categoryItem1.children"
           :key="categoryItem2"
         >
-          <template v-if="categoryTreeRadioStore.categoryIdTree[categoryItem2.id]">
+          <template v-if="categoryTreeStore.categoryIdTreeRadio[categoryItem2.id]">
             <li>
               <single-category-tree-with-radio-button
                 :category="categoryItem2"
@@ -38,27 +38,10 @@
 
 <script setup>
 import SingleCategoryTreeWithRadioButton from '@/components/nav/SingleCategoryTreeWithRadioButton.vue'
-import { useCategoryTreeRadioStore } from '@/stores/useCategoryTreeRadioStore.ts'
-import { onMounted } from 'vue'
+import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 
 // 스토어 선언
-const categoryTreeRadioStore = useCategoryTreeRadioStore()
-
-onMounted(async () => {
-  // 카테고리 id맵을 생성
-  const createIdMap = (items) => {
-    return items.reduce((acc, item) => {
-      acc[item.id] = false
-      if (item.children && Array.isArray(item.children)) {
-        const nestedMap = createIdMap(item.children)
-        Object.assign(acc, nestedMap)
-      }
-      return acc
-    }, {})
-  }
-  categoryTreeRadioStore.createCategoryIdTree(createIdMap(categoryTreeRadioStore.userCategoryList))
-})
-
+const categoryTreeStore = useCategoryTreeStore()
 const treeWidth2 = 'liDepth2'
 </script>
 
