@@ -6,7 +6,7 @@ import type { CategoryIdMap } from '@/utils/interface'
 
 export const useCategoryTreeStore = defineStore('categoryTree', () => {
   // 더미 값 들어있음
-  const userCategoryList = ref([])
+  const userCategoryList: any = ref([])
 
   // 카테고리 트리 depth show/hide 컨트롤 용
   const categoryIdTree = ref<CategoryIdMap>({})

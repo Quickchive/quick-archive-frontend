@@ -1,7 +1,7 @@
 <template>
   <div class="flex-container__col--100">
     <header class="titleHeader">
-      <h1>{{ searchStore.keyword }} 검색 결과</h1>
+      <h1>{{ searchStore.keyword.main }} 검색 결과</h1>
     </header>
     <div class="divider"></div>
     <!-- 검색 결과 -->
@@ -29,15 +29,15 @@
           </div>
         </template>
         <!-- 1.2 검색 결과 X -->
-        <template v-if="searchStore.searchedContentCount === 0 || searchStore.keyword === ''">
+        <template v-if="searchStore.searchedContentCount === 0 || searchStore.keyword.main === ''">
           <div class="flex-container__col contents__empty">
             <img :src="emptyContentImg" class="img-empty" />
             <span>저장된 콘텐츠가 없습니다.</span>
           </div>
         </template>
-        <!-- 2. 카테고리 검색 결과 -->
       </section>
       <div class="searchpage-divider"></div>
+      <!-- 2. 카테고리 검색 결과 -->
       <section>
         <div class="contents-num__wrapper">카테고리 {{ searchStore.searchedCategoryCount }}개</div>
         <!-- 2.1 검색 결과 O -->
@@ -64,12 +64,17 @@
                 <!-- 1차 카테고리 && 2차 카테고리 존재 -->
                 <div
                   class="searchResult-category-text-box"
-                  v-if="category.parentId !== null && category.children"
+                  v-if="category.parentId !== null && !category.children"
                 >
                   <h1 class="searchResult-category-title">{{ category.name }}</h1>
                   <div class="searchResult-category-detail">
                     <!-- 카테고리 위치 -->
-                    <span>{{ categoryStore.getCategoryDepth2NameById(category.parentId) }} </span>
+                    <span
+                      >{{ searchStore.findParentAndGrandParent(category.id).grandParentName }}
+                    </span>
+                    <img :src="nextIcon" class="icon-ex-small" />
+                    <span>{{ searchStore.findParentAndGrandParent(category.id).parentName }}</span>
+
                     <img :src="dividerIcon" />
                     <span>454개 콘텐츠</span>
                   </div>
@@ -77,18 +82,14 @@
                 <!-- 1차 카테고리 && 2차 카테고리 && 3차 카테고리 존재 -->
                 <div
                   class="searchResult-category-text-box"
-                  v-if="
-                    category.parentId !== null && categoryStore.isCategoryDepth3(category.parentId)
-                  "
+                  v-if="category.parentId !== null && category.children"
                 >
                   <h1 class="searchResult-category-title">{{ category.name }}</h1>
                   <div class="searchResult-category-detail">
                     <!-- 카테고리 위치 -->
-                    <span>{{ categoryStore.getCategoryDepth3NameById(category.parentId) }} </span>
-                    <img :src="nextIcon" class="icon-ex-small" />
-                    <span>{{ categoryStore.getCategoryDepth2NameById(category.parentId) }}</span>
+                    <span>{{ searchStore.getCategoryDepth2NameById(category.parentId) }} </span>
                     <img :src="dividerIcon" />
-                    <span>454개 콘텐츠</span>
+                    <span>4개 콘텐츠</span>
                   </div>
                 </div>
               </div>
@@ -108,7 +109,7 @@
           </div>
         </template>
         <!-- 2.2 검색 결과 X -->
-        <template v-if="searchStore.searchedCategoryCount === 0 || searchStore.keyword === ''">
+        <template v-if="searchStore.searchedCategoryCount === 0 || searchStore.keyword.main === ''">
           <div class="flex-container__col contents__empty">
             <img :src="emptyCategoryImg" class="img-empty" />
             <span>생성된 카테고리가 없습니다.</span>
@@ -121,45 +122,18 @@
 
 <script setup>
 import { useSearchStore } from '@/stores/useSearchStore.ts'
-import { useCategoryStore } from '@/stores/useCategoryStore.ts'
-import { useContentStore } from '@/stores/useContentStore.ts'
+import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import emptyContentImg from '@/assets/img/img_empty_nocontent.png'
 import emptyCategoryImg from '@/assets/img/img_empty_nocategory.png'
 import dividerIcon from '@/assets/ic/divider_14px.svg'
 import nextIcon from '@/assets/ic/ic_next_gray_24px.svg'
 import moreIcon from '@/assets/ic/ic-more.svg'
-import { getCategoryIdWithKeyword, getContentIdWithKeyword } from '@/utils/search.js'
-import { toRaw } from 'vue'
 import ContentsItem from '@/components/home/ContentsItem.vue'
 
 const searchStore = useSearchStore()
-const categoryStore = useCategoryStore()
-const contentStore = useContentStore()
+const categoryTreeStore = useCategoryTreeStore()
 const modalDataStore = useModalDataStore()
-
-searchStore.$subscribe(() => {
-  if (searchStore.keyword.value !== '') {
-    // 카테고리
-    searchStore.searchedCategory = getCategoryIdWithKeyword(
-      searchStore.keyword,
-      categoryStore.userCategoryList
-    )
-
-    if (searchStore.searchedCategory !== undefined) {
-      searchStore.searchedCategoryCount = searchStore.searchedCategory.length
-    }
-
-    // 콘텐츠
-    searchStore.searchedContent = toRaw(
-      getContentIdWithKeyword(searchStore.keyword, contentStore.userContentList)
-    )
-
-    if (searchStore.searchedContent !== undefined) {
-      searchStore.searchedContentCount = searchStore.searchedContent.length
-    }
-  }
-})
 </script>
 
 <style></style>

@@ -6,7 +6,11 @@
       :closeModal="closeModal"
     ></modal-header>
     <div class="wrapper__search-input">
-      <search-input :placeholderText="placeholderText" :isSizeSm="false"></search-input>
+      <search-input
+        :keyword="searchStore.keyword.categoryModal"
+        :placeholderText="searchStore.placeholderText.categoryModal"
+        :isSizeSm="false"
+      ></search-input>
     </div>
     <div class="wrapper__add-new-category__button">
       <button
@@ -42,16 +46,19 @@ import CategoryItemWithRadioButton from '@/components/nav/CategoryItemWithRadioB
 import ModalHeader from '@/components/header/ModalHeader.vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
+import { useSearchStore } from '@/stores/useSearchStore.ts'
+
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { toRaw, onMounted, ref } from 'vue'
 import categoryListDummy from '@/assets/model/categoryList.json'
 
-const placeholderText = '카테고리명 검색'
 const modalTitle = '생성 위치'
 const isBtnOnLeft = true
 
 // 스토어 선언
 const categoryStore = useCategoryStore()
+const searchStore = useSearchStore()
+
 const modalViewStore = useModalViewStore()
 const modalDataStore = useModalDataStore()
 

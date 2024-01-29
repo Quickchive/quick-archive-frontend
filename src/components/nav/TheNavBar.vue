@@ -8,9 +8,13 @@
           <img class="img-profile" :src="profileImg" /><span>{{ userStore.nickname }}</span>
         </div>
       </router-link>
-
       <div class="search__wrapper">
-        <search-input :placeholderText="placeholderText" :isSizeSm="true"></search-input>
+        <search-input
+          :keyword="searchStore.keyword.main"
+          :placeholderText="searchStore.placeholderText.main"
+          :isSizeSm="true"
+        >
+        </search-input>
       </div>
     </div>
     <!-- divider -->
@@ -41,17 +45,18 @@ import SearchInput from '@/components/input/SearchInput.vue'
 import ModalView from '@/views/ModalView.vue'
 import { useUserStore } from '@/stores/useUserStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
+import { useSearchStore } from '@/stores/useSearchStore.ts'
+
 import { useRouter } from 'vue-router'
-import { ref } from 'vue'
 import mainLogo from '@/assets/logo/logo_black_20px.svg'
 
 const userStore = useUserStore()
+const searchStore = useSearchStore()
+
 const modalViewStore = useModalViewStore()
 const router = useRouter()
 
-const placeholderText = ref('제목, 메모, 카테고리명 검색')
 const showAddModal = () => {
-  console.log('open')
   modalViewStore.openSelectModal()
 }
 

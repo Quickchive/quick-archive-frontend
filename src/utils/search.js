@@ -38,7 +38,7 @@ const getContentIdWithKeyword = (keyword, contentData) => {
 
   const set = new Set(contentIdListWithKeyword)
   const result = [...set]
-  // console.log('content', result)
+  console.log('content', result)
   return result
 }
 
@@ -81,8 +81,39 @@ const getCategoryIdWithKeyword = (keyword, categoryData) => {
   // 중복 제거
   const set = new Set(categoryListWithKeyword)
   const result = [...set]
-  // console.log(result)
+  console.log('category', result)
   return result
 }
 
-export { searchCategoryDataById, getCategoryIdWithKeyword, getContentIdWithKeyword }
+// 한글 조합이 완성되었는지 검색
+const checkHangulCompletion = (char) => {
+  var lastChar = char.charAt(char.length - 1)
+
+  // 한글 조합이 완성되었는지 확인
+  var isCompleted = isHangulCompleted(lastChar)
+
+  if (isCompleted) {
+    return true
+  } else {
+    return false
+  }
+}
+
+const isHangulCompleted = (char) => {
+  // 유니코드를 통해 한글 범위 확인
+  var charCode = char.charCodeAt(0)
+  return charCode >= 44032 && charCode <= 55203 // 한글 음절 범위
+}
+
+const isHangul = (char) => {
+  var pattern = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/
+  return pattern.test(char)
+}
+
+export {
+  searchCategoryDataById,
+  getCategoryIdWithKeyword,
+  getContentIdWithKeyword,
+  checkHangulCompletion,
+  isHangul
+}
