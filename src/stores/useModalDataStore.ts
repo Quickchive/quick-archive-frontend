@@ -12,6 +12,7 @@ import categoryStar from '@/assets/img/category/img_category_star.png'
 import categoryTrip from '@/assets/img/category/img_category_trip.png'
 import categoryWatch from '@/assets/img/category/img_category_watch.png'
 import { ref, reactive, computed } from 'vue'
+import { getOgData } from '@/api/contents'
 
 export const useModalDataStore = defineStore('modalData', () => {
   const defaultCategory = reactive([
@@ -98,12 +99,16 @@ export const useModalDataStore = defineStore('modalData', () => {
   })
 
   // 콘텐츠 추가 모달 데이터
-  const addContentData = reactive({
+  const addContentData = ref({
     category: selectedLocation.value,
     favorite: false,
     memo: '',
     link: '',
-    title: '작은집으로 이사가야 해서 미니멀리즘을 열...'
+    title: '',
+    coverImg: '',
+    siteName: '',
+    description: '',
+    parentId: ''
   })
 
   const getSelectedCategory = computed(() => {
@@ -145,22 +150,40 @@ export const useModalDataStore = defineStore('modalData', () => {
 
   // 콘텐츠 추가
   function setAddContentData(contentData: any) {
-    addContentData.category = contentData.category ? contentData.category : addContentData.category
-    addContentData.memo = contentData.memo ? contentData.memo : addContentData.memo
-    addContentData.link = contentData.link ? contentData.link : addContentData.link
-    addContentData.title = contentData.title ? contentData.title : addContentData.title
+    addContentData.value.category = contentData.category
+      ? contentData.category
+      : addContentData.value.category
+    addContentData.value.memo = contentData.memo ? contentData.memo : addContentData.value.memo
+    addContentData.value.link = contentData.link ? contentData.link : addContentData.value.link
+    addContentData.value.title = contentData.title ? contentData.title : addContentData.value.title
   }
   function setFavoriteToggle() {
-    addContentData.favorite = !addContentData.favorite
+    addContentData.value.favorite = !addContentData.value.favorite
   }
   function setMemo(contentAddMemo: string) {
-    addContentData.memo = contentAddMemo
+    addContentData.value.memo = contentAddMemo
   }
   function setLink(link: string) {
-    addContentData.link = link
+    addContentData.value.link = link
   }
   function setTitle(title: string) {
-    addContentData.title = title
+    addContentData.value.title = title
+  }
+
+  // og 데이터 추출
+  async function fetchOgData(link: string) {
+    try {
+      const response: any = await getOgData(link)
+      console.log('ogdata', response)
+      if (response.data.statusCode === 200 || response.data.statusCode === 201) {
+        addContentData.value.coverImg = response.data.coverImg
+        addContentData.value.title = response.data.title
+        addContentData.value.description = response.data.description
+        addContentData.value.siteName = response.data.siteName
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return {
@@ -179,6 +202,7 @@ export const useModalDataStore = defineStore('modalData', () => {
     setFavoriteToggle,
     setMemo,
     setLink,
-    setTitle
+    setTitle,
+    fetchOgData
   }
 })

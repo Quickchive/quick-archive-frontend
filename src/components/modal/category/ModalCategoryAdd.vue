@@ -50,10 +50,8 @@ import nextBlackIcon from '@/assets/ic/ic-next-black.svg'
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
 import ModalHeader from '@/components/header/ModalHeader.vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
-import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
-// import { addCategories } from '@/api/category.js'
-import { addCategories, updateCategories } from '@/api/category.js'
 import { ref, computed, onMounted } from 'vue'
 import { searchCategoryDataById } from '@/utils/search.js'
 
@@ -63,19 +61,23 @@ const props = defineProps({
   apiName: String
 })
 
+// store 선언
+const modalViewStore = useModalViewStore()
+const categoryTreeStore = useCategoryTreeStore()
+const modalDataStore = useModalDataStore()
+
 onMounted(async () => {
   if (props.apiName === 'editCategory') {
-    console.log('editCategory')
-    categoryName.value = categoryStore.focusedCategoryData.name
-    if (categoryStore.focusedCategoryData.parentId !== null) {
+    categoryName.value = categoryTreeStore.focusedCategoryData.name
+    if (categoryTreeStore.focusedCategoryData.parentId !== null) {
       const parentData = searchCategoryDataById(
-        categoryStore.userCategoryList,
-        categoryStore.focusedCategoryData.parentId
+        categoryTreeStore.userCategoryList,
+        categoryTreeStore.focusedCategoryData.parentId
       )
       modalDataStore.selectedLocation.name = parentData.name
       modalDataStore.selectedLocation.id = parentData.id
     }
-    if (categoryStore.focusedCategoryData.parentId === null) {
+    if (categoryTreeStore.focusedCategoryData.parentId === null) {
       modalDataStore.selectedLocation.name = '미지정'
     }
     console.log('parentData', parentData)
@@ -85,11 +87,6 @@ onMounted(async () => {
 const categoryName = ref('')
 let categoryIcon = ref(categoryWatchIcon)
 let categoryLocationName = ref('미지정')
-
-// store 선언
-const modalViewStore = useModalViewStore()
-const categoryStore = useCategoryStore()
-const modalDataStore = useModalDataStore()
 
 const openSelectCategoryModal = () => {
   modalViewStore.openSelectCategoryModal()
@@ -115,61 +112,30 @@ modalDataStore.$subscribe(() => {
   categoryLocationName.value = modalDataStore.selectedLocation.name
 })
 
-const saveCategory = async () => {
+// 저장 버튼 클릭 이벤트
+const saveCategory = () => {
   // 카테고리 추가
   if (props.apiName === 'addCategory') {
-    // 저장 버튼 클릭
-    // const addCategory = async () => {
-    try {
-      let categoryData = {
-        categoryName: categoryName.value,
-        iconName: modalDataStore.getSelectedCategory.iconName
-      }
-      if (modalDataStore.selectedLocation.name !== '미지정') {
-        categoryData.parentId = modalDataStore.selectedLocation.id
-      }
-      const response = await addCategories(categoryData)
-      console.log('카테고리 추가 서버 전송 응답', response)
-      // 상태코드로 에러 처리 하기
-      if (response.data.statusCode === 201) {
-        modalViewStore.closeAddCategoryModal()
-        modalViewStore.closeSelectModal()
-        await categoryStore.getUserCategoryList()
-      }
-    } catch (error) {
-      console.log(error)
-      if (error.response.data.statusCode === 409) {
-        modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
-        modalViewStore.openAlertModal()
-      }
+    let categoryData = {
+      categoryName: categoryName.value,
+      iconName: modalDataStore.getSelectedCategory.iconName
     }
+    if (modalDataStore.selectedLocation.name !== '미지정') {
+      categoryData.parentId = modalDataStore.selectedLocation.id
+    }
+    categoryTreeStore.addCategory(categoryData)
   }
   // 카테고리 수정
   if (props.apiName === 'editCategory') {
-    try {
-      let categoryData = {
-        categoryName: categoryName.value,
-        iconName: modalDataStore.getSelectedCategory.iconName,
-        // parentId: modalDataStore.selectedLocation.id,
-        categoryId: categoryStore.focusedCategoryData.id
-      }
-      if (modalDataStore.selectedLocation.name !== '미지정') {
-        categoryData.parentId = modalDataStore.selectedLocation.id
-      }
-      const response = await updateCategories(categoryData)
-      console.log('카테고리 수정 서버 전송 응답', response)
-      if (response.data.statusCode === 201) {
-        modalViewStore.closeAddCategoryModal()
-        modalViewStore.closeSelectModal()
-        await categoryStore.getUserCategoryList()
-      }
-    } catch (error) {
-      console.log(error)
-      if (error.response.data.statusCode === 409) {
-        modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
-        modalViewStore.openAlertModal()
-      }
+    let editCategoryData = {
+      categoryName: categoryName.value,
+      iconName: modalDataStore.getSelectedCategory.iconName,
+      categoryId: categoryTreeStore.focusedCategoryId
     }
+    if (modalDataStore.selectedLocation.name !== '미지정') {
+      editCategoryData.parentId = modalDataStore.selectedLocation.id
+    }
+    categoryTreeStore.editCategory(editCategoryData)
   }
 }
 

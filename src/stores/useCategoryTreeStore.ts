@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import { getCategories } from '@/api/category'
 import { ref } from 'vue'
-import categoryList from '@/assets/model/categoryList.json'
 import type { CategoryIdMap } from '@/utils/interface'
 
 export const useCategoryTreeStore = defineStore('categoryTree', () => {

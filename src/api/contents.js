@@ -12,7 +12,7 @@ function updateContents(contentsData) {
 
 // 콘텐츠 조회
 function getContents(categoryId) {
-  return authInstance.get(`contents/contents?categoryId=${categoryId}`)
+  return authInstance.get(`contents?categoryId=${categoryId}`)
 }
 
 // 전체 콘텐츠
@@ -50,6 +50,11 @@ function summarizeContents(contentId) {
   return authInstance.get(`contents/${contentId}/summarize`)
 }
 
+// OG 데이터 크롤링
+function getOgData(link) {
+  return authInstance.get(`contents/og?link=${link}`)
+}
+
 export {
   addContents,
   updateContents,
@@ -60,5 +65,6 @@ export {
   getFavorites,
   getReminderCount,
   summarizeContents,
-  getAllContents
+  getAllContents,
+  getOgData
 }

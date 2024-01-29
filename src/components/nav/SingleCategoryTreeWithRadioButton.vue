@@ -38,7 +38,6 @@ import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 
 const modalDataStore = useModalDataStore()
 const categoryTreeStore = useCategoryTreeStore()
-
 const isChildrenCategoryShow = ref(false)
 
 const props = defineProps({

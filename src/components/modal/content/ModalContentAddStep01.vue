@@ -31,10 +31,14 @@
 import { ref, computed } from 'vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
+
 import ModalHeader from '@/components/header/ModalHeader.vue'
+import {} from '@/api/contents.js'
+
 const modalTitle = '콘텐츠 추가'
 const modalViewStore = useModalViewStore()
 const modalDataStore = useModalDataStore()
+
 const link = ref('')
 
 const setLink = (e) => {
@@ -51,9 +55,10 @@ const closeModal = () => {
   modalViewStore.closeSelectModal()
 }
 
-const toModalContentAddStep02 = () => {
+const toModalContentAddStep02 = async () => {
   modalDataStore.setLink(link.value)
-  modalViewStore.openAddContentDetailModal()
+  await modalDataStore.fetchOgData(link.value)
+  await modalViewStore.openAddContentDetailModal()
 }
 </script>
 

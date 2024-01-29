@@ -25,7 +25,7 @@
     </div>
   </article>
   <!-- 메모 -->
-  <memo-item :comment="comment"></memo-item>
+  <memo-item :comment="item.comment"></memo-item>
 </template>
 
 <script setup>
@@ -36,18 +36,17 @@ import favoriteSelectedIcon from '@/assets/ic/ic-favorite-seleted_32px.svg'
 import favoriteUnselectedIcon from '@/assets/ic/ic-favorite-unseleted_32px.svg'
 import { addFavorite } from '@/api/contents.js'
 import { useContentStore } from '@/stores/useContentStore.ts'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { ref } from 'vue'
 import MemoItem from '@/components/home/MemoItem.vue'
 
 const contentStore = useContentStore()
 const router = useRouter()
+const route = useRoute()
 
 const props = defineProps({
   item: Object
 })
-
-const comment = ref(props.item.comment)
 
 const favoriteEvent = async () => {
   try {
@@ -61,7 +60,7 @@ const favoriteEvent = async () => {
   }
 }
 
-const toCategoryPage = (categoryId) => {
+const toCategoryPage = async (categoryId) => {
   router.push(`/home/${categoryId}`)
 }
 </script>

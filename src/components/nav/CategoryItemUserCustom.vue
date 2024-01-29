@@ -31,6 +31,7 @@
                   <single-category-tree
                     :category="categoryItem3"
                     :treeWidth="treeWidth3"
+                    :activeExpandButton="false"
                   ></single-category-tree>
                 </li>
               </template>
@@ -45,27 +46,20 @@
 <script setup>
 import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import SingleCategoryTree from '@/components/nav/SingleCategoryTree.vue'
-import { onMounted } from 'vue'
+import { watch } from 'vue'
+
+watch(
+  () => useCategoryTreeStore.userCategoryList,
+  () => {
+    // 적절한 화면 갱신 로직 추가
+    console.log('myState가 변경되었습니다. 화면을 갱신합니다.')
+  }
+)
 
 const categoryTreeStore = useCategoryTreeStore()
 const treeWidth1 = 'category-list__first-ul'
 const treeWidth2 = 'category-list__second-ul'
 const treeWidth3 = 'category-list__third-ul'
-
-onMounted(async () => {
-  // 카테고리 id맵을 생성
-  const createIdMap = (items) => {
-    return items.reduce((acc, item) => {
-      acc[item.id] = false
-      if (item.children && Array.isArray(item.children)) {
-        const nestedMap = createIdMap(item.children)
-        Object.assign(acc, nestedMap)
-      }
-      return acc
-    }, {})
-  }
-  categoryTreeStore.createCategoryIdTree(createIdMap(categoryTreeStore.userCategoryList))
-})
 </script>
 
 <style></style>

@@ -44,7 +44,7 @@ import SearchInput from '@/components/input/SearchInput.vue'
 import addCategoryIcon from '@/assets/ic/ic-category-add.svg'
 import CategoryItemWithRadioButton from '@/components/nav/CategoryItemWithRadioButton.vue'
 import ModalHeader from '@/components/header/ModalHeader.vue'
-import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useSearchStore } from '@/stores/useSearchStore.ts'
 
@@ -56,13 +56,13 @@ const modalTitle = '생성 위치'
 const isBtnOnLeft = true
 
 // 스토어 선언
-const categoryStore = useCategoryStore()
+const categoryTreeStore = useCategoryTreeStore()
 const searchStore = useSearchStore()
 
 const modalViewStore = useModalViewStore()
 const modalDataStore = useModalDataStore()
 
-const categoryList = ref(categoryStore.userCategoryList)
+const categoryList = ref(categoryTreeStore.userCategoryList)
 
 const closeModal = () => {
   modalDataStore.resetCategoryLocation()
@@ -70,9 +70,9 @@ const closeModal = () => {
 }
 
 onMounted(async () => {
-  await categoryStore.getUserCategoryList()
-  if (toRaw(categoryStore.userCategoryList).length > 0) {
-    categoryList.value = toRaw(categoryStore.userCategoryList)
+  await categoryTreeStore.getUserCategoryList()
+  if (toRaw(categoryTreeStore.userCategoryList).length > 0) {
+    categoryList.value = toRaw(categoryTreeStore.userCategoryList)
   } else {
     categoryList.value = categoryListDummy
   }

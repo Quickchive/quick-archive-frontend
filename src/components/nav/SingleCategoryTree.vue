@@ -16,7 +16,7 @@
         {{ props.category.name }}
       </button>
     </div>
-    <button class="btn--transparent moreButton" @click="showMoreButton(props.category.id)">
+    <button class="btn--transparent moreButton" @click="showMoreButton(props.category)">
       <img :src="moreIcon" />
       <more-button v-if="isMoreButtonShow"></more-button>
     </button>
@@ -29,14 +29,18 @@ import expandLessIcon from '@/assets/ic/ic-expand-less.svg'
 import moreIcon from '@/assets/ic/ic-more.svg'
 import MoreButton from '@/components/button/MoreButton.vue'
 import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useCategoryStore } from '@/stores/useCategoryStore.ts'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
+import { useRouter, useRoute } from 'vue-router'
 import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
+import { useModalDataStore } from '@/stores/useModalDataStore.ts'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+import { useContentStore } from '@/stores/useContentStore.ts'
 
-const categoryStore = useCategoryStore()
 const modalDataStore = useModalDataStore()
 const categoryTreeStore = useCategoryTreeStore()
+const categoryStore = useCategoryStore()
+const contentStore = useContentStore()
+
+const route = useRoute()
 
 const isChildrenCategoryShow = ref(false)
 const isMoreButtonShow = ref(false)
@@ -53,16 +57,21 @@ const router = useRouter()
 const moreButton = reactive([])
 
 // 특정 카테고리 페이지로 이동
-const toCategoryPage = (categoryId, categoryName) => {
+const toCategoryPage = async (categoryId, categoryName) => {
+  await contentStore.fetchContents(categoryId)
+  //
   router.push(`/home/${categoryId}`)
   categoryStore.setCategoryName(categoryName)
 }
 
-const showMoreButton = () => {
+const showMoreButton = (categoryData) => {
   isMoreButtonShow.value = !isMoreButtonShow.value
+  categoryStore.setFocusedCategory(categoryData.id)
+  categoryStore.setFocusedCategoryData(categoryData)
 }
 
 const clickArrowEvent = () => {
+  if (props.activeExpandButton === false) return
   if (props.children) {
     isChildrenCategoryShow.value = !isChildrenCategoryShow.value
     categoryTreeStore.showChildrenCategory(props.children)
