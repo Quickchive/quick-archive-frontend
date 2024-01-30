@@ -10,7 +10,8 @@
       </router-link>
       <div class="search__wrapper">
         <search-input
-          :keyword="searchStore.keyword.main"
+          :keyword="'main'"
+          :location="searchStore.keyword.main"
           :placeholderText="searchStore.placeholderText.main"
           :isSizeSm="true"
         >

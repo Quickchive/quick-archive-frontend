@@ -7,8 +7,9 @@
     ></modal-header>
     <div class="wrapper__search-input">
       <search-input
-        :keyword="searchStore.keyword.categoryModal"
-        :placeholderText="searchStore.placeholderText.categoryModal"
+        :keyword="'modal'"
+        :location="searchStore.keyword.modal"
+        :placeholderText="searchStore.placeholderText.modal"
         :isSizeSm="false"
       ></search-input>
     </div>

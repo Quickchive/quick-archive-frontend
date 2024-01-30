@@ -2,15 +2,13 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { getCategoryIdWithKeyword, getContentIdWithKeyword } from '@/utils/search.js'
 import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
-
 import { toRaw } from 'vue'
 import { useContentStore } from '@/stores/useContentStore.ts'
 
 export const useSearchStore = defineStore('search', () => {
   const keyword = ref({
     main: '',
-    categoryModal: '',
-    contentModal: ''
+    modal: ''
   })
 
   const placeholderText = ref({
@@ -23,18 +21,7 @@ export const useSearchStore = defineStore('search', () => {
   const searchedCategory: any = ref([])
   const searchedContent: any = ref([])
   const categoryTreeStore = useCategoryTreeStore()
-
-  const categoryList = categoryTreeStore.userCategoryList
-
   const contentStore = useContentStore()
-
-  function $reset() {
-    keyword.value.main = ''
-    searchedCategoryCount.value = 0
-    searchedContentCount.value = 0
-    searchedCategory.value = []
-    searchedContent.value = []
-  }
 
   function searchEvent() {
     // 카테고리
@@ -138,7 +125,6 @@ export const useSearchStore = defineStore('search', () => {
     searchedContentCount,
     searchedCategory,
     searchedContent,
-    $reset,
     searchEvent,
     getCategoryDepth3NameById,
     isCategoryDepth3,
