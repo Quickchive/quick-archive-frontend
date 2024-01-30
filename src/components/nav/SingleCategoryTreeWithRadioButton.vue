@@ -7,7 +7,11 @@
       </button>
       <button class="btn--transparent category-list__btn--radio">
         <img
-          :src="modalDataStore.getCategoryImgByIconName(props.category.iconName)"
+          :src="
+            props.category.iconName == undefined
+              ? modalDataStore.getCategoryImgByIconName('Book')
+              : modalDataStore.getCategoryImgByIconName(props.category.iconName)
+          "
           class="category-icon img-category-icon--lg"
         />
         {{ props.category.name }}

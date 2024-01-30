@@ -42,22 +42,36 @@ const isInputValid = computed(() => {
 })
 
 const setKeyword = (e) => {
+  // 1. 메인 검색 인풋(카테고리명 + 콘텐츠 검색)
   if (props.keyword === 'main') {
     console.log(e.target.value)
     searchStore.keyword.main = e.target.value
-  } else if (props.keyword === 'modal') {
-    searchStore.keyword.modal = e.target.value
-  }
-
-  // 한글인 경우 조합이 완성되었을 때만 검색 요청을 보낸다.
-  if (isHangul(e.target.value)) {
-    if (checkHangulCompletion(e.target.value)) {
+    // 한글인 경우 조합이 완성되었을 때만 검색 요청을 보낸다.
+    if (isHangul(e.target.value)) {
+      if (checkHangulCompletion(e.target.value)) {
+        searchStore.searchEvent()
+        router.push('/home/search')
+      }
+    }
+    // 영문 검색
+    else {
       searchStore.searchEvent()
       router.push('/home/search')
     }
-  } else {
-    searchStore.searchEvent()
-    router.push('/home/search')
+  }
+  // 2. 모달 검색 인풋(카테고리 명 검색)
+  else if (props.keyword === 'modal') {
+    searchStore.keyword.modal = e.target.value
+    // 한글인 경우 조합이 완성되었을 때만 검색 요청을 보낸다.
+    if (isHangul(e.target.value)) {
+      if (checkHangulCompletion(e.target.value)) {
+        searchStore.searchCategoryEvent()
+      }
+    }
+    // 영문 검색
+    else {
+      searchStore.searchCategoryEvent()
+    }
   }
 }
 

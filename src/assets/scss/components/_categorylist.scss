@@ -61,6 +61,17 @@
           margin-right: 12px;
         }
       }
+      .category-item-radio__text-container {
+        @include flex(column, start, left);
+        .category-item-radio__category-name {
+          @include font(16px, 700, 24px);
+          color: #146eff;
+        }
+        .category-item-radio__category-parent-name {
+          @include font(13px, 500, 18px);
+          color: $color-grey-60;
+        }
+      }
     }
   }
 }

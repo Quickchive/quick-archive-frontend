@@ -22,9 +22,19 @@
       </button>
     </div>
     <!-- 카테고리 목록 (라디오 버튼) -->
-    <div class="wrapper__modal-category-list">
-      <category-item-with-radio-button></category-item-with-radio-button>
-    </div>
+    <template v-if="searchStore.keyword.modal === ''">
+      <div class="wrapper__modal-category-list">
+        <category-item-with-radio-button></category-item-with-radio-button>
+      </div>
+    </template>
+    <template v-else>
+      <div>
+        <category-item-with-radio-button-search
+          v-if="searchStore.searchedCategory2.length > 0"
+        ></category-item-with-radio-button-search>
+      </div>
+    </template>
+
     <!-- divider -->
     <div class="modal__divider--bottom"></div>
     <div class="modal-footer">
@@ -44,11 +54,12 @@
 import SearchInput from '@/components/input/SearchInput.vue'
 import addCategoryIcon from '@/assets/ic/ic-category-add.svg'
 import CategoryItemWithRadioButton from '@/components/nav/CategoryItemWithRadioButton.vue'
+import CategoryItemWithRadioButtonSearch from '@/components/nav/CategoryItemWithRadioButtonSearch.vue'
+
 import ModalHeader from '@/components/header/ModalHeader.vue'
 import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useSearchStore } from '@/stores/useSearchStore.ts'
-
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { toRaw, onMounted, ref } from 'vue'
 import categoryListDummy from '@/assets/model/categoryList.json'

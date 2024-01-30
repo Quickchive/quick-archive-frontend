@@ -13,12 +13,14 @@ export const useSearchStore = defineStore('search', () => {
 
   const placeholderText = ref({
     main: '제목, 메모, 카테고리명 검색',
-    categoryModal: '카테고리명 검색'
+    modal: '카테고리명 검색'
   })
 
   const searchedCategoryCount = ref(0)
   const searchedContentCount = ref(0)
   const searchedCategory: any = ref([])
+  const searchedCategory2: any = ref([])
+
   const searchedContent: any = ref([])
   const categoryTreeStore = useCategoryTreeStore()
   const contentStore = useContentStore()
@@ -42,6 +44,14 @@ export const useSearchStore = defineStore('search', () => {
     if (searchedContent.value !== undefined) {
       searchedContentCount.value = searchedContent.value.length
     }
+  }
+
+  function searchCategoryEvent() {
+    // 카테고리
+    searchedCategory2.value = getCategoryIdWithKeyword(
+      keyword.value.modal,
+      categoryTreeStore.userCategoryList
+    )
   }
 
   // 자식 카테고리 정보로 부모 카테고리 이름을 얻는다
@@ -129,6 +139,8 @@ export const useSearchStore = defineStore('search', () => {
     getCategoryDepth3NameById,
     isCategoryDepth3,
     getCategoryDepth2NameById,
-    findParentAndGrandParent
+    findParentAndGrandParent,
+    searchCategoryEvent,
+    searchedCategory2
   }
 })
