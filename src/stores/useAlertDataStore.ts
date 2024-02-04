@@ -1,13 +1,20 @@
 import { defineStore } from 'pinia'
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive } from 'vue'
 import { useUserStore } from '@/stores/useUserStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+import { addCategories } from '@/api/category.js'
+import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
+import { useModalDataStore } from '@/stores/useModalDataStore.ts'
+import { useContentStore } from '@/stores/useContentStore.ts'
 
 export const useAlertDataStore = defineStore('alertData', () => {
   const userStore = useUserStore()
   const modalViewStore = useModalViewStore()
   const categoryStore = useCategoryStore()
+  const categoryTreeStore = useCategoryTreeStore()
+  const modalDataStore = useModalDataStore()
+  const contentStore = useContentStore()
 
   // settingView: 로그아웃 얼럿 데이터
   const logoutAlertData = reactive({
@@ -56,9 +63,76 @@ export const useAlertDataStore = defineStore('alertData', () => {
     }
   })
 
+  // ModalView: 새 카테고리 추가 얼럿
+  const newCategoryName = ref('')
+
+  const addNewCategoryAlertData = reactive({
+    title: '새 카테고리',
+    message: '새 카테고리 이름을 입력해 주세요.\n생성 위치는 카테고리 수정 시 변경할 수 있어요.',
+    placeholder: '이름을 입력해주세요(2~15글자)',
+    input: true,
+    leftButtonMessage: '닫기',
+    rightButtonMessage: '저장',
+    leftButtonEvent: () => {
+      modalViewStore.closeSetNewCategoryModal()
+      modalViewStore.openSetCategoryLocationModal()
+    },
+    rightButtonEvent: async () => {
+      // 카테고리 생성
+      const categoryData = {
+        categoryName: newCategoryName.value,
+        iconName: 'Book'
+      }
+      // 카테고리 추가
+      try {
+        const response = await addCategories(categoryData)
+        // 상태코드로 에러 처리 하기
+        if (response.data.statusCode === 201) {
+          modalViewStore.closeSetNewCategoryModal()
+          modalViewStore.openCompleteAddCategoryModal()
+          await categoryTreeStore.updateUserCategoryList()
+        }
+      } catch (error: any) {
+        if (error.response.data.statusCode === 409) {
+          modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
+          modalViewStore.openAlertModal()
+        }
+      }
+    }
+  })
+
+  const completeAddCategoryAlertData = reactive({
+    title: '카테고리 생성 완료',
+    message: '방금 생성한 카테고리에\n 콘텐츠를 저장할까요?',
+    placeholder: '이름을 입력해주세요(2~15글자)',
+    input: false,
+    leftButtonMessage: '닫기',
+    rightButtonMessage: '저장',
+    leftButtonEvent: () => {
+      modalViewStore.closeCompleteAddCategoryModal()
+    },
+    rightButtonEvent: async () => {
+      // 콘텐츠 추가
+      try {
+        modalDataStore.selectCategoryLocation(newCategoryName.value)
+        const response: any = await contentStore.addContent()
+        // 상태코드로 에러 처리 하기
+        if (response.data.statusCode === 201) {
+          modalViewStore.closeSelectModal()
+        }
+        modalViewStore.closeCompleteAddCategoryModal()
+      } catch (error: any) {
+        console.log(error)
+      }
+    }
+  })
+
   return {
     logoutAlertData,
     withdrawalAlertData,
-    deleteCategoryAlertData
+    deleteCategoryAlertData,
+    addNewCategoryAlertData,
+    newCategoryName,
+    completeAddCategoryAlertData
   }
 })

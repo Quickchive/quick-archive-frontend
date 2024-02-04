@@ -39,8 +39,17 @@
       v-if="modalViewStore.deleteCategoryModal"
       :alertData="alertDataStore.deleteCategoryAlertData"
     ></alert-confirm>
-    <!-- 새 카테고리 추가 컨펌 -->
-    <confirm-with-input v-if="modalViewStore.addNewCategoryModal"></confirm-with-input>
+
+    <!-- 새 카테고리 추가 얼럿 -->
+    <confirm-with-input
+      v-if="modalViewStore.addNewCategoryModal"
+      :alertData="alertDataStore.addNewCategoryAlertData"
+    ></confirm-with-input>
+    <!-- 새 카테고리 추가 완료 얼럿 -->
+    <confirm-with-input
+      v-if="modalViewStore.completeAddNewCategoryModal"
+      :alertData="alertDataStore.completeAddCategoryAlertData"
+    ></confirm-with-input>
   </div>
   <div class="alert-overlay" v-if="modalViewStore.alertOverlay"></div>
   <div class="alert-view" v-if="modalViewStore.alertModal">
@@ -61,7 +70,7 @@ import ModalContentAddStep02 from '@/components/modal/content/ModalContentAddSte
 import AlertDuplicatedCategory from '@/components/modal/alert/AlertDuplicatedCategory.vue'
 import AlertConfirm from '@/components/modal/alert/AlertConfirm.vue'
 import ModalEditContentTitle from '@/components/modal/content/ModalEditContentTitle.vue'
-import ConfirmWithInput from '@/components/modal/confirm/ConfirmWithInput.vue'
+import ConfirmWithInput from '@/components/modal/alert/AlertWithInput.vue'
 
 const modalAddCategory = '카테고리 추가'
 const modalEditCategory = '카테고리 수정'

@@ -25,6 +25,7 @@ export const useModalViewStore = defineStore('modalView', () => {
   const withdrawalModal = ref(false)
   const settingAlertOverlay = ref(false)
   const addNewCategoryModal = ref(false)
+  const completeAddNewCategoryModal = ref(false)
 
   function openSelectModal() {
     console.log('openmodal', selectModal.value)
@@ -107,7 +108,17 @@ export const useModalViewStore = defineStore('modalView', () => {
   }
   function closeSetNewCategoryModal() {
     addNewCategoryModal.value = false
-    overlay.value = false
+    overlay.value = true
+    // categoryLocationModal.value = true
+  }
+  function openCompleteAddCategoryModal() {
+    completeAddNewCategoryModal.value = true
+    // overlay.value = true
+  }
+  function closeCompleteAddCategoryModal() {
+    completeAddNewCategoryModal.value = false
+    overlay.value = true
+    categoryLocationModal.value = true
   }
   // 카테고리 삭제 모달
   function openDeleteCategoryModal() {
@@ -197,6 +208,9 @@ export const useModalViewStore = defineStore('modalView', () => {
     closeEditContentTitleModal,
     addNewCategoryModal,
     openSetNewCategoryModal,
-    closeSetNewCategoryModal
+    closeSetNewCategoryModal,
+    openCompleteAddCategoryModal,
+    closeCompleteAddCategoryModal,
+    completeAddNewCategoryModal
   }
 })
