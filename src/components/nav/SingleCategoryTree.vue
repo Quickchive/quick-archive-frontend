@@ -18,7 +18,7 @@
     </div>
     <button class="btn--transparent moreButton" @click="showMoreButton(props.category)">
       <img :src="moreIcon" />
-      <more-button v-if="isMoreButtonShow"></more-button>
+      <more-button v-if="categoryTreeStore.moreBtnCategoryIdTree[props.category.id]"></more-button>
     </button>
   </li>
 </template>
@@ -64,8 +64,25 @@ const toCategoryPage = async (categoryId, categoryName) => {
   categoryStore.setCategoryName(categoryName)
 }
 
+const excludeItem = (obj, excludedKey) => {
+  let result = {}
+
+  for (let key in obj) {
+    if (key == excludedKey) {
+      result[key] = !obj[key]
+    } else {
+      result[key] = false
+    }
+  }
+  console.log(result)
+  return result
+}
+
 const showMoreButton = (categoryData) => {
-  isMoreButtonShow.value = !isMoreButtonShow.value
+  categoryTreeStore.moreBtnCategoryIdTree = excludeItem(
+    categoryTreeStore.moreBtnCategoryIdTree,
+    categoryData.id
+  )
   categoryStore.setFocusedCategory(categoryData.id)
   categoryStore.setFocusedCategoryData(categoryData)
 }
