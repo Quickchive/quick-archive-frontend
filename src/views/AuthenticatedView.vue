@@ -1,4 +1,4 @@
-<template>
+<template class="authenticated-view">
   <div class="wrapper__navbar">
     <the-nav-bar></the-nav-bar>
   </div>

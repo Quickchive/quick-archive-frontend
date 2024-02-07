@@ -1,27 +1,28 @@
 <template>
-  <article class="item-container">
-    <div class="thumbnail__wrapper">
-      <img :src="item.coverImg" class="thumbnail" />
-      <button class="btn--transparent btn-favorite" @click="favoriteEvent()">
-        <img :src="favoriteSelectedIcon" v-if="item.favorite" />
-        <img :src="favoriteUnselectedIcon" v-if="!item.favorite" />
-      </button>
-    </div>
-    <footer class="item__wrapper">
-      <h1>{{ item.title }}</h1>
-      <p>{{ item.description }}</p>
-      <footer class="flex-container__row">
-        <div id="thumbnail-category" @click="toCategoryPage(item.category.id)">
-          <img class="ic-category" :src="categoryIcon" />
-          {{ item.category ? item.category.name : '미지정' }}
-        </div>
-
-        <img :src="divider" />
-        {{ item.siteName }}
+  <article class="contents-item">
+    <div class="item-container">
+      <div class="thumbnail__wrapper">
+        <img :src="item.coverImg" class="thumbnail" />
+        <button class="btn--transparent btn-favorite" @click="favoriteEvent()">
+          <img :src="favoriteSelectedIcon" v-if="item.favorite" />
+          <img :src="favoriteUnselectedIcon" v-if="!item.favorite" />
+        </button>
+      </div>
+      <footer class="item__wrapper">
+        <h1>{{ item.title }}</h1>
+        <p>{{ item.description }}</p>
+        <footer class="flex-container__row">
+          <div id="thumbnail-category" @click="toCategoryPage(item.category.id)">
+            <img class="ic-category" :src="categoryIcon" />
+            {{ item.category ? item.category.name : '미지정' }}
+          </div>
+          <img :src="divider" />
+          {{ item.siteName }}
+        </footer>
       </footer>
-    </footer>
+    </div>
     <div class="contents-item__btn__wrapper">
-      <button class="btn--transparent btn-32"><img :src="moreIcon" /></button>
+      <button class=""><img :src="moreIcon" class="btn-32" /></button>
     </div>
   </article>
   <!-- 메모 -->
@@ -31,7 +32,7 @@
 <script setup>
 import categoryIcon from '@/assets/img/category/img_category_watch.png'
 import divider from '@/assets/img/divider_14px.svg'
-import moreIcon from '@/assets/ic/ic-more.svg'
+import moreIcon from '@/assets/ic/ic_more-32px.svg'
 import favoriteSelectedIcon from '@/assets/ic/ic-favorite-seleted_32px.svg'
 import favoriteUnselectedIcon from '@/assets/ic/ic-favorite-unseleted_32px.svg'
 import { addFavorite } from '@/api/contents.js'

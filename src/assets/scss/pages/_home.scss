@@ -11,13 +11,11 @@
   height: 100vh;
 }
 
-.wrapper__section {
+.home-container {
+  @include flex(column, left, start);
   padding: 80px 64px 0px 64px;
   gap: 8px;
-  position: fixed;
-  left: 368px;
   h1 {
-    width: 944px;
     overflow: hidden;
     color: $color-grey-100;
     text-overflow: ellipsis;

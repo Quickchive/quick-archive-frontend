@@ -1,5 +1,5 @@
 <template>
-  <section class="flex-container__col wrapper__section">
+  <section class="home-container">
     <router-view></router-view>
   </section>
 </template>
