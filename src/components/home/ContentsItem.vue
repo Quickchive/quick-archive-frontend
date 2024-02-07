@@ -22,7 +22,11 @@
       </footer>
     </div>
     <div class="contents-item__btn__wrapper">
-      <button class=""><img :src="moreIcon" class="btn-32" /></button>
+      <button class="moreButton">
+        <img :src="moreIcon" class="btn-32" />
+        <!-- 더보기 버튼 -->
+        <more-button :contentsBtn="true" class="more-button--contents"></more-button>
+      </button>
     </div>
   </article>
   <!-- 메모 -->
@@ -33,6 +37,7 @@
 import categoryIcon from '@/assets/img/category/img_category_watch.png'
 import divider from '@/assets/img/divider_14px.svg'
 import moreIcon from '@/assets/ic/ic_more-32px.svg'
+import MoreButton from '@/components/button/MoreButton.vue'
 import favoriteSelectedIcon from '@/assets/ic/ic-favorite-seleted_32px.svg'
 import favoriteUnselectedIcon from '@/assets/ic/ic-favorite-unseleted_32px.svg'
 import { addFavorite } from '@/api/contents.js'
@@ -40,6 +45,8 @@ import { useContentStore } from '@/stores/useContentStore.ts'
 import { useRouter, useRoute } from 'vue-router'
 import { ref } from 'vue'
 import MemoItem from '@/components/home/MemoItem.vue'
+import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
+const categoryTreeStore = useCategoryTreeStore()
 
 const contentStore = useContentStore()
 const router = useRouter()

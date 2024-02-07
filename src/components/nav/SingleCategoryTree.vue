@@ -18,7 +18,11 @@
     </div>
     <button class="btn--transparent moreButton" @click="showMoreButton(props.category)">
       <img :src="moreIcon" />
-      <more-button v-if="categoryTreeStore.moreBtnCategoryIdTree[props.category.id]"></more-button>
+      <more-button
+        :contentsBtn="false"
+        class="more-button"
+        v-if="categoryTreeStore.moreBtnCategoryIdTree[props.category.id]"
+      ></more-button>
     </button>
   </li>
 </template>

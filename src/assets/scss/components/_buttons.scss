@@ -322,6 +322,35 @@ button {
   position: relative;
 }
 
+// 콘텐츠 더보기 버튼
+.more-button--contents {
+  @include flex(row, space-between, center);
+  @include size(112px, 124px);
+  position: absolute;
+  z-index: 100;
+  top: 28px;
+  right: 0;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 8px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+  .single-btn {
+    @include font(14px, 600, 20px);
+    @include size(96px, 36px);
+    @include color($color-grey-100, #fff);
+    margin-left: 0;
+    border-radius: 4px;
+    padding: 0;
+    text-align: center;
+    letter-spacing: -0.3px;
+    &:hover {
+      @include color(#fff, #146eff);
+    }
+  }
+}
+// 카테고리 더보기 버튼
 .more-button {
   @include flex(space-between, center);
   @include size(112px, 88px);
