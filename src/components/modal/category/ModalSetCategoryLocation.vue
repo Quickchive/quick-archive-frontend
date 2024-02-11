@@ -62,7 +62,6 @@ import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useSearchStore } from '@/stores/useSearchStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { toRaw, onMounted, ref } from 'vue'
-import categoryListDummy from '@/assets/model/categoryList.json'
 
 const modalTitle = '생성 위치'
 const isBtnOnLeft = true
@@ -85,8 +84,6 @@ onMounted(async () => {
   await categoryTreeStore.getUserCategoryList()
   if (toRaw(categoryTreeStore.userCategoryList).length > 0) {
     categoryList.value = toRaw(categoryTreeStore.userCategoryList)
-  } else {
-    categoryList.value = categoryListDummy
   }
 })
 

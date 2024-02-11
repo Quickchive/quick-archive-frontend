@@ -30,7 +30,23 @@ import ContentsItem from '@/components/home/ContentsItem.vue'
 import TitleBar from '@/components/home/TitleBar.vue'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import emptyImg from '@/assets/img/img-empty-nocontent.png'
+import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { watch } from 'vue'
 
+const route = useRoute()
 const contentStore = useContentStore()
+
+onMounted(async () => {
+  await contentStore.fetchContents(Number(route.params.id))
+})
+
+watch(
+  () => useContentStore.userCustomContentList,
+  () => {
+    // 적절한 화면 갱신 로직 추가
+    console.log('myState가 변경되었습니다. 화면을 갱신합니다.')
+  }
+)
 </script>
 <style></style>

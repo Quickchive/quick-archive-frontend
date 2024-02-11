@@ -6,6 +6,7 @@ import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import type { CategoryIdMap } from '@/utils/interface'
 import { saveHideAlertToCookie } from '@/utils/cookies'
 import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
+import { useRoute } from 'vue-router'
 
 export const useContentStore = defineStore('content', () => {
   const userContentList = ref([])
@@ -16,6 +17,7 @@ export const useContentStore = defineStore('content', () => {
   const moreBtnContentIdTree = ref<CategoryIdMap>({})
   const focusedContentId = ref(-1)
   const focusedContentData = ref({})
+  const route = useRoute()
 
   async function fetchAllContents() {
     try {
@@ -66,7 +68,13 @@ export const useContentStore = defineStore('content', () => {
         modalViewStore.closeSelectModal()
         modalViewStore.closeAddContentModal()
         modalViewStore.closeAddContentDetailModal()
-        fetchAllContents()
+        if (route.params.id !== undefined) {
+          // 특정 콘텐츠 페이지인 경우
+          fetchContents(Number(route.params.id))
+        } else {
+          // 전체 콘텐츠 페이지인 경우
+          fetchAllContents()
+        }
       }
     } catch (error) {
       console.log(error)
@@ -85,7 +93,13 @@ export const useContentStore = defineStore('content', () => {
         } else {
           saveHideAlertToCookie(false)
         }
-        fetchAllContents()
+        if (route.params.id !== undefined) {
+          // 특정 콘텐츠 페이지인 경우
+          fetchContents(Number(route.params.id))
+        } else {
+          // 전체 콘텐츠 페이지인 경우
+          fetchAllContents()
+        }
       }
     } catch (error) {
       console.log(error)

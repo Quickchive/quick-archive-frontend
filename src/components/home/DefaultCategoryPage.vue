@@ -22,24 +22,25 @@
 
 <script setup>
 import ContentsItem from '@/components/home/ContentsItem.vue'
-import contentListDummy from '@/assets/model/contentList.json'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import { ref, onMounted, toRaw } from 'vue'
 import emptyImg from '@/assets/img/img-empty-nocontent.png'
 import TheFilter from '@/components/home/TheFilter.vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
 
 const contentStore = useContentStore()
 const contentList = ref({})
 
 onMounted(async () => {
   await contentStore.fetchAllContents()
-
   if (contentStore.userContentList.length > 0) {
     contentList.value = toRaw(contentStore.userContentList)
     console.log(contentList, 'contentList')
-  } else {
-    contentStore.setUserContentList(contentListDummy.contents)
   }
+
+  console.log('default-route', route.fullPath.length)
+  console.log('default-route-query', route.params.id)
 })
 
 // 콘텐츠 데이터 감시
