@@ -18,6 +18,10 @@ export const useCategoryStore = defineStore('category', () => {
   const focusedCategoryId = ref(-1)
   const focusedCategoryData = ref({})
 
+  // 상단 필터
+  const isUnselectedChipOn = ref(false)
+  const isFavoriteChipOn = ref(false)
+
   function setCategoryName(categoryName: string) {
     curCategoryName.value = categoryName
   }
@@ -78,6 +82,14 @@ export const useCategoryStore = defineStore('category', () => {
     }
   }
 
+  function setUnselectedContentChip() {
+    isUnselectedChipOn.value = !isUnselectedChipOn.value
+  }
+
+  function setFavoriteContentChip() {
+    isFavoriteChipOn.value = !isFavoriteChipOn.value
+  }
+
   return {
     curCategoryName,
     focusedCategoryId,
@@ -87,6 +99,10 @@ export const useCategoryStore = defineStore('category', () => {
     setFocusedCategory,
     setFocusedCategoryData,
     addCategory,
-    editCategory
+    editCategory,
+    isFavoriteChipOn,
+    isUnselectedChipOn,
+    setUnselectedContentChip,
+    setFavoriteContentChip
   }
 })

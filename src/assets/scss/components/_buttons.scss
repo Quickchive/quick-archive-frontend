@@ -31,11 +31,16 @@ button {
 
 .btn--chip {
   @include font(14px, 600, 24px);
-  @include color($color-grey-80, transparent);
   @include flex(column, _, flex-start);
   padding: 8px 14px;
   border-radius: 100px;
-  border: 1px solid $color-grey-10;
+  &.active {
+    @include color($color-white, $color-grey-100);
+  }
+  &.inactive {
+    @include color($color-grey-80, transparent);
+    border: 1px solid $color-grey-10;
+  }
 }
 
 .btn-social {
