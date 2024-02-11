@@ -132,3 +132,8 @@ input {
   @extend .input__sm--default;
   color: $color-grey-100;
 }
+
+.input__sm--content-link {
+  @extend .input__sm--default;
+  padding: 14px 93px 14px 14px;
+}

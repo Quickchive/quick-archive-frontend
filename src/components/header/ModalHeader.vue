@@ -7,21 +7,13 @@
   </header>
 </template>
 
-<script>
+<script setup>
 import topCloseIcon from '@/assets/ic/ic-top-close.svg'
-
-export default {
-  data() {
-    return {
-      topCloseIcon
-    }
-  },
-  props: {
-    modalTitle: String,
-    isBtnOnLeft: Boolean,
-    closeModal: Function
-  }
-}
+const props = defineProps({
+  modalTitle: String,
+  isBtnOnLeft: Boolean,
+  closeModal: Function
+})
 </script>
 
 <style></style>

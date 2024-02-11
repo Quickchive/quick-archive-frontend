@@ -46,6 +46,9 @@
       :alertData="alertDataStore.deleteContentAlertData"
     ></alert-confirm>
 
+    <!-- 콘텐츠 공유 얼럿 -->
+    <modal-content-share v-if="modalViewStore.shareContentModal"></modal-content-share>
+
     <!-- 새 카테고리 추가 얼럿 -->
     <confirm-with-input
       v-if="modalViewStore.addNewCategoryModal"
@@ -77,6 +80,7 @@ import AlertDuplicatedCategory from '@/components/modal/alert/AlertDuplicatedCat
 import AlertConfirm from '@/components/modal/alert/AlertConfirm.vue'
 import ModalEditContentTitle from '@/components/modal/content/ModalEditContentTitle.vue'
 import ConfirmWithInput from '@/components/modal/alert/AlertWithInput.vue'
+import ModalContentShare from '@/components/modal/content/ModalContentShare.vue'
 
 const modalAddCategory = '카테고리 추가'
 const modalEditCategory = '카테고리 수정'

@@ -1,8 +1,7 @@
 // 헤더 close 버튼은 오른쪽에 위치하는 것이 default
 .modal-header {
   @include size(100%, 88px);
-  display: flex;
-  align-items: center;
+  @include flex(row, center, center);
   box-sizing: border-box;
   padding: 0 28px;
   .modal-title {
@@ -28,7 +27,7 @@
   flex-direction: row-reverse;
   justify-content: right;
   .modal-title {
-    margin-left: 32px;
+    // margin-right: 32px;
   }
 }
 

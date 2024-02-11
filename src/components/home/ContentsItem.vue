@@ -81,7 +81,7 @@ const btnList = [
   },
   {
     name: '공유하기',
-    clickEvent: () => modalViewStore.openDeleteCategoryModal()
+    clickEvent: () => modalViewStore.openShareContentModal()
   },
   {
     name: '삭제하기',
