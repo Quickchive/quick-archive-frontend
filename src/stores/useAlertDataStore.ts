@@ -15,6 +15,7 @@ export const useAlertDataStore = defineStore('alertData', () => {
   const categoryTreeStore = useCategoryTreeStore()
   const modalDataStore = useModalDataStore()
   const contentStore = useContentStore()
+  const checkboxChecked = ref(false)
 
   // settingView: 로그아웃 얼럿 데이터
   const logoutAlertData = reactive({
@@ -50,9 +51,7 @@ export const useAlertDataStore = defineStore('alertData', () => {
   const deleteCategoryAlertData = reactive({
     message: '카테고리를 삭제할까요?',
     checkbox: true,
-    checkboxEvent: () => {
-      categoryStore.deleteContentsInCategory()
-    },
+    checkboxMessage: '카테고리 내 콘텐츠도 함께 삭제하기',
     leftButtonMessage: '닫기',
     rightButtonMessage: '삭제',
     leftButtonEvent: () => {
@@ -127,12 +126,35 @@ export const useAlertDataStore = defineStore('alertData', () => {
     }
   })
 
+  // ModalView: 콘텐츠 삭제 얼럿 데이터
+  const deleteContentAlertData = reactive({
+    message: '콘텐츠를 삭제할까요?',
+    checkbox: true,
+    checkboxMessage: '알림 다시 보지 않기',
+    leftButtonMessage: '닫기',
+    rightButtonMessage: '삭제',
+    leftButtonEvent: () => {
+      modalViewStore.closeDeleteContentModal()
+    },
+    rightButtonEvent: () => {
+      contentStore.deleteContent()
+    }
+  })
+
+  // ModalView: 얼럿 체크박스 온오프
+  const toggleCheckbox = () => {
+    checkboxChecked.value = !checkboxChecked.value
+  }
+
   return {
     logoutAlertData,
     withdrawalAlertData,
     deleteCategoryAlertData,
     addNewCategoryAlertData,
     newCategoryName,
-    completeAddCategoryAlertData
+    completeAddCategoryAlertData,
+    deleteContentAlertData,
+    checkboxChecked,
+    toggleCheckbox
   }
 })

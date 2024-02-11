@@ -19,7 +19,7 @@
     <button class="btn--transparent moreButton" @click="showMoreButton(props.category)">
       <img :src="moreIcon" />
       <more-button
-        :contentsBtn="false"
+        :btnList="btnList"
         class="more-button"
         v-if="categoryTreeStore.moreBtnCategoryIdTree[props.category.id]"
       ></more-button>
@@ -38,11 +38,13 @@ import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
+import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 
 const modalDataStore = useModalDataStore()
 const categoryTreeStore = useCategoryTreeStore()
 const categoryStore = useCategoryStore()
 const contentStore = useContentStore()
+const modalViewStore = useModalViewStore()
 
 const route = useRoute()
 
@@ -98,6 +100,18 @@ const clickArrowEvent = () => {
     categoryTreeStore.showChildrenCategory(props.children)
   }
 }
+
+const btnList = [
+  {
+    name: '편집하기',
+    clickEvent: () => modalViewStore.openEditCategoryModal()
+  },
+
+  {
+    name: '삭제하기',
+    clickEvent: () => modalViewStore.openDeleteCategoryModal()
+  }
+]
 </script>
 
 <style></style>

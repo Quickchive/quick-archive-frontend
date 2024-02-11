@@ -16,6 +16,8 @@ export const useModalViewStore = defineStore('modalView', () => {
   const alertModal = ref(false)
   const duplicatedCategoryLocation = ref('올리비아..')
   const editContentTitleModal = ref(false)
+  const deleteContentModal = ref(false)
+
   // 카테고리 삭제/수정 모달
   const editCategoryModal = ref(false)
   const deleteCategoryModal = ref(false)
@@ -87,6 +89,14 @@ export const useModalViewStore = defineStore('modalView', () => {
   }
   function closeEditContentTitleModal() {
     editContentTitleModal.value = false
+  }
+  function openDeleteContentModal() {
+    deleteContentModal.value = true
+    overlay.value = true
+  }
+  function closeDeleteContentModal() {
+    deleteContentModal.value = false
+    overlay.value = false
   }
   function openAlertModal() {
     alertModal.value = true
@@ -211,6 +221,9 @@ export const useModalViewStore = defineStore('modalView', () => {
     closeSetNewCategoryModal,
     openCompleteAddCategoryModal,
     closeCompleteAddCategoryModal,
-    completeAddNewCategoryModal
+    completeAddNewCategoryModal,
+    deleteContentModal,
+    openDeleteContentModal,
+    closeDeleteContentModal
   }
 })

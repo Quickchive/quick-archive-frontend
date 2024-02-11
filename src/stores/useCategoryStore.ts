@@ -5,16 +5,18 @@ import { ref } from 'vue'
 import { addCategories, updateCategories } from '@/api/category.js'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
+import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
 
 export const useCategoryStore = defineStore('category', () => {
   const modalViewStore = useModalViewStore()
   const modalDataStore = useModalDataStore()
+  const alertDataStore = useAlertDataStore()
+
   const categoryTreeStore = useCategoryTreeStore()
 
   const curCategoryName = ref('전체 콘텐츠')
   const focusedCategoryId = ref(-1)
   const focusedCategoryData = ref({})
-  const deleteContentsChecked = ref(false)
 
   function setCategoryName(categoryName: string) {
     curCategoryName.value = categoryName
@@ -31,7 +33,7 @@ export const useCategoryStore = defineStore('category', () => {
   async function deleteCategory() {
     try {
       const focusedCategory_id = focusedCategoryId.value
-      const response = await deleteCategories(focusedCategory_id, deleteContentsChecked.value)
+      const response = await deleteCategories(focusedCategory_id, alertDataStore.checkboxChecked)
       if (response.data.statusCode === (200 || 201)) {
         await categoryTreeStore.updateUserCategoryList()
         modalViewStore.closeDeleteCategoryModal()
@@ -40,9 +42,7 @@ export const useCategoryStore = defineStore('category', () => {
       console.log(error)
     }
   }
-  function deleteContentsInCategory() {
-    deleteContentsChecked.value = !deleteContentsChecked.value
-  }
+
   async function addCategory(categoryData: any) {
     // 카테고리 추가
     try {
@@ -82,8 +82,6 @@ export const useCategoryStore = defineStore('category', () => {
     curCategoryName,
     focusedCategoryId,
     focusedCategoryData,
-    deleteContentsChecked,
-    deleteContentsInCategory,
     deleteCategory,
     setCategoryName,
     setFocusedCategory,

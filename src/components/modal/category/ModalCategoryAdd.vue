@@ -54,6 +54,7 @@ import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { ref, computed, onMounted } from 'vue'
 import { searchCategoryDataById } from '@/utils/search.js'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 
 const props = defineProps({
   modalTitle: String,
@@ -64,20 +65,21 @@ const props = defineProps({
 // store 선언
 const modalViewStore = useModalViewStore()
 const categoryTreeStore = useCategoryTreeStore()
+const categoryStore = useCategoryStore()
 const modalDataStore = useModalDataStore()
 
 onMounted(async () => {
   if (props.apiName === 'editCategory') {
-    categoryName.value = categoryTreeStore.focusedCategoryData.name
-    if (categoryTreeStore.focusedCategoryData.parentId !== null) {
+    categoryName.value = categoryStore.focusedCategoryData.name
+    if (categoryStore.focusedCategoryData.parentId !== null) {
       const parentData = searchCategoryDataById(
         categoryTreeStore.userCategoryList,
-        categoryTreeStore.focusedCategoryData.parentId
+        categoryStore.focusedCategoryData.parentId
       )
       modalDataStore.selectedLocation.name = parentData.name
       modalDataStore.selectedLocation.id = parentData.id
     }
-    if (categoryTreeStore.focusedCategoryData.parentId === null) {
+    if (categoryStore.focusedCategoryData.parentId === null) {
       modalDataStore.selectedLocation.name = '미지정'
     }
     console.log('parentData', parentData)

@@ -66,7 +66,7 @@
   width: 100%;
   .contents-list__wrapper {
     @include flex(column, left, start);
-
+    width: 100%;
     gap: 20px;
     margin-top: 16px;
     height: 100vh;

@@ -71,10 +71,6 @@ export const useCategoryTreeStore = defineStore('categoryTree', () => {
     }, {})
   }
 
-  function updateCategoryIdTree(categoryIdMap: any, targetMap: any) {
-    targetMap.value = categoryIdMap
-  }
-
   return {
     userCategoryList,
     categoryIdTree,
@@ -82,7 +78,6 @@ export const useCategoryTreeStore = defineStore('categoryTree', () => {
     createCategoryIdMap,
     showChildrenCategory,
     getUserCategoryList,
-    updateCategoryIdTree,
     showChildrenCategoryRadio,
     updateUserCategoryList,
     moreBtnCategoryIdTree

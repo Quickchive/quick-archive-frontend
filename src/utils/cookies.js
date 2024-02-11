@@ -9,6 +9,10 @@ function saveUserToCookie(value) {
   document.cookie = `bookmark_user=${value}`
 }
 
+function saveHideAlertToCookie(value) {
+  document.cookie = `hide_alert=${value}; path=/`
+}
+
 function getAccessTokenFromCookie() {
   return document.cookie.replace(/(?:(?:^|.*;\s*)accessToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
 }
@@ -19,6 +23,10 @@ function getRefreshTokenFromCookie() {
 
 function getUserFromCookie() {
   return document.cookie.replace(/(?:(?:^|.*;\s*)bookmark_user\s*=\s*([^;]*).*$)|^.*$/, '$1')
+}
+
+function getHideAlertFromCookie() {
+  return document.cookie.replace(/(?:(?:^|.*;\s*)hide_alert\s*=\s*([^;]*).*$)|^.*$/, '$1')
 }
 
 function deleteCookie(value) {
@@ -32,5 +40,7 @@ export {
   saveRefreshTokenToCookie,
   getRefreshTokenFromCookie,
   getUserFromCookie,
-  deleteCookie
+  deleteCookie,
+  saveHideAlertToCookie,
+  getHideAlertFromCookie
 }

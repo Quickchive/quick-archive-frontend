@@ -6,7 +6,8 @@ import {
   saveAccessTokenToCookie,
   saveRefreshTokenToCookie,
   getRefreshTokenFromCookie,
-  deleteCookie
+  deleteCookie,
+  saveHideAlertToCookie
 } from '@/utils/cookies'
 import { useRouter } from 'vue-router'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
@@ -36,6 +37,7 @@ export const useUserStore = defineStore('user', () => {
       console.log('로그인 응답', response)
       saveRefreshTokenToCookie(response.data.refresh_token)
       saveAccessTokenToCookie(response.data.access_token)
+      saveHideAlertToCookie(false)
       refreshToken.value = response.data.refresh_token
       isLogin.value = true
     } catch (error) {
@@ -50,6 +52,8 @@ export const useUserStore = defineStore('user', () => {
       if (response.data.statusCode == 200) {
         saveRefreshTokenToCookie(response.data.refresh_token)
         saveAccessTokenToCookie(response.data.access_token)
+        saveHideAlertToCookie(false)
+
         nickname.value = response.data.name
         email.value = response.data.email
         refreshToken.value = response.data.refresh_token
@@ -66,6 +70,8 @@ export const useUserStore = defineStore('user', () => {
       if (response.data.statusCode == 200) {
         saveRefreshTokenToCookie(response.data.refresh_token)
         saveAccessTokenToCookie(response.data.access_token)
+        saveHideAlertToCookie(false)
+
         nickname.value = response.data.name
         email.value = response.data.email
         refreshToken.value = response.data.refresh_token

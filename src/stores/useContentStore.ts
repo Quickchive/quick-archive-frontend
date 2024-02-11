@@ -1,23 +1,29 @@
 import { defineStore } from 'pinia'
-import { getContents, getAllContents, addContents } from '@/api/contents'
-import contentListDummy from '@/assets/model/contentList.json'
+import { getContents, getAllContents, addContents, deleteContents } from '@/api/contents'
 import { ref } from 'vue'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
+import type { CategoryIdMap } from '@/utils/interface'
+import { saveHideAlertToCookie } from '@/utils/cookies'
+import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
 
 export const useContentStore = defineStore('content', () => {
-  // 더미
   const userContentList = ref([])
   const userCustomContentList = ref([])
-
+  const alertDataStore = useAlertDataStore()
   const modalDataStore = useModalDataStore()
   const modalViewStore = useModalViewStore()
+  const moreBtnContentIdTree = ref<CategoryIdMap>({})
+  const focusedContentId = ref(-1)
+  const focusedContentData = ref({})
 
   async function fetchAllContents() {
     try {
       const response: any = await getAllContents()
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
         userContentList.value = response.data.contents
+        const contentIdMap = createContentIdMap(userContentList.value)
+        moreBtnContentIdTree.value = contentIdMap
       }
     } catch (error) {
       console.log(error)
@@ -30,6 +36,8 @@ export const useContentStore = defineStore('content', () => {
       console.log('콘텐츠 조회', response)
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
         userCustomContentList.value = response.data.contents
+        const contentIdMap = createContentIdMap(userCustomContentList.value)
+        moreBtnContentIdTree.value = contentIdMap
       }
     } catch (error) {
       console.log(error)
@@ -58,10 +66,46 @@ export const useContentStore = defineStore('content', () => {
         modalViewStore.closeSelectModal()
         modalViewStore.closeAddContentModal()
         modalViewStore.closeAddContentDetailModal()
+        fetchAllContents()
       }
     } catch (error) {
       console.log(error)
     }
+  }
+
+  async function deleteContent() {
+    try {
+      const response: any = await deleteContents(focusedContentId.value)
+      console.log('deleteContent', response)
+      if (response.data.statusCode === 200 || response.data.statusCode === 201) {
+        modalViewStore.closeDeleteContentModal()
+        // 얼럿 다시 보지 않기
+        if (alertDataStore.checkboxChecked === true) {
+          saveHideAlertToCookie(true)
+        } else {
+          saveHideAlertToCookie(false)
+        }
+        fetchAllContents()
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  function createContentIdMap(items: any[]) {
+    return items.reduce((acc, item) => {
+      acc[item.id] = false
+      console.log('acc', acc)
+      return acc
+    }, {})
+  }
+
+  function setFocusedContent(contentId: number) {
+    focusedContentId.value = contentId
+  }
+
+  function setFocusedContentData(contentData: object) {
+    focusedContentData.value = contentData
   }
 
   return {
@@ -70,6 +114,13 @@ export const useContentStore = defineStore('content', () => {
     fetchContents,
     setUserContentList,
     addContent,
-    userCustomContentList
+    userCustomContentList,
+    deleteContent,
+    createContentIdMap,
+    moreBtnContentIdTree,
+    focusedContentId,
+    focusedContentData,
+    setFocusedContent,
+    setFocusedContentData
   }
 })

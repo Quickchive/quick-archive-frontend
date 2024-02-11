@@ -40,6 +40,12 @@
       :alertData="alertDataStore.deleteCategoryAlertData"
     ></alert-confirm>
 
+    <!-- 콘텐츠 삭제 얼럿 -->
+    <alert-confirm
+      v-if="modalViewStore.deleteContentModal"
+      :alertData="alertDataStore.deleteContentAlertData"
+    ></alert-confirm>
+
     <!-- 새 카테고리 추가 얼럿 -->
     <confirm-with-input
       v-if="modalViewStore.addNewCategoryModal"

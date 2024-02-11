@@ -6,17 +6,13 @@
     <div class="alert-btn--checkbox__wrapper">
       <button
         class="alert-btn--checkbox"
-        @click="props.alertData.checkboxEvent()"
+        @click="alertDataStore.toggleCheckbox()"
         v-if="props.alertData.checkbox"
       >
-        <img
-          :src="checkboxOffIcon"
-          v-if="!categoryStore.deleteContentsChecked"
-          class="icon-small"
-        />
-        <img :src="checkboxOnIcon" v-if="categoryStore.deleteContentsChecked" class="icon-small" />
+        <img :src="checkboxOffIcon" v-if="!alertDataStore.checkboxChecked" class="icon-small" />
+        <img :src="checkboxOnIcon" v-if="alertDataStore.checkboxChecked" class="icon-small" />
       </button>
-      <span>카테고리 내 콘텐츠도 함께 삭제하기</span>
+      <span>{{ props.alertData.checkboxMessage }}</span>
     </div>
 
     <div class="wrapper__alert-button--double">
@@ -33,9 +29,9 @@
 <script setup>
 import checkboxOffIcon from '@/assets/ic/ic-control-checkbox-off.svg'
 import checkboxOnIcon from '@/assets/ic/ic-control-checkbox-on.svg'
-import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
 
-const categoryStore = useCategoryStore()
+const alertDataStore = useAlertDataStore()
 
 const props = defineProps({
   alertData: Object

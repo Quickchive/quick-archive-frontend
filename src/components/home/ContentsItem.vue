@@ -22,10 +22,14 @@
       </footer>
     </div>
     <div class="contents-item__btn__wrapper">
-      <button class="moreButton">
+      <button class="moreButton" @click="showMoreButton(item)">
         <img :src="moreIcon" class="btn-32" />
         <!-- 더보기 버튼 -->
-        <more-button :contentsBtn="true" class="more-button--contents"></more-button>
+        <more-button
+          v-if="contentStore.moreBtnContentIdTree[item.id]"
+          :btnList="btnList"
+          class="more-button--contents"
+        ></more-button>
       </button>
     </div>
   </article>
@@ -42,16 +46,14 @@ import favoriteSelectedIcon from '@/assets/ic/ic-favorite-seleted_32px.svg'
 import favoriteUnselectedIcon from '@/assets/ic/ic-favorite-unseleted_32px.svg'
 import { addFavorite } from '@/api/contents.js'
 import { useContentStore } from '@/stores/useContentStore.ts'
-import { useRouter, useRoute } from 'vue-router'
-import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import MemoItem from '@/components/home/MemoItem.vue'
-import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
-const categoryTreeStore = useCategoryTreeStore()
+import { useModalViewStore } from '@/stores/useModalViewStore.ts'
+import { getHideAlertFromCookie } from '@/utils/cookies.js'
 
+const modalViewStore = useModalViewStore()
 const contentStore = useContentStore()
 const router = useRouter()
-const route = useRoute()
-
 const props = defineProps({
   item: Object
 })
@@ -70,6 +72,43 @@ const favoriteEvent = async () => {
 
 const toCategoryPage = async (categoryId) => {
   router.push(`/home/${categoryId}`)
+}
+
+const btnList = [
+  {
+    name: '편집하기',
+    clickEvent: () => modalViewStore.openEditCategoryModal()
+  },
+  {
+    name: '공유하기',
+    clickEvent: () => modalViewStore.openDeleteCategoryModal()
+  },
+  {
+    name: '삭제하기',
+    clickEvent: () =>
+      getHideAlertFromCookie()
+        ? contentStore.deleteContent()
+        : modalViewStore.openDeleteContentModal()
+  }
+]
+
+const excludeItem = (obj, excludedKey) => {
+  let result = {}
+
+  for (let key in obj) {
+    if (key == excludedKey) {
+      result[key] = !obj[key]
+    } else {
+      result[key] = false
+    }
+  }
+  return result
+}
+
+const showMoreButton = (contentData) => {
+  contentStore.moreBtnContentIdTree = excludeItem(contentStore.moreBtnContentIdTree, contentData.id)
+  contentStore.setFocusedContent(contentData.id)
+  contentStore.setFocusedContentData(contentData)
 }
 </script>
 <style></style>
