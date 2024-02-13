@@ -6,13 +6,15 @@ import { addCategories, updateCategories } from '@/api/category.js'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
+import { getFavorites } from '@/api/contents.js'
+import { useContentStore } from '@/stores/useContentStore.ts'
 
 export const useCategoryStore = defineStore('category', () => {
   const modalViewStore = useModalViewStore()
   const modalDataStore = useModalDataStore()
   const alertDataStore = useAlertDataStore()
-
   const categoryTreeStore = useCategoryTreeStore()
+  const contentStore = useContentStore()
 
   const curCategoryName = ref('전체 콘텐츠')
   const focusedCategoryId = ref(-1)
@@ -82,12 +84,44 @@ export const useCategoryStore = defineStore('category', () => {
     }
   }
 
-  function setUnselectedContentChip() {
-    isUnselectedChipOn.value = !isUnselectedChipOn.value
+  function setUnselectedContentChip(offBtn: Boolean) {
+    if (offBtn) {
+      isUnselectedChipOn.value = !isUnselectedChipOn.value
+    } else {
+      isFavoriteChipOn.value = false
+      isUnselectedChipOn.value = true
+    }
   }
 
-  function setFavoriteContentChip() {
-    isFavoriteChipOn.value = !isFavoriteChipOn.value
+  async function setFavoriteContentChip(offBtn: Boolean) {
+    // 캡슐 버튼
+    if (offBtn) {
+      isFavoriteChipOn.value = !isFavoriteChipOn.value
+      if (isFavoriteChipOn.value) {
+        try {
+          const response = await getFavorites()
+          console.log('favorite', response)
+          if (response.data.statusCode === 200 || response.data.statusCode === 201) {
+            contentStore.userFilteredContentList = response.data.favorite_contents
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    }
+    // navBar
+    else {
+      isFavoriteChipOn.value = true
+      try {
+        const response = await getFavorites()
+        console.log('favorite', response)
+        if (response.data.statusCode === 200 || response.data.statusCode === 201) {
+          contentStore.userFilteredContentList = response.data.favorite_contents
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 
   return {

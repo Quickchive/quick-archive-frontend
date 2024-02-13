@@ -19,7 +19,7 @@
               <img :src="expandMoreIcon" />
             </button>
             <button
-              @click="categoryStore.setFavoriteContentChip()"
+              @click="categoryStore.setFavoriteContentChip(false)"
               class="btn--transparent category-list__btn btn-26"
             >
               즐겨찾기한 콘텐츠
@@ -33,7 +33,7 @@
               <img :src="expandMoreIcon" />
             </button>
             <button
-              @click="categoryStore.setUnselectedContentChip()"
+              @click="categoryStore.setUnselectedContentChip(false)"
               class="btn--transparent category-list__btn btn-26"
             >
               카테고리 미지정

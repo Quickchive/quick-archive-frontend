@@ -36,6 +36,7 @@ button {
   border-radius: 100px;
   &.active {
     @include color($color-white, $color-grey-100);
+    border: 1px solid $color-grey-100;
   }
   &.inactive {
     @include color($color-grey-80, transparent);

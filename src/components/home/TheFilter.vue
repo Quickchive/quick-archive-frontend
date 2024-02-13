@@ -4,10 +4,18 @@
       <option selected value="recent">최신순</option>
       <option value="old">오래된순</option>
     </select>
-    <button class="btn--chip" :class="categoryStore.isFavoriteChipOn ? 'active' : 'inactive'">
+    <button
+      @click="categoryStore.setFavoriteContentChip(true)"
+      class="btn--chip"
+      :class="categoryStore.isFavoriteChipOn ? 'active' : 'inactive'"
+    >
       즐겨찾기
     </button>
-    <button :class="categoryStore.isUnselectedChipOn ? 'active' : 'inactive'" class="btn--chip">
+    <button
+      @click="categoryStore.setUnselectedContentChip(true)"
+      class="btn--chip"
+      :class="categoryStore.isUnselectedChipOn ? 'active' : 'inactive'"
+    >
       카테고리 미지정
     </button>
   </div>
