@@ -1,5 +1,11 @@
 import { defineStore } from 'pinia'
-import { getContents, getAllContents, addContents, deleteContents } from '@/api/contents'
+import {
+  getContents,
+  getAllContents,
+  addContents,
+  deleteContents,
+  addFavorite
+} from '@/api/contents'
 import { ref } from 'vue'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
@@ -123,6 +129,15 @@ export const useContentStore = defineStore('content', () => {
     focusedContentData.value = contentData
   }
 
+  async function favoriteContent(contentId: number) {
+    try {
+      const response = await addFavorite(contentId)
+      console.log('favoriteContent', response)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return {
     userContentList,
     fetchAllContents,
@@ -137,6 +152,7 @@ export const useContentStore = defineStore('content', () => {
     focusedContentData,
     setFocusedContent,
     setFocusedContentData,
+    favoriteContent,
     userFilteredContentList
   }
 })

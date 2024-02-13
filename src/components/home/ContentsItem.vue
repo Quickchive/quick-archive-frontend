@@ -61,12 +61,12 @@ const props = defineProps({
 const favoriteEvent = async () => {
   try {
     const response = await addFavorite(props.item.id)
-    console.log(response)
-    if (response.statusCode === 201) {
-      contentStore.fetchContents()
+    if (response.status === 200) {
+      // eslint-disable-next-line vue/no-mutating-props
+      props.item.favorite = !props.item.favorite // 즐겨찾기 상태 업데이트
     }
   } catch (error) {
-    console.log(error)
+    console.error('즐겨찾기 토글 오류:', error)
   }
 }
 
