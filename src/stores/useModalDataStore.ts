@@ -13,6 +13,7 @@ import categoryTrip from '@/assets/img/category/img_category_trip.png'
 import categoryWatch from '@/assets/img/category/img_category_watch.png'
 import { ref, reactive, computed } from 'vue'
 import { getOgData } from '@/api/contents'
+import defaultImg from '@/assets/img/img_default.png'
 
 export const useModalDataStore = defineStore('modalData', () => {
   const defaultCategory = reactive([

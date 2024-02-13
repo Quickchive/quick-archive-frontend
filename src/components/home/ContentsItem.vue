@@ -2,7 +2,7 @@
   <article class="contents-item">
     <div class="item-container">
       <div class="thumbnail__wrapper">
-        <img :src="item.coverImg" class="thumbnail" />
+        <img :src="item.coverImg" class="thumbnail" @error="handleImageError" />
         <button class="btn--transparent btn-favorite" @click="favoriteEvent()">
           <img :src="favoriteSelectedIcon" v-if="item.favorite" />
           <img :src="favoriteUnselectedIcon" v-if="!item.favorite" />
@@ -50,6 +50,7 @@ import { useRouter } from 'vue-router'
 import MemoItem from '@/components/home/MemoItem.vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { getHideAlertFromCookie } from '@/utils/cookies.js'
+import defaultImg from '@/assets/img/img_default.png'
 
 const modalViewStore = useModalViewStore()
 const contentStore = useContentStore()
@@ -109,6 +110,10 @@ const showMoreButton = (contentData) => {
   contentStore.moreBtnContentIdTree = excludeItem(contentStore.moreBtnContentIdTree, contentData.id)
   contentStore.setFocusedContent(contentData.id)
   contentStore.setFocusedContentData(contentData)
+}
+
+const handleImageError = (event) => {
+  event.target.src = defaultImg
 }
 </script>
 <style></style>
