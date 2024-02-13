@@ -11,6 +11,7 @@ import { useRoute } from 'vue-router'
 export const useContentStore = defineStore('content', () => {
   const userContentList = ref([])
   const userCustomContentList = ref([])
+  const userFilteredContentList = ref([])
   const alertDataStore = useAlertDataStore()
   const modalDataStore = useModalDataStore()
   const modalViewStore = useModalViewStore()
@@ -135,6 +136,7 @@ export const useContentStore = defineStore('content', () => {
     focusedContentId,
     focusedContentData,
     setFocusedContent,
-    setFocusedContentData
+    setFocusedContentData,
+    userFilteredContentList
   }
 })
