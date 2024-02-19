@@ -3,15 +3,19 @@
   <the-filter></the-filter>
   <div class="divider"></div>
   <article class="contents-container">
-    <div class="contents-num__wrapper">{{ contentStore.userContentList.length }}개</div>
+    <div class="contents-num__wrapper">{{ contentStore.userFilteredContentList.length }}개</div>
     <!-- 콘텐츠 있을 때 -->
-    <template v-if="contentStore.userContentList.length > 0">
+    <template v-if="contentStore.userFilteredContentList.length > 0">
       <div class="contents-list__wrapper">
-        <contents-item v-for="item in contentList" :key="item" :item="item"></contents-item>
+        <contents-item
+          v-for="item in contentStore.userFilteredContentList"
+          :key="item"
+          :item="item"
+        ></contents-item>
       </div>
     </template>
     <!-- 콘텐츠 없을 떄 -->
-    <template v-if="contentStore.userContentList.length === 0">
+    <template v-if="contentStore.userFilteredContentList.length === 0">
       <div class="flex-container__col contents__empty">
         <img :src="emptyImg" class="img-empty" />
         <span>저장된 콘텐츠가 없습니다.</span>

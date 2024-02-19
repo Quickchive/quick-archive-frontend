@@ -6,8 +6,12 @@ import { addCategories, updateCategories } from '@/api/category.js'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
-import { getFavorites } from '@/api/contents.js'
 import { useContentStore } from '@/stores/useContentStore.ts'
+import {
+  filterByCategoryIsNull,
+  filterByFavoriteAndCategoryIsNull,
+  filterByFavorite
+} from '@/utils/filter.js'
 
 export const useCategoryStore = defineStore('category', () => {
   const modalViewStore = useModalViewStore()
@@ -91,35 +95,66 @@ export const useCategoryStore = defineStore('category', () => {
       isFavoriteChipOn.value = false
       isUnselectedChipOn.value = true
     }
+
+    // 카테고리 미지정 on
+    if (isUnselectedChipOn.value === true) {
+      // && 즐겨찾기 on
+      if (isFavoriteChipOn.value === true) {
+        contentStore.userFilteredContentList = filterByFavoriteAndCategoryIsNull(
+          contentStore.userContentList
+        )
+      }
+      // && 즐겨찾기 off
+      else {
+        contentStore.userFilteredContentList = filterByCategoryIsNull(contentStore.userContentList)
+      }
+    }
+    // 카테고리 미지정 off
+    else {
+      // && 즐겨찾기 on
+      if (isFavoriteChipOn.value === true) {
+        contentStore.userFilteredContentList = filterByFavorite(contentStore.userContentList)
+      }
+      // && 즐겨찾기 off
+      else {
+        contentStore.userFilteredContentList = contentStore.userContentList
+      }
+    }
   }
 
   async function setFavoriteContentChip(offBtn: Boolean) {
     // 캡슐 버튼
     if (offBtn) {
       isFavoriteChipOn.value = !isFavoriteChipOn.value
-      if (isFavoriteChipOn.value) {
-        try {
-          const response = await getFavorites()
-          console.log('favorite', response)
-          if (response.data.statusCode === 200 || response.data.statusCode === 201) {
-            contentStore.userFilteredContentList = response.data.favorite_contents
-          }
-        } catch (error) {
-          console.log(error)
-        }
-      }
     }
     // navBar
     else {
       isFavoriteChipOn.value = true
-      try {
-        const response = await getFavorites()
-        console.log('favorite', response)
-        if (response.data.statusCode === 200 || response.data.statusCode === 201) {
-          contentStore.userFilteredContentList = response.data.favorite_contents
-        }
-      } catch (error) {
-        console.log(error)
+      isUnselectedChipOn.value = false
+    }
+
+    // 카테고리 미지정 on
+    if (isUnselectedChipOn.value === true) {
+      // && 즐겨찾기 on
+      if (isFavoriteChipOn.value === true) {
+        contentStore.userFilteredContentList = filterByFavoriteAndCategoryIsNull(
+          contentStore.userContentList
+        )
+      }
+      // && 즐겨찾기 off
+      else {
+        contentStore.userFilteredContentList = filterByCategoryIsNull(contentStore.userContentList)
+      }
+    }
+    // 카테고리 미지정 off
+    else {
+      // && 즐겨찾기 on
+      if (isFavoriteChipOn.value === true) {
+        contentStore.userFilteredContentList = filterByFavorite(contentStore.userContentList)
+      }
+      // && 즐겨찾기 off
+      else {
+        contentStore.userFilteredContentList = contentStore.userContentList
       }
     }
   }

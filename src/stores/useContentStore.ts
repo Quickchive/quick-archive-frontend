@@ -15,9 +15,9 @@ import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
 import { useRoute } from 'vue-router'
 
 export const useContentStore = defineStore('content', () => {
-  const userContentList = ref([])
+  const userContentList: any = ref([])
   const userCustomContentList = ref([])
-  const userFilteredContentList = ref([])
+  const userFilteredContentList: any = ref([])
   const alertDataStore = useAlertDataStore()
   const modalDataStore = useModalDataStore()
   const modalViewStore = useModalViewStore()
@@ -31,6 +31,7 @@ export const useContentStore = defineStore('content', () => {
       const response: any = await getAllContents()
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
         userContentList.value = response.data.contents
+        userFilteredContentList.value = response.data.contents
         const contentIdMap = createContentIdMap(userContentList.value)
         moreBtnContentIdTree.value = contentIdMap
       }
