@@ -1,6 +1,6 @@
 <template>
   <div class="contents-filter__wrapper">
-    <select class="selectbox__contents-filter">
+    <select class="selectbox__contents-filter" v-model="selectedOption" @change="sortContent">
       <option selected value="recent">최신순</option>
       <option value="old">오래된순</option>
     </select>
@@ -23,7 +23,25 @@
 
 <script setup>
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+import { ref } from 'vue'
 const categoryStore = useCategoryStore()
+import { useContentStore } from '@/stores/useContentStore.ts'
+const contentStore = useContentStore()
+import { sortByCreatedAtDescending, sortByCreatedAtAscending } from '@/utils/sort.js'
+
+const selectedOption = ref('recent')
+
+const sortContent = () => {
+  if (selectedOption.value === 'recent') {
+    contentStore.userFilteredContentList = sortByCreatedAtDescending(
+      contentStore.userFilteredContentList
+    )
+  } else {
+    contentStore.userFilteredContentList = sortByCreatedAtAscending(
+      contentStore.userFilteredContentList
+    )
+  }
+}
 </script>
 
 <style></style>

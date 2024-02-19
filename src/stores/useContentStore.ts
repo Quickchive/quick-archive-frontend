@@ -13,6 +13,7 @@ import type { CategoryIdMap } from '@/utils/interface'
 import { saveHideAlertToCookie } from '@/utils/cookies'
 import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
 import { useRoute } from 'vue-router'
+import { sortByCreatedAtDescending, sortByCreatedAtAscending } from '@/utils/sort.js'
 
 export const useContentStore = defineStore('content', () => {
   const userContentList: any = ref([])
@@ -30,9 +31,9 @@ export const useContentStore = defineStore('content', () => {
     try {
       const response: any = await getAllContents()
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
-        userContentList.value = response.data.contents
-        userFilteredContentList.value = response.data.contents
-        const contentIdMap = createContentIdMap(userContentList.value)
+        userContentList.value = sortByCreatedAtDescending(response.data.contents)
+        userFilteredContentList.value = userContentList.value
+        const contentIdMap = createContentIdMap(userFilteredContentList.value)
         moreBtnContentIdTree.value = contentIdMap
       }
     } catch (error) {

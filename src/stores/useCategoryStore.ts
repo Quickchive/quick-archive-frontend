@@ -122,7 +122,7 @@ export const useCategoryStore = defineStore('category', () => {
     }
   }
 
-  async function setFavoriteContentChip(offBtn: Boolean) {
+  function setFavoriteContentChip(offBtn: Boolean) {
     // 캡슐 버튼
     if (offBtn) {
       isFavoriteChipOn.value = !isFavoriteChipOn.value
