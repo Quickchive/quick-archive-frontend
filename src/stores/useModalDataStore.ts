@@ -13,7 +13,6 @@ import categoryTrip from '@/assets/img/category/img_category_trip.png'
 import categoryWatch from '@/assets/img/category/img_category_watch.png'
 import { ref, reactive, computed } from 'vue'
 import { getOgData } from '@/api/contents'
-import defaultImg from '@/assets/img/img_default.png'
 
 export const useModalDataStore = defineStore('modalData', () => {
   const defaultCategory = reactive([
@@ -112,7 +111,7 @@ export const useModalDataStore = defineStore('modalData', () => {
     parentId: ''
   })
 
-  const getSelectedCategory = computed(() => {
+  const getSelectedCategory: any = computed(() => {
     const selectedCategory = defaultCategory.find((e) => {
       return e.selected == true
     })
@@ -125,6 +124,11 @@ export const useModalDataStore = defineStore('modalData', () => {
       return categoryWatch
     }
     return icon.img
+  }
+
+  const getIconDatagByIconName = (iconName: string) => {
+    const icon: any = defaultCategory.find((e) => e.iconName === iconName)
+    return icon
   }
 
   // 카테고리 아이콘 선택 이벤트
@@ -204,6 +208,7 @@ export const useModalDataStore = defineStore('modalData', () => {
     setMemo,
     setLink,
     setTitle,
-    fetchOgData
+    fetchOgData,
+    getIconDatagByIconName
   }
 })

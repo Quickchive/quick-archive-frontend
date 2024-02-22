@@ -21,8 +21,17 @@ export const useCategoryStore = defineStore('category', () => {
   const contentStore = useContentStore()
 
   const curCategoryName = ref('전체 콘텐츠')
-  const focusedCategoryId = ref(-1)
-  const focusedCategoryData = ref({})
+  const focusedCategoryData: any = ref({
+    children: [],
+    createdAt: '',
+    iconName: '',
+    id: -1,
+    name: '',
+    parentId: null,
+    slug: '',
+    updatedAt: '',
+    userId: -1
+  })
 
   // 상단 필터
   const isUnselectedChipOn = ref(false)
@@ -32,17 +41,17 @@ export const useCategoryStore = defineStore('category', () => {
     curCategoryName.value = categoryName
   }
 
-  function setFocusedCategory(categoryId: number) {
-    focusedCategoryId.value = categoryId
-  }
-
-  function setFocusedCategoryData(categoryData: object) {
-    focusedCategoryData.value = categoryData
+  function setFocusedCategoryData(categoryData: any) {
+    focusedCategoryData.value.children = categoryData.children
+    focusedCategoryData.value.iconName = categoryData.iconName
+    focusedCategoryData.value.name = categoryData.name
+    focusedCategoryData.value.parentId = categoryData.parentId
+    focusedCategoryData.value.id = categoryData.id
   }
 
   async function deleteCategory() {
     try {
-      const focusedCategory_id = focusedCategoryId.value
+      const focusedCategory_id = focusedCategoryData.value.id
       const response = await deleteCategories(focusedCategory_id, alertDataStore.checkboxChecked)
       if (response.data.statusCode === (200 || 201)) {
         await categoryTreeStore.updateUserCategoryList()
@@ -161,11 +170,9 @@ export const useCategoryStore = defineStore('category', () => {
 
   return {
     curCategoryName,
-    focusedCategoryId,
     focusedCategoryData,
     deleteCategory,
     setCategoryName,
-    setFocusedCategory,
     setFocusedCategoryData,
     addCategory,
     editCategory,

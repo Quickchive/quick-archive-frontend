@@ -1,13 +1,13 @@
 <template>
   <dialog class="category-add__modal">
-    <modal-header :modalTitle="modalTitle" :closeModal="closeModal"></modal-header>
+    <modal-header :modalTitle="modalTitle" :closeModal="closeEvent"></modal-header>
     <div class="wrapper__category-change">
       <button class="btn--transparent category-change__button" @click="openSelectCategoryModal()">
         <div class="icon__category-change">
-          <img class="img-category-custom" :src="modalDataStore.getSelectedCategory.img" /><img
-            class="icon__thumb-change"
-            :src="thumbChangeIcon"
-          />
+          <img
+            class="img-category-custom"
+            :src="modalDataStore.getCategoryImgByIconName(categoryIcon)"
+          /><img class="icon__thumb-change" :src="thumbChangeIcon" />
         </div>
       </button>
     </div>
@@ -34,7 +34,7 @@
       <button
         class="btn-confirm"
         :class="isCategoryNameValid ? 'active' : 'inactive'"
-        @click="saveCategory()"
+        @click="saveCategory"
         :disabled="!isCategoryNameValid"
       >
         저장
@@ -45,7 +45,6 @@
 
 <script setup>
 import thumbChangeIcon from '@/assets/ic/ic-thumb-change.svg'
-import categoryWatchIcon from '@/assets/img/category/img_category_watch.png'
 import nextBlackIcon from '@/assets/ic/ic-next-black.svg'
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
 import ModalHeader from '@/components/header/ModalHeader.vue'
@@ -57,9 +56,9 @@ import { searchCategoryDataById } from '@/utils/search.js'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 
 const props = defineProps({
-  modalTitle: String,
   closeModal: Function,
-  apiName: String
+  apiName: String,
+  modalData: Object
 })
 
 // store 선언
@@ -68,27 +67,43 @@ const categoryTreeStore = useCategoryTreeStore()
 const categoryStore = useCategoryStore()
 const modalDataStore = useModalDataStore()
 
-onMounted(async () => {
-  if (props.apiName === 'editCategory') {
+const categoryName = ref('')
+const categoryIcon = ref('')
+const modalTitle = ref('')
+const closeEvent = ref(Function)
+
+onMounted(() => {
+  // 카테고리 추가
+  if (props.apiName === 'addCategory') {
+    modalTitle.value = '카테고리 추가'
+    categoryName.value = ''
+    categoryIcon.value = 'Folder'
+    closeEvent.value = () => modalViewStore.closeAddCategoryModal()
+  }
+
+  // 카테고리 수정
+  else {
+    modalTitle.value = '카테고리 수정'
     categoryName.value = categoryStore.focusedCategoryData.name
-    if (categoryStore.focusedCategoryData.parentId !== null) {
+    categoryIcon.value = categoryStore.focusedCategoryData.iconName
+    const iconData = modalDataStore.getIconDatagByIconName(
+      categoryStore.focusedCategoryData.iconName
+    )
+    modalDataStore.selectCategoryIcon(iconData)
+    closeEvent.value = () => modalViewStore.closeEditCategoryModal()
+
+    if (categoryStore.focusedCategoryData.parentId !== (null && -1 && undefined)) {
       const parentData = searchCategoryDataById(
         categoryTreeStore.userCategoryList,
         categoryStore.focusedCategoryData.parentId
       )
       modalDataStore.selectedLocation.name = parentData.name
       modalDataStore.selectedLocation.id = parentData.id
+    } else {
+      ;(modalDataStore.selectedLocation.name = '미지정'), (modalDataStore.selectedLocation.id = -1)
     }
-    if (categoryStore.focusedCategoryData.parentId === null) {
-      modalDataStore.selectedLocation.name = '미지정'
-    }
-    console.log('parentData', parentData)
   }
 })
-
-const categoryName = ref('')
-let categoryIcon = ref(categoryWatchIcon)
-let categoryLocationName = ref('미지정')
 
 const openSelectCategoryModal = () => {
   modalViewStore.openSelectCategoryModal()
@@ -110,34 +125,28 @@ const clearCategoryName = () => {
 
 // 카테고리 아이콘 감시
 modalDataStore.$subscribe(() => {
-  categoryIcon.value = modalDataStore.getSelectedCategory.img
-  categoryLocationName.value = modalDataStore.selectedLocation.name
+  categoryIcon.value = modalDataStore.getSelectedCategory.iconName
 })
 
 // 저장 버튼 클릭 이벤트
 const saveCategory = () => {
-  // 카테고리 추가
-  if (props.apiName === 'addCategory') {
-    let categoryData = {
-      categoryName: categoryName.value,
-      iconName: modalDataStore.getSelectedCategory.iconName
-    }
-    if (modalDataStore.selectedLocation.name !== '미지정') {
-      categoryData.parentId = modalDataStore.selectedLocation.id
-    }
-    categoryTreeStore.addCategory(categoryData)
+  let categoryData = {
+    categoryName: categoryName.value,
+    iconName: categoryIcon.value
   }
-  // 카테고리 수정
+  if (categoryStore.focusedCategoryData.parentId !== (null && -1 && undefined)) {
+    categoryData.parentId = modalDataStore.selectedLocation.id
+  }
+
+  // // 카테고리 추가
+  if (props.apiName === 'addCategory') {
+    categoryStore.addCategory(categoryData)
+  }
+
+  // // 카테고리 수정
   if (props.apiName === 'editCategory') {
-    let editCategoryData = {
-      categoryName: categoryName.value,
-      iconName: modalDataStore.getSelectedCategory.iconName,
-      categoryId: categoryTreeStore.focusedCategoryId
-    }
-    if (modalDataStore.selectedLocation.name !== '미지정') {
-      editCategoryData.parentId = modalDataStore.selectedLocation.id
-    }
-    categoryTreeStore.editCategory(editCategoryData)
+    categoryData.categoryId = categoryStore.focusedCategoryData.id
+    categoryStore.editCategory(categoryData)
   }
 }
 

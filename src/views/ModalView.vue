@@ -7,9 +7,7 @@
     ></modal-select-category-or-content>
     <!-- 카테고리 추가 모달 -->
     <modal-category-add
-      :modalTitle="modalAddCategory"
-      :closeModal="closeAddCategoryModal"
-      :apiName="addCategory"
+      :apiName="'addCategory'"
       v-if="modalViewStore.addCategoryModal"
     ></modal-category-add>
     <modal-category-select v-if="modalViewStore.selectCategoryModal"></modal-category-select>
@@ -21,9 +19,7 @@
 
     <!-- 카테고리 수정 모달 -->
     <modal-category-add
-      :modalTitle="modalEditCategory"
-      :closeModal="closeEditCategoryModal"
-      :apiName="editCategory"
+      :apiName="'editCategory'"
       v-if="modalViewStore.editCategoryModal"
     ></modal-category-add>
 
@@ -82,23 +78,9 @@ import ModalEditContentTitle from '@/components/modal/content/ModalEditContentTi
 import ConfirmWithInput from '@/components/modal/alert/AlertWithInput.vue'
 import ModalContentShare from '@/components/modal/content/ModalContentShare.vue'
 
-const modalAddCategory = '카테고리 추가'
-const modalEditCategory = '카테고리 수정'
-
 // counter store 가져오기
 const modalViewStore = useModalViewStore()
 const alertDataStore = useAlertDataStore()
-
-const closeAddCategoryModal = () => {
-  modalViewStore.closeAddCategoryModal()
-}
-
-const closeEditCategoryModal = () => {
-  modalViewStore.closeEditCategoryModal()
-}
-
-const addCategory = 'addCategory'
-const editCategory = 'editCategory'
 </script>
 
 <style></style>

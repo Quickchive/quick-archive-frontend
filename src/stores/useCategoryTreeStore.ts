@@ -40,9 +40,9 @@ export const useCategoryTreeStore = defineStore('categoryTree', () => {
       if (response.data.statusCode === 200) {
         userCategoryList.value = response.data.categoriesTree
         const categoryIdMap = createCategoryIdMap(userCategoryList.value)
-        categoryIdTree.value = categoryIdMap
-        categoryIdTreeRadio.value = categoryIdMap
-        moreBtnCategoryIdTree.value = categoryIdMap
+        categoryIdTree.value = Object.assign({}, categoryIdMap)
+        categoryIdTreeRadio.value = Object.assign({}, categoryIdMap)
+        moreBtnCategoryIdTree.value = Object.assign({}, categoryIdMap)
       }
     } catch (error) {
       console.log(error)
