@@ -24,9 +24,15 @@
     ></modal-category-add>
 
     <!-- 콘텐츠 모달 -->
-    <modal-content-add-step-01 v-if="modalViewStore.addContentModal"></modal-content-add-step-01>
+    <modal-content-add-step-01
+      v-if="modalViewStore.addContentModal"
+      :closeModal="closeAddContentStep01Modal"
+      :modalTitle="'콘텐츠 추가'"
+    ></modal-content-add-step-01>
     <modal-content-add-step-02
       v-if="modalViewStore.addContentDetailModal"
+      :closeModal="closeAddContentStep02Modal"
+      :modalTitle="'콘텐츠 추가'"
     ></modal-content-add-step-02>
     <modal-edit-content-title
       v-if="modalViewStore.editContentTitleModal"
@@ -35,6 +41,18 @@
       v-if="modalViewStore.deleteCategoryModal"
       :alertData="alertDataStore.deleteCategoryAlertData"
     ></alert-confirm>
+
+    <!-- 콘텐츠 수정 모달 -->
+    <modal-content-add-step-01
+      v-if="modalViewStore.editContentModal"
+      :modalTitle="'콘텐츠 수정'"
+      :closeModal="closeEditContentStep01Modal"
+    ></modal-content-add-step-01>
+    <modal-content-add-step-02
+      v-if="modalViewStore.editContentDetailModal"
+      :modalTitle="'콘텐츠 수정'"
+      :closeModal="closeEditContentStep02Modal"
+    ></modal-content-add-step-02>
 
     <!-- 콘텐츠 삭제 얼럿 -->
     <alert-confirm
@@ -81,6 +99,26 @@ import ModalContentShare from '@/components/modal/content/ModalContentShare.vue'
 // counter store 가져오기
 const modalViewStore = useModalViewStore()
 const alertDataStore = useAlertDataStore()
+
+const closeAddContentStep01Modal = () => {
+  modalViewStore.closeAddContentModal()
+  modalViewStore.closeSelectModal()
+}
+
+const closeAddContentStep02Modal = () => {
+  modalViewStore.closeAddContentDetailModal()
+  modalViewStore.closeAddContentModal()
+  modalViewStore.closeSelectModal()
+}
+
+const closeEditContentStep01Modal = () => {
+  modalViewStore.closeEditContentModal()
+}
+
+const closeEditContentStep02Modal = () => {
+  modalViewStore.closeEditContentDetailModal()
+  modalViewStore.closeEditContentModal()
+}
 </script>
 
 <style></style>

@@ -35,7 +35,11 @@ import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import ModalHeader from '@/components/header/ModalHeader.vue'
 import {} from '@/api/contents.js'
 
-const modalTitle = '콘텐츠 추가'
+const props = defineProps({
+  modalTitle: String,
+  closeModal: Function
+})
+
 const modalViewStore = useModalViewStore()
 const modalDataStore = useModalDataStore()
 
@@ -50,10 +54,10 @@ const isLinkValid = computed(() => {
   return 1 <= link.value.length ? true : false
 })
 
-const closeModal = () => {
-  modalViewStore.closeAddContentModal()
-  modalViewStore.closeSelectModal()
-}
+// const closeModal = () => {
+//   modalViewStore.closeAddContentModal()
+//   modalViewStore.closeSelectModal()
+// }
 
 const toModalContentAddStep02 = async () => {
   modalDataStore.setLink(link.value)

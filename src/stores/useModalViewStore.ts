@@ -18,6 +18,9 @@ export const useModalViewStore = defineStore('modalView', () => {
   const editContentTitleModal = ref(false)
   const deleteContentModal = ref(false)
   const shareContentModal = ref(false)
+  const editContentModal = ref(false)
+
+  const editContentDetailModal = ref(false)
 
   // 카테고리 삭제/수정 모달
   const editCategoryModal = ref(false)
@@ -97,6 +100,22 @@ export const useModalViewStore = defineStore('modalView', () => {
   }
   function closeDeleteContentModal() {
     deleteContentModal.value = false
+    overlay.value = false
+  }
+  function openEditContentModal() {
+    editContentModal.value = true
+    overlay.value = true
+  }
+  function closeEditContentModal() {
+    editContentModal.value = false
+    overlay.value = false
+  }
+  function openEditContentDetailModal() {
+    editContentDetailModal.value = true
+    overlay.value = true
+  }
+  function closeEditContentDetailModal() {
+    editContentDetailModal.value = false
     overlay.value = false
   }
   function openShareContentModal() {
@@ -236,6 +255,12 @@ export const useModalViewStore = defineStore('modalView', () => {
     closeDeleteContentModal,
     openShareContentModal,
     closeShareContentModal,
-    shareContentModal
+    shareContentModal,
+    editContentModal,
+    openEditContentModal,
+    closeEditContentModal,
+    editContentDetailModal,
+    openEditContentDetailModal,
+    closeEditContentDetailModal
   }
 })

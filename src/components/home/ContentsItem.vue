@@ -78,7 +78,7 @@ const toCategoryPage = async (categoryId) => {
 const btnList = [
   {
     name: '편집하기',
-    clickEvent: () => modalViewStore.openEditCategoryModal()
+    clickEvent: () => modalViewStore.openEditContentDetailModal()
   },
   {
     name: '공유하기',

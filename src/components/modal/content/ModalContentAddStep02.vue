@@ -40,7 +40,7 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn-confirm active" @click="contentStore.addContent()">저장</button>
+      <button class="btn-confirm active" @click="saveContent">저장</button>
     </div>
   </dialog>
 </template>
@@ -53,21 +53,34 @@ import ThumbnailItem from '../ThumbnailItem.vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
+import { onMounted } from 'vue'
 
-const modalTitle = '콘텐츠 추가'
 const isBtnOnLeft = true
 const modalViewStore = useModalViewStore()
 const modalDataStore = useModalDataStore()
 const contentStore = useContentStore()
 
-const closeModal = () => {
-  modalViewStore.closeAddContentDetailModal()
-  modalViewStore.closeAddContentModal()
-  modalViewStore.closeSelectModal()
-}
+const props = defineProps({
+  modalTitle: String,
+  closeModal: Function
+})
+
+onMounted(() => {
+  if (props.modalTitle === '콘텐츠 수정') {
+    modalDataStore.addContentData = contentStore.focusedContentData
+  }
+})
 
 const setMemo = (e) => {
   modalDataStore.setMemo(e.target.value)
+}
+
+const saveContent = () => {
+  if (props.modalTitle === '콘텐츠 추가') {
+    contentStore.addContent()
+  } else {
+    contentStore.editContent()
+  }
 }
 </script>
 

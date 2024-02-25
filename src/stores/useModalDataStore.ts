@@ -100,6 +100,7 @@ export const useModalDataStore = defineStore('modalData', () => {
 
   // 콘텐츠 추가 모달 데이터
   const addContentData = ref({
+    id: -1,
     category: selectedLocation.value,
     favorite: false,
     memo: '',

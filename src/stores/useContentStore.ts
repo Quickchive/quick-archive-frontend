@@ -4,7 +4,8 @@ import {
   getAllContents,
   addContents,
   deleteContents,
-  addFavorite
+  addFavorite,
+  updateContents
 } from '@/api/contents'
 import { ref } from 'vue'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
@@ -90,6 +91,42 @@ export const useContentStore = defineStore('content', () => {
     }
   }
 
+  async function editContent() {
+    try {
+      const contentData = {
+        id: modalDataStore.addContentData.id,
+        link: modalDataStore.addContentData.link,
+        title: modalDataStore.addContentData.title,
+        comment: modalDataStore.addContentData.memo,
+        favorite: modalDataStore.addContentData.favorite,
+        categoryName: modalDataStore.selectedLocation.name,
+        parentId: modalDataStore.selectedLocation.parentId
+      }
+
+      if (modalDataStore.selectedLocation.name === '미지정') {
+        delete contentData.categoryName
+      }
+
+      const response: any = await updateContents(contentData)
+      console.log('addContent', response)
+      if (response.data.statusCode === 200 || response.data.statusCode === 201) {
+        console.log('콘텐츠 수정 성공 로직')
+        modalViewStore.closeSelectModal()
+        modalViewStore.closeEditContentModal()
+        modalViewStore.closeEditContentDetailModal()
+        if (route.params.id !== undefined) {
+          // 특정 콘텐츠 페이지인 경우
+          fetchContents(Number(route.params.id))
+        } else {
+          // 전체 콘텐츠 페이지인 경우
+          fetchAllContents()
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   async function deleteContent() {
     try {
       const response: any = await deleteContents(focusedContentId.value)
@@ -155,6 +192,7 @@ export const useContentStore = defineStore('content', () => {
     setFocusedContent,
     setFocusedContentData,
     favoriteContent,
-    userFilteredContentList
+    userFilteredContentList,
+    editContent
   }
 })
