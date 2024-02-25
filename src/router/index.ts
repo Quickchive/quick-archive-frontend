@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from '@/stores/useUserStore.ts'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,6 +8,15 @@ const router = createRouter({
     {
       path: '/home',
       component: () => import('@/views/AuthenticatedView.vue'),
+      beforeEnter: async (to, from, next) => {
+        const userStore = useUserStore()
+        await userStore.getUserProfile()
+        if (!userStore.isLogin) {
+          next('/login')
+        } else {
+          next()
+        }
+      },
       children: [
         {
           path: '/home',
