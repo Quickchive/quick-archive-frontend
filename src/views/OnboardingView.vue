@@ -13,12 +13,14 @@
           <p>저장만 해주세요. 귀찮은 카테고리 정리는 대신해 드릴게요.</p>
           <div class="wrapper__section-button">
             <button id="btn__app">모바일 앱 다운로드</button>
-            <button id="btn__web">웹에서 이용하기</button>
+            <button id="btn__web" @click="toLoginPage">웹에서 이용하기</button>
           </div>
         </section>
       </article>
       <article class="wrapper__article__sub">
-        <article class="article__img-background"></article>
+        <article class="article__img-background" id="onboarding_img-1">
+          <img :src="onboarding1" />
+        </article>
         <article class="article__text">
           <img :src="num1" />
           <h3>저장 버튼 한 번만 누르세요. <br />카테고리 분류는 퀵카이브가 알아서!</h3>
@@ -37,10 +39,14 @@
           </h3>
           <p>사무실에서도 지하철에서도 자유롭게 사용하세요.</p>
         </article>
-        <article class="article__img-background"></article>
+        <article class="article__img-background" id="onboarding_img-2">
+          <img :src="onboarding2" />
+        </article>
       </article>
       <article class="wrapper__article__sub">
-        <article class="article__img-background"></article>
+        <article class="article__img-background" id="onboarding_img-3">
+          <img :src="onboarding3" />
+        </article>
         <article class="article__text">
           <img :src="num3" />
           <h3>
@@ -54,8 +60,18 @@
         </article>
       </article>
     </div>
+    <footer class="footer__onboarding">
+      <ul>
+        <button class="btn-main" @click="toMainPage">퀵카이브</button>
 
-    <footer></footer>
+        <li>약관 및 정책</li>
+        <img :src="divider" />
+        <li>서비스 만든 사람</li>
+        <img :src="divider" />
+        <li>이메일 문의</li>
+      </ul>
+      <button class="btn--instagram"><img :src="instagramLogo" /></button>
+    </footer>
   </div>
 </template>
 
@@ -64,6 +80,22 @@ import mainLogo from '@/assets/logo/logo_black_20px.svg'
 import num1 from '@/assets/ic/number/ic_num_1.svg'
 import num2 from '@/assets/ic/number/ic_num_2.svg'
 import num3 from '@/assets/ic/number/ic_num_3.svg'
+import onboarding1 from '@/assets/img/onboarding/onboarding1.png'
+import onboarding2 from '@/assets/img/onboarding/onboarding2.png'
+import onboarding3 from '@/assets/img/onboarding/onboarding3.png'
+import divider from '@/assets/ic/divider_14px.svg'
+import instagramLogo from '@/assets/ic/ic-instagram.svg'
+
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
+const toLoginPage = () => {
+  router.push('/login')
+}
+
+const toMainPage = () => {
+  router.push('/home')
+}
 </script>
 
 <style></style>
