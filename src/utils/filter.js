@@ -2,7 +2,7 @@ const filterByCategoryIsNull = (data) => {
   let result = []
 
   data.forEach((item) => {
-    if (item.category.name === '미지정') {
+    if (item.category === null) {
       result.push(item)
     }
   })
@@ -14,7 +14,7 @@ const filterByFavoriteAndCategoryIsNull = (data) => {
   let result = []
 
   data.forEach((item) => {
-    if (item.category.name === '미지정' && item.favorite === true) {
+    if (item.category === null && item.favorite === true) {
       result.push(item)
     }
   })

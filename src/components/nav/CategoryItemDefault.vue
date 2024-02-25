@@ -18,10 +18,7 @@
             <button class="btn--transparent expand-button">
               <img :src="expandMoreIcon" />
             </button>
-            <button
-              @click="categoryStore.setFavoriteContentChip(false)"
-              class="btn--transparent category-list__btn btn-26"
-            >
+            <button @click="toFavoriteCategory" class="btn--transparent category-list__btn btn-26">
               즐겨찾기한 콘텐츠
             </button>
           </div>
@@ -33,7 +30,7 @@
               <img :src="expandMoreIcon" />
             </button>
             <button
-              @click="categoryStore.setUnselectedContentChip(false)"
+              @click="toUnselectedCategory"
               class="btn--transparent category-list__btn btn-26"
             >
               카테고리 미지정
@@ -50,12 +47,30 @@ import expandMoreIcon from '@/assets/ic/ic-expand-more.svg'
 import expandLessIcon from '@/assets/ic/ic-expand-less.svg'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { reactive } from 'vue'
-
+import { useRoute, useRouter } from 'vue-router'
+const router = useRouter()
+const route = useRoute()
 const categoryStore = useCategoryStore()
 const allCategory = reactive({ show: true })
 
 const controlAllCategory = () => {
   allCategory.show = !allCategory.show
+}
+
+const toUnselectedCategory = () => {
+  categoryStore.setUnselectedContentChip(false)
+  if (route.fullPath.length > 5) {
+    router.push('/home')
+  }
+  // if (route.fullPath.length)
+}
+
+const toFavoriteCategory = () => {
+  categoryStore.setFavoriteContentChip(false)
+  if (route.fullPath.length > 5) {
+    router.push('/home')
+  }
+  // if (route.fullPath.length)
 }
 </script>
 

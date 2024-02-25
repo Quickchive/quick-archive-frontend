@@ -12,6 +12,7 @@
       즐겨찾기
     </button>
     <button
+      v-if="route.fullPath.length === 5"
       @click="categoryStore.setUnselectedContentChip(true)"
       class="btn--chip"
       :class="categoryStore.isUnselectedChipOn ? 'active' : 'inactive'"
@@ -28,6 +29,8 @@ const categoryStore = useCategoryStore()
 import { useContentStore } from '@/stores/useContentStore.ts'
 const contentStore = useContentStore()
 import { sortByCreatedAtDescending, sortByCreatedAtAscending } from '@/utils/sort.js'
+import { useRoute } from 'vue-router'
+const route = useRoute()
 
 const selectedOption = ref('recent')
 

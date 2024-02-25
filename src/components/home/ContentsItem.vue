@@ -9,10 +9,12 @@
         </button>
       </div>
       <footer class="item__wrapper">
-        <h1>{{ item.title }}</h1>
+        <button class="btn--transparent" @click="toLink(item.link)">
+          <h1>{{ item.title }}</h1>
+        </button>
         <p>{{ item.description }}</p>
         <footer class="flex-container__row">
-          <div id="thumbnail-category" @click="toCategoryPage(item.category.id)">
+          <div id="thumbnail-category" @click="toCategoryPage()">
             <img class="ic-category" :src="categoryIcon" />
             {{ item.category ? item.category.name : '미지정' }}
           </div>
@@ -49,11 +51,15 @@ import { useContentStore } from '@/stores/useContentStore.ts'
 import { useRouter } from 'vue-router'
 import MemoItem from '@/components/home/MemoItem.vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+
 import { getHideAlertFromCookie } from '@/utils/cookies.js'
 import defaultImg from '@/assets/img/img_default.png'
 
 const modalViewStore = useModalViewStore()
 const contentStore = useContentStore()
+const categoryStore = useCategoryStore()
+
 const router = useRouter()
 const props = defineProps({
   item: Object
@@ -71,8 +77,14 @@ const favoriteEvent = async () => {
   }
 }
 
-const toCategoryPage = async (categoryId) => {
-  router.push(`/home/${categoryId}`)
+const toCategoryPage = () => {
+  if (props.item.category !== null) {
+    categoryStore.setCategoryName(props.item.category.name)
+    router.push(`/home/${props.item.category.id}`)
+  } else {
+    categoryStore.setUnselectedContentChip(true)
+    // router.push(`/home`)
+  }
 }
 
 const btnList = [
@@ -114,6 +126,10 @@ const showMoreButton = (contentData) => {
 
 const handleImageError = (event) => {
   event.target.src = defaultImg
+}
+
+const toLink = (link) => {
+  window.open(link, '_blank')
 }
 </script>
 <style></style>
