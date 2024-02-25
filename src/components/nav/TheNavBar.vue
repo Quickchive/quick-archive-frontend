@@ -93,7 +93,6 @@ onMounted(async () => {
       console.error(error)
     }
   } else {
-    console.log('테스터 로그인')
     await userStore.getUserProfile()
     await categoryTreeStore.getUserCategoryList()
   }

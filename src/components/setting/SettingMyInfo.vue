@@ -76,7 +76,6 @@ const clearText = () => {
 const editNickname = async () => {
   // 수정모드 on
   if (disabled.value === true) {
-    console.log('닉네임 수정 모드 On')
     disabled.value = false
     editNicknameButton.value = '수정완료'
     clearButtonShow.value = true
@@ -85,7 +84,6 @@ const editNickname = async () => {
   // 수정모드 off -> 닉네임 수정 요청
   if (disabled.value === false) {
     disabled.value = true
-    console.log('닉네임 수정 모드 Off -> 닉네임 수정 요청 전송')
     userStore.editNickname(nickname.value)
     editNicknameButton.value = '변경하기'
     clearButtonShow.value = false
