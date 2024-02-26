@@ -73,12 +73,11 @@
 }
 
 .wrapper__category-list {
-  position: absolute;
+  position: fixed;
   overflow-y: scroll;
   // top: 222px;
   overscroll-behavior: none;
-
   top: 198px;
   z-index: -10;
-  height: calc(100vh - 305px);
+  height: calc(100% - 305px);
 }

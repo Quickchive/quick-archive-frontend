@@ -16,8 +16,11 @@
   @include flex(column, left, start);
   padding: 80px 64px 0px 64px;
   gap: 8px;
+  position: fixed;
+  top: 0;
+  left: 368px;
   h1 {
-    overflow: hidden;
+    // overflow: hidden;
     color: $color-grey-100;
     text-overflow: ellipsis;
     @include font(32px, 700, 48px);
