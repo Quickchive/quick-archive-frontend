@@ -38,6 +38,12 @@
         color: $color-grey-60;
         @include font(13px, 500, 18px);
         letter-spacing: -0.3px;
+        a {
+          @include flex(row, start, center);
+        }
+        a:visited {
+          @include font(13px, 500, 18px);
+        }
         .ic-category {
           width: 20px;
           margin-right: 6px;

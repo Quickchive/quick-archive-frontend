@@ -2,27 +2,34 @@
   <article class="contents-item">
     <div class="item-container">
       <div class="thumbnail__wrapper">
-        <img :src="item.coverImg" class="thumbnail" @error="handleImageError" />
+        <a :href="item.link" target="_self">
+          <img :src="item.coverImg" class="thumbnail" @error="handleImageError" />
+        </a>
         <button class="btn--transparent btn-favorite" @click="favoriteEvent()">
           <img :src="favoriteSelectedIcon" v-if="item.favorite" />
           <img :src="favoriteUnselectedIcon" v-if="!item.favorite" />
         </button>
       </div>
       <footer class="item__wrapper">
-        <button class="btn--transparent" @click="toLink(item.link)">
-          <h1>{{ item.title }}</h1>
-        </button>
-        <p>{{ item.description }}</p>
+        <a :href="item.link" target="_self">
+          <h1>
+            {{ item.title }}
+          </h1>
+          <p>{{ item.description }}</p>
+        </a>
         <footer class="flex-container__row">
           <div id="thumbnail-category" @click="toCategoryPage()">
             <img class="ic-category" :src="categoryIcon" />
             {{ item.category ? item.category.name : '미지정' }}
           </div>
-          <img :src="divider" />
-          {{ item.siteName }}
+          <a v-if="item.siteName" :href="item.link" target="_self">
+            <img :src="divider" />
+            {{ item.siteName }}
+          </a>
         </footer>
       </footer>
     </div>
+
     <div class="contents-item__btn__wrapper">
       <button class="moreButton" @click="showMoreButton(item)">
         <img :src="moreIcon" class="btn-32" />
@@ -126,10 +133,6 @@ const showMoreButton = (contentData) => {
 
 const handleImageError = (event) => {
   event.target.src = defaultImg
-}
-
-const toLink = (link) => {
-  window.open(link, '_blank')
 }
 </script>
 <style></style>
