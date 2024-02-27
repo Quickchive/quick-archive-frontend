@@ -61,7 +61,16 @@ const router = createRouter({
     {
       path: '/',
       name: 'onboarding',
-      component: () => import('@/views/OnboardingView.vue')
+      component: () => import('@/views/OnboardingView.vue'),
+      beforeEnter: async (to, from, next) => {
+        const userStore = useUserStore()
+        await userStore.getUserProfile()
+        if (userStore.isLogin) {
+          next('/home')
+        } else {
+          next()
+        }
+      }
     },
     // 로그인 페이지
     {
