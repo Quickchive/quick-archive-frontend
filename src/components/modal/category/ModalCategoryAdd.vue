@@ -25,9 +25,13 @@
       </button>
     </label>
     <div class="flex-container__row wrapper__category-position">
-      <label>생성 위치</label>
+      <label>현재 위치</label>
       <button class="btn--transparent flex-container__row" @click="openSetCategoryLocationModal()">
-        {{ modalDataStore.selectedLocation.name }}<img :src="nextBlackIcon" />
+        <img
+          v-if="modalDataStore.selectedLocation.name !== '전체 콘텐츠'"
+          class="category-select-icon"
+          :src="modalDataStore.getCategoryImgByIconName(modalDataStore.selectedLocation.iconName)"
+        />{{ modalDataStore.selectedLocation.name }}<img :src="nextBlackIcon" />
       </button>
     </div>
     <div class="modal-footer">
@@ -100,7 +104,8 @@ onMounted(() => {
       modalDataStore.selectedLocation.name = parentData.name
       modalDataStore.selectedLocation.id = parentData.id
     } else {
-      ;(modalDataStore.selectedLocation.name = '미지정'), (modalDataStore.selectedLocation.id = -1)
+      ;(modalDataStore.selectedLocation.name = '전체 콘텐츠'),
+        (modalDataStore.selectedLocation.id = -1)
     }
   }
 })

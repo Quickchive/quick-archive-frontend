@@ -63,7 +63,7 @@ import { useSearchStore } from '@/stores/useSearchStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { toRaw, onMounted, ref } from 'vue'
 
-const modalTitle = '생성 위치'
+const modalTitle = '현재 위치'
 const isBtnOnLeft = true
 
 // 스토어 선언

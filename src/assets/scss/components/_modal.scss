@@ -163,6 +163,12 @@ dialog {
   }
 }
 
+.category-select-icon {
+  @include size(24px, 24px);
+  border-radius: 100px;
+  margin-right: 4px;
+}
+
 .category-set-location__modal {
   @extend .modal__sm;
   height: 608px;

@@ -103,7 +103,7 @@ export const useContentStore = defineStore('content', () => {
         parentId: modalDataStore.selectedLocation.parentId
       }
 
-      if (modalDataStore.selectedLocation.name === '미지정') {
+      if (modalDataStore.selectedLocation.name === '전체 콘텐츠') {
         delete contentData.categoryName
       }
 

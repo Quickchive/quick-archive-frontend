@@ -61,7 +61,7 @@ export const useModalViewStore = defineStore('modalView', () => {
   function closeSelectCategoryModal() {
     selectCategoryModal.value = false
   }
-  // step 1.2.2 - 생성 위치
+  // step 1.2.2 - 현재 위치
   function openSetCategoryLocationModal() {
     categoryLocationModal.value = true
   }

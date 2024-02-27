@@ -20,7 +20,7 @@
         <footer class="flex-container__row">
           <div id="thumbnail-category" @click="toCategoryPage()">
             <img class="ic-category" :src="categoryIcon" />
-            {{ item.category ? item.category.name : '미지정' }}
+            {{ item.category ? item.category.name : '전체 콘텐츠' }}
           </div>
           <a v-if="item.siteName" :href="item.link" target="_self">
             <img :src="divider" />
