@@ -15,6 +15,7 @@ p {
 }
 
 .login-container {
+  position: absolute;
   @include flex;
   @include size(100%, 100vh);
 }

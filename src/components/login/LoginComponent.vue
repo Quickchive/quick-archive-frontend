@@ -1,9 +1,11 @@
 <template>
-  <div class="overlay"></div>
+  <onboarding-view></onboarding-view>
+
+  <div class="login-overlay"></div>
   <div class="login-container">
     <div class="login-form">
       <div class="close-btn__wrapper">
-        <button class="btn--transparent"><img :src="icClose" /></button>
+        <button class="btn--transparent" @click="toOnboarding"><img :src="icClose" /></button>
       </div>
       <header class="header__login">
         <h1>Login</h1>
@@ -43,6 +45,7 @@ import logoKakao from '@/assets/logo/logo-kakao.svg'
 import logoGoogle from '@/assets/logo/logo-google.svg'
 import logoApple from '@/assets/logo/logo-apple.svg'
 import union from '@/assets/union.svg'
+import onboardingView from '@/views/OnboardingView.vue'
 
 export default {
   data() {
@@ -54,6 +57,7 @@ export default {
       union
     }
   },
+  components: { onboardingView },
   methods: {
     // 로그인 요청
     async submitForm() {
@@ -71,6 +75,9 @@ export default {
         this.alertModalContent = error.response.data.message
         this.isAlertModalActive = true
       }
+    },
+    toOnboarding() {
+      this.$router.push('/')
     }
   }
 }
