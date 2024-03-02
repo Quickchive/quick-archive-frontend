@@ -175,6 +175,7 @@ dialog {
   align-items: center;
   position: relative;
   z-index: 10000;
+  padding: 0 28px;
   .wrapper__search-input {
     @include size(398px, 50px);
     margin: 16px 0 40px 0;
@@ -202,6 +203,7 @@ dialog {
   height: 608px;
   align-items: center;
   z-index: 1000;
+  padding: 0 28px 0 28px;
   .ul__content-modal {
     width: 398px;
     @include font(14px, 400, 24px);

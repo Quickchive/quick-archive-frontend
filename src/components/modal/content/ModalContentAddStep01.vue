@@ -1,6 +1,10 @@
 <template>
   <dialog class="content-add__modal">
-    <modal-header :modalTitle="modalTitle" :closeModal="closeModal"></modal-header>
+    <modal-header
+      :modalTitle="modalTitle"
+      :isBtnOnLeft="false"
+      :closeModal="closeModal"
+    ></modal-header>
     <div class="wrapper__content-modal-input">
       <input
         class="input__content-modal"

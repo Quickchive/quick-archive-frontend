@@ -2,7 +2,7 @@
   <dialog class="category-set-location__modal">
     <modal-header
       :modalTitle="modalTitle"
-      :isBtnOnLeft="isBtnOnLeft"
+      :isBtnOnLeft="true"
       :closeModal="closeModal"
     ></modal-header>
     <div class="wrapper__search-input">
@@ -64,7 +64,6 @@ import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { toRaw, onMounted, ref } from 'vue'
 
 const modalTitle = '현재 위치'
-const isBtnOnLeft = true
 
 // 스토어 선언
 const categoryTreeStore = useCategoryTreeStore()

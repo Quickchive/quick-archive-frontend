@@ -8,7 +8,9 @@
             <img v-if="allCategory.show" :src="expandLessIcon" />
             <img v-if="!allCategory.show" :src="expandMoreIcon" />
           </button>
-          <button class="btn--transparent category-list__btn btn-26">전체 콘텐츠</button>
+          <button class="btn--transparent category-list__btn btn-26" @click="toAllCategory">
+            전체 콘텐츠
+          </button>
         </div>
       </li>
       <ul v-if="allCategory.show" class="category-list__second-ul">
@@ -55,6 +57,11 @@ const allCategory = reactive({ show: true })
 
 const controlAllCategory = () => {
   allCategory.show = !allCategory.show
+}
+
+const toAllCategory = () => {
+  categoryStore.resetContentChip()
+  router.push('/home')
 }
 
 const toUnselectedCategory = () => {

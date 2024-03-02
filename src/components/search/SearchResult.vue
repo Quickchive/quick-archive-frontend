@@ -3,7 +3,8 @@
     <header class="titleHeader">
       <h1>{{ searchStore.keyword.main }} 검색 결과</h1>
     </header>
-    <div class="divider"></div>
+
+    <div class="search__divider"></div>
     <!-- 검색 결과 -->
     <article class="flex-container__col search-container">
       <!-- 1. 콘텐츠 검색 결과 -->
@@ -124,7 +125,7 @@
 import { useSearchStore } from '@/stores/useSearchStore.ts'
 import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
-import emptyContentImg from '@/assets/img/img_empty_nocontent.png'
+import emptyContentImg from '@/assets/img/img-empty-nocontent.png'
 import emptyCategoryImg from '@/assets/img/img_empty_nocategory.png'
 import dividerIcon from '@/assets/ic/divider_14px.svg'
 import nextIcon from '@/assets/ic/ic_next_gray_24px.svg'

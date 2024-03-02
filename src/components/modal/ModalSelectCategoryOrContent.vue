@@ -2,7 +2,7 @@
   <dialog class="category-modal">
     <modal-header
       :modalTitle="modalTitle"
-      :isBtnOnRight="isBtnOnRight"
+      :isBtnOnLeft="false"
       :closeModal="closeModal"
     ></modal-header>
     <div class="category-modal__btn__wrapper">
@@ -26,7 +26,6 @@ import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { ref } from 'vue'
 
 const modalTitle = '추가'
-const isBtnOnRight = ref(true)
 const modalViewStore = useModalViewStore()
 
 const closeModal = () => {

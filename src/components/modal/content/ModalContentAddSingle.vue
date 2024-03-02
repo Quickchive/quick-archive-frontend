@@ -2,7 +2,7 @@
   <dialog class="content-add__modal">
     <modal-header-step
       :modalTitle="modalTitle"
-      :isBtnOnLeft="isBtnOnLeft"
+      :isBtnOnLeft="true"
       :closeModal="closeModal"
     ></modal-header-step>
     <!-- 썸네일 -->
@@ -55,7 +55,6 @@ import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import { onMounted } from 'vue'
 
-const isBtnOnLeft = true
 const modalViewStore = useModalViewStore()
 const modalDataStore = useModalDataStore()
 const contentStore = useContentStore()

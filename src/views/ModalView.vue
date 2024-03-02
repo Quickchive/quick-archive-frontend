@@ -72,15 +72,15 @@
     <modal-content-share v-if="modalViewStore.shareContentModal"></modal-content-share>
 
     <!-- 새 카테고리 추가 얼럿 -->
-    <confirm-with-input
+    <alert-with-input
       v-if="modalViewStore.addNewCategoryModal"
       :alertData="alertDataStore.addNewCategoryAlertData"
-    ></confirm-with-input>
+    ></alert-with-input>
     <!-- 새 카테고리 추가 완료 얼럿 -->
-    <confirm-with-input
+    <alert-with-input
       v-if="modalViewStore.completeAddNewCategoryModal"
       :alertData="alertDataStore.completeAddCategoryAlertData"
-    ></confirm-with-input>
+    ></alert-with-input>
   </div>
   <div class="alert-overlay" v-if="modalViewStore.alertOverlay"></div>
   <div class="alert-view" v-if="modalViewStore.alertModal">
@@ -102,7 +102,7 @@ import ModalContentAddMultiple from '@/components/modal/content/ModalContentAddM
 import AlertDuplicatedCategory from '@/components/modal/alert/AlertDuplicatedCategory.vue'
 import AlertConfirm from '@/components/modal/alert/AlertConfirm.vue'
 import ModalEditContentTitle from '@/components/modal/content/ModalEditContentTitle.vue'
-import ConfirmWithInput from '@/components/modal/alert/AlertWithInput.vue'
+import AlertWithInput from '@/components/modal/alert/AlertWithInput.vue'
 import ModalContentShare from '@/components/modal/content/ModalContentShare.vue'
 
 const modalViewStore = useModalViewStore()

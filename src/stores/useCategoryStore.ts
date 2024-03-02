@@ -131,6 +131,12 @@ export const useCategoryStore = defineStore('category', () => {
     }
   }
 
+  function resetContentChip() {
+    contentStore.userFilteredContentList = contentStore.userContentList
+    isFavoriteChipOn.value = false
+    isUnselectedChipOn.value = false
+  }
+
   function setFavoriteContentChip(offBtn: Boolean) {
     // 캡슐 버튼
     if (offBtn) {
@@ -179,6 +185,7 @@ export const useCategoryStore = defineStore('category', () => {
     isFavoriteChipOn,
     isUnselectedChipOn,
     setUnselectedContentChip,
-    setFavoriteContentChip
+    setFavoriteContentChip,
+    resetContentChip
   }
 })

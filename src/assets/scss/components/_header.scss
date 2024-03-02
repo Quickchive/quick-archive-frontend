@@ -1,38 +1,30 @@
-// 헤더 close 버튼은 오른쪽에 위치하는 것이 default
+// 헤더 close 버튼은 왼쪽에 위치하는 것이 default
 .modal-header {
   @include size(100%, 88px);
-  @include flex(row, center, center);
-  box-sizing: border-box;
-  padding: 0 28px;
+
+  &.left {
+    @include flex(row, center, center);
+  }
+  &.right {
+    @include flex(row-reverse, center, center);
+  }
   .modal-title {
-    width: 278px;
+    width: 100%;
     color: $color-grey-100;
     text-align: center;
     @include font(17px, 700, 24px);
-    letter-spacing: -0.3px;
-  }
-}
-
-// 헤더 close 버튼이 왼쪽일 때 - 스타일 바인딩
-.headerBtnLeft {
-  flex-direction: row;
-  justify-content: left;
-  .modal-title {
-    margin-left: 32px;
-  }
-}
-
-// 헤더 close 버튼이 오른쪽일 때 - 스타일 바인딩
-.headerBtnRight {
-  flex-direction: row-reverse;
-  justify-content: right;
-  .modal-title {
-    margin-right: 32px;
+    &.left {
+      margin-right: 32px;
+    }
+    &.right {
+      margin-left: 32px;
+    }
   }
 }
 
 .modal-header--step {
   @extend .modal-header;
+  @include flex(row, center, center);
   .modal-title {
     margin: 0 32px;
   }

@@ -2,7 +2,7 @@
   <dialog class="category-select__modal">
     <modal-header
       :modalTitle="modalTitle"
-      :isBtnOnLeft="true"
+      :isBtnOnLeft="false"
       :closeModal="closeModal"
     ></modal-header>
     <article class="flex-container__row wrapper__category-icon">
