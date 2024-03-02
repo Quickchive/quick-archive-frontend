@@ -77,7 +77,7 @@ export const useContentStore = defineStore('content', () => {
         console.log('콘텐츠 추가 성공 로직')
         modalViewStore.closeSelectModal()
         modalViewStore.closeAddContentModal()
-        modalViewStore.closeAddContentDetailModal()
+        modalViewStore.closeAddContentSingle()
         if (route.params.id !== undefined) {
           // 특정 콘텐츠 페이지인 경우
           fetchContents(Number(route.params.id))
@@ -88,6 +88,38 @@ export const useContentStore = defineStore('content', () => {
       }
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  async function addMultipleContent() {
+    try {
+      for (let i = 0; i < modalDataStore.addContentData.length; i++) {
+        if (modalDataStore.addContentData[i].checked) {
+          const contentData = {
+            link: modalDataStore.addContentData[i].link,
+            title: modalDataStore.addContentData[i].title,
+            comment: modalDataStore.addContentData[i].memo,
+            favorite: modalDataStore.addContentData[i].favorite,
+            categoryName: modalDataStore.selectedLocation.name,
+            parentId: modalDataStore.selectedLocation.parentId
+          }
+          const response: any = await addContents(contentData)
+          console.log('addContent', response)
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      modalViewStore.closeSelectModal()
+      modalViewStore.closeAddContentModal()
+      modalViewStore.closeAddContentMultiple()
+      if (route.params.id !== undefined) {
+        // 특정 콘텐츠 페이지인 경우
+        fetchContents(Number(route.params.id))
+      } else {
+        // 전체 콘텐츠 페이지인 경우
+        fetchAllContents()
+      }
     }
   }
 
@@ -193,6 +225,7 @@ export const useContentStore = defineStore('content', () => {
     setFocusedContentData,
     favoriteContent,
     userFilteredContentList,
-    editContent
+    editContent,
+    addMultipleContent
   }
 })

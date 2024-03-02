@@ -69,12 +69,14 @@
 
 .contents-container {
   @include flex(column, center, start);
-  width: 100%;
+  box-sizing: border-box;
   overflow-y: scroll;
   overscroll-behavior: none;
   position: fixed;
   top: 232px;
   z-index: -10;
+  padding-right: 64px;
+
   .contents-list__wrapper {
     @include flex(column, left, start);
     width: 100%;
@@ -86,7 +88,8 @@
 }
 
 .contents-num__wrapper {
-  color: $color-grey-70;
-  @include font(14px, 600, 24px);
+  @include font(14px, 600, 24px, $color-grey-70);
+  text-align: left;
+  width: 398px;
   letter-spacing: -0.3px;
 }

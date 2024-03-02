@@ -12,7 +12,8 @@
 }
 
 .home-container {
-  width: 100%;
+  width: calc(100% - 368px);
+  box-sizing: border-box;
   @include flex(column, left, start);
   padding: 80px 64px 0px 64px;
   gap: 8px;

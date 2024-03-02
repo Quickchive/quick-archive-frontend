@@ -91,6 +91,14 @@
   }
 }
 
+.box__thumbnail--multiple {
+  @extend .box__thumbnail;
+  margin-bottom: 0;
+  .box__thumbnail-img {
+    cursor: pointer;
+  }
+}
+
 #thumbnail-category {
   cursor: pointer;
   display: flex;

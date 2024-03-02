@@ -29,13 +29,21 @@
       :closeModal="closeAddContentStep01Modal"
       :modalTitle="'콘텐츠 추가'"
     ></modal-content-add-step-01>
-    <modal-content-add-step-02
+    <!-- 콘텐츠 추가 - 단일 링크 -->
+    <modal-content-add-single
       v-if="modalViewStore.addContentDetailModal"
-      :closeModal="closeAddContentStep02Modal"
+      :closeModal="modalViewStore.closeAddContentSingle"
       :modalTitle="'콘텐츠 추가'"
-    ></modal-content-add-step-02>
+    ></modal-content-add-single>
+    <!-- 콘텐츠 추가 - 다중 링크 -->
+    <modal-content-add-multiple
+      v-if="modalViewStore.addContentMultiple"
+      :closeModal="modalViewStore.closeAddContentMultiple"
+      :modalTitle="'콘텐츠 추가'"
+    ></modal-content-add-multiple>
     <modal-edit-content-title
       v-if="modalViewStore.editContentTitleModal"
+      :index="index"
     ></modal-edit-content-title>
     <alert-confirm
       v-if="modalViewStore.deleteCategoryModal"
@@ -48,11 +56,11 @@
       :modalTitle="'콘텐츠 수정'"
       :closeModal="closeEditContentStep01Modal"
     ></modal-content-add-step-01>
-    <modal-content-add-step-02
+    <modal-content-add-single
       v-if="modalViewStore.editContentDetailModal"
       :modalTitle="'콘텐츠 수정'"
-      :closeModal="closeEditContentStep02Modal"
-    ></modal-content-add-step-02>
+      :closeModal="closeEditContentSingle"
+    ></modal-content-add-single>
 
     <!-- 콘텐츠 삭제 얼럿 -->
     <alert-confirm
@@ -89,14 +97,14 @@ import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
 import ModalCategorySelect from '@/components/modal/category/ModalCategorySelect.vue'
 import ModalSetCategoryLocation from '@/components/modal/category/ModalSetCategoryLocation.vue'
 import ModalContentAddStep01 from '@/components/modal/content/ModalContentAddStep01.vue'
-import ModalContentAddStep02 from '@/components/modal/content/ModalContentAddStep02.vue'
+import ModalContentAddSingle from '@/components/modal/content/ModalContentAddSingle.vue'
+import ModalContentAddMultiple from '@/components/modal/content/ModalContentAddMultiple.vue'
 import AlertDuplicatedCategory from '@/components/modal/alert/AlertDuplicatedCategory.vue'
 import AlertConfirm from '@/components/modal/alert/AlertConfirm.vue'
 import ModalEditContentTitle from '@/components/modal/content/ModalEditContentTitle.vue'
 import ConfirmWithInput from '@/components/modal/alert/AlertWithInput.vue'
 import ModalContentShare from '@/components/modal/content/ModalContentShare.vue'
 
-// counter store 가져오기
 const modalViewStore = useModalViewStore()
 const alertDataStore = useAlertDataStore()
 
@@ -105,17 +113,11 @@ const closeAddContentStep01Modal = () => {
   modalViewStore.closeSelectModal()
 }
 
-const closeAddContentStep02Modal = () => {
-  modalViewStore.closeAddContentDetailModal()
-  modalViewStore.closeAddContentModal()
-  modalViewStore.closeSelectModal()
-}
-
 const closeEditContentStep01Modal = () => {
   modalViewStore.closeEditContentModal()
 }
 
-const closeEditContentStep02Modal = () => {
+const closeEditContentSingle = () => {
   modalViewStore.closeEditContentDetailModal()
   modalViewStore.closeEditContentModal()
 }

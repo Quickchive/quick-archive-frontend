@@ -54,7 +54,7 @@
 }
 
 .contents-filter__wrapper {
-  @include flex(_, left, center);
+  @include flex(row, left, center);
   @include size(100%, 64px);
   gap: 8px;
   padding: 16px 0px 8px 0;

@@ -174,7 +174,7 @@ dialog {
   height: 608px;
   align-items: center;
   position: relative;
-  z-index: 999;
+  z-index: 10000;
   .wrapper__search-input {
     @include size(398px, 50px);
     margin: 16px 0 40px 0;
@@ -201,6 +201,7 @@ dialog {
   @extend .modal__sm;
   height: 608px;
   align-items: center;
+  z-index: 1000;
   .ul__content-modal {
     width: 398px;
     @include font(14px, 400, 24px);
@@ -212,6 +213,12 @@ dialog {
     li {
       list-style: none;
     }
+  }
+  .wrapper__multiple-thumbnail {
+    @include flex(column, start, center);
+    height: 264px;
+    overflow-y: scroll;
+    gap: 24px;
   }
   .wrapper__content-modal-input {
     width: 398px;
@@ -229,6 +236,20 @@ dialog {
     label {
       margin-bottom: 8px;
     }
+  }
+  .wrapper__content-num {
+    @include font(14px, 600, 24px, $color-grey-70);
+    text-align: left;
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+    width: 398px;
+  }
+  .content-add__divider {
+    @include size(462px, 48px);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 100%);
+    position: relative;
+    // bottom: 278px;
+    margin-bottom: 20px;
   }
 }
 

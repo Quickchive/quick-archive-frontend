@@ -2,48 +2,23 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useModalViewStore = defineStore('modalView', () => {
+  // ******** 공통 모달 ********
   const selectModal = ref(false)
-  // 카테고리 모달
+  const alertOverlay = ref(false)
+  const overlay = ref(false)
+  const toastMessage = ref('')
+  const alertModal = ref(false)
+
+  // ******** 카테고리 모달 ********
   const addCategoryModal = ref(false)
   // 카테고리 수정 모달
   const selectCategoryModal = ref(false)
-  const alertOverlay = ref(false)
-  const overlay = ref(false)
   const categoryLocationModal = ref(false)
-  // 콘텐츠 모달
-  const addContentModal = ref(false)
-  const addContentDetailModal = ref(false)
-  const alertModal = ref(false)
-  const duplicatedCategoryLocation = ref('올리비아..')
-  const editContentTitleModal = ref(false)
-  const deleteContentModal = ref(false)
-  const shareContentModal = ref(false)
-  const editContentModal = ref(false)
-
-  const editContentDetailModal = ref(false)
-
   // 카테고리 삭제/수정 모달
   const editCategoryModal = ref(false)
   const deleteCategoryModal = ref(false)
-  const toastMessage = ref('')
-  // 마이 페이지
-  const logoutModal = ref(false)
-  const withdrawalModal = ref(false)
-  const settingAlertOverlay = ref(false)
-  const addNewCategoryModal = ref(false)
   const completeAddNewCategoryModal = ref(false)
 
-  function openSelectModal() {
-    console.log('openmodal', selectModal.value)
-    selectModal.value = true
-    overlay.value = true
-  }
-  function closeSelectModal() {
-    selectModal.value = false
-    addCategoryModal.value = false
-    selectCategoryModal.value = false
-    overlay.value = false
-  }
   // step 1.2 - 카테고리
   function openAddCategoryModal() {
     selectModal.value = false
@@ -68,6 +43,56 @@ export const useModalViewStore = defineStore('modalView', () => {
   function closeSetCategoryLocationModal() {
     categoryLocationModal.value = false
   }
+  function openSetNewCategoryModal() {
+    addNewCategoryModal.value = true
+    categoryLocationModal.value = false
+    addCategoryModal.value = false
+    addContentDetailModal.value = false
+    addContentModal.value = false
+  }
+  function closeSetNewCategoryModal() {
+    addNewCategoryModal.value = false
+    overlay.value = true
+  }
+  function openCompleteAddCategoryModal() {
+    completeAddNewCategoryModal.value = true
+  }
+  function closeCompleteAddCategoryModal() {
+    completeAddNewCategoryModal.value = false
+    overlay.value = true
+    categoryLocationModal.value = true
+  }
+  // 카테고리 삭제 모달
+  function openDeleteCategoryModal() {
+    deleteCategoryModal.value = true
+    overlay.value = true
+  }
+  function closeDeleteCategoryModal() {
+    deleteCategoryModal.value = false
+    overlay.value = false
+  }
+  // 카테고리 수정 모달
+  function openEditCategoryModal() {
+    editCategoryModal.value = true
+    overlay.value = true
+  }
+  function closeEditCategoryModal() {
+    editCategoryModal.value = false
+    overlay.value = false
+  }
+  // ********************************
+
+  // ******** 콘텐츠 모달 ********
+  const addContentModal = ref(false)
+  const addContentDetailModal = ref(false)
+  const addContentMultiple = ref(false)
+  const duplicatedCategoryLocation = ref('올리비아..')
+  const editContentTitleModal = ref(false)
+  const deleteContentModal = ref(false)
+  const shareContentModal = ref(false)
+  const editContentModal = ref(false)
+  const editContentDetailModal = ref(false)
+
   // step 1.1 - 콘텐츠
   function openAddContentModal() {
     selectModal.value = false
@@ -78,12 +103,23 @@ export const useModalViewStore = defineStore('modalView', () => {
     addContentModal.value = false
     selectModal.value = true
   }
-  function openAddContentDetailModal() {
+  function openAddContentSingle() {
     addContentDetailModal.value = true
     overlay.value = true
   }
-  function closeAddContentDetailModal() {
+  function closeAddContentSingle() {
     addContentDetailModal.value = false
+    closeAddContentModal()
+    closeSelectModal()
+  }
+  function openAddContentMultiple() {
+    addContentMultiple.value = true
+    overlay.value = true
+  }
+  function closeAddContentMultiple() {
+    addContentMultiple.value = false
+    closeAddContentModal()
+    closeSelectModal()
   }
   function returnAddContentModal() {
     addContentDetailModal.value = false
@@ -126,60 +162,14 @@ export const useModalViewStore = defineStore('modalView', () => {
     shareContentModal.value = false
     overlay.value = false
   }
-  function openAlertModal() {
-    alertModal.value = true
-    alertOverlay.value = true
-  }
-  function closeAlertModal() {
-    alertModal.value = false
-    alertOverlay.value = false
-  }
-  function setDuplicatedCategoryName(categoryName: string) {
-    duplicatedCategoryLocation.value = categoryName
-  }
-  function openSetNewCategoryModal() {
-    addNewCategoryModal.value = true
-    categoryLocationModal.value = false
-    addCategoryModal.value = false
-    addContentDetailModal.value = false
-    addContentModal.value = false
-  }
-  function closeSetNewCategoryModal() {
-    addNewCategoryModal.value = false
-    overlay.value = true
-    // categoryLocationModal.value = true
-  }
-  function openCompleteAddCategoryModal() {
-    completeAddNewCategoryModal.value = true
-    // overlay.value = true
-  }
-  function closeCompleteAddCategoryModal() {
-    completeAddNewCategoryModal.value = false
-    overlay.value = true
-    categoryLocationModal.value = true
-  }
-  // 카테고리 삭제 모달
-  function openDeleteCategoryModal() {
-    deleteCategoryModal.value = true
-    overlay.value = true
-  }
-  function closeDeleteCategoryModal() {
-    deleteCategoryModal.value = false
-    overlay.value = false
-  }
-  // 카테고리 수정 모달
-  function openEditCategoryModal() {
-    editCategoryModal.value = true
-    overlay.value = true
-  }
-  function closeEditCategoryModal() {
-    editCategoryModal.value = false
-    overlay.value = false
-  }
-  // 토스트 메시지
-  function setToastMessage(message: string) {
-    toastMessage.value = message
-  }
+  // ********************************
+
+  // ******** 마이 페이지 ********
+  const logoutModal = ref(false)
+  const withdrawalModal = ref(false)
+  const settingAlertOverlay = ref(false)
+  const addNewCategoryModal = ref(false)
+
   // 로그아웃 모달
   function openLogoutModal() {
     logoutModal.value = true
@@ -197,6 +187,33 @@ export const useModalViewStore = defineStore('modalView', () => {
   function closeWithdrawalModal() {
     withdrawalModal.value = false
     settingAlertOverlay.value = false
+  }
+  // ********************************
+
+  function openSelectModal() {
+    selectModal.value = true
+    overlay.value = true
+  }
+  function closeSelectModal() {
+    selectModal.value = false
+    addCategoryModal.value = false
+    selectCategoryModal.value = false
+    overlay.value = false
+  }
+  function openAlertModal() {
+    alertModal.value = true
+    alertOverlay.value = true
+  }
+  function closeAlertModal() {
+    alertModal.value = false
+    alertOverlay.value = false
+  }
+  function setDuplicatedCategoryName(categoryName: string) {
+    duplicatedCategoryLocation.value = categoryName
+  }
+  // 토스트 메시지
+  function setToastMessage(message: string) {
+    toastMessage.value = message
   }
 
   return {
@@ -226,8 +243,8 @@ export const useModalViewStore = defineStore('modalView', () => {
     closeSetCategoryLocationModal,
     openAddContentModal,
     closeAddContentModal,
-    openAddContentDetailModal,
-    closeAddContentDetailModal,
+    openAddContentSingle,
+    closeAddContentSingle,
     returnAddContentModal,
     openAlertModal,
     closeAlertModal,
@@ -261,6 +278,9 @@ export const useModalViewStore = defineStore('modalView', () => {
     closeEditContentModal,
     editContentDetailModal,
     openEditContentDetailModal,
-    closeEditContentDetailModal
+    closeEditContentDetailModal,
+    openAddContentMultiple,
+    closeAddContentMultiple,
+    addContentMultiple
   }
 })

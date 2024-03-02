@@ -34,9 +34,19 @@ import topCloseIcon from '@/assets/ic/ic-top-close.svg'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { ref, computed } from 'vue'
+
 const modalDataStore = useModalDataStore()
 const modalViewStore = useModalViewStore()
-const title = ref(modalDataStore.addContentData.title)
+
+const isMultipleContent = computed(() => {
+  return modalDataStore.addContentData.length === undefined ? false : true
+})
+
+const title = ref(
+  isMultipleContent.value
+    ? modalDataStore.addContentData[modalDataStore.focusedAddContentIndex].title
+    : modalDataStore.addContentData.title
+)
 
 const setTitle = (e) => {
   title.value = e.target.value
@@ -47,8 +57,12 @@ const isTitleValid = computed(() => {
 })
 
 const saveContentTitle = () => {
+  if (isMultipleContent.value) {
+    modalDataStore.setMultipleTitle(title.value)
+  } else {
+    modalDataStore.setTitle(title.value)
+  }
   modalViewStore.closeEditContentTitleModal()
-  modalDataStore.setTitle(title.value)
 }
 
 const clearTitle = () => {

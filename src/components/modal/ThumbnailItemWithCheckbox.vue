@@ -1,40 +1,48 @@
 <template>
-  <div class="box__thumbnail">
-    <div class="box__thumbnail-img">
-      <img class="thumbnail__sm" :src="thumbnail" />
-      <!-- <img class="thumbnail__checkbox" :src="checkboxOn" /> -->
+  <div class="box__thumbnail--multiple">
+    <div class="box__thumbnail-img" @click="modalDataStore.checkLinkInMultipleLink(index)">
+      <img class="thumbnail__sm" :src="contentData.coverImg" @error="handleImageError" />
+      <!-- <img v-if="contentData.checked" class="thumbnail__checkbox" :src="checkboxOn" /> -->
       <button class="button__checkbox">
-        <img :src="checkboxOff" />
+        <img :src="checkboxOff" v-if="!contentData.checked" />
+        <img :src="checkboxOn" v-if="contentData.checked" />
       </button>
     </div>
     <div class="wrapper__thumbnail-content">
       <div class="box__input--content-title">
-        <span class="text__contentTitle">{{ contentTitle }}</span>
-        <button class="btn--transparent"><img :src="editIcon" /></button>
+        <span class="text__contentTitle">{{ contentData.title }}</span>
+        <button class="btn--transparent">
+          <img :src="editIcon" @click="openEditContentTitleModal()" />
+        </button>
       </div>
-      <span class="text__contentLink">{{ contentLink }}</span>
+      <span class="text__contentLink">{{ contentData.link }}</span>
     </div>
   </div>
 </template>
 
-<script>
-import thumbnail from '@/assets/img/thumbnail-sm.png'
-import editIcon from '@/assets/ic/ic-edit.svg'
+<script setup>
 import checkboxOn from '@/assets/ic/ic-control-checkbox-on.svg'
 import checkboxOff from '@/assets/ic/ic-control-checkbox-off.svg'
+import editIcon from '@/assets/ic/ic-edit.svg'
+import defaultImg from '@/assets/img/img_default.png'
+import { useModalDataStore } from '@/stores/useModalDataStore.ts'
+import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 
-export default {
-  data() {
-    return {
-      thumbnail,
-      editIcon,
-      checkboxOn,
-      checkboxOff,
-      contentTitle:
-        '작은집으로 이사가야 해서 미니멀리즘을 열...' /*'작은집으로 이사가야 해서 미니멀리즘을 열심히 실천한다',*/,
-      contentLink: 'https://brunch.co.kr/@21d3b3e76882478/32'
-    }
-  }
+const modalDataStore = useModalDataStore()
+const modalViewStore = useModalViewStore()
+
+const props = defineProps({
+  contentData: Object,
+  index: Number
+})
+
+const handleImageError = (event) => {
+  event.target.src = defaultImg
+}
+
+const openEditContentTitleModal = () => {
+  modalDataStore.setFocusedAddContentIndex(props.index)
+  modalViewStore.openEditContentTitleModal()
 }
 </script>
 

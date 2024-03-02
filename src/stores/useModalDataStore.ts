@@ -98,8 +98,8 @@ export const useModalDataStore = defineStore('modalData', () => {
     name: '전체 콘텐츠'
   })
 
-  // 콘텐츠 추가 모달 데이터
-  const addContentData = ref({
+  // 콘텐츠 추가 모달 데이터 - 단일 링크
+  const addContentData: any = ref({
     id: -1,
     category: selectedLocation.value,
     favorite: false,
@@ -111,6 +111,13 @@ export const useModalDataStore = defineStore('modalData', () => {
     description: '',
     parentId: ''
   })
+
+  // 콘텐츠 추가 모달 데이터 - 단일 링크
+  const focusedAddContentIndex: any = ref()
+
+  const setFocusedAddContentIndex = (index: Number) => {
+    focusedAddContentIndex.value = index
+  }
 
   const getSelectedCategory: any = computed(() => {
     const selectedCategory = defaultCategory.find((e) => {
@@ -149,7 +156,6 @@ export const useModalDataStore = defineStore('modalData', () => {
   function resetCategoryLocation() {
     selectedLocation.value = { name: '전체 콘텐츠' }
   }
-
   function clickRadioButton(category: any) {
     selectedLocation.value = category
   }
@@ -169,11 +175,18 @@ export const useModalDataStore = defineStore('modalData', () => {
   function setMemo(contentAddMemo: string) {
     addContentData.value.memo = contentAddMemo
   }
-  function setLink(link: string) {
-    addContentData.value.link = link
+
+  function checkLinkInMultipleLink(index: any) {
+    console.log('isChecked', addContentData.value[index].checked)
+    addContentData.value[index].checked = !addContentData.value[index].checked
   }
+
   function setTitle(title: string) {
     addContentData.value.title = title
+  }
+
+  function setMultipleTitle(title: string) {
+    addContentData.value[focusedAddContentIndex.value].title = title
   }
 
   // og 데이터 추출
@@ -182,14 +195,49 @@ export const useModalDataStore = defineStore('modalData', () => {
       const response: any = await getOgData(link)
       console.log('ogdata', response)
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
-        addContentData.value.coverImg = response.data.coverImg
-        addContentData.value.title = response.data.title
-        addContentData.value.description = response.data.description
-        addContentData.value.siteName = response.data.siteName
+        return response.data
       }
     } catch (error) {
       console.log(error)
     }
+  }
+
+  async function setSingleLink(link: string) {
+    addContentData.value.link = link
+    const ogData = await fetchOgData(link)
+    addContentData.value.coverImg = ogData.coverImg
+    addContentData.value.title = ogData.title
+    addContentData.value.description = ogData.description
+    addContentData.value.siteName = ogData.siteName
+  }
+
+  async function fetchMultipleLinksOgData(links: any) {
+    const multipleLinksArr: {
+      link: any
+      coverImg: any
+      title: any
+      description: any
+      siteName: any
+    }[] = []
+
+    for (let i = 0; i < links.length; i++) {
+      const ogData = await fetchOgData(links[i])
+      const linkData = {
+        link: links[i],
+        coverImg: ogData.coverImg,
+        title: ogData.title,
+        description: ogData.description,
+        siteName: ogData.siteName,
+        checked: true
+      }
+      multipleLinksArr.push(linkData)
+    }
+
+    return multipleLinksArr
+  }
+
+  function setMultipleLinks(linkArrData: any) {
+    addContentData.value = linkArrData
   }
 
   return {
@@ -207,9 +255,15 @@ export const useModalDataStore = defineStore('modalData', () => {
     setAddContentData,
     setFavoriteToggle,
     setMemo,
-    setLink,
+    setSingleLink,
+    setMultipleLinks,
     setTitle,
     fetchOgData,
-    getIconDatagByIconName
+    getIconDatagByIconName,
+    checkLinkInMultipleLink,
+    fetchMultipleLinksOgData,
+    focusedAddContentIndex,
+    setFocusedAddContentIndex,
+    setMultipleTitle
   }
 })
