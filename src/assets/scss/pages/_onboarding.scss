@@ -118,10 +118,15 @@
   }
   .footer__onboarding {
     @include flex(row, space-between, end);
+    width: 100%;
     padding: 0 40px 60px 40px;
     height: 140px;
     box-sizing: border-box;
-
+    a {
+      &:visited {
+        color: $color-grey-80;
+      }
+    }
     ul {
       .btn-main {
         color: $color-grey-80;
@@ -145,11 +150,18 @@
 
     .btn--instagram {
       @include flex(row, center, center);
-
       width: 40px;
       height: 40px;
       background-color: $color-grey-10;
       border-radius: 40px;
+      a {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    .wrapper__footer-onboarding {
+      width: 100%;
+      @include flex(row, space-between, center);
     }
   }
 }

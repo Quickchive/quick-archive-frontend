@@ -61,16 +61,31 @@
       </article>
     </div>
     <footer class="footer__onboarding">
-      <ul>
-        <button class="btn-main" @click="toMainPage">퀵카이브</button>
+      <div class="wrapper__footer-onboarding">
+        <ul>
+          <button class="btn-main">
+            <a href="https://quickarchive.co.kr/">퀵카이브</a>
+          </button>
 
-        <li>약관 및 정책</li>
-        <img :src="divider" />
-        <li>서비스 만든 사람</li>
-        <img :src="divider" />
-        <li>이메일 문의</li>
-      </ul>
-      <button class="btn--instagram"><img :src="instagramLogo" /></button>
+          <li>
+            <a href="https://www.notion.so/fabc4b39c85b446bab8f2bb8549926b7?pvs=4">약관 및 정책</a>
+          </li>
+          <img :src="divider" />
+          <li>
+            <a href="https://www.notion.so/6bf8991d981b440bafe3c6bb9dfe3ba1?pvs=4">
+              서비스 만든 사람</a
+            >
+          </li>
+          <img :src="divider" />
+          <li>이메일 문의</li>
+        </ul>
+        <button class="btn--instagram">
+          <a
+            href="https://www.instagram.com/quick_archive/?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D"
+            ><img :src="instagramLogo"
+          /></a>
+        </button>
+      </div>
     </footer>
   </div>
 </template>
@@ -95,6 +110,12 @@ const toLoginPage = () => {
 
 const toMainPage = () => {
   router.push('/home')
+}
+
+const toInsta = () => {
+  router.push(
+    'https://www.instagram.com/quick_archive/?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D'
+  )
 }
 </script>
 

@@ -26,14 +26,14 @@
         </button>
 
         <button class="setting-main-button">
-          <a href="https://www.notion.so/6bf8991d981b440bafe3c6bb9dfe3ba1">
+          <a href="https://www.notion.so/6bf8991d981b440bafe3c6bb9dfe3ba1?pvs=4">
             <div class="wrapper__button-icon"><img :src="errorIcon" />서비스 만든 사람들</div>
             <img :src="nextIcon" />
           </a>
         </button>
 
         <button class="setting-main-button">
-          <a href="https://www.notion.so/fabc4b39c85b446bab8f2bb8549926b7">
+          <a href="https://www.notion.so/fabc4b39c85b446bab8f2bb8549926b7?pvs=4">
             <div class="wrapper__button-icon"><img :src="profileIcon" />약관 및 정책</div>
             <img :src="nextIcon" />
           </a>
