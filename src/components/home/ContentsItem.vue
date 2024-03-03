@@ -19,7 +19,14 @@
         </a>
         <footer class="flex-container__row">
           <div id="thumbnail-category" @click="toCategoryPage()">
-            <img class="ic-category" :src="categoryIcon" />
+            <img
+              class="ic-category"
+              :src="
+                item.category
+                  ? modalDataStore.getCategoryImgByIconName(item.category.iconName)
+                  : categoryIcon
+              "
+            />
             {{ item.category ? item.category.name : '전체 콘텐츠' }}
           </div>
           <a v-if="item.siteName" :href="item.link" target="_self">
@@ -59,10 +66,12 @@ import { useRouter } from 'vue-router'
 import MemoItem from '@/components/home/MemoItem.vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 
 import { getHideAlertFromCookie } from '@/utils/cookies.js'
 import defaultImg from '@/assets/img/img_default.png'
 
+const modalDataStore = useModalDataStore()
 const modalViewStore = useModalViewStore()
 const contentStore = useContentStore()
 const categoryStore = useCategoryStore()
