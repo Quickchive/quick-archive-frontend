@@ -59,7 +59,7 @@
                   <h1 class="searchResult-category-title">{{ category.name }}</h1>
                   <div class="searchResult-category-detail">
                     <!-- 카테고리 위치 -->
-                    <span>454개 콘텐츠</span>
+                    <span>{{ contentCounts[category.id] }}개 콘텐츠</span>
                   </div>
                 </div>
                 <!-- 1차 카테고리 && 2차 카테고리 존재 -->
@@ -73,14 +73,20 @@
                     <span
                       >{{ searchStore.findParentAndGrandParent(category.id).grandParentName }}
                     </span>
-                    <img :src="nextIcon" class="icon-ex-small" />
+                    <img
+                      v-if="
+                        searchStore.findParentAndGrandParent(category.id).grandParentName.length > 0
+                      "
+                      :src="nextIcon"
+                      class="icon-ex-small"
+                    />
                     <span>{{ searchStore.findParentAndGrandParent(category.id).parentName }}</span>
 
                     <img :src="dividerIcon" />
-                    <span>454개 콘텐츠</span>
+                    <span>{{ contentCounts[category.id] }}개 콘텐츠</span>
                   </div>
                 </div>
-                <!-- 1차 카테고리 && 2차 카테고리 && 3차 카테고리 존재 -->
+                <!-- 1차 카테고리 && 2차 카테고리 && 3차 카테고리 존재  -->
                 <div
                   class="searchResult-category-text-box"
                   v-if="category.parentId !== null && category.children"
@@ -90,7 +96,7 @@
                     <!-- 카테고리 위치 -->
                     <span>{{ searchStore.getCategoryDepth2NameById(category.parentId) }} </span>
                     <img :src="dividerIcon" />
-                    <span>4개 콘텐츠</span>
+                    <span>{{ contentCounts[category.id] }}개 콘텐츠</span>
                   </div>
                 </div>
               </div>
@@ -133,7 +139,6 @@ import moreIcon from '@/assets/ic/ic-more.svg'
 import ContentsItem from '@/components/home/ContentsItem.vue'
 
 const searchStore = useSearchStore()
-const categoryTreeStore = useCategoryTreeStore()
 const modalDataStore = useModalDataStore()
 </script>
 

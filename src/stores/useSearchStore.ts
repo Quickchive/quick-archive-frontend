@@ -4,6 +4,7 @@ import { getCategoryIdWithKeyword, getContentIdWithKeyword } from '@/utils/searc
 import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import { toRaw } from 'vue'
 import { useContentStore } from '@/stores/useContentStore.ts'
+import { getContents } from '@/api/contents'
 
 export const useSearchStore = defineStore('search', () => {
   const keyword = ref({
@@ -24,6 +25,7 @@ export const useSearchStore = defineStore('search', () => {
   const searchedContent: any = ref([])
   const categoryTreeStore = useCategoryTreeStore()
   const contentStore = useContentStore()
+  const contentCounts: any = ref({}) // 카테고리별 콘텐츠 개수를 저장할 객체
 
   function searchEvent() {
     // 카테고리
@@ -128,6 +130,20 @@ export const useSearchStore = defineStore('search', () => {
     return { parentName, grandParentName }
   }
 
+  async function getContentCountByCategory(categoryId: any) {
+    try {
+      const response = await getContents(categoryId)
+      if (response.data.statusCode === 200) {
+        const contentCount = response.data.contents.length
+        console.log(contentCount, '콘텐츠 개수')
+        // return contentCount
+        contentCounts.value[categoryId] = contentCount
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return {
     keyword,
     placeholderText,
@@ -141,6 +157,7 @@ export const useSearchStore = defineStore('search', () => {
     getCategoryDepth2NameById,
     findParentAndGrandParent,
     searchCategoryEvent,
-    searchedCategory2
+    searchedCategory2,
+    getContentCountByCategory
   }
 })
