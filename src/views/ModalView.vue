@@ -110,7 +110,6 @@ const alertDataStore = useAlertDataStore()
 
 const closeAddContentStep01Modal = () => {
   modalViewStore.closeAddContentModal()
-  modalViewStore.closeSelectModal()
 }
 
 const closeEditContentStep01Modal = () => {

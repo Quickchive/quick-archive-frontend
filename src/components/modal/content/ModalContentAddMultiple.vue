@@ -4,6 +4,7 @@
       :modalTitle="modalTitle"
       :isBtnOnLeft="true"
       :closeModal="closeModal"
+      :goBack="goBack"
     ></modal-header-step>
     <div class="wrapper__content-num">{{ modalDataStore.addContentData.length }}개 콘텐츠</div>
     <!-- 썸네일 -->
@@ -56,6 +57,11 @@ const props = defineProps({
 
 const saveContent = () => {
   contentStore.addMultipleContent()
+}
+
+const goBack = () => {
+  modalViewStore.closeAddContentMultiple()
+  modalViewStore.openAddContentModal()
 }
 </script>
 

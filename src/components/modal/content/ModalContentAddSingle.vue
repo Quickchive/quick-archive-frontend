@@ -4,6 +4,7 @@
       :modalTitle="modalTitle"
       :isBtnOnLeft="true"
       :closeModal="closeModal"
+      :goBack="goBack"
     ></modal-header-step>
     <!-- 썸네일 -->
     <thumbnail-item></thumbnail-item>
@@ -80,6 +81,11 @@ const saveContent = () => {
   } else {
     contentStore.editContent()
   }
+}
+
+const goBack = () => {
+  modalViewStore.closeAddContentSingle()
+  modalViewStore.openAddContentModal()
 }
 </script>
 

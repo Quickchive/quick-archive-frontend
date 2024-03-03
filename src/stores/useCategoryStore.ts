@@ -74,6 +74,11 @@ export const useCategoryStore = defineStore('category', () => {
   async function addCategory(categoryData: any) {
     // 카테고리 추가
     try {
+      // 대카테고리가 10개 이상인지 체크
+      // if (categoryTreeStore.userCategoryList.length >= 10) {
+
+      // }
+
       const response = await addCategories(categoryData)
       // 상태코드로 에러 처리 하기
       if (response.data.statusCode === 201) {
