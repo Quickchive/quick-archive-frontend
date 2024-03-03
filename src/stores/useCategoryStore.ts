@@ -75,29 +75,44 @@ export const useCategoryStore = defineStore('category', () => {
     // 카테고리 추가
     try {
       // 대카테고리가 10개 이상인지 체크
-      // if (categoryTreeStore.userCategoryList.length >= 10) {
-
-      // }
-
-      const response = await addCategories(categoryData)
-      // 상태코드로 에러 처리 하기
-      if (response.data.statusCode === 201) {
-        // 토스트
-        const toastData = {
-          message: '카테고리가 추가되었습니다.',
-          func: {
-            message: '보러가기'
-          }
+      console.log('len', categoryTreeStore.userCategoryList.length)
+      if (categoryTreeStore.userCategoryList.length >= 10) {
+        const alertData = {
+          title: '알림',
+          content: `무료 버전에서는 메인 카테고리를
+          10개까지만 만들 수 있어요. 
+          단, 서브 카테고리는 개수 제한 없이 만들 수 있어요.`
         }
-        modalDataStore.setToastMessage(toastData)
-        modalViewStore.showToast()
-        modalViewStore.closeAddCategoryModal()
-        modalViewStore.closeSelectModal()
-        await categoryTreeStore.updateUserCategoryList()
+        alertDataStore.setDefaultAlertData(alertData)
+        modalViewStore.openAlertModal()
+      } else {
+        const response = await addCategories(categoryData)
+        // 상태코드로 에러 처리 하기
+        if (response.data.statusCode === 201) {
+          // 토스트
+          const toastData = {
+            message: '카테고리가 추가되었습니다.',
+            func: {
+              message: '보러가기'
+            }
+          }
+          modalDataStore.setToastMessage(toastData)
+          modalViewStore.showToast()
+          modalViewStore.closeAddCategoryModal()
+          modalViewStore.closeSelectModal()
+          await categoryTreeStore.updateUserCategoryList()
+        }
       }
     } catch (error: any) {
       if (error.response.data.statusCode === 409) {
         modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
+        const alertData = {
+          title: '알림',
+          content: `동일한 이름의 카테고리가 
+          ${modalViewStore.duplicatedCategoryLocation}내에 있어요.
+          카테고리 이름을 변경해주세요.`
+        }
+        alertDataStore.setDefaultAlertData(alertData)
         modalViewStore.openAlertModal()
       }
     }
@@ -115,6 +130,13 @@ export const useCategoryStore = defineStore('category', () => {
     } catch (error: any) {
       if (error.response.data.statusCode === 409) {
         modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
+        const alertData = {
+          title: '알림',
+          content: `동일한 이름의 카테고리가 
+          ${modalViewStore.duplicatedCategoryLocation}내에 있어요.
+          카테고리 이름을 변경해주세요.`
+        }
+        alertDataStore.setDefaultAlertData(alertData)
         modalViewStore.openAlertModal()
       }
     }

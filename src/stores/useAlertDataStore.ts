@@ -17,6 +17,11 @@ export const useAlertDataStore = defineStore('alertData', () => {
   const contentStore = useContentStore()
   const checkboxChecked = ref(false)
 
+  const defaultAlertData = reactive({
+    title: '',
+    content: ''
+  })
+
   // settingView: 로그아웃 얼럿 데이터
   const logoutAlertData = reactive({
     message: '정말 로그아웃 하시겠어요?',
@@ -146,6 +151,12 @@ export const useAlertDataStore = defineStore('alertData', () => {
     checkboxChecked.value = !checkboxChecked.value
   }
 
+  // 기본 얼럿 데이터 세팅
+  const setDefaultAlertData = (data: any) => {
+    defaultAlertData.title = data.title
+    defaultAlertData.content = data.content
+  }
+
   return {
     logoutAlertData,
     withdrawalAlertData,
@@ -155,6 +166,8 @@ export const useAlertDataStore = defineStore('alertData', () => {
     completeAddCategoryAlertData,
     deleteContentAlertData,
     checkboxChecked,
-    toggleCheckbox
+    toggleCheckbox,
+    defaultAlertData,
+    setDefaultAlertData
   }
 })

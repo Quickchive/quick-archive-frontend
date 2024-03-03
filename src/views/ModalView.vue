@@ -85,7 +85,7 @@
   <div class="alert-overlay" v-if="modalViewStore.alertOverlay"></div>
   <div class="alert-view" v-if="modalViewStore.alertModal">
     <!-- 얼럿 모달 -->
-    <alert-duplicated-category></alert-duplicated-category>
+    <alert-default></alert-default>
   </div>
 </template>
 
@@ -99,7 +99,7 @@ import ModalSetCategoryLocation from '@/components/modal/category/ModalSetCatego
 import ModalContentAddStep01 from '@/components/modal/content/ModalContentAddStep01.vue'
 import ModalContentAddSingle from '@/components/modal/content/ModalContentAddSingle.vue'
 import ModalContentAddMultiple from '@/components/modal/content/ModalContentAddMultiple.vue'
-import AlertDuplicatedCategory from '@/components/modal/alert/AlertDuplicatedCategory.vue'
+import AlertDefault from '@/components/modal/alert/AlertDefault.vue'
 import AlertConfirm from '@/components/modal/alert/AlertConfirm.vue'
 import ModalEditContentTitle from '@/components/modal/content/ModalEditContentTitle.vue'
 import AlertWithInput from '@/components/modal/alert/AlertWithInput.vue'
