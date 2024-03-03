@@ -56,6 +56,15 @@ export const useCategoryStore = defineStore('category', () => {
       if (response.data.statusCode === (200 || 201)) {
         await categoryTreeStore.updateUserCategoryList()
         modalViewStore.closeDeleteCategoryModal()
+        // 토스트
+        const toastData = {
+          message: '카테고리가 삭제되었습니다.',
+          func: {
+            message: '취소하기'
+          }
+        }
+        modalDataStore.setToastMessage(toastData)
+        modalViewStore.showToast()
       }
     } catch (error) {
       console.log(error)
@@ -68,6 +77,15 @@ export const useCategoryStore = defineStore('category', () => {
       const response = await addCategories(categoryData)
       // 상태코드로 에러 처리 하기
       if (response.data.statusCode === 201) {
+        // 토스트
+        const toastData = {
+          message: '카테고리가 추가되었습니다.',
+          func: {
+            message: '보러가기'
+          }
+        }
+        modalDataStore.setToastMessage(toastData)
+        modalViewStore.showToast()
         modalViewStore.closeAddCategoryModal()
         modalViewStore.closeSelectModal()
         await categoryTreeStore.updateUserCategoryList()

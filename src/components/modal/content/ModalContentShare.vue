@@ -18,12 +18,23 @@
 import ModalHeader from '@/components/header/ModalHeader.vue'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
+import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 
 const contentStore = useContentStore()
 const modalViewStore = useModalViewStore()
+const modalDataStore = useModalDataStore()
 
 const closeModal = () => {
   modalViewStore.closeShareContentModal()
+  // 토스트
+  const toastData = {
+    message: 'URL이 복사되었습니다.',
+    func: {
+      message: ''
+    }
+  }
+  modalDataStore.setToastMessage(toastData)
+  modalViewStore.showToast()
 }
 
 const copyLink = () => {

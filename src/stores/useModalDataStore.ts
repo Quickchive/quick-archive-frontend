@@ -15,6 +15,13 @@ import { ref, reactive, computed } from 'vue'
 import { getOgData } from '@/api/contents'
 
 export const useModalDataStore = defineStore('modalData', () => {
+  const toast = ref({
+    message: '',
+    func: {
+      message: ''
+    }
+  })
+
   const defaultCategory = reactive([
     {
       id: 0,
@@ -240,6 +247,12 @@ export const useModalDataStore = defineStore('modalData', () => {
     addContentData.value = linkArrData
   }
 
+  // 토스트 메시지
+  function setToastMessage(toastData: any) {
+    toast.value.message = toastData.message
+    toast.value.func.message = toastData.func.message
+  }
+
   return {
     defaultCategory,
     newCategoryName,
@@ -264,6 +277,8 @@ export const useModalDataStore = defineStore('modalData', () => {
     fetchMultipleLinksOgData,
     focusedAddContentIndex,
     setFocusedAddContentIndex,
-    setMultipleTitle
+    setMultipleTitle,
+    setToastMessage,
+    toast
   }
 })

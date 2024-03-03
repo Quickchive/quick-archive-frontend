@@ -158,14 +158,6 @@ button {
   padding: 0;
 }
 
-.btn-toast {
-  @include font(13px, 500, 20px);
-  @include color(#fff, transparent);
-  text-align: right;
-  text-decoration-line: underline;
-  padding: 0;
-}
-
 .button--go-next {
   @include font(15px, 600, 24px);
   @include color($color-grey-100, transparent);

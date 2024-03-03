@@ -1,16 +1,51 @@
 .toast {
   @include size(360px, 54px);
-  @include flex;
+  @include flex(row, space-between, center);
   border-radius: 100px;
   background: rgba(35, 35, 41, 0.8);
   backdrop-filter: blur(10px);
   padding: 0 16px;
   box-sizing: border-box;
-  .toast-content {
-    width: 239px;
-    margin: 0 12px 0 16px;
-    color: #fff;
-    @include font(14px, 500, 22px);
-    letter-spacing: -0.3px;
+  position: absolute;
+  bottom: 40px;
+  left: 540px;
+  z-index: 1000;
+  .wrapper__main-toast-content {
+    @include flex(row, center, center);
+    .toast-content {
+      @include font(14px, 500, 22px, #fff);
+      margin-left: 12px;
+    }
   }
+  .btn-toast {
+    width: 45px;
+    @include font(13px, 500, 20px, #fff);
+    background-color: transparent;
+    text-decoration-line: underline;
+    padding: 0;
+  }
+}
+
+.toast-enter-from {
+  opacity: 0;
+}
+
+.toast-enter-to {
+  opacity: 1;
+}
+
+.toast-enter-active {
+  transition: all 0.2s ease-in;
+}
+
+.toast-leave-from {
+  opacity: 1;
+}
+
+.toast-leave-to {
+  opacity: 0;
+}
+
+.toast-leave-active {
+  transition: all 0.3s ease-out;
 }

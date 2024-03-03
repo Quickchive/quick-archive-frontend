@@ -6,8 +6,8 @@ export const useModalViewStore = defineStore('modalView', () => {
   const selectModal = ref(false)
   const alertOverlay = ref(false)
   const overlay = ref(false)
-  const toastMessage = ref('')
   const alertModal = ref(false)
+  const toastModal = ref(false)
 
   // ******** 카테고리 모달 ********
   const addCategoryModal = ref(false)
@@ -211,9 +211,10 @@ export const useModalViewStore = defineStore('modalView', () => {
   function setDuplicatedCategoryName(categoryName: string) {
     duplicatedCategoryLocation.value = categoryName
   }
-  // 토스트 메시지
-  function setToastMessage(message: string) {
-    toastMessage.value = message
+
+  function showToast() {
+    toastModal.value = true
+    setTimeout(() => (toastModal.value = false), 2500)
   }
 
   return {
@@ -229,7 +230,6 @@ export const useModalViewStore = defineStore('modalView', () => {
     duplicatedCategoryLocation,
     editCategoryModal,
     deleteCategoryModal,
-    toastMessage,
     logoutModal,
     withdrawalModal,
     settingAlertOverlay,
@@ -253,7 +253,6 @@ export const useModalViewStore = defineStore('modalView', () => {
     closeDeleteCategoryModal,
     openEditCategoryModal,
     closeEditCategoryModal,
-    setToastMessage,
     openLogoutModal,
     closeLogoutModal,
     openWithdrawalModal,
@@ -281,6 +280,8 @@ export const useModalViewStore = defineStore('modalView', () => {
     closeEditContentDetailModal,
     openAddContentMultiple,
     closeAddContentMultiple,
-    addContentMultiple
+    addContentMultiple,
+    showToast,
+    toastModal
   }
 })

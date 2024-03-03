@@ -1,21 +1,20 @@
 <template>
   <div class="flex-container__row toast">
-    <img :src="doneIcon" />
-    <span class="toast-content">{{ toastText }}</span>
-    <button class="btn-toast">보러가기</button>
+    <div class="wrapper__main-toast-content">
+      <img :src="doneIcon" />
+      <span class="toast-content">{{ modalDataStore.toast.message }}</span>
+    </div>
+    <button v-if="modalDataStore.toast.func" class="btn-toast">
+      {{ modalDataStore.toast.func.message }}
+    </button>
   </div>
 </template>
 
-<script>
+<script setup>
 import doneIcon from '@/assets/ic/ic-done.svg'
-export default {
-  data() {
-    return {
-      doneIcon,
-      toastText: '카테고리가 추가되었습니다.'
-    }
-  }
-}
+import { useModalDataStore } from '@/stores/useModalDataStore.ts'
+
+const modalDataStore = useModalDataStore()
 </script>
 
 <style></style>

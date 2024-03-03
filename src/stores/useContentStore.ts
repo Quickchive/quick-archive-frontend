@@ -165,6 +165,15 @@ export const useContentStore = defineStore('content', () => {
       console.log('deleteContent', response)
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
         modalViewStore.closeDeleteContentModal()
+        // 토스트
+        const toastData = {
+          message: '콘텐츠가 삭제되었습니다.',
+          func: {
+            message: '취소하기'
+          }
+        }
+        modalDataStore.setToastMessage(toastData)
+        modalViewStore.showToast()
         // 얼럿 다시 보지 않기
         if (alertDataStore.checkboxChecked === true) {
           saveHideAlertToCookie(true)
