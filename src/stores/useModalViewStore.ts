@@ -8,6 +8,7 @@ export const useModalViewStore = defineStore('modalView', () => {
   const overlay = ref(false)
   const alertModal = ref(false)
   const toastModal = ref(false)
+  const toastErrorModal = ref(false)
 
   // ******** 카테고리 모달 ********
   const addCategoryModal = ref(false)
@@ -217,6 +218,10 @@ export const useModalViewStore = defineStore('modalView', () => {
     setTimeout(() => (toastModal.value = false), 2500)
   }
 
+  function showErrorToast() {
+    toastErrorModal.value = true
+    setTimeout(() => (toastErrorModal.value = false), 2500)
+  }
   return {
     selectModal,
     addCategoryModal,
@@ -282,6 +287,8 @@ export const useModalViewStore = defineStore('modalView', () => {
     closeAddContentMultiple,
     addContentMultiple,
     showToast,
-    toastModal
+    toastModal,
+    showErrorToast,
+    toastErrorModal
   }
 })

@@ -2,10 +2,10 @@
   <section class="home-container">
     <router-view></router-view>
   </section>
-  <!-- 토스트 -->
+  <!-- 토스트
   <Transition name="toast">
     <toast-default v-if="modalViewStore.toastModal"></toast-default>
-  </Transition>
+  </Transition> -->
 </template>
 
 <script setup>

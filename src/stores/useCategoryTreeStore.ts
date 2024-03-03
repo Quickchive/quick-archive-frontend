@@ -2,9 +2,13 @@ import { defineStore } from 'pinia'
 import { getCategories } from '@/api/category'
 import { ref } from 'vue'
 import type { CategoryIdMap } from '@/utils/interface'
+import { useModalDataStore } from '@/stores/useModalDataStore.ts'
+import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 
 export const useCategoryTreeStore = defineStore('categoryTree', () => {
-  // 더미 값 들어있음
+  const modalDataStore = useModalDataStore()
+  const modalViewStore = useModalViewStore()
+
   const userCategoryList: any = ref([])
 
   // 카테고리 트리 depth show/hide 컨트롤 용
@@ -44,8 +48,14 @@ export const useCategoryTreeStore = defineStore('categoryTree', () => {
         categoryIdTreeRadio.value = Object.assign({}, categoryIdMap)
         moreBtnCategoryIdTree.value = Object.assign({}, categoryIdMap)
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error)
+      // 토스트
+      const toastData = {
+        message: error.response.data.message
+      }
+      modalDataStore.setToastMessage(toastData)
+      modalViewStore.showErrorToast()
     }
   }
 
@@ -55,8 +65,14 @@ export const useCategoryTreeStore = defineStore('categoryTree', () => {
       if (response.data.statusCode === 200) {
         userCategoryList.value = response.data.categoriesTree
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error)
+      // 토스트
+      const toastData = {
+        message: error.response.data.message
+      }
+      modalDataStore.setToastMessage(toastData)
+      modalViewStore.showErrorToast()
     }
   }
 

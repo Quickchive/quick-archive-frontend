@@ -66,8 +66,14 @@ export const useCategoryStore = defineStore('category', () => {
         modalDataStore.setToastMessage(toastData)
         modalViewStore.showToast()
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error)
+      // 토스트
+      const toastData = {
+        message: error.response.data.message
+      }
+      modalDataStore.setToastMessage(toastData)
+      modalViewStore.showErrorToast()
     }
   }
 
@@ -114,6 +120,13 @@ export const useCategoryStore = defineStore('category', () => {
         }
         alertDataStore.setDefaultAlertData(alertData)
         modalViewStore.openAlertModal()
+      } else {
+        // 토스트
+        const toastData = {
+          message: error.response.data.message
+        }
+        modalDataStore.setToastMessage(toastData)
+        modalViewStore.showErrorToast()
       }
     }
   }
@@ -138,6 +151,13 @@ export const useCategoryStore = defineStore('category', () => {
         }
         alertDataStore.setDefaultAlertData(alertData)
         modalViewStore.openAlertModal()
+      } else {
+        // 토스트
+        const toastData = {
+          message: error.response.data.message
+        }
+        modalDataStore.setToastMessage(toastData)
+        modalViewStore.showErrorToast()
       }
     }
   }

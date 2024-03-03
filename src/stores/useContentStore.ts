@@ -37,8 +37,14 @@ export const useContentStore = defineStore('content', () => {
         const contentIdMap = createContentIdMap(userFilteredContentList.value)
         moreBtnContentIdTree.value = contentIdMap
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error)
+      // 토스트
+      const toastData = {
+        message: error.response.data.message
+      }
+      modalDataStore.setToastMessage(toastData)
+      modalViewStore.showErrorToast()
     }
   }
 
@@ -51,8 +57,14 @@ export const useContentStore = defineStore('content', () => {
         const contentIdMap = createContentIdMap(userCustomContentList.value)
         moreBtnContentIdTree.value = contentIdMap
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error)
+      // 토스트
+      const toastData = {
+        message: error.response.data.message
+      }
+      modalDataStore.setToastMessage(toastData)
+      modalViewStore.showErrorToast()
     }
   }
 
@@ -74,7 +86,6 @@ export const useContentStore = defineStore('content', () => {
       const response: any = await addContents(contentData)
       console.log('addContent', response)
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
-        console.log('콘텐츠 추가 성공 로직')
         modalViewStore.closeSelectModal()
         modalViewStore.closeAddContentModal()
         modalViewStore.closeAddContentSingle()
@@ -86,8 +97,13 @@ export const useContentStore = defineStore('content', () => {
           fetchAllContents()
         }
       }
-    } catch (error) {
-      console.log(error)
+    } catch (error: any) {
+      // 토스트
+      const toastData = {
+        message: error.response.data.message
+      }
+      modalDataStore.setToastMessage(toastData)
+      modalViewStore.showErrorToast()
     }
   }
 
@@ -107,8 +123,14 @@ export const useContentStore = defineStore('content', () => {
           console.log('addContent', response)
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error)
+      // 토스트
+      const toastData = {
+        message: error.response.data.message
+      }
+      modalDataStore.setToastMessage(toastData)
+      modalViewStore.showErrorToast()
     } finally {
       modalViewStore.closeSelectModal()
       modalViewStore.closeAddContentModal()
@@ -142,7 +164,6 @@ export const useContentStore = defineStore('content', () => {
       const response: any = await updateContents(contentData)
       console.log('addContent', response)
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
-        console.log('콘텐츠 수정 성공 로직')
         modalViewStore.closeSelectModal()
         modalViewStore.closeEditContentModal()
         modalViewStore.closeEditContentDetailModal()
@@ -154,8 +175,14 @@ export const useContentStore = defineStore('content', () => {
           fetchAllContents()
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error)
+      // 토스트
+      const toastData = {
+        message: error.response.data.message
+      }
+      modalDataStore.setToastMessage(toastData)
+      modalViewStore.showErrorToast()
     }
   }
 
@@ -188,15 +215,20 @@ export const useContentStore = defineStore('content', () => {
           fetchAllContents()
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error)
+      // 토스트
+      const toastData = {
+        message: error.response.data.message
+      }
+      modalDataStore.setToastMessage(toastData)
+      modalViewStore.showErrorToast()
     }
   }
 
   function createContentIdMap(items: any[]) {
     return items.reduce((acc, item) => {
       acc[item.id] = false
-      console.log('acc', acc)
       return acc
     }, {})
   }
@@ -212,7 +244,6 @@ export const useContentStore = defineStore('content', () => {
   async function favoriteContent(contentId: number) {
     try {
       const response = await addFavorite(contentId)
-      console.log('favoriteContent', response)
     } catch (error) {
       console.log(error)
     }
