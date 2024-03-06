@@ -111,12 +111,6 @@ const toLoginPage = () => {
 const toMainPage = () => {
   router.push('/home')
 }
-
-const toInsta = () => {
-  router.push(
-    'https://www.instagram.com/quick_archive/?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D'
-  )
-}
 </script>
 
 <style></style>
