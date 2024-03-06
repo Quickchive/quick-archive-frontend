@@ -1,8 +1,6 @@
 .divider {
   @include size(100%, 16px);
   background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
-  position: fixed;
-  top: 208px;
 }
 
 .search__divider {
@@ -13,15 +11,11 @@
 .navbar__divider--top {
   @include size(368px, 24px);
   background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
-  position: fixed;
-  top: 198px;
 }
 
 .navbar__divider--bottom {
   @include size(368px, 24px);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 100%);
-  position: fixed;
-  bottom: 96px;
 }
 
 .category-list__divider {

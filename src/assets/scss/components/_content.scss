@@ -16,19 +16,16 @@
         @include size(100%, 24px);
         text-align: left;
         overflow: hidden;
-        color: $color-grey-100;
         text-overflow: ellipsis;
-        @include font(16px, 600, 24px);
+        @include font(16px, 600, 24px, $color-grey-100);
         letter-spacing: -0.3px;
       }
       p {
         @include size(100%, 24px);
         text-align: left;
         overflow: hidden;
-        color: $color-grey-70;
         text-overflow: ellipsis;
-        @include font(14px, 400, 21px);
-        letter-spacing: -0.3px;
+        @include font(14px, 400, 21px, $color-grey-70);
         margin: 4px 0 12px 0;
       }
 
@@ -36,7 +33,6 @@
         width: 100%;
         align-items: center;
         @include font(13px, 500, 18px, $color-grey-60);
-        letter-spacing: -0.3px;
         a {
           @include flex(row, start, center);
           &:visited {
@@ -70,15 +66,9 @@
 }
 
 .contents-container {
-  width: calc(100% - 368px);
   box-sizing: border-box;
   overflow-y: scroll;
   overscroll-behavior: none;
-  position: fixed;
-  top: 232px;
-  left: 368px;
-  z-index: -10;
-  padding: 0 64px;
   .contents-list__wrapper {
     @include flex(column, left, start);
     width: 100%;
@@ -93,5 +83,4 @@
   @include font(14px, 600, 24px, $color-grey-70);
   text-align: left;
   width: 398px;
-  letter-spacing: -0.3px;
 }

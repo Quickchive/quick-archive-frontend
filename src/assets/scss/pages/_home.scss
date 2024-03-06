@@ -5,8 +5,6 @@
 // _contact.scss
 
 .wrapper__navbar {
-  // position: fixed;
-  // top: 0;
   background-color: #ffffff;
   height: 100vh;
 }
@@ -17,15 +15,9 @@
   @include flex(column, left, start);
   padding: 80px 64px 0px 64px;
   gap: 8px;
-  position: fixed;
-  top: 0;
-  left: 368px;
   h1 {
-    // overflow: hidden;
-    color: $color-grey-100;
     text-overflow: ellipsis;
-    @include font(32px, 700, 48px);
-    letter-spacing: -0.3px;
+    @include font(32px, 700, 48px, $color-grey-100);
     text-align: left;
     margin: 0;
   }
