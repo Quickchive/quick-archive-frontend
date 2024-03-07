@@ -103,12 +103,12 @@ const clickArrowEvent = () => {
 const btnList = [
   {
     name: '편집하기',
-    clickEvent: () => modalViewStore.openEditCategoryModal()
+    clickEvent: () => modalViewStore.showModalWithOverlay('editCategory', 'default')
   },
 
   {
     name: '삭제하기',
-    clickEvent: () => modalViewStore.openDeleteCategoryModal()
+    clickEvent: () => modalViewStore.showModalWithOverlay('deleteCategory', 'default')
   }
 ]
 </script>

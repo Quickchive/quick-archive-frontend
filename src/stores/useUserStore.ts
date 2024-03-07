@@ -97,7 +97,7 @@ export const useUserStore = defineStore('user', () => {
       }
       const response = await logoutUser(refresh_token)
       if (response.data.statusCode === 201 || response.data.statusCode === 200) {
-        modalViewStore.closeLogoutModal()
+        modalViewStore.hideModalWithOverlay('logout', 'settingAlert')
         router.push('/login')
       }
       nickname.value = ''
@@ -133,7 +133,8 @@ export const useUserStore = defineStore('user', () => {
       const response = await deleteProfile()
       console.log(response)
       if (response.data.statusCode === 201 || response.data.statusCode === 200) {
-        modalViewStore.closeWithdrawalModal()
+        modalViewStore.hideModalWithOverlay('withdrawal', 'settingAlert')
+
         router.push('/login')
       }
     } catch (error) {

@@ -23,7 +23,6 @@ import ModalHeader from '@/components/header/ModalHeader.vue'
 import addCategory from '@/assets/img/img_add_category.png'
 import addContent from '@/assets/img/img_add_content.png'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
-import { ref } from 'vue'
 
 const modalTitle = '추가'
 const modalViewStore = useModalViewStore()

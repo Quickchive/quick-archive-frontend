@@ -1,7 +1,7 @@
 <template>
   <dialog class="content-add__modal">
     <header class="modal-header--edit-title">
-      <button class="btn--transparent btn-32" @click="modalViewStore.closeEditContentTitleModal()">
+      <button class="btn--transparent btn-32" @click="modalViewStore.hideModal('editContentTitle')">
         <img :src="topCloseIcon" />
       </button>
       <button class="btn--transparent" @click="clearTitle()">내용 전체삭제</button>
@@ -62,7 +62,7 @@ const saveContentTitle = () => {
   } else {
     modalDataStore.setTitle(title.value)
   }
-  modalViewStore.closeEditContentTitleModal()
+  modalViewStore.hideModal('editContentTitle')
 }
 
 const clearTitle = () => {

@@ -66,7 +66,7 @@ onMounted(async () => {
 
 // 완료 버튼 클릭
 const setLocation = () => {
-  modalViewStore.closeSetCategoryLocationModal()
+  modalViewStore.hideModal('categoryLocation')
 }
 </script>
 <style></style>

@@ -165,8 +165,8 @@ export const useContentStore = defineStore('content', () => {
       console.log('addContent', response)
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
         modalViewStore.closeSelectModal()
-        modalViewStore.closeEditContentModal()
-        modalViewStore.closeEditContentDetailModal()
+        modalViewStore.hideModalWithOverlay('editContent', 'default')
+        modalViewStore.hideModalWithOverlay('editContentDetail', 'default')
         if (route.params.id !== undefined) {
           // 특정 콘텐츠 페이지인 경우
           fetchContents(Number(route.params.id))
@@ -191,7 +191,7 @@ export const useContentStore = defineStore('content', () => {
       const response: any = await deleteContents(focusedContentId.value)
       console.log('deleteContent', response)
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
-        modalViewStore.closeDeleteContentModal()
+        modalViewStore.hideModalWithOverlay('deleteContent', 'default')
         // 토스트
         const toastData = {
           message: '콘텐츠가 삭제되었습니다.',

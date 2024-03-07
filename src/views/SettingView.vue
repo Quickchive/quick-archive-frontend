@@ -2,14 +2,14 @@
   <div class="wrapper__setting-component">
     <router-view></router-view>
   </div>
-  <div class="alert-overlay" v-if="modalViewStore.settingAlertOverlay"></div>
+  <div class="alert-overlay" v-if="modalViewStore.overlay.settingAlert"></div>
 
   <!-- 얼럿 모달: 로그아웃 -->
-  <div class="alert-view" v-if="modalViewStore.logoutModal">
+  <div class="alert-view" v-if="modalViewStore.modal.logout">
     <alert-confirm :alertData="alertDataStore.logoutAlertData"></alert-confirm>
   </div>
   <!-- 얼럿 모달: 회원 탈퇴 -->
-  <div class="alert-view" v-if="modalViewStore.withdrawalModal">
+  <div class="alert-view" v-if="modalViewStore.modal.withdrawal">
     <alert-confirm :alertData="alertDataStore.withdrawalAlertData"></alert-confirm>
   </div>
 </template>

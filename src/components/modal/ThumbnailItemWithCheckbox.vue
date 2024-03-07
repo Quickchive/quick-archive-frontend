@@ -42,7 +42,7 @@ const handleImageError = (event) => {
 
 const openEditContentTitleModal = () => {
   modalDataStore.setFocusedAddContentIndex(props.index)
-  modalViewStore.openEditContentTitleModal()
+  modalViewStore.hideModal('editContentTitle')
 }
 </script>
 

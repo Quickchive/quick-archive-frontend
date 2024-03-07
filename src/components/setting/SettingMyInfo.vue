@@ -33,7 +33,7 @@
         <div class="wrapper__logout">
           <button
             class="flex-container__row--space-between btn--transparent"
-            @click="modalViewStore.openLogoutModal()"
+            @click="modalViewStore.showModalWithOverlay('logout', 'settingAlert')"
           >
             <label class="label__md">로그아웃</label>
             <img :src="nextIcon" />
@@ -43,7 +43,9 @@
       <div class="wrapper__withdraw">
         <label
           >회원 탈퇴를 원하시면
-          <button @click="modalViewStore.openWithdrawalModal()">이곳</button>을 눌러주세요
+          <button @click="modalViewStore.showModalWithOverlay('withdrawal', 'settingAlert')">
+            이곳</button
+          >을 눌러주세요
         </label>
       </div>
     </section>

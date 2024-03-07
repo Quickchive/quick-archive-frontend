@@ -25,7 +25,7 @@ const modalViewStore = useModalViewStore()
 const modalDataStore = useModalDataStore()
 
 const closeModal = () => {
-  modalViewStore.closeShareContentModal()
+  modalViewStore.hideModalWithOverlay('shareContent', 'default')
   // 토스트
   const toastData = {
     message: 'URL이 복사되었습니다.',

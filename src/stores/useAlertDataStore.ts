@@ -29,7 +29,7 @@ export const useAlertDataStore = defineStore('alertData', () => {
     leftButtonMessage: '닫기',
     rightButtonMessage: '확인',
     leftButtonEvent: () => {
-      modalViewStore.closeLogoutModal()
+      modalViewStore.hideModalWithOverlay('logout', 'settingAlert')
     },
     rightButtonEvent: () => {
       userStore.logout()
@@ -48,7 +48,7 @@ export const useAlertDataStore = defineStore('alertData', () => {
       userStore.withdrawal()
     },
     rightButtonEvent: () => {
-      modalViewStore.closeWithdrawalModal()
+      modalViewStore.hideModalWithOverlay('withdrawal', 'settingAlert')
     }
   })
 
@@ -60,7 +60,7 @@ export const useAlertDataStore = defineStore('alertData', () => {
     leftButtonMessage: '닫기',
     rightButtonMessage: '삭제',
     leftButtonEvent: () => {
-      modalViewStore.closeDeleteCategoryModal()
+      modalViewStore.hideModalWithOverlay('deleteCategory', 'default')
     },
     rightButtonEvent: () => {
       categoryStore.deleteCategory()
@@ -79,7 +79,7 @@ export const useAlertDataStore = defineStore('alertData', () => {
     rightButtonMessage: '저장',
     leftButtonEvent: () => {
       modalViewStore.closeSetNewCategoryModal()
-      modalViewStore.openSetCategoryLocationModal()
+      modalViewStore.showModal('categoryLocation')
     },
     rightButtonEvent: async () => {
       // 카테고리 생성
@@ -93,13 +93,14 @@ export const useAlertDataStore = defineStore('alertData', () => {
         // 상태코드로 에러 처리 하기
         if (response.data.statusCode === 201) {
           modalViewStore.closeSetNewCategoryModal()
-          modalViewStore.openCompleteAddCategoryModal()
+          modalViewStore.showModal('completeAddNewCategory')
+
           await categoryTreeStore.updateUserCategoryList()
         }
       } catch (error: any) {
         if (error.response.data.statusCode === 409) {
           modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
-          modalViewStore.openAlertModal()
+          modalViewStore.showModalWithOverlay('alert', 'alert')
         }
       }
     }
@@ -139,7 +140,7 @@ export const useAlertDataStore = defineStore('alertData', () => {
     leftButtonMessage: '닫기',
     rightButtonMessage: '삭제',
     leftButtonEvent: () => {
-      modalViewStore.closeDeleteContentModal()
+      modalViewStore.hideModalWithOverlay('deleteCategory', 'default')
     },
     rightButtonEvent: () => {
       contentStore.deleteContent()

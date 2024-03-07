@@ -44,11 +44,11 @@ const selectCategoryIcon = (i) => {
 const submitCategoryIcon = () => {
   // 1. 카테고리 아이콘 저장 로직
   // 2. 1번 완료 후 모달 닫기 로직
-  modalViewStore.closeSelectCategoryModal()
+  modalViewStore.hideModal('selectCategory')
 }
 // 닫기 이벤트 - 카테고리 아이콘 기본값으로 저장 후 닫기
 const closeModal = () => {
-  modalViewStore.closeSelectCategoryModal()
+  modalViewStore.hideModal('selectCategory')
 }
 </script>
 

@@ -35,7 +35,7 @@
   </nav>
   <div class="navbar-shadow"></div>
   <!-- 모달 -->
-  <modal-view v-if="modalViewStore.overlay"></modal-view>
+  <modal-view v-if="modalViewStore.overlay.default"></modal-view>
 </template>
 
 <script setup>
@@ -60,7 +60,7 @@ const router = useRouter()
 const route = useRoute()
 
 const showAddModal = () => {
-  modalViewStore.openSelectModal()
+  modalViewStore.showModalWithOverlay('select', 'default')
 }
 
 const toMainPage = () => {

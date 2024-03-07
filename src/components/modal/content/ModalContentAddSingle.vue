@@ -84,7 +84,7 @@ const saveContent = () => {
 }
 
 const goBack = () => {
-  modalViewStore.closeAddContentSingle()
+  modalViewStore.hideModal('editContentDetail')
   modalViewStore.openAddContentModal()
 }
 </script>

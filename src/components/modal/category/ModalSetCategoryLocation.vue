@@ -76,7 +76,7 @@ const categoryList = ref(categoryTreeStore.userCategoryList)
 
 const closeModal = () => {
   modalDataStore.resetCategoryLocation()
-  modalViewStore.closeSetCategoryLocationModal()
+  modalViewStore.hideModal('categoryLocation')
 }
 
 onMounted(async () => {
@@ -88,7 +88,7 @@ onMounted(async () => {
 
 // 완료 버튼 클릭
 const setLocation = () => {
-  modalViewStore.closeSetCategoryLocationModal()
+  modalViewStore.hideModal('categoryLocation')
 }
 </script>
 <style></style>

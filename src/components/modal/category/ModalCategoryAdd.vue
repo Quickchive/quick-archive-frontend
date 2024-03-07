@@ -94,8 +94,7 @@ onMounted(() => {
       categoryStore.focusedCategoryData.iconName
     )
     modalDataStore.selectCategoryIcon(iconData)
-    closeEvent.value = () => modalViewStore.closeEditCategoryModal()
-
+    closeEvent.value = () => modalViewStore.hideModalWithOverlay('editCategory', 'default')
     if (categoryStore.focusedCategoryData.parentId !== (null && -1 && undefined)) {
       const parentData = searchCategoryDataById(
         categoryTreeStore.userCategoryList,
@@ -111,11 +110,11 @@ onMounted(() => {
 })
 
 const openSelectCategoryModal = () => {
-  modalViewStore.openSelectCategoryModal()
+  modalViewStore.showModal('selectCategory')
 }
 
 const openSetCategoryLocationModal = () => {
-  modalViewStore.openSetCategoryLocationModal()
+  modalViewStore.showModal('categoryLocation')
 }
 
 // 카테고리 명 유효성 검사

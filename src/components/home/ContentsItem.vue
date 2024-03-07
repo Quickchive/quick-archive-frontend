@@ -106,18 +106,18 @@ const toCategoryPage = () => {
 const btnList = [
   {
     name: '편집하기',
-    clickEvent: () => modalViewStore.openEditContentDetailModal()
+    clickEvent: () => modalViewStore.showModalWithOverlay('editContentDetail', 'default')
   },
   {
     name: '공유하기',
-    clickEvent: () => modalViewStore.openShareContentModal()
+    clickEvent: () => modalViewStore.showModalWithOverlay('shareContent', 'default')
   },
   {
     name: '삭제하기',
     clickEvent: () =>
       getHideAlertFromCookie()
         ? contentStore.deleteContent()
-        : modalViewStore.openDeleteContentModal()
+        : modalViewStore.showModalWithOverlay('deleteContent', 'default')
   }
 ]
 

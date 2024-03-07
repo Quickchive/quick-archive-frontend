@@ -106,13 +106,14 @@ const submitLink = async () => {
   // 링크 1개인 경우
   if (numOfLink === 1) {
     modalDataStore.setSingleLink(linkStr)
-    modalViewStore.openAddContentSingle()
+    modalViewStore.showModalWithOverlay('addContentDetail', 'default')
+
     // 링크 2개인 경우
   } else if (numOfLink > 1) {
     const linkArr = setMultipleLinkArr(linkStr)
     const multipleLink = await modalDataStore.fetchMultipleLinksOgData(linkArr)
     await modalDataStore.setMultipleLinks(multipleLink)
-    await modalViewStore.openAddContentMultiple()
+    modalViewStore.showModalWithOverlay('addContentMultiple', 'default')
   }
 }
 </script>

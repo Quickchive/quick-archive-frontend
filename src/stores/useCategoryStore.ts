@@ -55,7 +55,7 @@ export const useCategoryStore = defineStore('category', () => {
       const response = await deleteCategories(focusedCategory_id, alertDataStore.checkboxChecked)
       if (response.data.statusCode === (200 || 201)) {
         await categoryTreeStore.updateUserCategoryList()
-        modalViewStore.closeDeleteCategoryModal()
+        modalViewStore.hideModalWithOverlay('deleteCategory', 'default')
         // 토스트
         const toastData = {
           message: '카테고리가 삭제되었습니다.',
@@ -90,7 +90,7 @@ export const useCategoryStore = defineStore('category', () => {
           단, 서브 카테고리는 개수 제한 없이 만들 수 있어요.`
         }
         alertDataStore.setDefaultAlertData(alertData)
-        modalViewStore.openAlertModal()
+        modalViewStore.showModalWithOverlay('alert', 'alert')
       } else {
         const response = await addCategories(categoryData)
         // 상태코드로 에러 처리 하기
@@ -119,7 +119,7 @@ export const useCategoryStore = defineStore('category', () => {
           카테고리 이름을 변경해주세요.`
         }
         alertDataStore.setDefaultAlertData(alertData)
-        modalViewStore.openAlertModal()
+        modalViewStore.showModalWithOverlay('alert', 'alert')
       } else {
         // 토스트
         const toastData = {
@@ -136,8 +136,7 @@ export const useCategoryStore = defineStore('category', () => {
     try {
       const response = await updateCategories(categoryData)
       if (response.data.statusCode === 200) {
-        modalViewStore.closeEditCategoryModal()
-        // modalViewStore.closeSelectModal()
+        modalViewStore.hideModalWithOverlay('editCategory', 'default')
         await categoryTreeStore.updateUserCategoryList()
       }
     } catch (error: any) {
@@ -150,7 +149,7 @@ export const useCategoryStore = defineStore('category', () => {
           카테고리 이름을 변경해주세요.`
         }
         alertDataStore.setDefaultAlertData(alertData)
-        modalViewStore.openAlertModal()
+        modalViewStore.showModalWithOverlay('alert', 'alert')
       } else {
         // 토스트
         const toastData = {
