@@ -5,7 +5,10 @@
       {{ alertDataStore.defaultAlertData.content }}
     </p>
     <div class="flex-container__row wrapper__alert-button--single">
-      <button class="alert-btn confirm" @click="modalViewStore.hideModal('alert', 'alert')">
+      <button
+        class="alert-btn confirm"
+        @click="modalViewStore.hideModalWithOverlay('alert', 'alert')"
+      >
         확인
       </button>
     </div>
