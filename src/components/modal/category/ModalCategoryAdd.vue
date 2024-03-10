@@ -95,7 +95,7 @@ onMounted(() => {
     )
     modalDataStore.selectCategoryIcon(iconData)
     closeEvent.value = () => modalViewStore.hideModalWithOverlay('editCategory', 'default')
-    if (categoryStore.focusedCategoryData.parentId !== (null && -1 && undefined)) {
+    if (categoryStore.focusedCategoryData.parentId !== null) {
       const parentData = searchCategoryDataById(
         categoryTreeStore.userCategoryList,
         categoryStore.focusedCategoryData.parentId
@@ -103,8 +103,8 @@ onMounted(() => {
       modalDataStore.selectedLocation.name = parentData.name
       modalDataStore.selectedLocation.id = parentData.id
     } else {
-      ;(modalDataStore.selectedLocation.name = '전체 콘텐츠'),
-        (modalDataStore.selectedLocation.id = -1)
+      modalDataStore.selectedLocation.name = '전체 콘텐츠'
+      modalDataStore.selectedLocation.id = -1
     }
   }
 })
@@ -138,7 +138,7 @@ const saveCategory = () => {
     categoryName: categoryName.value,
     iconName: categoryIcon.value
   }
-  if (categoryStore.focusedCategoryData.parentId !== (null && -1 && undefined)) {
+  if (categoryStore.focusedCategoryData.parentId !== (null || -1 || undefined)) {
     categoryData.parentId = modalDataStore.selectedLocation.id
   }
 

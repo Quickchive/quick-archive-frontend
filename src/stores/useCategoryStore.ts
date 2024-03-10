@@ -82,7 +82,12 @@ export const useCategoryStore = defineStore('category', () => {
     try {
       // 대카테고리가 10개 이상인지 체크
       console.log('len', categoryTreeStore.userCategoryList.length)
-      if (categoryTreeStore.userCategoryList.length >= 10) {
+      if (
+        categoryTreeStore.userCategoryList.length >= 10 &&
+        !categoryData.categoryId === undefined
+      ) {
+        console.log(categoryData.categoryId)
+
         const alertData = {
           title: '알림',
           content: `무료 버전에서는 메인 카테고리를
@@ -114,7 +119,7 @@ export const useCategoryStore = defineStore('category', () => {
         modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
         const alertData = {
           title: '알림',
-          content: `동일한 이름의 카테고리가 
+          content: `동일한 이름의 카테고리가
           ${modalViewStore.duplicatedCategoryLocation}내에 있어요.
           카테고리 이름을 변경해주세요.`
         }
