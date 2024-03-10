@@ -59,7 +59,8 @@
                   <h1 class="searchResult-category-title">{{ category.name }}</h1>
                   <div class="searchResult-category-detail">
                     <!-- 카테고리 위치 -->
-                    <span>{{ contentCounts[category.id] }}개 콘텐츠</span>
+                    <!-- <span>{{ contentCounts[category.id] }}개 콘텐츠</span> -->
+                    <span>{{ 0 }}개 콘텐츠</span>
                   </div>
                 </div>
                 <!-- 1차 카테고리 && 2차 카테고리 존재 -->
@@ -83,7 +84,8 @@
                     <span>{{ searchStore.findParentAndGrandParent(category.id).parentName }}</span>
 
                     <img :src="dividerIcon" />
-                    <span>{{ contentCounts[category.id] }}개 콘텐츠</span>
+                    <!-- <span>{{ contentCounts[category.id] }}개 콘텐츠</span> -->
+                    <span>{{ 0 }}개 콘텐츠</span>
                   </div>
                 </div>
                 <!-- 1차 카테고리 && 2차 카테고리 && 3차 카테고리 존재  -->
@@ -96,7 +98,8 @@
                     <!-- 카테고리 위치 -->
                     <span>{{ searchStore.getCategoryDepth2NameById(category.parentId) }} </span>
                     <img :src="dividerIcon" />
-                    <span>{{ contentCounts[category.id] }}개 콘텐츠</span>
+                    <!-- <span>{{ contentCounts[category.id] }}개 콘텐츠</span> -->
+                    <span>{{ 0 }}개 콘텐츠</span>
                   </div>
                 </div>
               </div>
