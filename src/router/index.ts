@@ -8,15 +8,15 @@ const router = createRouter({
     {
       path: '/home',
       component: () => import('@/views/AuthenticatedView.vue'),
-      beforeEnter: async (to, from, next) => {
-        const userStore = useUserStore()
-        await userStore.getUserProfile()
-        if (!userStore.isLogin) {
-          next('/login')
-        } else {
-          next()
-        }
-      },
+      // beforeEnter: async (to, from, next) => {
+      //   const userStore = useUserStore()
+      //   await userStore.getUserProfile()
+      //   if (!userStore.isLogin) {
+      //     next('/login')
+      //   } else {
+      //     next()
+      //   }
+      // },
       children: [
         {
           path: '/home',
