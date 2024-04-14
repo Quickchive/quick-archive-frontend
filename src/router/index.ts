@@ -27,6 +27,10 @@ const router = createRouter({
               component: () => import('@/components/home/DefaultCategoryPage.vue')
             },
             {
+              path: '/home/kakao',
+              component: () => import('@/components/home/CustomCategoryPage.vue')
+            },
+            {
               path: '/home/:id',
               component: () => import('@/components/home/CustomCategoryPage.vue')
             }
