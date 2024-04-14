@@ -74,7 +74,7 @@ onMounted(async () => {
     userStore.setSocialLoginInfo('google')
     try {
       const code = route.query.code
-      await userStore.googleLogin(code)
+      await userStore.googleSocialLogin(code)
       await userStore.getUserProfile()
       await categoryTreeStore.getUserCategoryList()
     } catch (error) {

@@ -48,7 +48,7 @@ export const useUserStore = defineStore('user', () => {
   async function kakaoSocialLogin(code: any) {
     try {
       const response: any = await kakaoLogin(code)
-      console.log(response)
+      console.log('카카오 응답', response)
       if (response.data.statusCode == 200) {
         saveRefreshTokenToCookie(response.data.refresh_token)
         saveAccessTokenToCookie(response.data.access_token)
@@ -66,7 +66,7 @@ export const useUserStore = defineStore('user', () => {
   async function googleSocialLogin(code: any) {
     try {
       const response: any = await googleLogin(code)
-      console.log(response)
+      console.log('google 응답', response)
       if (response.data.statusCode == 200) {
         saveRefreshTokenToCookie(response.data.refresh_token)
         saveAccessTokenToCookie(response.data.access_token)
