@@ -40,8 +40,12 @@ export const useUserStore = defineStore('user', () => {
       saveHideAlertToCookie(false)
       refreshToken.value = response.data.refresh_token
       isLogin.value = true
+      if (response.data.statusCode === 201) {
+        router.push('/home')
+      }
     } catch (error) {
       console.error(error)
+      window.alert(error)
     }
   }
 

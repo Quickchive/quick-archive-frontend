@@ -26,22 +26,15 @@ const email = ref('')
 const pw = ref('')
 
 const userStore = useUserStore()
-const router = useRouter()
 
 // 로그인 요청
-const submitForm = async () => {
-  try {
-    const userData = {
-      email: email.value,
-      password: pw.value,
-      auto_login: true
-    }
-    await userStore.testerLogin(userData)
-  } catch (error) {
-    console.log(error)
-  } finally {
-    router.push('/home')
+const submitForm = () => {
+  const userData = {
+    email: email.value,
+    password: pw.value,
+    auto_login: true
   }
+  userStore.testerLogin(userData)
 }
 </script>
 <style></style>
