@@ -7,9 +7,9 @@
         <div class="myinfo-list">
           <label class="label__modal">이메일</label>
           <div class="wrapper__input-left-icon">
-            <img :src="googleIcon" v-if="userStore.socialLoginInfo === google" />
-            <img :src="kakaoIcon" v-if="userStore.socialLoginInfo === kakao" />
-            <!-- <img :src="appleIcon" v-if="userStore.socialLoginInfo === apple" /> -->
+            <img :src="googleIcon" v-if="userStore.socialLoginInfo === 'google'" />
+            <img :src="kakaoIcon" v-if="userStore.socialLoginInfo === 'kakao'" />
+            <!-- <img :src="appleIcon" v-if="userStore.socialLoginInfo === 'apple'" /> -->
             <input class="input__sm--readonly" readonly :placeholder="userStore.email" />
           </div>
         </div>
