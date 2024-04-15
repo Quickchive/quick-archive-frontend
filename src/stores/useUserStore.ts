@@ -16,7 +16,6 @@ import { ref } from 'vue'
 export const useUserStore = defineStore('user', () => {
   const router = useRouter()
   const modalViewStore = useModalViewStore()
-
   const accessToken = ref('')
   const refreshToken = ref('')
   const isLogin = ref(false)
@@ -24,8 +23,7 @@ export const useUserStore = defineStore('user', () => {
   const email = ref('tester@naver.com')
   // 마이페이지
   const recommendationMode = ref(true)
-  const socialLoginInfo = ref('google')
-
+  const socialLoginInfo = ref('' || localStorage.getItem('oauthInfo'))
   function getRefreshToken() {
     return refreshToken.value
   }
@@ -175,9 +173,11 @@ export const useUserStore = defineStore('user', () => {
       console.error(error)
     }
   }
+
   function setSocialLoginInfo(snsName: string) {
-    socialLoginInfo.value = snsName
+    localStorage.setItem('oauthInfo', snsName)
   }
+
   return {
     accessToken,
     refreshToken,

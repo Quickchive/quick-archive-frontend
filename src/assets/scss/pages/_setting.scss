@@ -31,11 +31,21 @@
 .wrapper__input-left-icon {
   position: relative;
   margin-top: 8px;
-  img {
+
+  .logo__social-info {
     position: absolute;
     left: 16px;
     top: 25%;
     width: 24px;
+    height: 24px;
+    @include color($color-white, $color-white);
+    border-radius: 50px;
+    box-sizing: border-box;
+    padding: 5px;
+    @include flex(column, center, center);
+    img {
+      width: 90%;
+    }
   }
 }
 
