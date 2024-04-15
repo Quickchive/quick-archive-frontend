@@ -178,6 +178,10 @@ export const useUserStore = defineStore('user', () => {
     localStorage.setItem('oauthInfo', snsName)
   }
 
+  function getSocialLoginInfo() {
+    return localStorage.getItem('oauthInfo') ? localStorage.getItem('oauthInfo') : ''
+  }
+
   return {
     accessToken,
     refreshToken,
@@ -199,6 +203,7 @@ export const useUserStore = defineStore('user', () => {
     editNickname,
     setSocialLoginInfo,
     testerLogin,
-    getRefreshToken
+    getRefreshToken,
+    getSocialLoginInfo
   }
 })
