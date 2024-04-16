@@ -3,13 +3,11 @@
   padding: 8px 8px 8px 14px;
   width: 94px;
   border-radius: 100px;
-  border: 1px solid var(--grey-10, #eeeef0);
-  color: var(--grey-80, #515253);
-  @include font(14px, 600, 24px);
-  letter-spacing: -0.3px;
+  border: 1px solid $color-grey-10;
+  // color: $color-grey-80;
+  @include font(14px, 600, 24px, $color-grey-80);
   /* 화살표 커스텀 */
   -o-appearance: none;
-  -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   background: url('@/assets/ic/ic-chips-down.svg') calc(100% - 5px) center no-repeat;
