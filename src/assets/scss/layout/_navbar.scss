@@ -18,8 +18,10 @@
 }
 
 .navbar__btn__wrapper {
-  @include size(288px, 96px);
   background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 40px;
 }
 
 .profile__wrapper {

@@ -1,6 +1,8 @@
 .category-list {
   @extend .flex-container__col--center;
-  width: 288px;
+  width: 368px;
+  padding: 0 40px 0 40px;
+  box-sizing: border-box;
 }
 
 .category-tree {
