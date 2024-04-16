@@ -32,8 +32,11 @@
     letter-spacing: -0.3px;
     @include font(18px, 700, 24px);
   }
-  img {
+  .img-profile {
+    border-radius: 1000px;
+    border: 1px solid rgba(19, 22, 26, 0.03);
     margin-right: 12px;
+    @include size(40px, 40px);
   }
 }
 
