@@ -5,7 +5,10 @@
       <!-- profile -->
       <router-link to="/home/setting">
         <div class="profile__wrapper">
-          <img class="img-profile" :src="profileImg" /><span>{{ userStore.nickname }}</span>
+          <div class="img-profile">
+            <img :src="profileImg" />
+          </div>
+          <span>{{ userStore.nickname }}</span>
         </div>
       </router-link>
       <div class="search__wrapper">

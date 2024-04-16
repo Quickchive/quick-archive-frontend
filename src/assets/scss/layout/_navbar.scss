@@ -33,10 +33,14 @@
     @include font(18px, 700, 24px);
   }
   .img-profile {
-    border-radius: 1000px;
-    border: 1px solid rgba(19, 22, 26, 0.03);
-    margin-right: 12px;
+    @include flex(row, center, center);
     @include size(40px, 40px);
+    margin-right: 12px;
+    img {
+      @include size(40px, 40px);
+      border-radius: 1000px;
+      border: 1px solid #ebeff2;
+    }
   }
 }
 
