@@ -117,7 +117,7 @@ const closeEditContentStep01Modal = () => {
 }
 
 const closeEditContentSingle = () => {
-  modalViewStore.hideModalWithOverlay('editContentDetail')
+  modalViewStore.hideModalWithOverlay('editContentDetail', 'default')
   modalViewStore.hideModalWithOverlay('editContent')
 }
 </script>
