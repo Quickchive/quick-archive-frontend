@@ -1,5 +1,5 @@
 <template>
-  <h1>전체 콘텐츠</h1>
+  <title-header class="titleHeader-main" :title="'전체 콘텐츠'"></title-header>
   <the-filter></the-filter>
   <div class="divider"></div>
   <article class="contents-container">
@@ -31,6 +31,8 @@ import { ref, onMounted, toRaw } from 'vue'
 import emptyImg from '@/assets/img/img-empty-nocontent.png'
 import TheFilter from '@/components/home/TheFilter.vue'
 import { useRoute } from 'vue-router'
+import TitleHeader from '@/components/header/TitleHeader.vue'
+
 const route = useRoute()
 
 const contentStore = useContentStore()

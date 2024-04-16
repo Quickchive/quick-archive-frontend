@@ -70,6 +70,9 @@
   box-sizing: border-box;
   overflow-y: scroll;
   overscroll-behavior: none;
+  box-sizing: border-box;
+  padding: 0 64px 0px 64px;
+
   .contents-list__wrapper {
     @include flex(column, left, start);
     width: 100%;

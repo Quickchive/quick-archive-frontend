@@ -52,11 +52,15 @@
     overflow: hidden;
     color: $color-grey-100;
     text-overflow: ellipsis;
-    whitespace: nowrap;
     @include font(32px, 700, 48px);
     letter-spacing: -0.3px;
     text-align: left;
   }
+}
+
+.titleHeader-main {
+  @extend .titleHeader;
+  padding: 80px 64px 0px 64px;
 }
 
 #search-titleHeader {
