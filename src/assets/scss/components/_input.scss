@@ -44,14 +44,16 @@ input {
 // 콘텐츠 추가 인풋
 .input__content-modal {
   @include size(100%, 50px);
-  @include font(15px, 500, 22px);
+  @include font(15px, 500, 22px, $color-grey-100);
   padding: 14px 16px;
   border-radius: 8px;
-  gap: 8px;
-  letter-spacing: -0.30000001192092896px;
-  text-align: left;
-  @include color($color-grey-60, #f5f5f5);
+  background-color: #f5f5f5;
   box-sizing: border-box;
+  gap: 8px;
+  text-align: left;
+  &::placeholder {
+    @include font(15px, 500, 22px, $color-grey-60);
+  }
 }
 
 .textarea__memo {
