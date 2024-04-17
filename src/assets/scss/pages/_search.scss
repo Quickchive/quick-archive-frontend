@@ -54,7 +54,6 @@
     flex-direction: column;
     margin: 16px 0 40px 0;
     gap: 20px;
-
     .wrapper__searchResult-content-item {
       @include size(100%, 112px);
 
@@ -62,6 +61,7 @@
       align-items: center;
       .thumbnail__wrapper {
         position: relative;
+        height: 112px;
         .thumbnail {
           @include size(112px, 112px);
           margin-right: 24px;

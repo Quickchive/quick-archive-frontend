@@ -1,5 +1,6 @@
 .thumbnail__wrapper {
   position: relative;
+  height: 112px;
   .thumbnail {
     @include size(112px, 112px);
     margin-right: 24px;
