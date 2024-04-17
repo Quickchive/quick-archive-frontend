@@ -112,7 +112,7 @@ const submitLink = async () => {
   } else if (numOfLink > 1) {
     const linkArr = setMultipleLinkArr(linkStr)
     const multipleLink = await modalDataStore.fetchMultipleLinksOgData(linkArr)
-    await modalDataStore.setMultipleLinks(multipleLink)
+    modalDataStore.setMultipleLinks(multipleLink)
     modalViewStore.showModalWithOverlay('addContentMultiple', 'default')
   }
 }

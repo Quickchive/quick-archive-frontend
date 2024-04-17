@@ -83,6 +83,10 @@ export const useContentStore = defineStore('content', () => {
         parentId: modalDataStore.selectedLocation.parentId
       }
 
+      if (contentData.categoryName === '전체 콘텐츠') {
+        delete contentData.categoryName
+      }
+
       const response: any = await addContents(contentData)
       console.log('addContent', response)
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
@@ -119,6 +123,11 @@ export const useContentStore = defineStore('content', () => {
             categoryName: modalDataStore.selectedLocation.name,
             parentId: modalDataStore.selectedLocation.parentId
           }
+
+          if (contentData.categoryName === '전체 콘텐츠') {
+            delete contentData.categoryName
+          }
+
           const response: any = await addContents(contentData)
           console.log('addContent', response)
         }
@@ -157,7 +166,7 @@ export const useContentStore = defineStore('content', () => {
         parentId: modalDataStore.selectedLocation.parentId
       }
 
-      if (modalDataStore.selectedLocation.name === '전체 콘텐츠') {
+      if (contentData.categoryName === '전체 콘텐츠') {
         delete contentData.categoryName
       }
 
