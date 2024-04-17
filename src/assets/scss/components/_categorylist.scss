@@ -45,6 +45,7 @@
   ul {
     li {
       height: 56px;
+      width: 100%;
       .category-list-radio__category-button {
         @include color($color-grey-100, transparent);
         overflow: hidden;
@@ -79,4 +80,19 @@
 
 .category-icon {
   margin-right: 10px;
+}
+
+.singleCategoryTreeWithRadio {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  .category-list__btn-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+  }
 }

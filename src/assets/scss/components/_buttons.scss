@@ -96,16 +96,16 @@ button {
 
 .category-list__btn {
   @include flex;
-  @include font(16px, 500, 24px);
-  color: $color-grey-100;
+  @include font(16px, 500, 24px, $color-grey-100);
   margin: 0px 16px 0px 0px;
 }
 
 .category-list__btn--radio {
   @include flex;
-  @include font(16px, 500, 24px);
-  color: $color-grey-100;
+  @include font(16px, 500, 24px, $color-grey-100);
   margin: 0px 16px 0px 0px;
+  background-color: pink;
+  height: 40px;
 }
 
 .expand-button {
