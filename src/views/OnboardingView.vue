@@ -2,6 +2,12 @@
   <div class="onboarding">
     <header class="header">
       <button @click="toMainPage()" class="btn--transparent"><img :src="mainLogo" /></button>
+      <transition name="fade">
+        <div class="wrapper__header-button" v-show="showSmButton">
+          <button id="btn__app--sm">모바일 앱 다운로드</button>
+          <button id="btn__web--sm">웹에서 이용하기</button>
+        </div>
+      </transition>
     </header>
     <div class="wrapper__article">
       <article class="wrapper__article-main">
@@ -11,7 +17,7 @@
             퀵카이브에 담아보세요.
           </h2>
           <p>저장만 해주세요. 귀찮은 카테고리 정리는 대신해 드릴게요.</p>
-          <div class="wrapper__section-button">
+          <div class="wrapper__section-button" v-show="showLgButton">
             <button id="btn__app">모바일 앱 다운로드</button>
             <button id="btn__web" @click="toLoginPage">웹에서 이용하기</button>
           </div>
@@ -100,7 +106,7 @@ import onboarding2 from '@/assets/img/onboarding/onboarding2.png'
 import onboarding3 from '@/assets/img/onboarding/onboarding3.png'
 import divider from '@/assets/ic/divider_14px.svg'
 import instagramLogo from '@/assets/ic/ic-instagram.svg'
-
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
@@ -110,6 +116,23 @@ const toLoginPage = () => {
 
 const toMainPage = () => {
   router.push('/home')
+}
+
+onMounted(() => {
+  document.addEventListener('scroll', scrollEvents, true)
+})
+
+const showSmButton = ref(false)
+const showLgButton = ref(true)
+
+const scrollEvents = () => {
+  if (document.querySelector('.onboarding').scrollTop > 580) {
+    showSmButton.value = true
+    showLgButton.value = false
+  } else {
+    showSmButton.value = false
+    showLgButton.value = true
+  }
 }
 </script>
 

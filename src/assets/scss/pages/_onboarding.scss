@@ -1,17 +1,50 @@
 .onboarding {
   width: 100%;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
   .header {
+    @include flex(row, space-between, center);
+
     padding: 28px 40px;
     box-sizing: border-box;
     border-bottom: 1px solid $color-grey-10;
     background: #fff;
     width: 100%;
+    height: 80px;
+    position: fixed;
+    .wrapper__header-button {
+      display: flex;
+      gap: 8px;
+
+      button {
+        text-align: center;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 24px; /* 171.429% */
+        @include size(132px, 40px);
+        border-radius: 6px;
+      }
+      #btn__app--sm {
+        color: $color-grey-80;
+        border: 1px solid $color-grey-20;
+      }
+      #btn__web--sm {
+        color: $color-white;
+        background: #146eff;
+      }
+    }
   }
   .wrapper__article {
-    padding: 0 40px;
+    padding: 81px 40px 0px 40px;
     .wrapper__article-main {
-      padding: 238px 0;
+      // padding: 238px 0;
+      height: 820px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       .section__main {
+        height: 344px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -165,4 +198,12 @@
       @include flex(row, space-between, center);
     }
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0;
 }
