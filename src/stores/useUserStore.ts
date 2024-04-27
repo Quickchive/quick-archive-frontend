@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { googleLogin, kakaoLogin } from '@/api/oauth'
+import { googleLogin, kakaoLogin, appleLogin } from '@/api/oauth'
 import { logoutUser, loginUser } from '@/api/auth'
 import { getProfile, deleteProfile, editProfile } from '@/api/user'
 import {
@@ -84,11 +84,22 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  async function appleSocialLogin() {
+  async function appleSocialLogin(code: any) {
     try {
-      // login 로직
+      const response: any = await appleLogin(code)
+      console.log('apple 응답', response)
+      if (response.data.statusCode == 200) {
+        saveRefreshTokenToCookie(response.data.refresh_token)
+        saveAccessTokenToCookie(response.data.access_token)
+        saveHideAlertToCookie(false)
+
+        nickname.value = response.data.name
+        email.value = response.data.email
+        refreshToken.value = response.data.refresh_token
+        isLogin.value = true
+      }
     } catch (error) {
-      return error
+      console.error(error)
     }
   }
 

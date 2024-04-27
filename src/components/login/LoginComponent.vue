@@ -28,7 +28,9 @@
             Google로 시작하기
           </button>
         </a>
-        <button class="btn--apple btn-56"><img :src="logoApple" />Apple로 시작하기</button>
+        <a href="https://test.quickarchive.co.kr/api/oauth/apple-auth" target="_blank">
+          <button class="btn--apple btn-56"><img :src="logoApple" />Apple로 시작하기</button>
+        </a>
       </div>
       <div class="desc__wrapper">
         <a href="https://www.notion.so/fabc4b39c85b446bab8f2bb8549926b7"

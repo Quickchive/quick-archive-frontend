@@ -95,6 +95,18 @@ onMounted(async () => {
     } catch (error) {
       console.error(error)
     }
+  }
+  if (route.fullPath.includes('apple')) {
+    try {
+      console.log('apple login')
+      userStore.setSocialLoginInfo('apple')
+      const code = route.query.code
+      await userStore.appleSocialLogin(code)
+      await userStore.getUserProfile()
+      await categoryTreeStore.getUserCategoryList()
+    } catch (error) {
+      console.error(error)
+    }
   } else {
     await userStore.getUserProfile()
     await categoryTreeStore.getUserCategoryList()
