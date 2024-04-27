@@ -12,7 +12,7 @@
       즐겨찾기
     </button>
     <button
-      v-if="route.fullPath.length === 5"
+      v-if="categoryStore.curCategoryName === '전체 콘텐츠'"
       @click="categoryStore.setUnselectedContentChip(true)"
       class="btn--chip"
       :class="categoryStore.isUnselectedChipOn ? 'active' : 'inactive'"
