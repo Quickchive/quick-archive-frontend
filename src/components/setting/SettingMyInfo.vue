@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-container__col--100">
+  <div class="setting-myinfo">
     <title-header :title="title"></title-header>
     <div class="divider"></div>
     <section class="myinfo">
