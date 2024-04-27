@@ -7,10 +7,10 @@
         <div class="myinfo-list">
           <label class="label__modal">이메일</label>
           <div class="wrapper__input-left-icon">
-            <div class="logo__social-info" v-if="userStore.socialLoginInfo !== ''">
-              <img :src="googleIcon" v-if="userStore.getSocialLoginInfo === 'google'" />
-              <img :src="kakaoIcon" v-if="userStore.getSocialLoginInfo === 'kakao'" />
-              <img :src="appleIcon" v-if="userStore.getSocialLoginInfo === 'apple'" />
+            <div class="logo__social-info" v-if="userStore.socialLoginInfo() !== null">
+              <img :src="googleIcon" v-if="userStore.socialLoginInfo === 'google'" />
+              <img :src="kakaoIcon" v-if="userStore.socialLoginInfo === 'kakao'" />
+              <img :src="appleIcon" v-if="userStore.socialLoginInfo === 'apple'" />
             </div>
             <input class="input__sm--readonly" readonly :placeholder="userStore.email" />
           </div>

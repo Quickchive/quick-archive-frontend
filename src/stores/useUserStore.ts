@@ -23,7 +23,7 @@ export const useUserStore = defineStore('user', () => {
   const email = ref('tester@naver.com')
   // 마이페이지
   const recommendationMode = ref(true)
-  const socialLoginInfo = ref('' || localStorage.getItem('oauthInfo'))
+  const socialLoginInfo: any = ref('')
   function getRefreshToken() {
     return refreshToken.value
   }
@@ -186,12 +186,18 @@ export const useUserStore = defineStore('user', () => {
   }
 
   function setSocialLoginInfo(snsName: string) {
+    socialLoginInfo.value = snsName
     localStorage.setItem('oauthInfo', snsName)
   }
 
   function getSocialLoginInfo() {
     console.log('oauthInfo', localStorage.getItem('oauthInfo'))
-    return localStorage.getItem('oauthInfo') ? localStorage.getItem('oauthInfo') : ''
+
+    if (localStorage.getItem('oauthInfo') !== null) {
+      socialLoginInfo.value = localStorage.getItem('oauthInfo')
+    }
+
+    return localStorage.getItem('oauthInfo')
   }
 
   return {

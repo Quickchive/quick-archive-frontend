@@ -1,6 +1,5 @@
 <template>
-  <title-header class="titleHeader-main" :title="'전체 콘텐츠'"></title-header>
-  <the-filter></the-filter>
+  <title-bar></title-bar>
   <div class="divider"></div>
   <article class="contents-container">
     <div class="contents-num__wrapper">{{ contentStore.userFilteredContentList.length }}개</div>
@@ -29,9 +28,8 @@ import ContentsItem from '@/components/home/ContentsItem.vue'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import { ref, onMounted, toRaw } from 'vue'
 import emptyImg from '@/assets/img/img-empty-nocontent.png'
-import TheFilter from '@/components/home/TheFilter.vue'
 import { useRoute } from 'vue-router'
-import TitleHeader from '@/components/header/TitleHeader.vue'
+import TitleBar from '@/components/home/TitleBar.vue'
 
 const route = useRoute()
 
