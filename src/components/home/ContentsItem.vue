@@ -96,7 +96,7 @@ const favoriteEvent = async () => {
 const toCategoryPage = () => {
   if (props.item.category !== null) {
     categoryStore.setCategoryName(props.item.category.name)
-    router.push(`/home/${props.item.category.id}`)
+    router.push(`/home/detail/${props.item.category.id}`)
   } else {
     categoryStore.setUnselectedContentChip(true)
     // router.push(`/home`)

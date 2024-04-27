@@ -31,7 +31,11 @@ const router = createRouter({
               component: () => import('@/components/home/DefaultCategoryPage.vue')
             },
             {
-              path: '/home/:id',
+              path: '/home/:code',
+              component: () => import('@/components/home/DefaultCategoryPage.vue')
+            },
+            {
+              path: '/home/detail/:id',
               component: () => import('@/components/home/CustomCategoryPage.vue')
             }
           ]
