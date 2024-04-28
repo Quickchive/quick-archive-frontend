@@ -215,14 +215,17 @@ dialog {
   padding: 0 28px 0 28px;
   .ul__content-modal {
     width: 398px;
-    @include font(14px, 400, 24px);
-    letter-spacing: -0.30000001192092896px;
+    @include font(14px, 700, 22px, $color-grey-60);
     text-align: left;
-    color: $color-grey-60;
     margin: 12px 0;
     padding: 0;
     li {
+      @include font(13px, 400, 22px, $color-grey-60);
       list-style: none;
+    }
+    .wrapper__spaceRectangle {
+      display: flex;
+      align-items: center;
     }
   }
   .wrapper__multiple-thumbnail {

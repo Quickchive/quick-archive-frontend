@@ -15,8 +15,13 @@
       />
     </div>
     <ul class="ul__content-modal">
-      <li>• 링크 여러 개를 한번에 저장할 수 있어요.</li>
-      <li>• 저장할 링크를 모두 붙여넣고 다음을 눌러보세요.</li>
+      여러 링크를 한꺼번에 저장하고 싶나요?
+      <li>• 2개 이상의 링크를 입력창에 넣고 ‘다음'을 누르면<br /></li>
+      <li>&nbsp;&nbsp;&nbsp;한 카테고리에 링크를 한꺼번에 저장할 수 있어요.</li>
+      <li>• 링크 사이에 스페이스바를 한 번 눌러 링크를 구분해주세요.<br /></li>
+      <li class="wrapper__spaceRectangle">
+        &nbsp;&nbsp;&nbsp;www.google.com/24013<img :src="spaceRectangle" />www.google.com/24013
+      </li>
     </ul>
     <div class="modal-footer">
       <button
@@ -35,6 +40,7 @@
 import { ref, computed } from 'vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
+import spaceRectangle from '@/assets/img/spacebar-rectangle.png'
 
 import ModalHeader from '@/components/header/ModalHeader.vue'
 import {} from '@/api/contents.js'
