@@ -250,7 +250,22 @@ export const useModalDataStore = defineStore('modalData', () => {
   // 토스트 메시지
   function setToastMessage(toastData: any) {
     toast.value.message = toastData.message
-    toast.value.func.message = toastData.func.message
+    if (toastData.func) {
+      toast.value.func.message = toastData.func.message
+    }
+  }
+
+  function resetAddContentData() {
+    addContentData.value.id = -1
+    addContentData.value.selectedLocation = { name: '전체 콘텐츠' }
+    addContentData.value.favorite = false
+    addContentData.value.memo = ''
+    addContentData.value.link = ''
+    addContentData.value.title = ''
+    addContentData.value.coverImg = ''
+    addContentData.value.siteName = ''
+    addContentData.value.description = ''
+    addContentData.value.parentId = ''
   }
 
   return {
@@ -279,6 +294,7 @@ export const useModalDataStore = defineStore('modalData', () => {
     setFocusedAddContentIndex,
     setMultipleTitle,
     setToastMessage,
-    toast
+    toast,
+    resetAddContentData
   }
 })

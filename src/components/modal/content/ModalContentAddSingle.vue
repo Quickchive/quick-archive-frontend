@@ -67,7 +67,13 @@ const props = defineProps({
 
 onMounted(() => {
   if (props.modalTitle === '콘텐츠 수정') {
-    modalDataStore.addContentData = contentStore.focusedContentData
+    modalDataStore.addContentData.id = contentStore.focusedContentData.id
+    modalDataStore.addContentData.link = contentStore.focusedContentData.link
+    modalDataStore.addContentData.title = contentStore.focusedContentData.title
+    modalDataStore.addContentData.memo = contentStore.focusedContentData.memo
+    modalDataStore.addContentData.favorite = contentStore.focusedContentData.favorite
+    modalDataStore.selectedLocation.name = contentStore.focusedContentData.category.name
+    modalDataStore.selectedLocation.parentId = contentStore.focusedContentData.parentId
   }
 })
 

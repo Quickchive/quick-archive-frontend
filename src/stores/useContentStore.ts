@@ -108,6 +108,8 @@ export const useContentStore = defineStore('content', () => {
       }
       modalDataStore.setToastMessage(toastData)
       modalViewStore.showErrorToast()
+    } finally {
+      modalDataStore.resetAddContentData()
     }
   }
 
@@ -171,7 +173,7 @@ export const useContentStore = defineStore('content', () => {
       }
 
       const response: any = await updateContents(contentData)
-      console.log('addContent', response)
+      console.log('editContent', response)
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
         modalViewStore.closeSelectModal()
         modalViewStore.hideModalWithOverlay('editContent', 'default')
