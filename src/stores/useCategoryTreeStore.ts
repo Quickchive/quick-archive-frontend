@@ -15,6 +15,7 @@ export const useCategoryTreeStore = defineStore('categoryTree', () => {
   const categoryIdTree = ref<CategoryIdMap>({})
   const categoryIdTreeRadio = ref<CategoryIdMap>({})
   const moreBtnCategoryIdTree = ref<CategoryIdMap>({})
+  const moreBtnCategoryIdTree__search = ref<CategoryIdMap>({})
 
   // 카테고리 트리 depth show/hide 컨트롤 용
   function showChildrenCategory(children: any) {
@@ -47,6 +48,7 @@ export const useCategoryTreeStore = defineStore('categoryTree', () => {
         categoryIdTree.value = Object.assign({}, categoryIdMap)
         categoryIdTreeRadio.value = Object.assign({}, categoryIdMap)
         moreBtnCategoryIdTree.value = Object.assign({}, categoryIdMap)
+        moreBtnCategoryIdTree__search.value = Object.assign({}, categoryIdMap)
       }
     } catch (error: any) {
       console.log(error)
@@ -96,6 +98,7 @@ export const useCategoryTreeStore = defineStore('categoryTree', () => {
     getUserCategoryList,
     showChildrenCategoryRadio,
     updateUserCategoryList,
-    moreBtnCategoryIdTree
+    moreBtnCategoryIdTree,
+    moreBtnCategoryIdTree__search
   }
 })

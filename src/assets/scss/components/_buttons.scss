@@ -350,7 +350,7 @@ button {
 }
 // 카테고리 더보기 버튼
 .more-button {
-  @include flex(space-between, center);
+  // @include flex(space-between, center);
   @include size(112px, 88px);
   position: absolute;
   z-index: 100;
@@ -370,13 +370,18 @@ button {
     flex-shrink: 0;
     padding: 0;
     text-align: center;
-    font-feature-settings: 'cv12' on;
-    text-overflow: ellipsis;
-    whitespace: nowrap;
-    letter-spacing: -0.3px;
     &:hover {
       @include color(#fff, #146eff);
     }
+  }
+}
+
+// 카테고리 더보기 버튼 -- 검색 결과
+.moreBtnBase {
+  position: relative;
+  .more-button--search {
+    @extend .more-button;
+    top: 44px;
   }
 }
 

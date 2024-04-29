@@ -103,7 +103,14 @@
                   </div>
                 </div>
               </div>
-              <button class="btn--transparent"><img :src="moreIcon" /></button>
+              <button class="btn--transparent moreBtnBase" @click="showMoreButton(category)">
+                <img :src="moreIcon" />
+                <more-button
+                  :btnList="btnList"
+                  class="more-button--search"
+                  v-if="categoryTreeStore.moreBtnCategoryIdTree__search[category.id]"
+                ></more-button>
+              </button>
             </article>
           </div>
           <!-- 더보기 버튼 -->
@@ -140,9 +147,49 @@ import dividerIcon from '@/assets/ic/divider_14px.svg'
 import nextIcon from '@/assets/ic/ic_next_gray_24px.svg'
 import moreIcon from '@/assets/ic/ic-more.svg'
 import ContentsItem from '@/components/home/ContentsItem.vue'
+import MoreButton from '@/components/button/MoreButton.vue'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 
 const searchStore = useSearchStore()
+const categoryTreeStore = useCategoryTreeStore()
+const categoryStore = useCategoryStore()
+const modalViewStore = useModalViewStore()
 const modalDataStore = useModalDataStore()
+
+const excludeItem = (obj, excludedKey) => {
+  let result = {}
+
+  for (let key in obj) {
+    if (key == excludedKey) {
+      result[key] = !obj[key]
+    } else {
+      result[key] = false
+    }
+  }
+  console.log(result)
+  return result
+}
+
+const showMoreButton = (categoryData) => {
+  categoryTreeStore.moreBtnCategoryIdTree__search = excludeItem(
+    categoryTreeStore.moreBtnCategoryIdTree__search,
+    categoryData.id
+  )
+  categoryStore.setFocusedCategoryData(categoryData)
+}
+
+const btnList = [
+  {
+    name: '편집하기',
+    clickEvent: () => modalViewStore.showModalWithOverlay('editCategory', 'default')
+  },
+
+  {
+    name: '삭제하기',
+    clickEvent: () => modalViewStore.showModalWithOverlay('deleteCategory', 'default')
+  }
+]
 </script>
 
 <style></style>
