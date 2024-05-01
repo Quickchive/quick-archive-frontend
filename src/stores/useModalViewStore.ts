@@ -3,8 +3,6 @@ import { ref, reactive } from 'vue'
 import type { Modal, Overlay } from '@/utils/interface'
 
 export const useModalViewStore = defineStore('modalView', () => {
-  const toastModal = ref(false)
-  const toastErrorModal = ref(false)
   const duplicatedCategoryLocation = ref('올리비아..')
 
   const overlay: Overlay = reactive({
@@ -124,16 +122,6 @@ export const useModalViewStore = defineStore('modalView', () => {
     duplicatedCategoryLocation.value = categoryName
   }
 
-  function showToast() {
-    toastModal.value = true
-    setTimeout(() => (toastModal.value = false), 2500)
-  }
-
-  function showErrorToast() {
-    toastErrorModal.value = true
-    setTimeout(() => (toastErrorModal.value = false), 2500)
-  }
-
   return {
     overlay,
     modal,
@@ -149,10 +137,10 @@ export const useModalViewStore = defineStore('modalView', () => {
     closeSetNewCategoryModal,
     closeCompleteAddCategoryModal,
     closeAddContentMultiple,
-    showToast,
-    toastModal,
-    showErrorToast,
-    toastErrorModal,
+    // showToast,
+    // toastModal,
+    // showErrorToast,
+    // toastErrorModal,
     showModalWithOverlay,
     hideModalWithOverlay,
     showModal,

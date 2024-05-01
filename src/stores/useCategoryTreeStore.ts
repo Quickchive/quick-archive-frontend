@@ -2,12 +2,10 @@ import { defineStore } from 'pinia'
 import { getCategories } from '@/api/category'
 import { ref } from 'vue'
 import type { CategoryIdMap } from '@/utils/interface'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
-import { useModalViewStore } from '@/stores/useModalViewStore.ts'
+import { useToastStore } from '@/stores/useToastStore.ts'
 
 export const useCategoryTreeStore = defineStore('categoryTree', () => {
-  const modalDataStore = useModalDataStore()
-  const modalViewStore = useModalViewStore()
+  const toastStore = useToastStore()
 
   const userCategoryList: any = ref([])
 
@@ -56,8 +54,7 @@ export const useCategoryTreeStore = defineStore('categoryTree', () => {
       const toastData = {
         message: error.response.data.message
       }
-      modalDataStore.setToastMessage(toastData)
-      modalViewStore.showErrorToast()
+      toastStore.executeErrorToast(toastData)
     }
   }
 
@@ -73,8 +70,7 @@ export const useCategoryTreeStore = defineStore('categoryTree', () => {
       const toastData = {
         message: error.response.data.message
       }
-      modalDataStore.setToastMessage(toastData)
-      modalViewStore.showErrorToast()
+      toastStore.executeErrorToast(toastData)
     }
   }
 

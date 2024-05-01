@@ -10,6 +10,7 @@ import {
 import { ref } from 'vue'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
+import { useToastStore } from '@/stores/useToastStore.ts'
 import type { CategoryIdMap } from '@/utils/interface'
 import { saveHideAlertToCookie } from '@/utils/cookies'
 import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
@@ -23,15 +24,19 @@ export const useContentStore = defineStore('content', () => {
   const alertDataStore = useAlertDataStore()
   const modalDataStore = useModalDataStore()
   const modalViewStore = useModalViewStore()
+  const toastStore = useToastStore()
+
   const moreBtnContentIdTree = ref<CategoryIdMap>({})
   const focusedContentId = ref(-1)
   const focusedContentData = ref({})
   const route = useRoute()
 
+  /***** api 함수 *****/
+
   async function fetchAllContents() {
     try {
       const response: any = await getAllContents()
-      if (response.data.statusCode === 200 || response.data.statusCode === 201) {
+      if (response.data.statusCode === 200) {
         userContentList.value = sortByCreatedAtDescending(response.data.contents)
         userFilteredContentList.value = userContentList.value
         const contentIdMap = createContentIdMap(userFilteredContentList.value)
@@ -43,8 +48,9 @@ export const useContentStore = defineStore('content', () => {
       const toastData = {
         message: error.response.data.message
       }
-      modalDataStore.setToastMessage(toastData)
-      modalViewStore.showErrorToast()
+      toastStore.executeErrorToast(toastData)
+      // toastStore.setToastMessage(toastData)
+      // toastStore.showErrorToast()
     }
   }
 
@@ -63,13 +69,16 @@ export const useContentStore = defineStore('content', () => {
       const toastData = {
         message: error.response.data.message
       }
-      modalDataStore.setToastMessage(toastData)
-      modalViewStore.showErrorToast()
+      toastStore.executeErrorToast(toastData)
     }
   }
 
-  function setUserContentList(contentList: never[]) {
-    userContentList.value = contentList
+  async function favoriteContent(contentId: number) {
+    try {
+      const response = await addFavorite(contentId)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async function addContent() {
@@ -106,8 +115,7 @@ export const useContentStore = defineStore('content', () => {
       const toastData = {
         message: error.response.data.message
       }
-      modalDataStore.setToastMessage(toastData)
-      modalViewStore.showErrorToast()
+      toastStore.executeErrorToast(toastData)
     } finally {
       modalDataStore.resetAddContentData()
     }
@@ -140,8 +148,7 @@ export const useContentStore = defineStore('content', () => {
       const toastData = {
         message: error.response.data.message
       }
-      modalDataStore.setToastMessage(toastData)
-      modalViewStore.showErrorToast()
+      toastStore.executeErrorToast(toastData)
     } finally {
       modalViewStore.closeSelectModal()
       modalViewStore.closeAddContentModal()
@@ -192,8 +199,7 @@ export const useContentStore = defineStore('content', () => {
       const toastData = {
         message: error.response.data.message
       }
-      modalDataStore.setToastMessage(toastData)
-      modalViewStore.showErrorToast()
+      toastStore.executeErrorToast(toastData)
     }
   }
 
@@ -210,8 +216,8 @@ export const useContentStore = defineStore('content', () => {
             message: '취소하기'
           }
         }
-        modalDataStore.setToastMessage(toastData)
-        modalViewStore.showToast()
+        toastStore.executeDefaultToast(toastData)
+
         // 얼럿 다시 보지 않기
         if (alertDataStore.checkboxChecked === true) {
           saveHideAlertToCookie(true)
@@ -232,9 +238,12 @@ export const useContentStore = defineStore('content', () => {
       const toastData = {
         message: error.response.data.message
       }
-      modalDataStore.setToastMessage(toastData)
-      modalViewStore.showErrorToast()
+      toastStore.executeErrorToast(toastData)
     }
+  }
+
+  function setUserContentList(contentList: never[]) {
+    userContentList.value = contentList
   }
 
   function createContentIdMap(items: any[]) {
@@ -250,14 +259,6 @@ export const useContentStore = defineStore('content', () => {
 
   function setFocusedContentData(contentData: object) {
     focusedContentData.value = contentData
-  }
-
-  async function favoriteContent(contentId: number) {
-    try {
-      const response = await addFavorite(contentId)
-    } catch (error) {
-      console.log(error)
-    }
   }
 
   return {

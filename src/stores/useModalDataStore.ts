@@ -15,16 +15,6 @@ import { ref, reactive, computed } from 'vue'
 import { getOgData } from '@/api/contents'
 
 export const useModalDataStore = defineStore('modalData', () => {
-  const toast = ref({
-    message: '',
-    func: {
-      message: '',
-      execute: () => {
-        console.log('토스트 함수')
-      }
-    }
-  })
-
   const defaultCategory = reactive([
     {
       id: 0,
@@ -250,15 +240,6 @@ export const useModalDataStore = defineStore('modalData', () => {
     addContentData.value = linkArrData
   }
 
-  // 토스트 메시지
-  function setToastMessage(toastData: any) {
-    toast.value.message = toastData.message
-    if (toastData.func) {
-      toast.value.func.message = toastData.func.message
-      toast.value.func.execute = toastData.func.execute
-    }
-  }
-
   function resetAddContentData() {
     addContentData.value.id = -1
     addContentData.value.selectedLocation = { name: '전체 콘텐츠' }
@@ -297,8 +278,6 @@ export const useModalDataStore = defineStore('modalData', () => {
     focusedAddContentIndex,
     setFocusedAddContentIndex,
     setMultipleTitle,
-    setToastMessage,
-    toast,
     resetAddContentData
   }
 })

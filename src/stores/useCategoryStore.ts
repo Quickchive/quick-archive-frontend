@@ -7,6 +7,8 @@ import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
+import { useToastStore } from '@/stores/useToastStore.ts'
+
 import {
   filterByCategoryIsNull,
   filterByFavoriteAndCategoryIsNull,
@@ -19,6 +21,7 @@ export const useCategoryStore = defineStore('category', () => {
   const alertDataStore = useAlertDataStore()
   const categoryTreeStore = useCategoryTreeStore()
   const contentStore = useContentStore()
+  const toastStore = useToastStore()
 
   const curCategoryName = ref('전체 콘텐츠')
   const focusedCategoryData: any = ref({
@@ -63,17 +66,14 @@ export const useCategoryStore = defineStore('category', () => {
             message: '취소하기'
           }
         }
-        modalDataStore.setToastMessage(toastData)
-        modalViewStore.showToast()
+        toastStore.executeDefaultToast(toastData)
       }
     } catch (error: any) {
-      console.log(error)
       // 토스트
       const toastData = {
         message: error.response.data.message
       }
-      modalDataStore.setToastMessage(toastData)
-      modalViewStore.showErrorToast()
+      toastStore.executeErrorToast(toastData)
     }
   }
 
@@ -81,13 +81,10 @@ export const useCategoryStore = defineStore('category', () => {
     // 카테고리 추가
     try {
       // 대카테고리가 10개 이상인지 체크
-      console.log('len', categoryTreeStore.userCategoryList.length)
       if (
         categoryTreeStore.userCategoryList.length >= 10 &&
         !categoryData.categoryId === undefined
       ) {
-        console.log(categoryData.categoryId)
-
         const alertData = {
           title: '알림',
           content: `무료 버전에서는 메인 카테고리를
@@ -99,20 +96,18 @@ export const useCategoryStore = defineStore('category', () => {
       } else {
         const response = await addCategories(categoryData)
         // 상태코드로 에러 처리 하기
-        if (response.data.statusCode === 201) {
-          // 토스트
-          const toastData = {
-            message: '카테고리가 추가되었습니다.',
-            func: {
-              message: '보러가기'
-            }
+
+        // 토스트
+        const toastData = {
+          message: '카테고리가 추가되었습니다.',
+          func: {
+            message: '보러가기'
           }
-          modalDataStore.setToastMessage(toastData)
-          modalViewStore.showToast()
-          modalViewStore.closeAddCategoryModal()
-          modalViewStore.closeSelectModal()
-          await categoryTreeStore.updateUserCategoryList()
         }
+        toastStore.executeDefaultToast(toastData)
+        modalViewStore.closeAddCategoryModal()
+        modalViewStore.closeSelectModal()
+        await categoryTreeStore.updateUserCategoryList()
       }
     } catch (error: any) {
       if (error.response.data.statusCode === 409) {
@@ -130,8 +125,7 @@ export const useCategoryStore = defineStore('category', () => {
         const toastData = {
           message: error.response.data.message
         }
-        modalDataStore.setToastMessage(toastData)
-        modalViewStore.showErrorToast()
+        toastStore.executeErrorToast(toastData)
       }
     }
   }
@@ -160,8 +154,7 @@ export const useCategoryStore = defineStore('category', () => {
         const toastData = {
           message: error.response.data.message
         }
-        modalDataStore.setToastMessage(toastData)
-        modalViewStore.showErrorToast()
+        toastStore.executeErrorToast(toastData)
       }
     }
   }

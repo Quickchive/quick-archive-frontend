@@ -2,23 +2,19 @@
   <div class="flex-container__row toast">
     <div class="wrapper__main-toast-content">
       <img :src="doneIcon" />
-      <span class="toast-content">{{ modalDataStore.toast.message }}</span>
+      <span class="toast-content">{{ toastStore.toast.message }}</span>
     </div>
-    <button
-      v-if="modalDataStore.toast.func"
-      class="btn-toast"
-      @click="modalDataStore.toast.func.execute()"
-    >
-      {{ modalDataStore.toast.func.message }}
+    <button v-if="toastStore.toast.func" class="btn-toast" @click="toastStore.toast.func.execute()">
+      {{ toastStore.toast.func.message }}
     </button>
   </div>
 </template>
 
 <script setup>
 import doneIcon from '@/assets/ic/ic-done.svg'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
+import { useToastStore } from '@/stores/useToastStore.ts'
 
-const modalDataStore = useModalDataStore()
+const toastStore = useToastStore()
 </script>
 
 <style></style>
