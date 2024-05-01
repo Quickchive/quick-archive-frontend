@@ -1,5 +1,5 @@
 <template>
-  <div class="category-item">
+  <div class="category-item-default">
     <!-- 전체 콘텐츠 -->
     <ul class="category-list__first-ul">
       <li>
@@ -13,9 +13,9 @@
           </button>
         </div>
       </li>
-      <ul v-if="allCategory.show" class="category-list__second-ul">
+      <ul v-if="allCategory.show">
         <!-- 즐겨찾기한 콘텐츠 -->
-        <li>
+        <li class="category-list__second-ul">
           <div class="category-item__btn__wrapper">
             <button class="btn--transparent expand-button">
               <img :src="expandMoreIcon" />
@@ -26,7 +26,7 @@
           </div>
         </li>
         <!-- 미지정 콘텐츠 -->
-        <li>
+        <li class="category-list__second-ul">
           <div class="category-item__btn__wrapper">
             <button class="btn--transparent expand-button">
               <img :src="expandMoreIcon" />

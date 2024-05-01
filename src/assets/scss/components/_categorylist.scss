@@ -1,7 +1,7 @@
 .category-list {
   @extend .flex-container__col--center;
   width: 368px;
-  padding: 0 40px 0 40px;
+  padding: 0 32px 0 32px;
   box-sizing: border-box;
 }
 
@@ -35,6 +35,20 @@
     }
     .category-list__third-ul {
       padding-left: 64px;
+    }
+  }
+}
+
+.category-item-default {
+  @extend .category-item;
+  ul {
+    li {
+      padding: 0 8px;
+      &:hover {
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        cursor: pointer;
+      }
     }
   }
 }

@@ -41,6 +41,11 @@ button {
   &.inactive {
     @include color($color-grey-80, transparent);
     border: 1px solid $color-grey-10;
+    &:hover {
+      background-color: #f5f5f5;
+      border: 1px solid #f5f5f5;
+      cursor: pointer;
+    }
   }
 }
 

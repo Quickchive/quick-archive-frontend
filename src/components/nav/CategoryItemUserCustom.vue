@@ -4,7 +4,7 @@
     v-for="categoryItem1 in categoryTreeStore.userCategoryList"
     :key="categoryItem1"
   >
-    <div class="category-item">
+    <div class="category-item-default">
       <!-- 1차 카테고리 -->
       <ul v-if="categoryItem1" class="category-list__first-ul">
         <li>
