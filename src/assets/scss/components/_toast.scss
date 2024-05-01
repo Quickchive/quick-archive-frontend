@@ -15,6 +15,10 @@
     .toast-content {
       @include font(14px, 500, 22px, #fff);
       margin-left: 12px;
+      width: 240px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
   .btn-toast {

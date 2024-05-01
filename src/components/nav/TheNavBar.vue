@@ -54,16 +54,41 @@ import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import { useRouter, useRoute } from 'vue-router'
 import mainLogo from '@/assets/logo/logo_black_20px.svg'
 import { onMounted } from 'vue'
+import { useModalDataStore } from '@/stores/useModalDataStore'
 
 const categoryTreeStore = useCategoryTreeStore()
 const userStore = useUserStore()
 const searchStore = useSearchStore()
 const modalViewStore = useModalViewStore()
+const modalDataStore = useModalDataStore()
+
 const router = useRouter()
 const route = useRoute()
 
+const RegExp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+
 const showAddModal = () => {
   modalViewStore.showModalWithOverlay('select', 'default')
+
+  // 클립보드에 URL 데이터가 있는지 확인하고 있으면 토스트 노출
+  navigator.clipboard.readText().then((text) => {
+    console.log('Pasted content: ', text)
+    if (RegExp.test(text)) {
+      const toastData = {
+        message: text,
+        func: {
+          message: '저장하기',
+          execute: () => {
+            modalViewStore.hideModalWithOverlay('select', 'default')
+            modalDataStore.setSingleLink(text)
+            modalViewStore.showModalWithOverlay('addContentDetail', 'default')
+          }
+        }
+      }
+      modalDataStore.setToastMessage(toastData)
+      modalViewStore.showToast()
+    }
+  })
 }
 
 const toMainPage = () => {

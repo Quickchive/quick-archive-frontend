@@ -4,7 +4,11 @@
       <img :src="doneIcon" />
       <span class="toast-content">{{ modalDataStore.toast.message }}</span>
     </div>
-    <button v-if="modalDataStore.toast.func" class="btn-toast">
+    <button
+      v-if="modalDataStore.toast.func"
+      class="btn-toast"
+      @click="modalDataStore.toast.func.execute()"
+    >
       {{ modalDataStore.toast.func.message }}
     </button>
   </div>

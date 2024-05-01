@@ -18,7 +18,10 @@ export const useModalDataStore = defineStore('modalData', () => {
   const toast = ref({
     message: '',
     func: {
-      message: ''
+      message: '',
+      execute: () => {
+        console.log('토스트 함수')
+      }
     }
   })
 
@@ -252,6 +255,7 @@ export const useModalDataStore = defineStore('modalData', () => {
     toast.value.message = toastData.message
     if (toastData.func) {
       toast.value.func.message = toastData.func.message
+      toast.value.func.execute = toastData.func.execute
     }
   }
 
