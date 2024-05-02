@@ -49,12 +49,7 @@ export const useCategoryTreeStore = defineStore('categoryTree', () => {
         moreBtnCategoryIdTree__search.value = Object.assign({}, categoryIdMap)
       }
     } catch (error: any) {
-      console.log(error)
-      // 토스트
-      const toastData = {
-        message: error.response.data.message
-      }
-      toastStore.executeErrorToast(toastData)
+      toastStore.executeErrorToast(error.response.data.message)
     }
   }
 
@@ -65,12 +60,7 @@ export const useCategoryTreeStore = defineStore('categoryTree', () => {
         userCategoryList.value = response.data.categoriesTree
       }
     } catch (error: any) {
-      console.log(error)
-      // 토스트
-      const toastData = {
-        message: error.response.data.message
-      }
-      toastStore.executeErrorToast(toastData)
+      toastStore.executeErrorToast(error.response.data.message)
     }
   }
 

@@ -56,76 +56,64 @@ export const useCategoryStore = defineStore('category', () => {
     try {
       const focusedCategory_id = focusedCategoryData.value.id
       const response = await deleteCategories(focusedCategory_id, alertDataStore.checkboxChecked)
-      if (response.data.statusCode === (200 || 201)) {
-        await categoryTreeStore.updateUserCategoryList()
-        modalViewStore.hideModalWithOverlay('deleteCategory', 'default')
-        // 토스트
-        const toastData = {
-          message: '카테고리가 삭제되었습니다.',
-          func: {
-            message: '취소하기'
-          }
-        }
-        toastStore.executeDefaultToast(toastData)
-      }
-    } catch (error: any) {
-      // 토스트
+      console.log('deleteCategory', response)
+      await categoryTreeStore.updateUserCategoryList()
+      modalViewStore.hideModalWithOverlay('deleteCategory', 'default')
       const toastData = {
-        message: error.response.data.message
+        message: '카테고리가 삭제되었습니다.',
+        func: {
+          message: '취소하기'
+        }
       }
-      toastStore.executeErrorToast(toastData)
+      toastStore.executeDefaultToast(toastData)
+    } catch (error: any) {
+      toastStore.executeErrorToast(error.response.data.message)
     }
   }
 
   async function addCategory(categoryData: any) {
     // 카테고리 추가
     try {
-      // 대카테고리가 10개 이상인지 체크
-      if (
-        categoryTreeStore.userCategoryList.length >= 10 &&
-        !categoryData.categoryId === undefined
-      ) {
-        const alertData = {
-          title: '알림',
-          content: `무료 버전에서는 메인 카테고리를
-          10개까지만 만들 수 있어요. 
-          단, 서브 카테고리는 개수 제한 없이 만들 수 있어요.`
+      const response = await addCategories(categoryData)
+      console.log(response)
+      const toastData = {
+        message: '카테고리가 추가되었습니다.',
+        func: {
+          message: '보러가기'
         }
-        alertDataStore.setDefaultAlertData(alertData)
-        modalViewStore.showModalWithOverlay('alert', 'alert')
-      } else {
-        const response = await addCategories(categoryData)
-        // 상태코드로 에러 처리 하기
-
-        // 토스트
-        const toastData = {
-          message: '카테고리가 추가되었습니다.',
-          func: {
-            message: '보러가기'
-          }
-        }
-        toastStore.executeDefaultToast(toastData)
-        modalViewStore.closeAddCategoryModal()
-        modalViewStore.closeSelectModal()
-        await categoryTreeStore.updateUserCategoryList()
       }
+      toastStore.executeDefaultToast(toastData)
+      modalViewStore.closeAddCategoryModal()
+      modalViewStore.closeSelectModal()
+      await categoryTreeStore.updateUserCategoryList()
     } catch (error: any) {
       if (error.response.data.statusCode === 409) {
-        modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
-        const alertData = {
-          title: '알림',
-          content: `동일한 이름의 카테고리가
+        if (error.response.data.message === 'Category already exists') {
+          const alertData = {
+            title: '알림',
+            content: `동일한 이름의 카테고리가
           ${modalViewStore.duplicatedCategoryLocation}내에 있어요.
           카테고리 이름을 변경해주세요.`
+          }
+          modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
+
+          alertDataStore.setDefaultAlertData(alertData)
+          modalViewStore.showModalWithOverlay('alert', 'alert')
         }
-        alertDataStore.setDefaultAlertData(alertData)
-        modalViewStore.showModalWithOverlay('alert', 'alert')
+        if (error.response.data.message === "Root categories can't be more than 10 in one user") {
+          const alertData = {
+            title: '알림',
+            content: `무료 버전에서는 메인 카테고리를
+          10개까지만 만들 수 있어요. 
+          단, 서브 카테고리는 개수 제한 없이 만들 수 있어요.`
+          }
+          modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
+
+          alertDataStore.setDefaultAlertData(alertData)
+          modalViewStore.showModalWithOverlay('alert', 'alert')
+        }
       } else {
-        // 토스트
-        const toastData = {
-          message: error.response.data.message
-        }
-        toastStore.executeErrorToast(toastData)
+        toastStore.executeErrorToast(error.response.data.message)
       }
     }
   }
@@ -150,11 +138,7 @@ export const useCategoryStore = defineStore('category', () => {
         alertDataStore.setDefaultAlertData(alertData)
         modalViewStore.showModalWithOverlay('alert', 'alert')
       } else {
-        // 토스트
-        const toastData = {
-          message: error.response.data.message
-        }
-        toastStore.executeErrorToast(toastData)
+        toastStore.executeErrorToast(error.response.data.message)
       }
     }
   }

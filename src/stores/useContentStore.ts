@@ -43,14 +43,8 @@ export const useContentStore = defineStore('content', () => {
         moreBtnContentIdTree.value = contentIdMap
       }
     } catch (error: any) {
-      console.log(error)
       // 토스트
-      const toastData = {
-        message: error.response.data.message
-      }
-      toastStore.executeErrorToast(toastData)
-      // toastStore.setToastMessage(toastData)
-      // toastStore.showErrorToast()
+      toastStore.executeErrorToast(error.response.data.message)
     }
   }
 
@@ -64,12 +58,7 @@ export const useContentStore = defineStore('content', () => {
         moreBtnContentIdTree.value = contentIdMap
       }
     } catch (error: any) {
-      console.log(error)
-      // 토스트
-      const toastData = {
-        message: error.response.data.message
-      }
-      toastStore.executeErrorToast(toastData)
+      toastStore.executeErrorToast(error.response.data.message)
     }
   }
 
@@ -91,11 +80,9 @@ export const useContentStore = defineStore('content', () => {
         categoryName: modalDataStore.selectedLocation.name,
         parentId: modalDataStore.selectedLocation.parentId
       }
-
       if (contentData.categoryName === '전체 콘텐츠') {
         delete contentData.categoryName
       }
-
       const response: any = await addContents(contentData)
       console.log('addContent', response)
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
@@ -111,11 +98,7 @@ export const useContentStore = defineStore('content', () => {
         }
       }
     } catch (error: any) {
-      // 토스트
-      const toastData = {
-        message: error.response.data.message
-      }
-      toastStore.executeErrorToast(toastData)
+      toastStore.executeErrorToast(error.response.data.message)
     } finally {
       modalDataStore.resetAddContentData()
     }
@@ -133,22 +116,16 @@ export const useContentStore = defineStore('content', () => {
             categoryName: modalDataStore.selectedLocation.name,
             parentId: modalDataStore.selectedLocation.parentId
           }
-
           if (contentData.categoryName === '전체 콘텐츠') {
             delete contentData.categoryName
           }
-
           const response: any = await addContents(contentData)
           console.log('addContent', response)
         }
       }
     } catch (error: any) {
-      console.log(error)
       // 토스트
-      const toastData = {
-        message: error.response.data.message
-      }
-      toastStore.executeErrorToast(toastData)
+      toastStore.executeErrorToast(error.response.data.message)
     } finally {
       modalViewStore.closeSelectModal()
       modalViewStore.closeAddContentModal()
@@ -174,11 +151,9 @@ export const useContentStore = defineStore('content', () => {
         categoryName: modalDataStore.selectedLocation.name,
         parentId: modalDataStore.selectedLocation.parentId
       }
-
       if (contentData.categoryName === '전체 콘텐츠') {
         delete contentData.categoryName
       }
-
       const response: any = await updateContents(contentData)
       console.log('editContent', response)
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
@@ -194,12 +169,7 @@ export const useContentStore = defineStore('content', () => {
         }
       }
     } catch (error: any) {
-      console.log(error)
-      // 토스트
-      const toastData = {
-        message: error.response.data.message
-      }
-      toastStore.executeErrorToast(toastData)
+      toastStore.executeErrorToast(error.response.data.message)
     }
   }
 
@@ -209,7 +179,6 @@ export const useContentStore = defineStore('content', () => {
       console.log('deleteContent', response)
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
         modalViewStore.hideModalWithOverlay('deleteContent', 'default')
-        // 토스트
         const toastData = {
           message: '콘텐츠가 삭제되었습니다.',
           func: {
@@ -233,12 +202,7 @@ export const useContentStore = defineStore('content', () => {
         }
       }
     } catch (error: any) {
-      console.log(error)
-      // 토스트
-      const toastData = {
-        message: error.response.data.message
-      }
-      toastStore.executeErrorToast(toastData)
+      toastStore.executeErrorToast(error.response.data.message)
     }
   }
 

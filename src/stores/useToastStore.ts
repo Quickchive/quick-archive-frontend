@@ -12,16 +12,25 @@ export const useToastStore = defineStore('toast', () => {
     }
   })
 
+  const errorToast = ref({
+    message: ''
+  })
+
   const toastModal = ref(false)
   const toastErrorModal = ref(false)
 
   // 토스트 메시지
-  function setToastMessage(toastData: any) {
+  function setMessage(toastData: any) {
     toast.value.message = toastData.message
     if (toastData.func) {
       toast.value.func.message = toastData.func.message
       toast.value.func.execute = toastData.func.execute
     }
+  }
+
+  // 에러 메시지
+  function setErrorMessage(errorMsg: string) {
+    errorToast.value.message = errorMsg
   }
 
   function showDefaultToast() {
@@ -35,23 +44,25 @@ export const useToastStore = defineStore('toast', () => {
   }
 
   function executeDefaultToast(toastData: object) {
-    setToastMessage(toastData)
+    setMessage(toastData)
     showDefaultToast()
   }
 
-  function executeErrorToast(toastData: object) {
-    setToastMessage(toastData)
+  function executeErrorToast(errorMsg: string) {
+    setErrorMessage(errorMsg)
     showErrorToast()
   }
 
   return {
     toast,
+    errorToast,
     toastModal,
     toastErrorModal,
     executeDefaultToast,
     executeErrorToast,
-    setToastMessage,
+    setMessage,
     showDefaultToast,
-    showErrorToast
+    showErrorToast,
+    setErrorMessage
   }
 })
