@@ -72,8 +72,13 @@ onMounted(() => {
     modalDataStore.addContentData.title = contentStore.focusedContentData.title
     modalDataStore.addContentData.memo = contentStore.focusedContentData.memo
     modalDataStore.addContentData.favorite = contentStore.focusedContentData.favorite
-    modalDataStore.selectedLocation.name = contentStore.focusedContentData.category.name
+    modalDataStore.selectedLocation.name = contentStore.focusedContentData.category
+      ? contentStore.focusedContentData.category.name
+      : '전체 콘텐츠'
     modalDataStore.selectedLocation.parentId = contentStore.focusedContentData.parentId
+      ? contentStore.focusedContentData.parentId
+      : -1
+    modalDataStore.addContentData.coverImg = contentStore.focusedContentData.coverImg
   }
 })
 

@@ -41,10 +41,7 @@
       :closeModal="modalViewStore.closeAddContentMultiple"
       :modalTitle="'콘텐츠 추가'"
     ></modal-content-add-multiple>
-    <modal-edit-content-title
-      v-if="modalViewStore.modal.editContentTitle"
-      :index="index"
-    ></modal-edit-content-title>
+
     <alert-confirm
       v-if="modalViewStore.modal.deleteCategory"
       :alertData="alertDataStore.deleteCategoryAlertData"
@@ -70,6 +67,11 @@
 
     <!-- 콘텐츠 공유 얼럿 -->
     <modal-content-share v-if="modalViewStore.modal.shareContent"></modal-content-share>
+
+    <!-- 콘텐츠 제목 수정 모달 -->
+    <modal-edit-content-title
+      v-if="modalViewStore.modal.editContentTitle"
+    ></modal-edit-content-title>
 
     <!-- 새 카테고리 추가 얼럿 -->
     <alert-with-input

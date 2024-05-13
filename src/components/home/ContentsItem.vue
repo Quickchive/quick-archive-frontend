@@ -135,6 +135,7 @@ const excludeItem = (obj, excludedKey) => {
 }
 
 const showMoreButton = (contentData) => {
+  console.log(contentData)
   contentStore.moreBtnContentIdTree = excludeItem(contentStore.moreBtnContentIdTree, contentData.id)
   contentStore.setFocusedContent(contentData.id)
   contentStore.setFocusedContentData(contentData)
