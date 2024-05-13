@@ -5,14 +5,14 @@
     <section class="setting-list">
       <article class="main-button-list">
         <button class="setting-main-button" @click="toMyInfoPage()">
-          <div class="wrapper__button-icon"><img :src="automaticIcon" />내정보</div>
+          <div class="wrapper__button-icon"><img :src="profileIcon" />내정보</div>
           <div class="flex-container__row--align-center">
             <span class="setting-nickname">{{ userStore.nickname }}</span>
             <img :src="nextIcon" />
           </div>
         </button>
         <div class="setting-main-button">
-          <div class="wrapper__button-icon"><img :src="makerIcon" />카테고리 추천</div>
+          <div class="wrapper__button-icon"><img :src="automaticIcon" />카테고리 추천</div>
           <toggle-button
             :value="userStore.recommendationMode"
             :toggleOn="userStore.enableRecommendationMode"
@@ -20,21 +20,21 @@
         </div>
         <button class="setting-main-button">
           <a href="">
-            <div class="wrapper__button-icon"><img :src="policyIcon" />오류신고</div>
+            <div class="wrapper__button-icon"><img :src="errorIcon" />오류신고</div>
             <img :src="nextIcon" />
           </a>
         </button>
 
         <button class="setting-main-button">
           <a href="https://www.notion.so/6bf8991d981b440bafe3c6bb9dfe3ba1?pvs=4">
-            <div class="wrapper__button-icon"><img :src="errorIcon" />서비스 만든 사람들</div>
+            <div class="wrapper__button-icon"><img :src="makerIcon" />서비스 만든 사람들</div>
             <img :src="nextIcon" />
           </a>
         </button>
 
         <button class="setting-main-button">
           <a href="https://www.notion.so/fabc4b39c85b446bab8f2bb8549926b7?pvs=4">
-            <div class="wrapper__button-icon"><img :src="profileIcon" />약관 및 정책</div>
+            <div class="wrapper__button-icon"><img :src="policyIcon" />약관 및 정책</div>
             <img :src="nextIcon" />
           </a>
         </button>
