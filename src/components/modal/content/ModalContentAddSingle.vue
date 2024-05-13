@@ -77,7 +77,7 @@ onMounted(() => {
       : '전체 콘텐츠'
     modalDataStore.selectedLocation.parentId = contentStore.focusedContentData.parentId
       ? contentStore.focusedContentData.parentId
-      : -1
+      : null
     modalDataStore.addContentData.coverImg = contentStore.focusedContentData.coverImg
   }
 })
