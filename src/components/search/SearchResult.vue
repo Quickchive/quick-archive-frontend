@@ -181,7 +181,7 @@ const showMoreButton = (categoryData) => {
 
 const btnList = [
   {
-    name: '편집하기',
+    name: '수정하기',
     clickEvent: () => modalViewStore.showModalWithOverlay('editCategory', 'default')
   },
 
