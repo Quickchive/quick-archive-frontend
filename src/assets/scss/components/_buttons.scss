@@ -184,12 +184,9 @@ button {
   --toggle-handle-disabled: $color-grey-20;
 }
 
-.toggle-container {
-  &:focus {
-    border-style: none;
-    outline: none;
-    box-shadow: none;
-  }
+.toggle-container,
+.toggle-button {
+  box-shadow: none !important;
 }
 
 .toggle-off {
