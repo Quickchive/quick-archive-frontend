@@ -14,7 +14,7 @@ import { useToastStore } from '@/stores/useToastStore.ts'
 import type { CategoryIdMap } from '@/utils/interface'
 import { saveHideAlertToCookie } from '@/utils/cookies'
 import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
-import { useRoute } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { sortByCreatedAtDescending, sortByCreatedAtAscending } from '@/utils/sort.js'
 
 export const useContentStore = defineStore('content', () => {
@@ -30,6 +30,7 @@ export const useContentStore = defineStore('content', () => {
   const focusedContentId = ref(-1)
   const focusedContentData = ref({})
   const route = useRoute()
+  const router = useRouter()
 
   /***** api 함수 *****/
 
@@ -96,6 +97,13 @@ export const useContentStore = defineStore('content', () => {
           // 전체 콘텐츠 페이지인 경우
           fetchAllContents()
         }
+        const toastData = {
+          message: '콘텐츠가 추가되었습니다.',
+          func: {
+            message: '보러가기'
+          }
+        }
+        toastStore.executeDefaultToast(toastData)
       }
     } catch (error: any) {
       toastStore.executeErrorToast(error.response.data.message)
