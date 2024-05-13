@@ -294,7 +294,7 @@ button {
 
 .button--change-nickname {
   @include color(#146eff, transparent);
-  @include font(13px, 600, 22px);
+  @include font(13px, 600, 22px, #146eff);
   font-feature-settings: 'cv12' on;
   letter-spacing: -0.3px;
 }
