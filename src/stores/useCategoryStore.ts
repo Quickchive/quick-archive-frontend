@@ -89,13 +89,12 @@ export const useCategoryStore = defineStore('category', () => {
     } catch (error: any) {
       if (error.response.data.statusCode === 409) {
         if (error.response.data.message === 'Category already exists') {
+          modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
+
           const alertData = {
             title: '알림',
-            content: `동일한 이름의 카테고리가
-          ${modalViewStore.duplicatedCategoryLocation}내에 있어요.
-          카테고리 이름을 변경해주세요.`
+            content: `동일한 이름의 카테고리가 ${modalViewStore.duplicatedCategoryLocation}내에 있어요.\n카테고리 이름을 변경해주세요.`
           }
-          modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
 
           alertDataStore.setDefaultAlertData(alertData)
           modalViewStore.showModalWithOverlay('alert', 'alert')
