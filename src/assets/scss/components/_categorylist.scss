@@ -19,6 +19,7 @@
     padding: 0;
     .category-item__btn__wrapper {
       @include flex;
+      width: 100%;
     }
     li {
       @include flex(column, space-between, center);

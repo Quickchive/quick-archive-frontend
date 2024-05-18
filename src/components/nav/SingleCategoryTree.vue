@@ -1,6 +1,6 @@
 <template>
   <li :class="props.treeWidth">
-    <div class="flex-container__row--align-center">
+    <div class="singleCategoryBtn">
       <button class="btn--transparent expand-button" @click="clickArrowEvent()">
         <img v-if="isChildrenCategoryShow" :src="expandLessIcon" />
         <img v-if="!isChildrenCategoryShow" :src="expandMoreIcon" />

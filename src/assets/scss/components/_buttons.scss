@@ -99,10 +99,16 @@ button {
   margin: 0;
 }
 
+.singleCategoryBtn {
+  width: 100%;
+  @include flex(row, flex-start, center);
+}
+
 .category-list__btn {
-  @include flex;
+  @include flex(row, flex-start, center);
   @include font(16px, 500, 24px, $color-grey-100);
   margin: 0px 16px 0px 0px;
+  width: 100%;
 }
 
 .category-list__btn--radio {
