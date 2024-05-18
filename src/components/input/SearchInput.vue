@@ -34,7 +34,7 @@ const props = defineProps({
 
 // 카테고리 명 유효성 검사
 const isInputValid = computed(() => {
-  if (props.keyword === searchStore.keyword.main) {
+  if (props.keyword === 'main') {
     return searchStore.keyword.main.length >= 1 ? true : false
   } else {
     return searchStore.keyword.modal.length >= 1 ? true : false
