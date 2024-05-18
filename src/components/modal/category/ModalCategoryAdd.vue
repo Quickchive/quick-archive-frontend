@@ -20,7 +20,7 @@
         autofocus
         maxlength="15"
       />
-      <button class="btn--transparent" @click="clearCategoryName()">
+      <button v-show="categoryName" class="btn--transparent" @click="clearCategoryName()">
         <img :src="textfieldCancelIcon" />
       </button>
     </label>
