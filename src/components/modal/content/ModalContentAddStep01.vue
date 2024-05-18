@@ -39,7 +39,8 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
+import { useContentStore } from '@/stores/useContentStore.ts'
+
 import spaceRectangle from '@/assets/img/spacebar-rectangle.png'
 
 import ModalHeader from '@/components/header/ModalHeader.vue'
@@ -51,7 +52,7 @@ const props = defineProps({
 })
 
 const modalViewStore = useModalViewStore()
-const modalDataStore = useModalDataStore()
+const contentStore = useContentStore()
 
 const link = ref('')
 
@@ -111,14 +112,14 @@ const submitLink = async () => {
 
   // 링크 1개인 경우
   if (numOfLink === 1) {
-    modalDataStore.setSingleLink(linkStr)
+    contentStore.setSingleLink(linkStr)
     modalViewStore.showModalWithOverlay('addContentDetail', 'default')
 
     // 링크 2개인 경우
   } else if (numOfLink > 1) {
     const linkArr = setMultipleLinkArr(linkStr)
-    const multipleLink = await modalDataStore.fetchMultipleLinksOgData(linkArr)
-    modalDataStore.setMultipleLinks(multipleLink)
+    const multipleLink = await contentStore.fetchMultipleLinksOgData(linkArr)
+    contentStore.setMultipleLinks(multipleLink)
     modalViewStore.showModalWithOverlay('addContentMultiple', 'default')
   }
 }

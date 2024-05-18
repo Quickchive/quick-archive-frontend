@@ -36,13 +36,9 @@ const selectedOption = ref('recent')
 
 const sortContent = () => {
   if (selectedOption.value === 'recent') {
-    contentStore.userFilteredContentList = sortByCreatedAtDescending(
-      contentStore.userFilteredContentList
-    )
+    contentStore.contentList = sortByCreatedAtDescending(contentStore.contentList)
   } else {
-    contentStore.userFilteredContentList = sortByCreatedAtAscending(
-      contentStore.userFilteredContentList
-    )
+    contentStore.contentList = sortByCreatedAtAscending(contentStore.contentList)
   }
 }
 </script>

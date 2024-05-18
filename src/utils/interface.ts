@@ -1,5 +1,3 @@
-import type { Ref, reactive } from 'vue'
-
 interface CategoryIdMap {
   [id: number]: boolean
 }
@@ -35,4 +33,33 @@ interface Modal {
   // deleteCategory: Ref<boolean>
 }
 
-export type { CategoryIdMap, Modal, Overlay }
+interface ContentObj {
+  id: number
+  link: string
+  title: string
+  siteName: string
+  description: string
+  comment: string
+  favorite: boolean
+  categoryName: string
+  categoryIconName?: string
+  categoryId?: number
+  parentId?: number
+  createdAt?: number
+  updatedAt?: number
+  coverImg?: string
+  checked?: boolean
+  focused: boolean
+}
+
+interface OgContent {
+  link: string
+  coverImg: string
+  title: string
+  description: string
+  siteName: string
+}
+
+interface ContentList extends Array<ContentObj> {}
+
+export type { CategoryIdMap, Modal, Overlay, ContentObj, ContentList, OgContent }

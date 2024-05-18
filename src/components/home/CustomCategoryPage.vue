@@ -2,12 +2,12 @@
   <title-bar></title-bar>
   <div class="divider"></div>
   <article class="contents-container">
-    <div class="contents-num__wrapper">{{ contentStore.userCustomContentList.length }}개</div>
+    <div class="contents-num__wrapper">{{ contentStore.contentList.length }}개</div>
     <!-- 콘텐츠 있을 때 -->
-    <template v-if="contentStore.userCustomContentList.length > 0">
+    <template v-if="contentStore.contentList.length > 0">
       <div class="contents-list__wrapper">
         <contents-item
-          v-for="item in contentStore.userCustomContentList"
+          v-for="item in contentStore.contentList"
           :item="item"
           :key="item"
         ></contents-item>
@@ -40,7 +40,7 @@ onMounted(async () => {
 })
 
 watch(
-  () => useContentStore.userCustomContentList,
+  () => useContentStore.contentList,
   () => {
     // 적절한 화면 갱신 로직 추가
     console.log('myState가 변경되었습니다. 화면을 갱신합니다.')

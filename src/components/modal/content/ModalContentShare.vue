@@ -5,7 +5,7 @@
       <input
         id="contentLink"
         class="input__sm--content-link"
-        :value="contentStore.focusedContentData.link"
+        :value="contentStore.contentObj.link"
         readonly
         @select="deselectText"
       />

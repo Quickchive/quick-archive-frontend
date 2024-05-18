@@ -100,6 +100,17 @@ export const useModalViewStore = defineStore('modalView', () => {
     modal.select = true
   }
 
+  function openEditContentModal() {
+    modal.select = false
+    modal.editContent = true
+    overlay.default = true
+  }
+
+  function closeEditContentModal() {
+    modal.editContent = false
+    modal.select = true
+  }
+
   function closeAddContentSingle() {
     modal.addContentDetail = false
     closeAddContentModal()
@@ -141,6 +152,8 @@ export const useModalViewStore = defineStore('modalView', () => {
     // toastModal,
     // showErrorToast,
     // toastErrorModal,
+    openEditContentModal,
+    closeEditContentModal,
     showModalWithOverlay,
     hideModalWithOverlay,
     showModal,
