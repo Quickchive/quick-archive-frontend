@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia'
+import { ref, reactive } from 'vue'
+import { useRoute } from 'vue-router'
 import {
   getContents,
   getAllContents,
@@ -7,44 +9,150 @@ import {
   addFavorite,
   updateContents
 } from '@/api/contents'
-import { ref } from 'vue'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
+import { getOgData } from '@/api/contents'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
-import { useToastStore } from '@/stores/useToastStore.ts'
-import type { CategoryIdMap } from '@/utils/interface'
-import { saveHideAlertToCookie } from '@/utils/cookies'
 import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
-import { useRouter, useRoute } from 'vue-router'
-import { sortByCreatedAtDescending, sortByCreatedAtAscending } from '@/utils/sort.js'
+import { useToastStore } from '@/stores/useToastStore.ts'
+import {
+  type CategoryIdMap,
+  type ContentObj,
+  type ContentList,
+  type OgContent
+} from '@/utils/interface'
+import { saveHideAlertToCookie } from '@/utils/cookies'
+import { sortByCreatedAtDescending } from '@/utils/sort.js'
+import { deleteNullContentProp, deleteNullEditContentProp } from '@/utils/util.js'
 
 export const useContentStore = defineStore('content', () => {
-  const userContentList: any = ref([])
-  const userCustomContentList = ref([])
-  const userFilteredContentList: any = ref([])
   const alertDataStore = useAlertDataStore()
-  const modalDataStore = useModalDataStore()
   const modalViewStore = useModalViewStore()
   const toastStore = useToastStore()
+  const route = useRoute()
+
+  /*** state ***/
+
+  // 사용: 콘텐츠 추가 모달, 콘텐츠 수정 모달
+  const contentObj = reactive<ContentObj>({
+    id: 0,
+    link: '',
+    title: '',
+    siteName: '',
+    description: '',
+    comment: '',
+    favorite: false,
+    categoryName: '',
+    categoryIconName: '',
+    categoryId: -1,
+    parentId: -1,
+    coverImg: '',
+    focused: false
+  })
+
+  // 사용: 콘텐츠 추가 모달
+  const multipleContentList: any = ref([])
+
+  // 사용: 콘텐츠 조회, 검색 대상
+  const allContentList = ref<ContentList[]>([])
+
+  // 사용: 콘텐츠 조회, 카테고리 별 콘텐츠 페이지
+  const contentList = ref<ContentList[]>([])
+
+  const focusedContent = ref({
+    id: -1,
+    index: -1
+  })
 
   const moreBtnContentIdTree = ref<CategoryIdMap>({})
-  const focusedContentId = ref(-1)
-  const focusedContentData = ref({})
-  const route = useRoute()
-  const router = useRouter()
 
-  /***** api 함수 *****/
+  /*** actions ***/
 
+  function setAllContentList(contents: ContentList[]) {
+    allContentList.value = contents
+  }
+
+  function setContentList(contents: ContentList[]) {
+    contentList.value = contents
+  }
+
+  function setContentObj(content: OgContent) {
+    contentObj.link = content.link
+    contentObj.coverImg = content.coverImg
+    contentObj.title = content.title
+    contentObj.description = content.description
+    contentObj.siteName = content.siteName
+  }
+
+  function setContentTitle(title: string) {
+    contentObj.title = title
+  }
+
+  function resetContentObj() {
+    contentObj.id = -1
+    contentObj.link = ''
+    contentObj.coverImg = ''
+    contentObj.title = ''
+    contentObj.comment = ''
+    contentObj.description = ''
+    contentObj.siteName = ''
+    contentObj.favorite = false
+    contentObj.categoryName = ''
+    contentObj.categoryId = -1
+    contentObj.categoryIconName = ''
+  }
+
+  function createContentIdMap(items: any[]) {
+    return items.reduce((acc, item) => {
+      acc[item.id] = false
+      return acc
+    }, {})
+  }
+
+  function setFocusedContent(content: any) {
+    contentObj.id = content.id
+    contentObj.link = content.link
+    contentObj.coverImg = content.coverImg
+    contentObj.title = content.title
+    contentObj.comment = content.comment
+    contentObj.description = content.description
+    contentObj.siteName = content.siteName
+    contentObj.favorite = content.favorite
+    if (content.category !== null) {
+      contentObj.categoryName = content.category.name
+      contentObj.categoryId = content.category.id
+      contentObj.categoryIconName = content.category.iconName
+    }
+  }
+
+  // 다중 콘텐츠에서 사용
+  function setFocusedContentIndex(index: number) {
+    focusedContent.value.index = index
+  }
+
+  function checkLinkInMultipleLink(index: any) {
+    console.log('isChecked', multipleContentList.value[index].checked)
+    multipleContentList.value[index].checked = !multipleContentList.value[index].checked
+  }
+
+  function setMultipleTitle(title: string) {
+    multipleContentList.value[focusedContent.value.index].title = title
+  }
+
+  function setMultipleLinks(multipleLinkArray: OgContent) {
+    console.log(multipleContentList)
+    multipleContentList.value = multipleLinkArray
+  }
+
+  /*************** api 함수 ***************/
   async function fetchAllContents() {
     try {
       const response: any = await getAllContents()
       if (response.data.statusCode === 200) {
-        userContentList.value = sortByCreatedAtDescending(response.data.contents)
-        userFilteredContentList.value = userContentList.value
-        const contentIdMap = createContentIdMap(userFilteredContentList.value)
+        setAllContentList(sortByCreatedAtDescending(response.data.contents))
+        setContentList(allContentList.value)
+        const contentIdMap = createContentIdMap(contentList.value)
         moreBtnContentIdTree.value = contentIdMap
       }
     } catch (error: any) {
-      // 토스트
       toastStore.executeErrorToast(error.response.data.message)
     }
   }
@@ -52,10 +160,10 @@ export const useContentStore = defineStore('content', () => {
   async function fetchContents(categoryId: number) {
     try {
       const response: any = await getContents(categoryId)
-      console.log('콘텐츠 조회', response)
-      if (response.data.statusCode === 200 || response.data.statusCode === 201) {
-        userCustomContentList.value = response.data.contents
-        const contentIdMap = createContentIdMap(userCustomContentList.value)
+      console.log('콘텐츠 조회', response.data.statusCode)
+      if (response.data.statusCode === 200) {
+        setContentList(response.data.contents)
+        const contentIdMap = createContentIdMap(contentList.value)
         moreBtnContentIdTree.value = contentIdMap
       }
     } catch (error: any) {
@@ -73,20 +181,10 @@ export const useContentStore = defineStore('content', () => {
 
   async function addContent() {
     try {
-      const contentData = {
-        link: modalDataStore.addContentData.link,
-        title: modalDataStore.addContentData.title,
-        comment: modalDataStore.addContentData.memo,
-        favorite: modalDataStore.addContentData.favorite,
-        categoryName: modalDataStore.selectedLocation.name,
-        parentId: modalDataStore.selectedLocation.parentId
-      }
-      if (contentData.categoryName === '전체 콘텐츠') {
-        delete contentData.categoryName
-      }
+      const contentData = deleteNullContentProp(contentObj)
       const response: any = await addContents(contentData)
       console.log('addContent', response)
-      if (response.data.statusCode === 200 || response.data.statusCode === 201) {
+      if (response.data.statusCode === 201) {
         modalViewStore.closeSelectModal()
         modalViewStore.closeAddContentModal()
         modalViewStore.closeAddContentSingle()
@@ -106,27 +204,18 @@ export const useContentStore = defineStore('content', () => {
         toastStore.executeDefaultToast(toastData)
       }
     } catch (error: any) {
+      console.log(error)
       toastStore.executeErrorToast(error.response.data.message)
     } finally {
-      modalDataStore.resetAddContentData()
+      resetContentObj()
     }
   }
 
   async function addMultipleContent() {
     try {
-      for (let i = 0; i < modalDataStore.addContentData.length; i++) {
-        if (modalDataStore.addContentData[i].checked) {
-          const contentData = {
-            link: modalDataStore.addContentData[i].link,
-            title: modalDataStore.addContentData[i].title,
-            comment: modalDataStore.addContentData[i].memo,
-            favorite: modalDataStore.addContentData[i].favorite,
-            categoryName: modalDataStore.selectedLocation.name,
-            parentId: modalDataStore.selectedLocation.parentId
-          }
-          if (contentData.categoryName === '전체 콘텐츠') {
-            delete contentData.categoryName
-          }
+      for (let i = 0; i < multipleContentList.value.length; i++) {
+        if (multipleContentList.value[i].checked) {
+          const contentData = deleteNullContentProp(multipleContentList.value[i])
           const response: any = await addContents(contentData)
           console.log('addContent', response)
         }
@@ -150,21 +239,10 @@ export const useContentStore = defineStore('content', () => {
 
   async function editContent() {
     try {
-      const contentData = {
-        id: modalDataStore.addContentData.id,
-        link: modalDataStore.addContentData.link,
-        title: modalDataStore.addContentData.title,
-        comment: modalDataStore.addContentData.memo,
-        favorite: modalDataStore.addContentData.favorite,
-        categoryName: modalDataStore.selectedLocation.name,
-        parentId: modalDataStore.selectedLocation.parentId
-      }
-      if (contentData.categoryName === '전체 콘텐츠') {
-        delete contentData.categoryName
-      }
+      const contentData = deleteNullEditContentProp(contentObj)
       const response: any = await updateContents(contentData)
       console.log('editContent', response)
-      if (response.data.statusCode === 200 || response.data.statusCode === 201) {
+      if (response.data.statusCode === 200) {
         modalViewStore.closeSelectModal()
         modalViewStore.hideModalWithOverlay('editContent', 'default')
         modalViewStore.hideModalWithOverlay('editContentDetail', 'default')
@@ -183,7 +261,7 @@ export const useContentStore = defineStore('content', () => {
 
   async function deleteContent() {
     try {
-      const response: any = await deleteContents(focusedContentId.value)
+      const response: any = await deleteContents(focusedContent.value.id)
       console.log('deleteContent', response)
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
         modalViewStore.hideModalWithOverlay('deleteContent', 'default')
@@ -214,42 +292,73 @@ export const useContentStore = defineStore('content', () => {
     }
   }
 
-  function setUserContentList(contentList: never[]) {
-    userContentList.value = contentList
+  // og 데이터 추출
+  async function fetchOgData(link: string) {
+    try {
+      const response: any = await getOgData(link)
+      console.log('ogdata', response)
+      if (response.data.statusCode === 200 || response.data.statusCode === 201) {
+        return response.data
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  function createContentIdMap(items: any[]) {
-    return items.reduce((acc, item) => {
-      acc[item.id] = false
-      return acc
-    }, {})
+  async function setSingleLink(link: string) {
+    const ogData = await fetchOgData(link)
+    const singleLinkObj: OgContent = {
+      link: link,
+      coverImg: ogData.coverImg,
+      title: ogData.title,
+      description: ogData.description,
+      siteName: ogData.siteName
+    }
+
+    setContentObj(singleLinkObj)
   }
 
-  function setFocusedContent(contentId: number) {
-    focusedContentId.value = contentId
-  }
+  async function fetchMultipleLinksOgData(links: any) {
+    const multipleLinksArr = <OgContent[]>[]
 
-  function setFocusedContentData(contentData: object) {
-    focusedContentData.value = contentData
+    for (let i = 0; i < links.length; i++) {
+      const ogData = await fetchOgData(links[i])
+      const linkData = {
+        link: links[i],
+        coverImg: ogData.coverImg,
+        title: ogData.title,
+        description: ogData.description,
+        siteName: ogData.siteName,
+        checked: true
+      }
+      multipleLinksArr.push(linkData)
+    }
+
+    return multipleLinksArr
   }
 
   return {
-    userContentList,
+    allContentList,
+    focusedContent,
+    contentList,
+    multipleContentList,
+    moreBtnContentIdTree,
+    contentObj,
+    setFocusedContent,
+    setContentTitle,
+    setSingleLink,
+    setMultipleLinks,
+    checkLinkInMultipleLink,
+    setMultipleTitle,
+    setFocusedContentIndex,
+    addContent,
+    deleteContent,
+    editContent,
+    favoriteContent,
+    addMultipleContent,
     fetchAllContents,
     fetchContents,
-    setUserContentList,
-    addContent,
-    userCustomContentList,
-    deleteContent,
-    createContentIdMap,
-    moreBtnContentIdTree,
-    focusedContentId,
-    focusedContentData,
-    setFocusedContent,
-    setFocusedContentData,
-    favoriteContent,
-    userFilteredContentList,
-    editContent,
-    addMultipleContent
+    fetchOgData,
+    fetchMultipleLinksOgData
   }
 })

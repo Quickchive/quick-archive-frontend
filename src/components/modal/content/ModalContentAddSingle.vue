@@ -22,7 +22,7 @@
       <div class="flex-container__row--space-between">
         <label class="label__modal">즐겨찾기</label>
         <toggle-button
-          :value="modalDataStore.addContentData.favorite"
+          :value="contentStore.contentObj.favorite"
           :toggleOn="modalDataStore.setFavoriteToggle"
         ></toggle-button>
       </div>
@@ -54,7 +54,6 @@ import ThumbnailItem from '../ThumbnailItem.vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
-import { onMounted } from 'vue'
 
 const modalViewStore = useModalViewStore()
 const modalDataStore = useModalDataStore()
@@ -62,24 +61,9 @@ const contentStore = useContentStore()
 
 const props = defineProps({
   modalTitle: String,
-  closeModal: Function
-})
-
-onMounted(() => {
-  if (props.modalTitle === '콘텐츠 수정') {
-    modalDataStore.addContentData.id = contentStore.focusedContentData.id
-    modalDataStore.addContentData.link = contentStore.focusedContentData.link
-    modalDataStore.addContentData.title = contentStore.focusedContentData.title
-    modalDataStore.addContentData.memo = contentStore.focusedContentData.memo
-    modalDataStore.addContentData.favorite = contentStore.focusedContentData.favorite
-    modalDataStore.selectedLocation.name = contentStore.focusedContentData.category
-      ? contentStore.focusedContentData.category.name
-      : '전체 콘텐츠'
-    modalDataStore.selectedLocation.parentId = contentStore.focusedContentData.parentId
-      ? contentStore.focusedContentData.parentId
-      : null
-    modalDataStore.addContentData.coverImg = contentStore.focusedContentData.coverImg
-  }
+  closeModal: Function,
+  goBack: Function,
+  content: Object
 })
 
 const setMemo = (e) => {
@@ -92,11 +76,6 @@ const saveContent = () => {
   } else {
     contentStore.editContent()
   }
-}
-
-const goBack = () => {
-  modalViewStore.hideModal('editContentDetail')
-  modalViewStore.openAddContentModal()
 }
 </script>
 

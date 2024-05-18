@@ -154,30 +154,28 @@ export const useCategoryStore = defineStore('category', () => {
     if (isUnselectedChipOn.value === true) {
       // && 즐겨찾기 on
       if (isFavoriteChipOn.value === true) {
-        contentStore.userFilteredContentList = filterByFavoriteAndCategoryIsNull(
-          contentStore.userContentList
-        )
+        contentStore.contentList = filterByFavoriteAndCategoryIsNull(contentStore.allContentList)
       }
       // && 즐겨찾기 off
       else {
-        contentStore.userFilteredContentList = filterByCategoryIsNull(contentStore.userContentList)
+        contentStore.contentList = filterByCategoryIsNull(contentStore.allContentList)
       }
     }
     // 카테고리 미지정 off
     else {
       // && 즐겨찾기 on
       if (isFavoriteChipOn.value === true) {
-        contentStore.userFilteredContentList = filterByFavorite(contentStore.userContentList)
+        contentStore.contentList = filterByFavorite(contentStore.allContentList)
       }
       // && 즐겨찾기 off
       else {
-        contentStore.userFilteredContentList = contentStore.userContentList
+        contentStore.contentList = contentStore.allContentList
       }
     }
   }
 
   function resetContentChip() {
-    contentStore.userFilteredContentList = contentStore.userContentList
+    contentStore.contentList = contentStore.allContentList
     isFavoriteChipOn.value = false
     isUnselectedChipOn.value = false
   }
@@ -197,24 +195,22 @@ export const useCategoryStore = defineStore('category', () => {
     if (isUnselectedChipOn.value === true) {
       // && 즐겨찾기 on
       if (isFavoriteChipOn.value === true) {
-        contentStore.userFilteredContentList = filterByFavoriteAndCategoryIsNull(
-          contentStore.userContentList
-        )
+        contentStore.contentList = filterByFavoriteAndCategoryIsNull(contentStore.allContentList)
       }
       // && 즐겨찾기 off
       else {
-        contentStore.userFilteredContentList = filterByCategoryIsNull(contentStore.userContentList)
+        contentStore.contentList = filterByCategoryIsNull(contentStore.allContentList)
       }
     }
     // 카테고리 미지정 off
     else {
       // && 즐겨찾기 on
       if (isFavoriteChipOn.value === true) {
-        contentStore.userFilteredContentList = filterByFavorite(contentStore.userContentList)
+        contentStore.contentList = filterByFavorite(contentStore.allContentList)
       }
       // && 즐겨찾기 off
       else {
-        contentStore.userFilteredContentList = contentStore.userContentList
+        contentStore.contentList = contentStore.allContentList
       }
     }
   }

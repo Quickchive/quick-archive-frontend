@@ -40,7 +40,7 @@ export const useSearchStore = defineStore('search', () => {
 
     // 콘텐츠
     searchedContent.value = toRaw(
-      getContentIdWithKeyword(keyword.value.main, contentStore.userContentList)
+      getContentIdWithKeyword(keyword.value.main, contentStore.allContentList)
     )
 
     if (searchedContent.value !== undefined) {

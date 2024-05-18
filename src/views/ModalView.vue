@@ -23,41 +23,46 @@
       v-if="modalViewStore.modal.editCategory"
     ></modal-category-add>
 
-    <!-- 콘텐츠 모달 -->
-    <modal-content-add-step-01
+    <!-- 콘텐츠 추가 - 단일 링크 -->
+    <modal-content-step-01
       v-if="modalViewStore.modal.addContent"
       :closeModal="closeAddContentStep01Modal"
       :modalTitle="'콘텐츠 추가'"
-    ></modal-content-add-step-01>
-    <!-- 콘텐츠 추가 - 단일 링크 -->
-    <modal-content-add-single
+    ></modal-content-step-01>
+
+    <modal-content-single
       v-if="modalViewStore.modal.addContentDetail"
       :closeModal="modalViewStore.closeAddContentSingle"
       :modalTitle="'콘텐츠 추가'"
-    ></modal-content-add-single>
+      :goBack="gobackAddContentStep01"
+    ></modal-content-single>
+
     <!-- 콘텐츠 추가 - 다중 링크 -->
-    <modal-content-add-multiple
+    <modal-content-multiple
       v-if="modalViewStore.modal.addContentMultiple"
       :closeModal="modalViewStore.closeAddContentMultiple"
       :modalTitle="'콘텐츠 추가'"
-    ></modal-content-add-multiple>
+      :goBack="gobackAddContentStep01"
+    ></modal-content-multiple>
+
+    <!-- 콘텐츠 수정 모달 -->
+    <modal-content-step-01
+      v-if="modalViewStore.modal.editContent"
+      :modalTitle="'콘텐츠 수정'"
+      :closeModal="closeEditContentStep01Modal"
+    ></modal-content-step-01>
+
+    <modal-content-single
+      v-if="modalViewStore.modal.editContentDetail"
+      :modalTitle="'콘텐츠 수정'"
+      :closeModal="closeEditContentSingle"
+      :goBack="gobackEditContentStep01"
+    ></modal-content-single>
 
     <alert-confirm
       v-if="modalViewStore.modal.deleteCategory"
       :alertData="alertDataStore.deleteCategoryAlertData"
     ></alert-confirm>
-
-    <!-- 콘텐츠 수정 모달 -->
-    <modal-content-add-step-01
-      v-if="modalViewStore.modal.editContent"
-      :modalTitle="'콘텐츠 수정'"
-      :closeModal="closeEditContentStep01Modal"
-    ></modal-content-add-step-01>
-    <modal-content-add-single
-      v-if="modalViewStore.modal.editContentDetail"
-      :modalTitle="'콘텐츠 수정'"
-      :closeModal="closeEditContentSingle"
-    ></modal-content-add-single>
 
     <!-- 콘텐츠 삭제 얼럿 -->
     <alert-confirm
@@ -98,9 +103,9 @@ import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
 import ModalCategorySelect from '@/components/modal/category/ModalCategorySelect.vue'
 import ModalSetCategoryLocation from '@/components/modal/category/ModalSetCategoryLocation.vue'
-import ModalContentAddStep01 from '@/components/modal/content/ModalContentAddStep01.vue'
-import ModalContentAddSingle from '@/components/modal/content/ModalContentAddSingle.vue'
-import ModalContentAddMultiple from '@/components/modal/content/ModalContentAddMultiple.vue'
+import ModalContentStep01 from '@/components/modal/content/ModalContentAddStep01.vue'
+import ModalContentSingle from '@/components/modal/content/ModalContentAddSingle.vue'
+import ModalContentMultiple from '@/components/modal/content/ModalContentAddMultiple.vue'
 import AlertDefault from '@/components/modal/alert/AlertDefault.vue'
 import AlertConfirm from '@/components/modal/alert/AlertConfirm.vue'
 import ModalEditContentTitle from '@/components/modal/content/ModalEditContentTitle.vue'
@@ -115,12 +120,22 @@ const closeAddContentStep01Modal = () => {
 }
 
 const closeEditContentStep01Modal = () => {
-  modalViewStore.hideModalWithOverlay('editContent')
+  modalViewStore.closeEditContentModal()
 }
 
 const closeEditContentSingle = () => {
   modalViewStore.hideModalWithOverlay('editContentDetail', 'default')
   modalViewStore.hideModalWithOverlay('editContent')
+}
+
+const gobackAddContentStep01 = () => {
+  modalViewStore.hideModal('addContentDetail')
+  modalViewStore.openAddContentModal()
+}
+
+const gobackEditContentStep01 = () => {
+  modalViewStore.hideModal('editContentDetail')
+  modalViewStore.openEditContentModal()
 }
 </script>
 

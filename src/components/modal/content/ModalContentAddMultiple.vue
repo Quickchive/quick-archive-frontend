@@ -6,12 +6,12 @@
       :closeModal="closeModal"
       :goBack="goBack"
     ></modal-header-step>
-    <div class="wrapper__content-num">{{ modalDataStore.addContentData.length }}개 콘텐츠</div>
+    <div class="wrapper__content-num">{{ contentStore.multipleContentList.length }}개 콘텐츠</div>
     <!-- 썸네일 -->
-    <template v-if="modalDataStore.addContentData.length > 0">
+    <template v-if="contentStore.multipleContentList.length > 0">
       <div class="wrapper__multiple-thumbnail">
         <thumbnail-item-with-checkbox
-          v-for="(data, index) in modalDataStore.addContentData"
+          v-for="(data, index) in contentStore.multipleContentList"
           :key="index"
           :contentData="data"
           :index="index"

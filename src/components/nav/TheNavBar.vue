@@ -54,14 +54,12 @@ import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import { useRouter, useRoute } from 'vue-router'
 import mainLogo from '@/assets/logo/logo_black_20px.svg'
 import { onMounted } from 'vue'
-import { useModalDataStore } from '@/stores/useModalDataStore'
 import { useToastStore } from '@/stores/useToastStore.ts'
 
 const categoryTreeStore = useCategoryTreeStore()
 const userStore = useUserStore()
 const searchStore = useSearchStore()
 const modalViewStore = useModalViewStore()
-const modalDataStore = useModalDataStore()
 const toastStore = useToastStore()
 
 const router = useRouter()
@@ -82,7 +80,7 @@ const showAddModal = () => {
           message: '저장하기',
           execute: () => {
             modalViewStore.hideModalWithOverlay('select', 'default')
-            modalDataStore.setSingleLink(text)
+            contentStore.setSingleLink(text)
             modalViewStore.showModalWithOverlay('addContentDetail', 'default')
           }
         }

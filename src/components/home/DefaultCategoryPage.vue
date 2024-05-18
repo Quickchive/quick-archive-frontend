@@ -2,19 +2,19 @@
   <title-bar></title-bar>
   <div class="divider"></div>
   <article class="contents-container">
-    <div class="contents-num__wrapper">{{ contentStore.userFilteredContentList.length }}개</div>
+    <div class="contents-num__wrapper">{{ contentStore.contentList.length }}개</div>
     <!-- 콘텐츠 있을 때 -->
-    <template v-if="contentStore.userFilteredContentList.length > 0">
+    <template v-if="contentStore.contentList.length > 0">
       <div class="contents-list__wrapper">
         <contents-item
-          v-for="item in contentStore.userFilteredContentList"
+          v-for="item in contentStore.contentList"
           :key="item"
           :item="item"
         ></contents-item>
       </div>
     </template>
     <!-- 콘텐츠 없을 떄 -->
-    <template v-if="contentStore.userFilteredContentList.length === 0">
+    <template v-if="contentStore.contentList.length === 0">
       <div class="flex-container__col contents__empty">
         <img :src="emptyImg" class="img-empty" />
         <span>저장된 콘텐츠가 없습니다.</span>
@@ -38,8 +38,8 @@ const contentList = ref({})
 
 onMounted(async () => {
   await contentStore.fetchAllContents()
-  if (contentStore.userContentList.length > 0) {
-    contentList.value = toRaw(contentStore.userContentList)
+  if (contentStore.allContentList.length > 0) {
+    contentList.value = toRaw(contentStore.allContentList)
     console.log(contentList, 'contentList')
   }
 
@@ -49,8 +49,8 @@ onMounted(async () => {
 
 // 콘텐츠 데이터 감시
 contentStore.$subscribe(() => {
-  if (contentStore.userContentList.length > 0) {
-    contentList.value = toRaw(contentStore.userContentList)
+  if (contentStore.allContentList.length > 0) {
+    contentList.value = toRaw(contentStore.allContentList)
   }
 })
 </script>
