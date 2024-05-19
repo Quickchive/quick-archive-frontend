@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, reactive } from 'vue'
+import { ref, reactive, toRaw } from 'vue'
 import { useRoute } from 'vue-router'
 import {
   getContents,
@@ -22,12 +22,15 @@ import {
 import { saveHideAlertToCookie } from '@/utils/cookies'
 import { sortByCreatedAtDescending } from '@/utils/sort.js'
 import { deleteNullContentProp, deleteNullEditContentProp } from '@/utils/util.js'
+import { useRouter } from 'vue-router'
+import { json } from 'stream/consumers'
 
 export const useContentStore = defineStore('content', () => {
   const alertDataStore = useAlertDataStore()
   const modalViewStore = useModalViewStore()
   const toastStore = useToastStore()
   const route = useRoute()
+  const router = useRouter()
 
   /*** state ***/
 
@@ -195,10 +198,17 @@ export const useContentStore = defineStore('content', () => {
           // 전체 콘텐츠 페이지인 경우
           fetchAllContents()
         }
+        const jsonResponse = JSON.parse(response.config.data)
         const toastData = {
           message: '콘텐츠가 추가되었습니다.',
           func: {
-            message: '보러가기'
+            message: '보러가기',
+            execute: () => {
+              // 해당 카테고리로 이동 후 (categoryName으로 categoryId 찾는 로직 구현 필요)
+              // router.push(`/home/detail/${categoryId}`)
+              // 새탭에서 해당 콘텐츠 열기 처리
+              window.open(jsonResponse.link)
+            }
           }
         }
         toastStore.executeDefaultToast(toastData)
