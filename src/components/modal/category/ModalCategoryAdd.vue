@@ -28,10 +28,10 @@
       <label>현재 위치</label>
       <button class="btn--transparent flex-container__row" @click="openSetCategoryLocationModal()">
         <img
-          v-if="modalDataStore.selectedLocation.name !== '전체 콘텐츠'"
+          v-if="categoryStore.selectedLocation.name !== '전체 콘텐츠'"
           class="category-select-icon"
-          :src="modalDataStore.getCategoryImgByIconName(modalDataStore.selectedLocation.iconName)"
-        />{{ modalDataStore.selectedLocation.name }}<img :src="nextBlackIcon" />
+          :src="modalDataStore.getCategoryImgByIconName(categoryStore.selectedLocation.iconName)"
+        />{{ categoryStore.selectedLocation.name }}<img :src="nextBlackIcon" />
       </button>
     </div>
     <div class="modal-footer">
@@ -80,6 +80,7 @@ onMounted(() => {
     modalTitle.value = '카테고리 추가'
     categoryName.value = ''
     categoryIcon.value = 'Folder'
+    categoryStore.resetSelectedLocation()
     closeEvent.value = () => modalViewStore.closeAddCategoryModal()
   }
 
@@ -98,11 +99,13 @@ onMounted(() => {
         categoryStore.userCategoryList,
         categoryStore.focusedCategoryData.parentId
       )
-      modalDataStore.selectedLocation.name = parentData.name
-      modalDataStore.selectedLocation.id = parentData.id
+      console.log('parentData', parentData)
+      categoryStore.selectedLocation.name = parentData.name
+      categoryStore.selectedLocation.id = parentData.id
+      categoryStore.selectedLocation.iconName = parentData.iconName
     } else {
-      modalDataStore.selectedLocation.name = '전체 콘텐츠'
-      modalDataStore.selectedLocation.id = -1
+      categoryStore.selectedLocation.name = '전체 콘텐츠'
+      categoryStore.selectedLocation.id = -1
     }
   }
 })
@@ -137,7 +140,7 @@ const saveCategory = () => {
     iconName: categoryIcon.value
   }
   if (categoryStore.focusedCategoryData.parentId !== (null || -1 || undefined)) {
-    categoryData.parentId = modalDataStore.selectedLocation.id
+    categoryData.parentId = categoryStore.selectedLocation.id
   }
 
   // // 카테고리 추가

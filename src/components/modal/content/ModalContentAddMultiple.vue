@@ -26,7 +26,7 @@
       <div class="flex-container__row--space-between">
         <label class="label__modal"> 카테고리 </label>
         <button class="button--go-next" @click="modalViewStore.showModal('categoryLocation')">
-          {{ modalDataStore.selectedLocation.name }}<img :src="nextBlackIcon" />
+          {{ categoryStore.selectedLocation.name }}<img :src="nextBlackIcon" />
         </button>
       </div>
     </div>
@@ -42,13 +42,12 @@ import ModalHeaderStep from '@/components/header/ModalHeaderStep.vue'
 import nextBlackIcon from '@/assets/ic/ic-next-black.svg'
 import ThumbnailItemWithCheckbox from '@/components/modal/ThumbnailItemWithCheckbox.vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 
-const modalDataStore = useModalDataStore()
 const modalViewStore = useModalViewStore()
-
 const contentStore = useContentStore()
+const categoryStore = useCategoryStore()
 
 const props = defineProps({
   modalTitle: String,

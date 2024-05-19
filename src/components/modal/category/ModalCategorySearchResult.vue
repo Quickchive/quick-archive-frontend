@@ -25,8 +25,8 @@
     <div class="modal-footer">
       <button
         class="btn-confirm"
-        :class="modalDataStore.isSelectedCategory ? 'active' : 'inactive'"
-        :disabled="!modalDataStore.isSelectedCategory"
+        :class="categoryStore.isSelectedCategory ? 'active' : 'inactive'"
+        :disabled="!categoryStore.isSelectedCategory"
         @click="setLocation()"
       >
         완료

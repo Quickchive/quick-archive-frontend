@@ -25,7 +25,7 @@
               type="radio"
               :id="props.category.id"
               name="grades"
-              :checked="props.category.name === modalDataStore.selectedLocation.name"
+              :checked="props.category.name === categoryStore.selectedLocation.name"
             />
             <span class="custom-radio"></span>
           </label>
@@ -64,7 +64,7 @@ const clickArrowEvent = () => {
 }
 
 const selectRadioButton = (categoryDepth) => {
-  modalDataStore.clickRadioButton(categoryDepth)
+  categoryStore.clickRadioButton(categoryDepth)
 }
 </script>
 

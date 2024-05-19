@@ -3,7 +3,6 @@ import { deleteCategories } from '@/api/category.js'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { ref } from 'vue'
 import { addCategories, updateCategories } from '@/api/category.js'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import { useToastStore } from '@/stores/useToastStore.ts'
@@ -17,7 +16,6 @@ import type { CategoryIdMap } from '@/utils/interface'
 import { getCategories } from '@/api/category'
 export const useCategoryStore = defineStore('category', () => {
   const modalViewStore = useModalViewStore()
-  const modalDataStore = useModalDataStore()
   const alertDataStore = useAlertDataStore()
   const contentStore = useContentStore()
   const toastStore = useToastStore()
@@ -36,9 +34,15 @@ export const useCategoryStore = defineStore('category', () => {
     id: -1,
     name: '',
     parentId: null,
+    parentIconName: '',
     slug: '',
     updatedAt: '',
     userId: -1
+  })
+  // 카테고리 추가 & 콘텐츠 추가 모달 공통
+  const selectedLocation: any = ref({
+    name: '전체 콘텐츠',
+    iconName: ''
   })
 
   const userCategoryList: any = ref([])
@@ -49,6 +53,8 @@ export const useCategoryStore = defineStore('category', () => {
   const moreBtnCategoryIdTree = ref<CategoryIdMap>({})
   const moreBtnCategoryIdTree__search = ref<CategoryIdMap>({})
 
+  const isSelectedCategory = () => selectedLocation.value.name !== '전체 콘텐츠'
+
   /*** actions ***/
 
   function setCategoryName(categoryName: string) {
@@ -56,6 +62,7 @@ export const useCategoryStore = defineStore('category', () => {
   }
 
   function setFocusedCategoryData(categoryData: any) {
+    console.log('categoryData', categoryData)
     focusedCategoryData.value.children = categoryData.children
     focusedCategoryData.value.iconName = categoryData.iconName
     focusedCategoryData.value.name = categoryData.name
@@ -167,6 +174,22 @@ export const useCategoryStore = defineStore('category', () => {
       return acc
     }, {})
   }
+
+  function selectCategoryLocation(categoryName: string) {
+    selectedLocation.value.name = categoryName
+  }
+  function resetCategoryLocation() {
+    selectedLocation.value = { name: '전체 콘텐츠' }
+  }
+  function clickRadioButton(category: any) {
+    selectedLocation.value = category
+  }
+
+  function resetSelectedLocation() {
+    selectedLocation.value.name = '전체 콘텐츠'
+    selectedLocation.value.iconName = 'watch'
+    selectedLocation.value.id = -1
+  }
   /*** api 함수 ***/
 
   async function getUserCategoryList() {
@@ -222,7 +245,7 @@ export const useCategoryStore = defineStore('category', () => {
     } catch (error: any) {
       if (error.response.data.statusCode === 409) {
         if (error.response.data.message === 'Category already exists') {
-          modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
+          modalViewStore.setDuplicatedCategoryName(selectedLocation.value.name)
 
           const alertData = {
             title: '알림',
@@ -239,7 +262,7 @@ export const useCategoryStore = defineStore('category', () => {
           10개까지만 만들 수 있어요. 
           단, 서브 카테고리는 개수 제한 없이 만들 수 있어요.`
           }
-          modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
+          modalViewStore.setDuplicatedCategoryName(selectedLocation.value.name)
 
           alertDataStore.setDefaultAlertData(alertData)
           modalViewStore.showModalWithOverlay('alert', 'alert')
@@ -260,7 +283,7 @@ export const useCategoryStore = defineStore('category', () => {
       }
     } catch (error: any) {
       if (error.response.data.statusCode === 409) {
-        modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
+        modalViewStore.setDuplicatedCategoryName(selectedLocation.value.name)
         const alertData = {
           title: '알림',
           content: `동일한 이름의 카테고리가 
@@ -308,6 +331,12 @@ export const useCategoryStore = defineStore('category', () => {
     setFavoriteContentChip,
     resetContentChip,
     updateUserCategoryList,
-    userCategoryList
+    userCategoryList,
+    selectedLocation,
+    isSelectedCategory,
+    selectCategoryLocation,
+    resetCategoryLocation,
+    clickRadioButton,
+    resetSelectedLocation
   }
 })

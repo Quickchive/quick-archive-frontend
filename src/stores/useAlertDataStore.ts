@@ -97,7 +97,7 @@ export const useAlertDataStore = defineStore('alertData', () => {
         }
       } catch (error: any) {
         if (error.response.data.statusCode === 409) {
-          modalViewStore.setDuplicatedCategoryName(modalDataStore.selectedLocation.name)
+          modalViewStore.setDuplicatedCategoryName(categoryStore.selectedLocation.name)
           modalViewStore.showModalWithOverlay('alert', 'alert')
         }
       }
@@ -117,7 +117,7 @@ export const useAlertDataStore = defineStore('alertData', () => {
     rightButtonEvent: async () => {
       // 콘텐츠 추가
       try {
-        modalDataStore.selectCategoryLocation(newCategoryName.value)
+        categoryStore.selectCategoryLocation(newCategoryName.value)
         const response: any = await contentStore.addContent()
         // 상태코드로 에러 처리 하기
         if (response.data.statusCode === 201) {
