@@ -62,12 +62,14 @@ const controlAllCategory = () => {
 const toAllCategory = () => {
   categoryStore.resetContentChip()
   router.push('/home')
+  categoryStore.setCategoryName('전체 콘텐츠')
 }
 
 const toUnselectedCategory = () => {
   categoryStore.setUnselectedContentChip(false)
   if (route.fullPath.length > 5) {
     router.push('/home')
+    categoryStore.setCategoryName('전체 콘텐츠')
   }
   // if (route.fullPath.length)
 }
@@ -76,6 +78,7 @@ const toFavoriteCategory = () => {
   categoryStore.setFavoriteContentChip(false)
   if (route.fullPath.length > 5) {
     router.push('/home')
+    categoryStore.setCategoryName('전체 콘텐츠')
   }
   // if (route.fullPath.length)
 }

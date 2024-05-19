@@ -24,6 +24,10 @@ export const useCategoryStore = defineStore('category', () => {
 
   /*** state ***/
 
+  // 상단 필터
+  const isUnselectedChipOn = ref(false)
+  const isFavoriteChipOn = ref(false)
+
   const curCategoryName = ref('전체 콘텐츠')
   const focusedCategoryData: any = ref({
     children: [],
@@ -36,11 +40,8 @@ export const useCategoryStore = defineStore('category', () => {
     updatedAt: '',
     userId: -1
   })
-  const userCategoryList: any = ref([])
 
-  // 상단 필터
-  const isUnselectedChipOn = ref(false)
-  const isFavoriteChipOn = ref(false)
+  const userCategoryList: any = ref([])
 
   // 카테고리 트리 depth show/hide 컨트롤 용
   const categoryIdTree = ref<CategoryIdMap>({})
@@ -145,6 +146,7 @@ export const useCategoryStore = defineStore('category', () => {
       }
     }
   } // 카테고리 트리 depth show/hide 컨트롤 용
+
   function showChildrenCategoryRadio(children: any) {
     if (children) {
       for (const child of children) {
@@ -154,6 +156,19 @@ export const useCategoryStore = defineStore('category', () => {
       }
     }
   }
+
+  function createCategoryIdMap(items: any[]) {
+    return items.reduce((acc, item) => {
+      acc[item.id] = false
+      if (item.children && Array.isArray(item.children)) {
+        const nestedMap = createCategoryIdMap(item.children)
+        Object.assign(acc, nestedMap)
+      }
+      return acc
+    }, {})
+  }
+  /*** api 함수 ***/
+
   async function getUserCategoryList() {
     try {
       const response = await getCategories()
@@ -169,18 +184,6 @@ export const useCategoryStore = defineStore('category', () => {
       toastStore.executeErrorToast(error.response.data.message)
     }
   }
-
-  function createCategoryIdMap(items: any[]) {
-    return items.reduce((acc, item) => {
-      acc[item.id] = false
-      if (item.children && Array.isArray(item.children)) {
-        const nestedMap = createCategoryIdMap(item.children)
-        Object.assign(acc, nestedMap)
-      }
-      return acc
-    }, {})
-  }
-  /*** api 함수 ***/
 
   async function deleteCategory() {
     try {

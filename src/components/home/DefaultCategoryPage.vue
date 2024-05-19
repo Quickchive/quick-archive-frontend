@@ -30,14 +30,18 @@ import { ref, onMounted, toRaw } from 'vue'
 import emptyImg from '@/assets/img/img-empty-nocontent.png'
 import { useRoute } from 'vue-router'
 import TitleBar from '@/components/home/TitleBar.vue'
+import { useCategoryStore } from '@/stores/useCategoryStore'
 
 const route = useRoute()
 
 const contentStore = useContentStore()
 const contentList = ref({})
+const categoryStore = useCategoryStore()
 
 onMounted(async () => {
-  await contentStore.fetchAllContents()
+  if (!(categoryStore.isUnselectedChipOn || categoryStore.isFavoriteChipOn)) {
+    await contentStore.fetchAllContents()
+  }
   if (contentStore.allContentList.length > 0) {
     contentList.value = toRaw(contentStore.allContentList)
     console.log(contentList, 'contentList')
