@@ -40,10 +40,10 @@ import expandMoreIcon from '@/assets/ic/ic-expand-more.svg'
 import expandLessIcon from '@/assets/ic/ic-expand-less.svg'
 import { ref } from 'vue'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
-import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 
 const modalDataStore = useModalDataStore()
-const categoryTreeStore = useCategoryTreeStore()
+const categoryStore = useCategoryStore()
 const isChildrenCategoryShow = ref(false)
 
 const props = defineProps({
@@ -59,7 +59,7 @@ const clickArrowEvent = () => {
   if (props.activeExpandButton === false) return
   if (props.children) {
     isChildrenCategoryShow.value = !isChildrenCategoryShow.value
-    categoryTreeStore.showChildrenCategoryRadio(props.children)
+    categoryStore.showChildrenCategoryRadio(props.children)
   }
 }
 

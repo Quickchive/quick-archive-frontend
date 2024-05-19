@@ -16,7 +16,7 @@
           v-for="categoryItem2 in category.children"
           :key="categoryItem2.id"
         >
-          <template v-if="categoryTreeStore.categoryIdTreeRadio[categoryItem2.id]">
+          <template v-if="categoryStore.categoryIdTreeRadio[categoryItem2.id]">
             <li>
               <single-category-with-radio-button
                 :category="categoryItem2"
@@ -33,11 +33,11 @@
 
 <script setup>
 import SingleCategoryWithRadioButton from '@/components/nav/SingleCategoryWithRadioButton.vue'
-import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useSearchStore } from '@/stores/useSearchStore.ts'
 
 // 스토어 선언
-const categoryTreeStore = useCategoryTreeStore()
+const categoryStore = useCategoryStore()
 const searchStore = useSearchStore()
 </script>
 

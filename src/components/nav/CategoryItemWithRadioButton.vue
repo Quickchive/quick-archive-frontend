@@ -1,7 +1,7 @@
 <template>
   <div
     class="category-tree"
-    v-for="categoryItem1 in categoryTreeStore.userCategoryList"
+    v-for="categoryItem1 in categoryStore.userCategoryList"
     :key="categoryItem1"
   >
     <div class="category-item-radio">
@@ -20,7 +20,7 @@
           v-for="categoryItem2 in categoryItem1.children"
           :key="categoryItem2"
         >
-          <template v-if="categoryTreeStore.categoryIdTreeRadio[categoryItem2.id]">
+          <template v-if="categoryStore.categoryIdTreeRadio[categoryItem2.id]">
             <li>
               <single-category-tree-with-radio-button
                 :category="categoryItem2"
@@ -38,10 +38,10 @@
 
 <script setup>
 import SingleCategoryTreeWithRadioButton from '@/components/nav/SingleCategoryTreeWithRadioButton.vue'
-import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 
 // 스토어 선언
-const categoryTreeStore = useCategoryTreeStore()
+const categoryStore = useCategoryStore()
 const treeWidth2 = 'liDepth2'
 </script>
 

@@ -57,7 +57,7 @@ import CategoryItemWithRadioButton from '@/components/nav/CategoryItemWithRadioB
 import CategoryItemWithRadioButtonSearch from '@/components/nav/CategoryItemWithRadioButtonSearch.vue'
 
 import ModalHeader from '@/components/header/ModalHeader.vue'
-import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useSearchStore } from '@/stores/useSearchStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
@@ -66,13 +66,13 @@ import { toRaw, onMounted, ref } from 'vue'
 const modalTitle = '현재 위치'
 
 // 스토어 선언
-const categoryTreeStore = useCategoryTreeStore()
+const categoryStore = useCategoryStore()
 const searchStore = useSearchStore()
 
 const modalViewStore = useModalViewStore()
 const modalDataStore = useModalDataStore()
 
-const categoryList = ref(categoryTreeStore.userCategoryList)
+const categoryList = ref(categoryStore.userCategoryList)
 
 const closeModal = () => {
   modalDataStore.resetCategoryLocation()
@@ -80,9 +80,9 @@ const closeModal = () => {
 }
 
 onMounted(async () => {
-  await categoryTreeStore.getUserCategoryList()
-  if (toRaw(categoryTreeStore.userCategoryList).length > 0) {
-    categoryList.value = toRaw(categoryTreeStore.userCategoryList)
+  await categoryStore.getUserCategoryList()
+  if (toRaw(categoryStore.userCategoryList).length > 0) {
+    categoryList.value = toRaw(categoryStore.userCategoryList)
   }
 })
 

@@ -105,7 +105,7 @@
                 <more-button
                   :btnList="btnList"
                   class="more-button--search"
-                  v-if="categoryTreeStore.moreBtnCategoryIdTree__search[category.id]"
+                  v-if="categoryStore.categoryStore.moreBtnCategoryIdTree__search[category.id]"
                 ></more-button>
               </button>
             </article>
@@ -136,7 +136,6 @@
 
 <script setup>
 import { useSearchStore } from '@/stores/useSearchStore.ts'
-import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import emptyContentImg from '@/assets/img/img-empty-nocontent.png'
 import emptyCategoryImg from '@/assets/img/img_empty_nocategory.png'
@@ -149,7 +148,6 @@ import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 
 const searchStore = useSearchStore()
-const categoryTreeStore = useCategoryTreeStore()
 const categoryStore = useCategoryStore()
 const modalViewStore = useModalViewStore()
 const modalDataStore = useModalDataStore()
@@ -169,8 +167,8 @@ const excludeItem = (obj, excludedKey) => {
 }
 
 const showMoreButton = (categoryData) => {
-  categoryTreeStore.moreBtnCategoryIdTree__search = excludeItem(
-    categoryTreeStore.moreBtnCategoryIdTree__search,
+  categoryStore.moreBtnCategoryIdTree__search = excludeItem(
+    categoryStore.moreBtnCategoryIdTree__search,
     categoryData.id
   )
   categoryStore.setFocusedCategoryData(categoryData)

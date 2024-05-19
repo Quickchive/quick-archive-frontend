@@ -53,7 +53,6 @@ import nextBlackIcon from '@/assets/ic/ic-next-black.svg'
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
 import ModalHeader from '@/components/header/ModalHeader.vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
-import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { ref, computed, onMounted } from 'vue'
 import { searchCategoryDataById } from '@/utils/search.js'
@@ -67,7 +66,6 @@ const props = defineProps({
 
 // store 선언
 const modalViewStore = useModalViewStore()
-const categoryTreeStore = useCategoryTreeStore()
 const categoryStore = useCategoryStore()
 const modalDataStore = useModalDataStore()
 
@@ -97,7 +95,7 @@ onMounted(() => {
     closeEvent.value = () => modalViewStore.hideModalWithOverlay('editCategory', 'default')
     if (categoryStore.focusedCategoryData.parentId !== null) {
       const parentData = searchCategoryDataById(
-        categoryTreeStore.userCategoryList,
+        categoryStore.userCategoryList,
         categoryStore.focusedCategoryData.parentId
       )
       modalDataStore.selectedLocation.name = parentData.name

@@ -50,13 +50,13 @@ import ModalView from '@/views/ModalView.vue'
 import { useUserStore } from '@/stores/useUserStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useSearchStore } from '@/stores/useSearchStore.ts'
-import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useRouter, useRoute } from 'vue-router'
 import mainLogo from '@/assets/logo/logo_black_20px.svg'
 import { onMounted } from 'vue'
 import { useToastStore } from '@/stores/useToastStore.ts'
 
-const categoryTreeStore = useCategoryTreeStore()
+const categoryStore = useCategoryStore()
 const userStore = useUserStore()
 const searchStore = useSearchStore()
 const modalViewStore = useModalViewStore()
@@ -103,7 +103,7 @@ onMounted(async () => {
       const code = route.query.code
       await userStore.googleSocialLogin(code)
       await userStore.getUserProfile()
-      await categoryTreeStore.getUserCategoryList()
+      await categoryStore.getUserCategoryList()
     } catch (error) {
       console.error(error)
     }
@@ -115,7 +115,7 @@ onMounted(async () => {
       const code = route.query.code
       await userStore.kakaoSocialLogin(code)
       await userStore.getUserProfile()
-      await categoryTreeStore.getUserCategoryList()
+      await categoryStore.getUserCategoryList()
     } catch (error) {
       console.error(error)
     }
@@ -127,13 +127,13 @@ onMounted(async () => {
       const code = route.query.code
       await userStore.appleSocialLogin(code)
       await userStore.getUserProfile()
-      await categoryTreeStore.getUserCategoryList()
+      await categoryStore.getUserCategoryList()
     } catch (error) {
       console.error(error)
     }
   } else {
     await userStore.getUserProfile()
-    await categoryTreeStore.getUserCategoryList()
+    await categoryStore.getUserCategoryList()
   }
 })
 </script>

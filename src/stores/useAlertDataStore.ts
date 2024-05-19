@@ -4,7 +4,6 @@ import { useUserStore } from '@/stores/useUserStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { addCategories } from '@/api/category.js'
-import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
 
@@ -12,7 +11,6 @@ export const useAlertDataStore = defineStore('alertData', () => {
   const userStore = useUserStore()
   const modalViewStore = useModalViewStore()
   const categoryStore = useCategoryStore()
-  const categoryTreeStore = useCategoryTreeStore()
   const modalDataStore = useModalDataStore()
   const contentStore = useContentStore()
   const checkboxChecked = ref(false)
@@ -95,7 +93,7 @@ export const useAlertDataStore = defineStore('alertData', () => {
           modalViewStore.closeSetNewCategoryModal()
           modalViewStore.showModal('completeAddNewCategory')
 
-          await categoryTreeStore.updateUserCategoryList()
+          await categoryStore.updateUserCategoryList()
         }
       } catch (error: any) {
         if (error.response.data.statusCode === 409) {

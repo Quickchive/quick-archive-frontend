@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { getCategoryIdWithKeyword, getContentIdWithKeyword } from '@/utils/search.js'
-import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { toRaw } from 'vue'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import { getContents } from '@/api/contents'
@@ -23,7 +23,7 @@ export const useSearchStore = defineStore('search', () => {
   const searchedCategory2: any = ref([])
 
   const searchedContent: any = ref([])
-  const categoryTreeStore = useCategoryTreeStore()
+  const categoryStore = useCategoryStore()
   const contentStore = useContentStore()
   const contentCounts: any = ref({}) // 카테고리별 콘텐츠 개수를 저장할 객체
 
@@ -31,7 +31,7 @@ export const useSearchStore = defineStore('search', () => {
     // 카테고리
     searchedCategory.value = getCategoryIdWithKeyword(
       keyword.value.main,
-      categoryTreeStore.userCategoryList
+      categoryStore.userCategoryList
     )
 
     if (searchedCategory.value !== undefined) {
@@ -52,7 +52,7 @@ export const useSearchStore = defineStore('search', () => {
     // 카테고리
     searchedCategory2.value = getCategoryIdWithKeyword(
       keyword.value.modal,
-      categoryTreeStore.userCategoryList
+      categoryStore.userCategoryList
     )
   }
 
@@ -61,7 +61,7 @@ export const useSearchStore = defineStore('search', () => {
   // 부모의 부모의 이름까지 찾는다.
 
   function getCategoryDepth2NameById(parentId: number) {
-    const categoryName = categoryTreeStore.userCategoryList.find((e: any) => e.id === parentId)
+    const categoryName = categoryStore.userCategoryList.find((e: any) => e.id === parentId)
     if (categoryName) {
       return categoryName.name
     }
@@ -71,9 +71,7 @@ export const useSearchStore = defineStore('search', () => {
   function getCategoryDepth3NameById(parentId: number) {
     const grandParentName = getCategoryDepth2NameById(parentId)
     console.log('grandParentName', grandParentName)
-    const categoryName = categoryTreeStore.userCategoryList.find(
-      (e: any) => e.name === grandParentName
-    )
+    const categoryName = categoryStore.userCategoryList.find((e: any) => e.name === grandParentName)
     if (categoryName) {
       return categoryName.name
     }
@@ -90,7 +88,7 @@ export const useSearchStore = defineStore('search', () => {
     // 1. id로 현재 위치를 찾음
     // result가 있다면 2차 카테고리임.
     // result가 없다면 3차 카테고리임.
-    const result = categoryTreeStore.userCategoryList.find((e: any) => e.id === id)
+    const result = categoryStore.userCategoryList.find((e: any) => e.id === id)
     if (result) {
       // console.log('2차 카테고리')
       return false
@@ -110,7 +108,7 @@ export const useSearchStore = defineStore('search', () => {
             if (child.id === targetId) {
               parentName = item.name
               grandParentName =
-                categoryTreeStore.userCategoryList.find(
+                categoryStore.userCategoryList.find(
                   (parent: { children: any[] }) =>
                     parent.children &&
                     parent.children.some((grandChild) => grandChild.id === item.id)
@@ -124,7 +122,7 @@ export const useSearchStore = defineStore('search', () => {
       }
     }
 
-    findNames(categoryTreeStore.userCategoryList, id)
+    findNames(categoryStore.userCategoryList, id)
     console.log('parent', parentName, 'grand', grandParentName)
 
     return { parentName, grandParentName }

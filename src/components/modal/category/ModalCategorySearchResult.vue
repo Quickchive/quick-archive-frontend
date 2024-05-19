@@ -39,7 +39,7 @@
 import SearchInput from '@/components/input/SearchInput.vue'
 import addCategoryIcon from '@/assets/ic/ic-category-add.svg'
 import CategoryItemWithRadioButton from '@/components/nav/CategoryItemWithRadioButton.vue'
-import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useSearchStore } from '@/stores/useSearchStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
@@ -47,18 +47,18 @@ import { toRaw, onMounted, ref } from 'vue'
 import categoryListDummy from '@/assets/model/categoryList.json'
 
 // 스토어 선언
-const categoryTreeStore = useCategoryTreeStore()
+const categoryStore = useCategoryStore()
 const searchStore = useSearchStore()
 
 const modalViewStore = useModalViewStore()
 const modalDataStore = useModalDataStore()
 
-const categoryList = ref(categoryTreeStore.userCategoryList)
+const categoryList = ref(categoryStore.userCategoryList)
 
 onMounted(async () => {
-  await categoryTreeStore.getUserCategoryList()
-  if (toRaw(categoryTreeStore.userCategoryList).length > 0) {
-    categoryList.value = toRaw(categoryTreeStore.userCategoryList)
+  await categoryStore.getUserCategoryList()
+  if (toRaw(categoryStore.userCategoryList).length > 0) {
+    categoryList.value = toRaw(categoryStore.userCategoryList)
   } else {
     categoryList.value = categoryListDummy
   }

@@ -21,7 +21,7 @@
       <more-button
         :btnList="btnList"
         class="more-button"
-        v-if="categoryTreeStore.moreBtnCategoryIdTree[props.category.id]"
+        v-if="categoryStore.moreBtnCategoryIdTree[props.category.id]"
       ></more-button>
     </button>
   </li>
@@ -34,14 +34,12 @@ import moreIcon from '@/assets/ic/ic-more.svg'
 import MoreButton from '@/components/button/MoreButton.vue'
 import { reactive, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useCategoryTreeStore } from '@/stores/useCategoryTreeStore.ts'
 import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 
 const modalDataStore = useModalDataStore()
-const categoryTreeStore = useCategoryTreeStore()
 const categoryStore = useCategoryStore()
 const contentStore = useContentStore()
 const modalViewStore = useModalViewStore()
@@ -85,8 +83,8 @@ const excludeItem = (obj, excludedKey) => {
 }
 
 const showMoreButton = (categoryData) => {
-  categoryTreeStore.moreBtnCategoryIdTree = excludeItem(
-    categoryTreeStore.moreBtnCategoryIdTree,
+  categoryStore.moreBtnCategoryIdTree = excludeItem(
+    categoryStore.moreBtnCategoryIdTree,
     categoryData.id
   )
   categoryStore.setFocusedCategoryData(categoryData)
@@ -96,7 +94,7 @@ const clickArrowEvent = () => {
   if (props.activeExpandButton === false) return
   if (props.children) {
     isChildrenCategoryShow.value = !isChildrenCategoryShow.value
-    categoryTreeStore.showChildrenCategory(props.children)
+    categoryStore.showChildrenCategory(props.children)
   }
 }
 
