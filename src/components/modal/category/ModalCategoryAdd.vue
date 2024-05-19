@@ -6,7 +6,7 @@
         <div class="icon__category-change">
           <img
             class="img-category-custom"
-            :src="modalDataStore.getCategoryImgByIconName(categoryIcon)"
+            :src="categoryStore.getCategoryImgByIconName(categoryIcon)"
           /><img class="icon__thumb-change" :src="thumbChangeIcon" />
         </div>
       </button>
@@ -28,10 +28,12 @@
       <label>현재 위치</label>
       <button class="btn--transparent flex-container__row" @click="openSetCategoryLocationModal()">
         <img
-          v-if="categoryStore.selectedLocation.name !== '전체 콘텐츠'"
+          v-if="categoryStore.focusedCategory.parentCategoryName !== ('전체 콘텐츠' || -1)"
           class="category-select-icon"
-          :src="modalDataStore.getCategoryImgByIconName(categoryStore.selectedLocation.iconName)"
-        />{{ categoryStore.selectedLocation.name }}<img :src="nextBlackIcon" />
+          :src="
+            categoryStore.getCategoryImgByIconName(categoryStore.focusedCategory.parentIconName)
+          "
+        />{{ categoryStore.focusedCategory.parentCategoryName }}<img :src="nextBlackIcon" />
       </button>
     </div>
     <div class="modal-footer">
@@ -53,7 +55,6 @@ import nextBlackIcon from '@/assets/ic/ic-next-black.svg'
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
 import ModalHeader from '@/components/header/ModalHeader.vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { ref, computed, onMounted } from 'vue'
 import { searchCategoryDataById } from '@/utils/search.js'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
@@ -67,7 +68,6 @@ const props = defineProps({
 // store 선언
 const modalViewStore = useModalViewStore()
 const categoryStore = useCategoryStore()
-const modalDataStore = useModalDataStore()
 
 const categoryName = ref('')
 const categoryIcon = ref('')
@@ -80,32 +80,27 @@ onMounted(() => {
     modalTitle.value = '카테고리 추가'
     categoryName.value = ''
     categoryIcon.value = 'Folder'
-    categoryStore.resetSelectedLocation()
+    categoryStore.resetParentCategory()
     closeEvent.value = () => modalViewStore.closeAddCategoryModal()
   }
 
   // 카테고리 수정
   else {
     modalTitle.value = '카테고리 수정'
-    categoryName.value = categoryStore.focusedCategoryData.name
-    categoryIcon.value = categoryStore.focusedCategoryData.iconName
-    const iconData = modalDataStore.getIconDatagByIconName(
-      categoryStore.focusedCategoryData.iconName
-    )
-    modalDataStore.selectCategoryIcon(iconData)
+    categoryName.value = categoryStore.focusedCategory.name
+    categoryIcon.value = categoryStore.focusedCategory.iconName
+    const iconData = categoryStore.getIconDatagByIconName(categoryStore.focusedCategory.iconName)
+    categoryStore.selectCategoryIcon(iconData)
     closeEvent.value = () => modalViewStore.hideModalWithOverlay('editCategory', 'default')
-    if (categoryStore.focusedCategoryData.parentId !== null) {
+    if (categoryStore.focusedCategory.parentId !== null || -1) {
       const parentData = searchCategoryDataById(
-        categoryStore.userCategoryList,
-        categoryStore.focusedCategoryData.parentId
+        categoryStore.categoryList,
+        categoryStore.focusedCategory.parentId
       )
       console.log('parentData', parentData)
-      categoryStore.selectedLocation.name = parentData.name
-      categoryStore.selectedLocation.id = parentData.id
-      categoryStore.selectedLocation.iconName = parentData.iconName
+      categoryStore.setParentCategory(parentData)
     } else {
-      categoryStore.selectedLocation.name = '전체 콘텐츠'
-      categoryStore.selectedLocation.id = -1
+      categoryStore.resetParentCategory()
     }
   }
 })
@@ -129,8 +124,8 @@ const clearCategoryName = () => {
 }
 
 // 카테고리 아이콘 감시
-modalDataStore.$subscribe(() => {
-  categoryIcon.value = modalDataStore.getSelectedCategory.iconName
+categoryStore.$subscribe(() => {
+  categoryIcon.value = categoryStore.getSelectedCategory.iconName
 })
 
 // 저장 버튼 클릭 이벤트
@@ -139,8 +134,8 @@ const saveCategory = () => {
     categoryName: categoryName.value,
     iconName: categoryIcon.value
   }
-  if (categoryStore.focusedCategoryData.parentId !== (null || -1 || undefined)) {
-    categoryData.parentId = categoryStore.selectedLocation.id
+  if (categoryStore.focusedCategory.parentId !== (null || -1 || undefined)) {
+    categoryData.parentId = categoryStore.parentCategory.id
   }
 
   // // 카테고리 추가
@@ -150,7 +145,7 @@ const saveCategory = () => {
 
   // // 카테고리 수정
   if (props.apiName === 'editCategory') {
-    categoryData.categoryId = categoryStore.focusedCategoryData.id
+    categoryData.categoryId = categoryStore.focusedCategory.id
     categoryStore.editCategory(categoryData)
   }
 }

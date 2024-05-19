@@ -20,7 +20,7 @@
             type="radio"
             :id="props.category.id"
             name="grades"
-            :checked="props.category.name === categoryStore.selectedLocation.name"
+            :checked="props.category.name === categoryStore.parentCategory.name"
             @click="selectRadioButton(props.category)"
           />
           <span class="custom-radio"></span>
@@ -51,7 +51,7 @@
             type="radio"
             :id="props.category.id"
             name="grades"
-            :checked="props.category.name === categoryStore.selectedLocation.name"
+            :checked="props.category.name === categoryStore.parentCategory.name"
             @click="selectRadioButton(props.category)"
           />
           <span class="custom-radio"></span>
@@ -62,12 +62,10 @@
 </template>
 
 <script setup>
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { computed } from 'vue'
 import { useSearchStore } from '@/stores/useSearchStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 
-const modalDataStore = useModalDataStore()
 const searchStore = useSearchStore()
 const categoryStore = useCategoryStore()
 
@@ -78,15 +76,15 @@ const props = defineProps({
 })
 
 const selectRadioButton = (categoryDepth) => {
-  categoryStore.clickRadioButton(categoryDepth)
+  categoryStore.setParentCategory(categoryDepth)
 }
 
 const convertedIconName = computed(() => {
   console.log(props.category)
   if (props.category.iconName == 'None') {
-    return modalDataStore.getCategoryImgByIconName('Book')
+    return categoryStore.getCategoryImgByIconName('Watch')
   } else {
-    return modalDataStore.getCategoryImgByIconName(props.category.iconName)
+    return categoryStore.getCategoryImgByIconName(props.category.iconName)
   }
 })
 </script>

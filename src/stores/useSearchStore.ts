@@ -31,7 +31,7 @@ export const useSearchStore = defineStore('search', () => {
     // 카테고리
     searchedCategory.value = getCategoryIdWithKeyword(
       keyword.value.main,
-      categoryStore.userCategoryList
+      categoryStore.categoryList
     )
 
     if (searchedCategory.value !== undefined) {
@@ -52,7 +52,7 @@ export const useSearchStore = defineStore('search', () => {
     // 카테고리
     searchedCategory2.value = getCategoryIdWithKeyword(
       keyword.value.modal,
-      categoryStore.userCategoryList
+      categoryStore.categoryList
     )
   }
 
@@ -61,7 +61,7 @@ export const useSearchStore = defineStore('search', () => {
   // 부모의 부모의 이름까지 찾는다.
 
   function getCategoryDepth2NameById(parentId: number) {
-    const categoryName = categoryStore.userCategoryList.find((e: any) => e.id === parentId)
+    const categoryName = categoryStore.categoryList.find((e: any) => e.id === parentId)
     if (categoryName) {
       return categoryName.name
     }
@@ -71,7 +71,7 @@ export const useSearchStore = defineStore('search', () => {
   function getCategoryDepth3NameById(parentId: number) {
     const grandParentName = getCategoryDepth2NameById(parentId)
     console.log('grandParentName', grandParentName)
-    const categoryName = categoryStore.userCategoryList.find((e: any) => e.name === grandParentName)
+    const categoryName = categoryStore.categoryList.find((e: any) => e.name === grandParentName)
     if (categoryName) {
       return categoryName.name
     }
@@ -88,7 +88,7 @@ export const useSearchStore = defineStore('search', () => {
     // 1. id로 현재 위치를 찾음
     // result가 있다면 2차 카테고리임.
     // result가 없다면 3차 카테고리임.
-    const result = categoryStore.userCategoryList.find((e: any) => e.id === id)
+    const result = categoryStore.categoryList.find((e: any) => e.id === id)
     if (result) {
       // console.log('2차 카테고리')
       return false
@@ -108,7 +108,7 @@ export const useSearchStore = defineStore('search', () => {
             if (child.id === targetId) {
               parentName = item.name
               grandParentName =
-                categoryStore.userCategoryList.find(
+                categoryStore.categoryList.find(
                   (parent: { children: any[] }) =>
                     parent.children &&
                     parent.children.some((grandChild) => grandChild.id === item.id)
@@ -122,7 +122,7 @@ export const useSearchStore = defineStore('search', () => {
       }
     }
 
-    findNames(categoryStore.userCategoryList, id)
+    findNames(categoryStore.categoryList, id)
     console.log('parent', parentName, 'grand', grandParentName)
 
     return { parentName, grandParentName }

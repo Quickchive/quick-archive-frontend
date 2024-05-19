@@ -40,7 +40,6 @@ import SearchInput from '@/components/input/SearchInput.vue'
 import addCategoryIcon from '@/assets/ic/ic-category-add.svg'
 import CategoryItemWithRadioButton from '@/components/nav/CategoryItemWithRadioButton.vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useSearchStore } from '@/stores/useSearchStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { toRaw, onMounted, ref } from 'vue'
@@ -51,14 +50,13 @@ const categoryStore = useCategoryStore()
 const searchStore = useSearchStore()
 
 const modalViewStore = useModalViewStore()
-const modalDataStore = useModalDataStore()
 
-const categoryList = ref(categoryStore.userCategoryList)
+const categoryList = ref(categoryStore.categoryList)
 
 onMounted(async () => {
   await categoryStore.getUserCategoryList()
-  if (toRaw(categoryStore.userCategoryList).length > 0) {
-    categoryList.value = toRaw(categoryStore.userCategoryList)
+  if (toRaw(categoryStore.categoryList).length > 0) {
+    categoryList.value = toRaw(categoryStore.categoryList)
   } else {
     categoryList.value = categoryListDummy
   }

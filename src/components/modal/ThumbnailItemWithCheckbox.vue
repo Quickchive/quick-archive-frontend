@@ -1,6 +1,6 @@
 <template>
   <div class="box__thumbnail--multiple">
-    <div class="box__thumbnail-img" @click="modalDataStore.checkLinkInMultipleLink(index)">
+    <div class="box__thumbnail-img" @click="contentStore.checkLinkInMultipleLink(index)">
       <img
         class="thumbnail__sm"
         :src="contentStore.multipleContentList[index].coverImg"
@@ -29,11 +29,9 @@ import checkboxOn from '@/assets/ic/ic-control-checkbox-on.svg'
 import checkboxOff from '@/assets/ic/ic-control-checkbox-off.svg'
 import editIcon from '@/assets/ic/ic-edit.svg'
 import defaultImg from '@/assets/img/img_default.png'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
 
-const modalDataStore = useModalDataStore()
 const modalViewStore = useModalViewStore()
 
 const props = defineProps({

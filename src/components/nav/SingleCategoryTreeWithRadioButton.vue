@@ -11,8 +11,8 @@
           <img
             :src="
               props.category.iconName == undefined
-                ? modalDataStore.getCategoryImgByIconName('Book')
-                : modalDataStore.getCategoryImgByIconName(props.category.iconName)
+                ? categoryStore.getCategoryImgByIconName('Book')
+                : categoryStore.getCategoryImgByIconName(props.category.iconName)
             "
             class="category-icon img-category-icon--lg"
           />
@@ -25,7 +25,7 @@
               type="radio"
               :id="props.category.id"
               name="grades"
-              :checked="props.category.name === categoryStore.selectedLocation.name"
+              :checked="props.category.name === categoryStore.parentCategory.name"
             />
             <span class="custom-radio"></span>
           </label>
@@ -39,11 +39,10 @@
 import expandMoreIcon from '@/assets/ic/ic-expand-more.svg'
 import expandLessIcon from '@/assets/ic/ic-expand-less.svg'
 import { ref } from 'vue'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 
-const modalDataStore = useModalDataStore()
 const categoryStore = useCategoryStore()
+
 const isChildrenCategoryShow = ref(false)
 
 const props = defineProps({
@@ -64,7 +63,7 @@ const clickArrowEvent = () => {
 }
 
 const selectRadioButton = (categoryDepth) => {
-  categoryStore.clickRadioButton(categoryDepth)
+  categoryStore.setParentCategory(categoryDepth)
 }
 </script>
 

@@ -8,7 +8,7 @@
     <article class="flex-container__row wrapper__category-icon">
       <button
         :key="categoryIcon"
-        v-for="categoryIcon in modalDataStore.defaultCategory"
+        v-for="categoryIcon in categoryStore.defaultCategory"
         class="button--category-icon"
         @click="selectCategoryIcon(categoryIcon)"
       >
@@ -28,17 +28,15 @@
 import ModalHeader from '@/components/header/ModalHeader.vue'
 import controlCheckbox from '@/assets/ic/ic-control-checkbox-on.svg'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
-// import { useCategoryStore } from '@/stores/useCategoryStore.ts'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 
 const modalTitle = '카테고리 아이콘 선택'
 const modalViewStore = useModalViewStore()
-// const categoryStore = useCategoryStore()
-const modalDataStore = useModalDataStore()
+const categoryStore = useCategoryStore()
 
 // 카테고리 아이콘 선택
 const selectCategoryIcon = (i) => {
-  modalDataStore.selectCategoryIcon(i)
+  categoryStore.selectCategoryIcon(i)
 }
 // 완료 버튼 이벤트 - 카테고리 아이콘 셋 후 저장
 const submitCategoryIcon = () => {

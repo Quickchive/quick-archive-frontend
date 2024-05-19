@@ -40,9 +40,9 @@
     <div class="modal-footer">
       <button
         class="btn-confirm"
-        :class="categoryStore.isSelectedCategory ? 'active' : 'inactive'"
-        :disabled="!categoryStore.isSelectedCategory"
-        @click="setLocation()"
+        :class="categoryStore.parentCategory.name !== '전체 콘텐츠' ? 'active' : 'inactive'"
+        :disabled="!categoryStore.parentCategory.name == '전체 콘텐츠'"
+        @click="setLocation"
       >
         완료
       </button>
@@ -55,39 +55,40 @@ import SearchInput from '@/components/input/SearchInput.vue'
 import addCategoryIcon from '@/assets/ic/ic-category-add.svg'
 import CategoryItemWithRadioButton from '@/components/nav/CategoryItemWithRadioButton.vue'
 import CategoryItemWithRadioButtonSearch from '@/components/nav/CategoryItemWithRadioButtonSearch.vue'
-
 import ModalHeader from '@/components/header/ModalHeader.vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useSearchStore } from '@/stores/useSearchStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { toRaw, onMounted, ref } from 'vue'
+import { useContentStore } from '@/stores/useContentStore.ts'
 
 const modalTitle = '현재 위치'
 
 // 스토어 선언
 const categoryStore = useCategoryStore()
 const searchStore = useSearchStore()
+const contentStore = useContentStore()
 
 const modalViewStore = useModalViewStore()
-const modalDataStore = useModalDataStore()
 
-const categoryList = ref(categoryStore.userCategoryList)
+const categoryList = ref(categoryStore.categoryList)
 
 const closeModal = () => {
-  categoryStore.resetCategoryLocation()
+  // categoryStore.resetParentCategory()
   modalViewStore.hideModal('categoryLocation')
 }
 
 onMounted(async () => {
   await categoryStore.getUserCategoryList()
-  if (toRaw(categoryStore.userCategoryList).length > 0) {
-    categoryList.value = toRaw(categoryStore.userCategoryList)
+  if (toRaw(categoryStore.categoryList).length > 0) {
+    categoryList.value = toRaw(categoryStore.categoryList)
   }
 })
 
 // 완료 버튼 클릭
 const setLocation = () => {
+  categoryStore.setCategory()
+  contentStore.setCategory()
   modalViewStore.hideModal('categoryLocation')
 }
 </script>

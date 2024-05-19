@@ -2,10 +2,10 @@
   <div class="flex-container__row toast">
     <div class="wrapper__main-toast-content">
       <img :src="failIcon" />
-      <span class="toast-content">{{ toastStore.toast.message }}</span>
+      <span class="toast-content">{{ toastStore.errorToast.message }}</span>
     </div>
-    <button v-if="toastStore.toast.func" class="btn-toast">
-      {{ toastStore.toast.func.message }}
+    <button v-if="toastStore.errorToast.func" class="btn-toast">
+      {{ toastStore.errorToast.func.message }}
     </button>
   </div>
 </template>

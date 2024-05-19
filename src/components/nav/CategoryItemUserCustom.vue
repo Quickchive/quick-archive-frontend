@@ -1,7 +1,7 @@
 <template>
   <div
     class="category-tree"
-    v-for="categoryItem1 in categoryStore.userCategoryList"
+    v-for="categoryItem1 in categoryStore.categoryList"
     :key="categoryItem1"
   >
     <div class="category-item-default">

@@ -10,7 +10,7 @@
         @click="toCategoryPage(props.category.id, props.category.name)"
       >
         <img
-          :src="modalDataStore.getCategoryImgByIconName(props.category.iconName)"
+          :src="categoryStore.getCategoryImgByIconName(props.category.iconName)"
           class="category-icon img-category-icon"
         />
         {{ props.category.name }}
@@ -33,18 +33,14 @@ import expandLessIcon from '@/assets/ic/ic-expand-less.svg'
 import moreIcon from '@/assets/ic/ic-more.svg'
 import MoreButton from '@/components/button/MoreButton.vue'
 import { reactive, ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
+import { useRouter } from 'vue-router'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 
-const modalDataStore = useModalDataStore()
 const categoryStore = useCategoryStore()
 const contentStore = useContentStore()
 const modalViewStore = useModalViewStore()
-
-const route = useRoute()
 
 const isChildrenCategoryShow = ref(false)
 const isMoreButtonShow = ref(false)
@@ -87,7 +83,7 @@ const showMoreButton = (categoryData) => {
     categoryStore.moreBtnCategoryIdTree,
     categoryData.id
   )
-  categoryStore.setFocusedCategoryData(categoryData)
+  categoryStore.setFocusedCategory(categoryData)
 }
 
 const clickArrowEvent = () => {

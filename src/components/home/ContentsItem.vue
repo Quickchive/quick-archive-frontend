@@ -23,7 +23,7 @@
               class="ic-category"
               :src="
                 item.category
-                  ? modalDataStore.getCategoryImgByIconName(item.category.iconName)
+                  ? categoryStore.getCategoryImgByIconName(item.category.iconName)
                   : categoryIcon
               "
             />
@@ -66,12 +66,9 @@ import { useRouter } from 'vue-router'
 import MemoItem from '@/components/home/MemoItem.vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
-
 import { getHideAlertFromCookie } from '@/utils/cookies.js'
 import defaultImg from '@/assets/img/img_default.png'
 
-const modalDataStore = useModalDataStore()
 const modalViewStore = useModalViewStore()
 const contentStore = useContentStore()
 const categoryStore = useCategoryStore()
@@ -135,9 +132,9 @@ const excludeItem = (obj, excludedKey) => {
 }
 
 const showMoreButton = (contentData) => {
-  console.log(contentData)
   contentStore.moreBtnContentIdTree = excludeItem(contentStore.moreBtnContentIdTree, contentData.id)
   contentStore.setFocusedContent(contentData)
+  // categoryStore.setParentCategory(contentData.category)
 }
 
 const handleImageError = (event) => {

@@ -4,14 +4,12 @@ import { useUserStore } from '@/stores/useUserStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { addCategories } from '@/api/category.js'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
 
 export const useAlertDataStore = defineStore('alertData', () => {
   const userStore = useUserStore()
   const modalViewStore = useModalViewStore()
   const categoryStore = useCategoryStore()
-  const modalDataStore = useModalDataStore()
   const contentStore = useContentStore()
   const checkboxChecked = ref(false)
 
@@ -97,7 +95,7 @@ export const useAlertDataStore = defineStore('alertData', () => {
         }
       } catch (error: any) {
         if (error.response.data.statusCode === 409) {
-          modalViewStore.setDuplicatedCategoryName(categoryStore.selectedLocation.name)
+          modalViewStore.setDuplicatedCategoryName(categoryStore.parentCategory.name)
           modalViewStore.showModalWithOverlay('alert', 'alert')
         }
       }

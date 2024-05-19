@@ -11,6 +11,8 @@ import {
 } from '@/api/contents'
 import { getOgData } from '@/api/contents'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+
 import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
 import { useToastStore } from '@/stores/useToastStore.ts'
 import {
@@ -29,6 +31,8 @@ export const useContentStore = defineStore('content', () => {
   const alertDataStore = useAlertDataStore()
   const modalViewStore = useModalViewStore()
   const toastStore = useToastStore()
+  const categoryStore = useCategoryStore()
+
   const route = useRoute()
   const router = useRouter()
 
@@ -43,7 +47,7 @@ export const useContentStore = defineStore('content', () => {
     description: '',
     comment: '',
     favorite: false,
-    categoryName: '',
+    categoryName: '전체 콘텐츠',
     categoryIconName: '',
     categoryId: -1,
     parentId: -1,
@@ -145,6 +149,20 @@ export const useContentStore = defineStore('content', () => {
     multipleContentList.value = multipleLinkArray
   }
 
+  function setFavoriteToggle() {
+    contentObj.favorite = !contentObj.favorite
+  }
+
+  function setMemo(memo: string) {
+    contentObj.comment = memo
+  }
+
+  function setCategory() {
+    contentObj.categoryName = categoryStore.parentCategory.name
+    contentObj.categoryIconName = categoryStore.parentCategory.iconName
+    contentObj.categoryId = categoryStore.parentCategory.id
+  }
+
   /*************** api 함수 ***************/
   async function fetchAllContents() {
     try {
@@ -156,7 +174,7 @@ export const useContentStore = defineStore('content', () => {
         moreBtnContentIdTree.value = contentIdMap
       }
     } catch (error: any) {
-      toastStore.executeErrorToast(error.response.data.message)
+      toastStore.executeErrorToast(error.message)
     }
   }
 
@@ -170,7 +188,7 @@ export const useContentStore = defineStore('content', () => {
         moreBtnContentIdTree.value = contentIdMap
       }
     } catch (error: any) {
-      toastStore.executeErrorToast(error.response.data.message)
+      toastStore.executeErrorToast(error.message)
     }
   }
 
@@ -215,7 +233,7 @@ export const useContentStore = defineStore('content', () => {
       }
     } catch (error: any) {
       console.log(error)
-      toastStore.executeErrorToast(error.response.data.message)
+      toastStore.executeErrorToast(error.message)
     } finally {
       resetContentObj()
     }
@@ -232,7 +250,7 @@ export const useContentStore = defineStore('content', () => {
       }
     } catch (error: any) {
       // 토스트
-      toastStore.executeErrorToast(error.response.data.message)
+      toastStore.executeErrorToast(error.message)
     } finally {
       modalViewStore.closeSelectModal()
       modalViewStore.closeAddContentModal()
@@ -265,7 +283,7 @@ export const useContentStore = defineStore('content', () => {
         }
       }
     } catch (error: any) {
-      toastStore.executeErrorToast(error.response.data.message)
+      toastStore.executeErrorToast(error.message)
     }
   }
 
@@ -298,7 +316,7 @@ export const useContentStore = defineStore('content', () => {
         }
       }
     } catch (error: any) {
-      toastStore.executeErrorToast(error.response.data.message)
+      toastStore.executeErrorToast(error.message)
     }
   }
 
@@ -369,6 +387,9 @@ export const useContentStore = defineStore('content', () => {
     fetchAllContents,
     fetchContents,
     fetchOgData,
-    fetchMultipleLinksOgData
+    fetchMultipleLinksOgData,
+    setFavoriteToggle,
+    setMemo,
+    setCategory
   }
 })

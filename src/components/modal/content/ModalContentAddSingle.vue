@@ -12,8 +12,13 @@
     <div class="wrapper__modal-inner">
       <div class="flex-container__row--space-between">
         <label class="label__modal"> 카테고리 </label>
+
         <button class="button--go-next" @click="modalViewStore.showModal('categoryLocation')">
-          {{ categoryStore.selectedLocation.name }}<img :src="nextBlackIcon" />
+          <img
+            v-if="contentStore.contentObj.categoryName !== ('전체 콘텐츠' || -1)"
+            class="category-select-icon"
+            :src="categoryStore.getCategoryImgByIconName(contentStore.contentObj.categoryIconName)"
+          />{{ contentStore.contentObj.categoryName }}<img :src="nextBlackIcon" />
         </button>
       </div>
     </div>
@@ -23,7 +28,7 @@
         <label class="label__modal">즐겨찾기</label>
         <toggle-button
           :value="contentStore.contentObj.favorite"
-          :toggleOn="modalDataStore.setFavoriteToggle"
+          :toggleOn="contentStore.setFavoriteToggle"
         ></toggle-button>
       </div>
     </div>
@@ -52,12 +57,10 @@ import nextBlackIcon from '@/assets/ic/ic-next-black.svg'
 import ToggleButton from '@/components/button/ToggleButton.vue'
 import ThumbnailItem from '../ThumbnailItem.vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 
 const modalViewStore = useModalViewStore()
-const modalDataStore = useModalDataStore()
 const contentStore = useContentStore()
 const categoryStore = useCategoryStore()
 
@@ -69,7 +72,7 @@ const props = defineProps({
 })
 
 const setMemo = (e) => {
-  modalDataStore.setMemo(e.target.value)
+  contentStore.setMemo(e.target.value)
 }
 
 const saveContent = () => {

@@ -51,7 +51,7 @@
             <article class="wrapper__searchResult-category-item">
               <div class="searchResult-category-item">
                 <img
-                  :src="modalDataStore.getCategoryImgByIconName(category.iconName)"
+                  :src="categoryStore.getCategoryImgByIconName(category.iconName)"
                   class="img-search-category-result"
                 />
                 <!-- 1차 카테고리만 존재 -->
@@ -136,7 +136,6 @@
 
 <script setup>
 import { useSearchStore } from '@/stores/useSearchStore.ts'
-import { useModalDataStore } from '@/stores/useModalDataStore.ts'
 import emptyContentImg from '@/assets/img/img-empty-nocontent.png'
 import emptyCategoryImg from '@/assets/img/img_empty_nocategory.png'
 import dividerIcon from '@/assets/ic/divider_14px.svg'
@@ -150,7 +149,6 @@ import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 const searchStore = useSearchStore()
 const categoryStore = useCategoryStore()
 const modalViewStore = useModalViewStore()
-const modalDataStore = useModalDataStore()
 
 const excludeItem = (obj, excludedKey) => {
   let result = {}
@@ -171,7 +169,7 @@ const showMoreButton = (categoryData) => {
     categoryStore.moreBtnCategoryIdTree__search,
     categoryData.id
   )
-  categoryStore.setFocusedCategoryData(categoryData)
+  categoryStore.setFocusedCategory(categoryData)
 }
 
 const btnList = [
