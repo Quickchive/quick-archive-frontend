@@ -37,4 +37,46 @@ const deleteNullEditContentProp = (contentObj) => {
   return contentData
 }
 
-export { deleteNullContentProp, deleteNullEditContentProp }
+const deleteNullCategoryProp = (categoryObj) => {
+  let categoryData = categoryObj
+
+  if (categoryData.parentId === -1) {
+    delete categoryData.parentId
+  }
+
+  return categoryData
+}
+
+const formatAddCategoryData = (categoryObj) => {
+  let categoryData = categoryObj
+
+  delete categoryData.parentIconName
+  delete categoryData.parentCategoryName
+
+  if (categoryData.parentId === -1) {
+    delete categoryData.parentId
+  }
+
+  return categoryData
+}
+
+const formatEditCategoryData = (categoryObj) => {
+  let categoryData = categoryObj
+
+  delete categoryData.parentIconName
+  delete categoryData.parentCategoryName
+
+  if (categoryData.parentId === -1) {
+    delete categoryData.parentId
+  }
+
+  return categoryData
+}
+
+export {
+  deleteNullContentProp,
+  deleteNullEditContentProp,
+  deleteNullCategoryProp,
+  formatAddCategoryData,
+  formatEditCategoryData
+}

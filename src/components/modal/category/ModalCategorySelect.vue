@@ -41,6 +41,7 @@ const selectCategoryIcon = (i) => {
 // 완료 버튼 이벤트 - 카테고리 아이콘 셋 후 저장
 const submitCategoryIcon = () => {
   // 1. 카테고리 아이콘 저장 로직
+  categoryStore.setCategoryIcon()
   // 2. 1번 완료 후 모달 닫기 로직
   modalViewStore.hideModal('selectCategory')
 }

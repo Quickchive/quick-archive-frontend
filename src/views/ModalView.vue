@@ -6,10 +6,7 @@
       v-if="modalViewStore.modal.select"
     ></modal-select-category-or-content>
     <!-- 카테고리 추가 모달 -->
-    <modal-category-add
-      :apiName="'addCategory'"
-      v-if="modalViewStore.modal.addCategory"
-    ></modal-category-add>
+    <modal-category-add v-if="modalViewStore.modal.addCategory"></modal-category-add>
     <modal-category-select v-if="modalViewStore.modal.selectCategory"></modal-category-select>
 
     <!-- 콘텐츠 추가 & 카테고리 추가 공통 사용: 카테고리 지정 모달 -->
@@ -18,10 +15,7 @@
     ></modal-set-category-location>
 
     <!-- 카테고리 수정 모달 -->
-    <modal-category-add
-      :apiName="'editCategory'"
-      v-if="modalViewStore.modal.editCategory"
-    ></modal-category-add>
+    <modal-category-edit v-if="modalViewStore.modal.editCategory"></modal-category-edit>
 
     <!-- 콘텐츠 추가 - 단일 링크 -->
     <modal-content-step-01
@@ -98,6 +92,7 @@
 
 <script setup>
 import ModalCategoryAdd from '@/components/modal/category/ModalCategoryAdd.vue'
+import ModalCategoryEdit from '@/components/modal/category/ModalCategoryEdit.vue'
 import ModalSelectCategoryOrContent from '@/components/modal/ModalSelectCategoryOrContent.vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'

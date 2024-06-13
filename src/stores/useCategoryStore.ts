@@ -15,6 +15,11 @@ import {
 } from '@/utils/filter.js'
 import type { CategoryIdMap } from '@/utils/interface'
 import { getCategories } from '@/api/category'
+import {
+  deleteNullCategoryProp,
+  formatAddCategoryData,
+  formatEditCategoryData
+} from '@/utils/util.js'
 export const useCategoryStore = defineStore('category', () => {
   const modalViewStore = useModalViewStore()
   const alertDataStore = useAlertDataStore()
@@ -35,7 +40,7 @@ export const useCategoryStore = defineStore('category', () => {
   const defaultCategory = reactive(defaultCategoryList)
 
   // 사용: navbar 카테고리 트리에서 펼침 또는 더보기 클릭 했을 때
-  const focusedCategory = ref({
+  const focusedCategory: any = ref({
     id: -1,
     name: '',
     children: [],
@@ -53,6 +58,32 @@ export const useCategoryStore = defineStore('category', () => {
     name: '전체 콘텐츠',
     iconName: '',
     id: -1
+  })
+
+  const getSelectedCategory: any = computed(() => {
+    const selectedCategory = defaultCategory.find((e) => {
+      return e.selected == true
+    })
+    return selectedCategory
+  })
+
+  // 사용: 카테고리 추가
+  const addCategoryObj = ref({
+    categoryName: '',
+    iconName: 'Folder',
+    parentId: parentCategory.value.id,
+    parentIconName: parentCategory.value.iconName,
+    parentCategoryName: parentCategory.value.name
+  })
+
+  // 사용: 카테고리 추가
+  const editCategoryObj = ref({
+    categoryId: -1,
+    name: '',
+    iconName: '',
+    parentId: -1,
+    parentIconName: '',
+    parentCategoryName: ''
   })
 
   // 카테고리 트리 depth show/hide 컨트롤 용
@@ -76,6 +107,11 @@ export const useCategoryStore = defineStore('category', () => {
     focusedCategory.value.name = categoryData.name
     focusedCategory.value.parentId = categoryData.parentId
     focusedCategory.value.id = categoryData.id
+
+    editCategoryObj.value.iconName = categoryData.iconName
+    editCategoryObj.value.name = categoryData.name
+    editCategoryObj.value.parentId = categoryData.parentId
+    editCategoryObj.value.categoryId = categoryData.id
   }
 
   function resetParentCategory() {
@@ -203,13 +239,6 @@ export const useCategoryStore = defineStore('category', () => {
     }, {})
   }
 
-  const getSelectedCategory: any = computed(() => {
-    const selectedCategory = defaultCategory.find((e) => {
-      return e.selected == true
-    })
-    return selectedCategory
-  })
-
   const getCategoryImgByIconName = (iconName: string) => {
     const icon: any = defaultCategory.find((e) => e.iconName === iconName)
     if (icon === undefined) {
@@ -237,6 +266,10 @@ export const useCategoryStore = defineStore('category', () => {
     focusedCategory.value.parentCategoryName = parentCategory.value.name
     focusedCategory.value.parentIconName = parentCategory.value.iconName
     focusedCategory.value.parentId = parentCategory.value.iconName
+  }
+
+  function setCategoryIcon() {
+    editCategoryObj.value.iconName = getSelectedCategory.value.iconName
   }
 
   /*** api 함수 ***/
@@ -276,10 +309,10 @@ export const useCategoryStore = defineStore('category', () => {
     }
   }
 
-  async function addCategory(categoryData: any) {
+  async function addCategory() {
     // 카테고리 추가
     try {
-      const response = await addCategories(categoryData)
+      const response = await addCategories(formatAddCategoryData(addCategoryObj.value))
       console.log(response)
       const toastData = {
         message: '카테고리가 추가되었습니다.',
@@ -295,7 +328,6 @@ export const useCategoryStore = defineStore('category', () => {
       if (error.response.data.statusCode === 409) {
         if (error.response.data.message === 'Category already exists') {
           modalViewStore.setDuplicatedCategoryName(parentCategory.value.name)
-
           const alertData = {
             title: '알림',
             content: `동일한 이름의 카테고리가 ${modalViewStore.duplicatedCategoryLocation}내에 있어요.\n카테고리 이름을 변경해주세요.`
@@ -322,10 +354,9 @@ export const useCategoryStore = defineStore('category', () => {
     }
   }
 
-  async function editCategory(categoryData: any) {
-    console.log(categoryData)
+  async function editCategory() {
     try {
-      const response = await updateCategories(categoryData)
+      const response = await updateCategories(formatEditCategoryData(editCategoryObj.value))
       if (response.data.statusCode === 200) {
         modalViewStore.hideModalWithOverlay('editCategory', 'default')
         await updateUserCategoryList()
@@ -358,7 +389,21 @@ export const useCategoryStore = defineStore('category', () => {
     }
   }
 
+  // 카테고리 추가 관련
+  function resetAddCategoryName() {
+    addCategoryObj.value.categoryName = ''
+  }
+
+  // 카테고리 추가 관련
+  function resetAddCategoryObj() {
+    addCategoryObj.value.categoryName = ''
+    addCategoryObj.value.iconName = ''
+    resetParentCategory()
+  }
+
   return {
+    resetAddCategoryName,
+    resetAddCategoryObj,
     categoryIdTree,
     categoryIdTreeRadio,
     moreBtnCategoryIdTree,
@@ -391,6 +436,9 @@ export const useCategoryStore = defineStore('category', () => {
     getCategoryImgByIconName,
     selectCategoryIcon,
     getIconDatagByIconName,
-    setCategory
+    setCategory,
+    addCategoryObj,
+    editCategoryObj,
+    setCategoryIcon
   }
 })
