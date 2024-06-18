@@ -2,7 +2,9 @@
   <dialog class="flex-container__col alert-modal">
     <h1 class="alert-title">{{ alertDataStore.defaultAlertData.title }}</h1>
     <p class="alert-content">
-      {{ alertDataStore.defaultAlertData.content }}
+      <span v-for="(alertData, index) in alertDataStore.defaultAlertData.content" :key="index">
+        {{ alertData }}<br />
+      </span>
     </p>
     <div class="flex-container__row wrapper__alert-button--single">
       <button

@@ -330,7 +330,11 @@ export const useCategoryStore = defineStore('category', () => {
           modalViewStore.setDuplicatedCategoryName(parentCategory.value.name)
           const alertData = {
             title: '알림',
-            content: `동일한 이름의 카테고리가 ${modalViewStore.duplicatedCategoryLocation}내에 있어요.\n카테고리 이름을 변경해주세요.`
+            content: [
+              '동일한 이름의 카테고리가',
+              `${modalViewStore.duplicatedCategoryLocation}내에 있어요.`,
+              '카테고리 이름을 변경해주세요.'
+            ]
           }
 
           alertDataStore.setDefaultAlertData(alertData)
@@ -339,9 +343,11 @@ export const useCategoryStore = defineStore('category', () => {
         if (error.response.data.message === "Root categories can't be more than 10 in one user") {
           const alertData = {
             title: '알림',
-            content: `무료 버전에서는 메인 카테고리를
-          10개까지만 만들 수 있어요. 
-          단, 서브 카테고리는 개수 제한 없이 만들 수 있어요.`
+            content: [
+              '무료 버전에서는 메인 카테고리를',
+              '10개까지만 만들 수 있어요.',
+              '단, 서브 카테고리는 개수 제한 없이 만들 수 있어요.'
+            ]
           }
           modalViewStore.setDuplicatedCategoryName(parentCategory.value.name)
 
@@ -366,9 +372,11 @@ export const useCategoryStore = defineStore('category', () => {
         modalViewStore.setDuplicatedCategoryName(parentCategory.value.name)
         const alertData = {
           title: '알림',
-          content: `동일한 이름의 카테고리가 
-          ${modalViewStore.duplicatedCategoryLocation}내에 있어요.
-          카테고리 이름을 변경해주세요.`
+          content: [
+            '동일한 이름의 카테고리가',
+            `${modalViewStore.duplicatedCategoryLocation}내에 있어요.`,
+            '카테고리 이름을 변경해주세요.'
+          ]
         }
         alertDataStore.setDefaultAlertData(alertData)
         modalViewStore.showModalWithOverlay('alert', 'alert')
