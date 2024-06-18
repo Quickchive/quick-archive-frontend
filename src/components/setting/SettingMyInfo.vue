@@ -23,6 +23,7 @@
               :value="nickname"
               @input="setNickName"
               :disabled="disabled"
+              ref="input"
             />
             <button v-show="clearButtonShow" class="button-clear" @click="clearText()">
               <img :src="textfieldCancelIcon" />
@@ -75,6 +76,9 @@ const modalViewStore = useModalViewStore()
 const nickname = ref(userStore.nickname)
 
 const clearText = () => {
+  if (input.value) {
+    input.value.focus()
+  }
   nickname.value = ''
 }
 

@@ -19,6 +19,7 @@
         placeholder="카테고리 이름(2~15글자)"
         autofocus
         maxlength="15"
+        ref="input"
       />
       <button
         v-show="categoryStore.editCategoryObj.name"
@@ -59,12 +60,13 @@ import nextBlackIcon from '@/assets/ic/ic-next-black.svg'
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
 import ModalHeader from '@/components/header/ModalHeader.vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 
 // store 선언
 const modalViewStore = useModalViewStore()
 const categoryStore = useCategoryStore()
+const input = ref(null)
 
 const closeEvent = () => {
   modalViewStore.hideModalWithOverlay('editCategory', 'default')
@@ -90,6 +92,9 @@ const isCategoryNameValid = computed(() => {
 
 // 카테고리 필드 삭제
 const clearCategoryName = () => {
+  if (input.value) {
+    input.value.focus()
+  }
   categoryStore.editCategoryObj.name = ''
 }
 

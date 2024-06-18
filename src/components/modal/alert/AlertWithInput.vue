@@ -11,8 +11,9 @@
         :value="alertDataStore.newCategoryName"
         maxlength="15"
         @input="setNewCategory"
+        ref="input"
       />
-      <button class="btn--transparent" @click="clearInput()">
+      <button v-show="isCategoryNameValid" class="btn--transparent" @click="clearInput()">
         <img :src="textfieldCancelIcon" />
       </button>
     </div>
@@ -38,7 +39,7 @@
 
 <script setup>
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
 
 const props = defineProps({
@@ -46,6 +47,7 @@ const props = defineProps({
 })
 
 const alertDataStore = useAlertDataStore()
+const input = ref(null)
 
 const setNewCategory = (e) => {
   alertDataStore.newCategoryName = e.target.value
@@ -59,7 +61,10 @@ const isCategoryNameValid = computed(() => {
 })
 
 const clearInput = () => {
-  alertDataStore.newCategoryName.value = ''
+  alertDataStore.newCategoryName = ''
+  if (input.value) {
+    input.value.focus()
+  }
 }
 </script>
 

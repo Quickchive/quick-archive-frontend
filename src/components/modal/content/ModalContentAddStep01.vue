@@ -11,8 +11,12 @@
         placeholder="링크를 입력해주세요"
         :value="link"
         @input="setLink"
+        ref="input"
         autofocus
       />
+      <button v-show="link" class="btn--transparent" @click="reset">
+        <img :src="textfieldCancelIcon" />
+      </button>
     </div>
     <ul class="ul__content-modal">
       여러 링크를 한꺼번에 저장하고 싶나요?
@@ -40,11 +44,12 @@
 import { ref, computed } from 'vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
-
+import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
 import spaceRectangle from '@/assets/img/spacebar-rectangle.png'
 
 import ModalHeader from '@/components/header/ModalHeader.vue'
 import {} from '@/api/contents.js'
+const input = ref(null)
 
 const props = defineProps({
   modalTitle: String,
@@ -58,6 +63,13 @@ const link = ref('')
 
 const setLink = (e) => {
   link.value = e.target.value
+}
+
+const reset = () => {
+  if (input.value) {
+    input.value.focus()
+  }
+  link.value = ''
 }
 
 // 카테고리 명 유효성 검사

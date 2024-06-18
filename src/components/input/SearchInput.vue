@@ -6,6 +6,7 @@
       :placeholder="props.placeholderText"
       :value="props.location"
       @input="setKeyword"
+      ref="input"
     />
     <button v-show="isInputValid" class="button-clear" @click="reset()">
       <img :src="textfieldCancelIcon" />
@@ -15,7 +16,7 @@
 
 <script setup>
 import naviSearch from '@/assets/ic/ic-navi-search-unselected.svg'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
 import { useSearchStore } from '@/stores/useSearchStore.ts'
 import { useRouter } from 'vue-router'
@@ -23,6 +24,7 @@ import { isHangul, checkHangulCompletion } from '@/utils/search.js'
 
 const searchStore = useSearchStore()
 const router = useRouter()
+const input = ref(null)
 
 const props = defineProps({
   keyword: String,
@@ -76,6 +78,9 @@ const setKeyword = (e) => {
 }
 
 const reset = () => {
+  if (input.value) {
+    input.value.focus()
+  }
   if (props.keyword === 'main') {
     searchStore.keyword.main = ''
     searchStore.searchedCategoryCount = 0

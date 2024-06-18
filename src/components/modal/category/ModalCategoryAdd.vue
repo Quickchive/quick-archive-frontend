@@ -19,11 +19,12 @@
         placeholder="카테고리 이름(2~15글자)"
         autofocus
         maxlength="15"
+        ref="input"
       />
       <button
         v-show="categoryStore.addCategoryObj.categoryName"
         class="btn--transparent"
-        @click="categoryStore.resetAddCategoryName"
+        @click="reset"
       >
         <img :src="textfieldCancelIcon" />
       </button>
@@ -57,7 +58,7 @@ import nextBlackIcon from '@/assets/ic/ic-next-black.svg'
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
 import ModalHeader from '@/components/header/ModalHeader.vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 
 // store 선언
@@ -67,6 +68,7 @@ const categoryStore = useCategoryStore()
 const closeEvent = () => {
   modalViewStore.hideModalWithOverlay('addCategory', 'default')
 }
+const input = ref(null)
 
 onMounted(() => {
   // 카테고리 추가
@@ -97,6 +99,13 @@ categoryStore.$subscribe(() => {
 
 const setCategoryName = (e) => {
   categoryStore.addCategoryObj.categoryName = e.target.value
+}
+
+const reset = () => {
+  if (input.value) {
+    input.value.focus()
+  }
+  categoryStore.resetAddCategoryName
 }
 </script>
 
