@@ -30,9 +30,8 @@
   align-items: center;
   margin-top: 32px;
   span {
-    color: $color-grey-100;
     letter-spacing: -0.3px;
-    @include font(18px, 700, 24px);
+    @include font(18px, 700, 24px, $color-grey-100);
   }
   .img-profile {
     @include flex(row, center, center);
@@ -51,10 +50,8 @@
   align-items: center;
   justify-content: center;
   span {
-    color: $color-grey-60;
     text-align: center;
-    @include font(15px, 500, 30px);
-    letter-spacing: -0.3px;
+    @include font(15px, 500, 30px, $color-grey-60);
   }
 }
 

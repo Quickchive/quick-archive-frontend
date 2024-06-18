@@ -157,17 +157,15 @@ dialog {
   justify-content: space-between;
   width: 100%;
   label {
-    color: $color-grey-90;
     font-feature-settings: 'cv12' on;
-    @include font(15px, 500, 24px);
+    @include font(15px, 500, 24px, $color-grey-90);
     letter-spacing: -0.3px;
   }
   button {
     align-items: center;
-    color: $color-grey-100;
     text-align: right;
     font-feature-settings: 'cv12' on;
-    @include font(15px, 600, 24px);
+    @include font(15px, 600, 24px, $color-grey-100);
     letter-spacing: -0.3px;
   }
 }

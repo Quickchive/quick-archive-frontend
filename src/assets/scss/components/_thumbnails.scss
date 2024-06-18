@@ -41,11 +41,10 @@
   justify-content: center;
   flex-shrink: 0;
   overflow: hidden;
-  color: var(--grey-100, #13141a);
   font-feature-settings: 'cv12' on;
   text-overflow: ellipsis;
   white-space: nowrap;
-  @include font(16px, 600, 24px);
+  @include font(16px, 600, 24px, $color-grey-100);
   letter-spacing: -0.3px;
 }
 
@@ -57,11 +56,10 @@
   justify-content: center;
   flex-shrink: 0;
   overflow: hidden;
-  color: var(--grey-70, #79797c);
   font-feature-settings: 'cv12' on;
   text-overflow: ellipsis;
   white-space: nowrap;
-  @include font(13px, 400, 20px);
+  @include font(13px, 400, 20px, $color-grey-70);
   letter-spacing: -0.3px;
 }
 
@@ -121,13 +119,11 @@
 
   .searhResult-content-memo__title {
     text-align: left;
-    color: $color-grey-60;
-    @include font(16px, 600, 24px);
+    @include font(16px, 600, 24px, $color-grey-60);
     letter-spacing: -0.3px;
   }
   .searhResult-content-memo__content {
-    color: $color-grey-70;
-    @include font(14px, 500, 22px);
+    @include font(14px, 500, 22px, $color-grey-70);
     letter-spacing: -0.3px;
     margin: 4px 0 16px 0;
     text-align: start;

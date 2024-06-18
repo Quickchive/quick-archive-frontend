@@ -51,16 +51,14 @@
         justify-content: center;
         gap: 20px;
         h2 {
-          color: $color-grey-90;
           text-align: center;
-          @include font(44px, 700, 64px);
+          @include font(44px, 700, 64px, $color-grey-90);
           letter-spacing: -0.3px;
           margin: 0;
         }
         p {
-          color: #515253;
           text-align: center;
-          @include font(20px, 400, 32px);
+          @include font(20px, 400, 32px, #515253);
           letter-spacing: -0.3px;
         }
         .wrapper__section-button {
@@ -132,14 +130,12 @@
         margin-bottom: 4px;
       }
       h3 {
-        color: $color-grey-90;
-        @include font(34px, 700, 48px);
+        @include font(34px, 700, 48px, $color-grey-90);
         letter-spacing: -0.3px;
         margin: 0;
       }
       p {
-        color: $color-grey-80;
-        @include font(18px, 400, 26px);
+        @include font(18px, 400, 26px, $color-grey-80);
         letter-spacing: -0.3px;
         text-align: left;
       }

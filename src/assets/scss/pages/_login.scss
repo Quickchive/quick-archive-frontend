@@ -7,9 +7,8 @@ h1 {
 }
 
 p {
-  color: $color-grey-80;
   text-align: center;
-  @include font(14px, 400, 24px);
+  @include font(14px, 400, 24px, $color-grey-80);
   letter-spacing: -0.3px;
   margin: 0;
 }
@@ -42,9 +41,8 @@ p {
 }
 
 .desc__wrapper {
-  color: $color-grey-60;
   text-align: center;
-  @include font(13px, 500, 16px);
+  @include font(13px, 500, 16px, $color-grey-60);
   letter-spacing: -0.3px;
   a {
     text-decoration-line: underline;

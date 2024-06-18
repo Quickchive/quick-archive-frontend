@@ -77,10 +77,9 @@ input {
 }
 
 .input__edit-title {
-  color: $color-grey-100;
   text-align: center;
   font-feature-settings: 'cv12' on;
-  @include font(22px, 500, 34px);
+  @include font(22px, 500, 34px, $color-grey-100);
   letter-spacing: -0.3px;
   width: 398px;
   word-break: keep-all;
@@ -92,10 +91,9 @@ input {
     caret-color: #146eff;
   }
   &::placeholder {
-    color: $color-grey-30;
     text-align: center;
     font-feature-settings: 'cv12' on;
-    @include font(22px, 500, 34px);
+    @include font(22px, 500, 34px, $color-grey-30);
     letter-spacing: -0.3px;
   }
 }

@@ -14,11 +14,10 @@ button {
 
 .category-modal__btn {
   @include flex(column, flex-end, center);
-  @include font(15px, 500, 20px);
+  @include font(15px, 500, 20px, $color-grey-100);
   @include size(180px, 180px);
   flex-shrink: 0;
   border-radius: 8px;
-  color: $color-grey-100;
   text-align: center;
   letter-spacing: -0.3px;
   padding: 0 0 16px 0;
@@ -139,9 +138,8 @@ button {
 }
 
 .add-new-category__btn {
-  @include font(15px, 600, 24px);
+  @include font(15px, 600, 24px, $color-grey-40);
   @include flex(_, left, _);
-  color: $color-grey-40;
   letter-spacing: -0.3px;
   gap: 8px;
   width: 100%;

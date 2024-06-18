@@ -21,16 +21,14 @@
           gap: 6px;
           .searchResult-category-title {
             overflow: hidden;
-            color: $color-grey-100;
             text-overflow: ellipsis;
             white-space: nowrap;
-            @include font(16px, 600, 24px);
+            @include font(16px, 600, 24px, $color-grey-100);
             letter-spacing: -0.3px;
             text-align: start;
           }
           .searchResult-category-detail {
-            color: $color-grey-60;
-            @include font(13px, 500, 18px);
+            @include font(13px, 500, 18px, $color-grey-60);
             letter-spacing: -0.3px;
             display: flex;
             align-items: center;
@@ -73,25 +71,22 @@
           @include size(100%, 24px);
           text-align: left;
           overflow: hidden;
-          color: $color-grey-100;
           text-overflow: ellipsis;
-          @include font(16px, 600, 24px);
+          @include font(16px, 600, 24px, $color-grey-100);
           letter-spacing: -0.3px;
         }
         p {
           @include size(100%, 42px);
           text-align: left;
           overflow: hidden;
-          color: $color-grey-70;
           text-overflow: ellipsis;
-          @include font(14px, 400, 21px);
+          @include font(14px, 400, 21px, $color-grey-70);
           letter-spacing: -0.3px;
           margin: 4px 0 12px 0;
         }
         footer {
           align-items: center;
-          color: $color-grey-60;
-          @include font(13px, 500, 18px);
+          @include font(13px, 500, 18px, $color-grey-60);
           letter-spacing: -0.3px;
           .ic-category {
             width: 20px;
