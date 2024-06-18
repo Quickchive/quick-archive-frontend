@@ -395,6 +395,11 @@ export const useCategoryStore = defineStore('category', () => {
   }
 
   // 카테고리 추가 관련
+  function resetEditCategoryName() {
+    editCategoryObj.value.name = ''
+  }
+
+  // 카테고리 추가 관련
   function resetAddCategoryObj() {
     addCategoryObj.value.categoryName = ''
     addCategoryObj.value.iconName = ''
@@ -439,6 +444,7 @@ export const useCategoryStore = defineStore('category', () => {
     setCategory,
     addCategoryObj,
     editCategoryObj,
-    setCategoryIcon
+    setCategoryIcon,
+    resetEditCategoryName
   }
 })

@@ -25,11 +25,7 @@
         maxlength="15"
         ref="input"
       />
-      <button
-        v-show="categoryStore.editCategoryObj.name"
-        class="btn--transparent"
-        @click="clearCategoryName()"
-      >
+      <button v-show="categoryStore.editCategoryObj.name" class="btn--transparent" @click="reset">
         <img :src="textfieldCancelIcon" />
       </button>
     </label>
@@ -95,11 +91,12 @@ const isCategoryNameValid = computed(() => {
 })
 
 // 카테고리 필드 삭제
-const clearCategoryName = () => {
+const reset = () => {
+  console.log('input')
   if (input.value) {
     input.value.focus()
   }
-  categoryStore.editCategoryObj.name = ''
+  categoryStore.resetEditCategoryName()
 }
 
 // 카테고리 아이콘 감시

@@ -73,6 +73,7 @@ const closeEvent = () => {
   modalViewStore.hideModalWithOverlay('addCategory', 'default')
 }
 const input = ref(null)
+const inputText = ref('')
 
 onMounted(() => {
   // 카테고리 추가
@@ -109,7 +110,7 @@ const reset = () => {
   if (input.value) {
     input.value.focus()
   }
-  categoryStore.resetAddCategoryName
+  categoryStore.resetAddCategoryName()
 }
 </script>
 
