@@ -3,7 +3,9 @@
     <modal-header
       :modalTitle="modalTitle"
       :isBtnOnLeft="true"
+      :titlePosition="'left'"
       :closeModal="closeModal"
+      :margin="left"
     ></modal-header>
     <div class="wrapper__search-input">
       <search-input

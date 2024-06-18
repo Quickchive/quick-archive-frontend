@@ -2,7 +2,9 @@
   <dialog class="category-select__modal">
     <modal-header
       :modalTitle="modalTitle"
-      :isBtnOnLeft="false"
+      :isBtnOnLeft="true"
+      :titlePosition="'none'"
+      :btnPosition="'category-select'"
       :closeModal="closeModal"
     ></modal-header>
     <article class="flex-container__row wrapper__category-icon">

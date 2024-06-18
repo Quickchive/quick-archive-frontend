@@ -8,6 +8,12 @@
   &.right {
     @include flex(row-reverse, center, center);
   }
+  button {
+    &.category-select {
+      position: absolute;
+      left: 28px;
+    }
+  }
   .modal-title {
     width: 100%;
     text-align: center;
@@ -17,6 +23,9 @@
     }
     &.right {
       margin-left: 32px;
+    }
+    &.none {
+      margin: none;
     }
   }
 }

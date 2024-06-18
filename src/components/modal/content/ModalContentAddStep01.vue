@@ -3,6 +3,7 @@
     <modal-header
       :modalTitle="modalTitle"
       :isBtnOnLeft="false"
+      :titlePosition="'right'"
       :closeModal="closeModal"
     ></modal-header>
     <div class="wrapper__content-modal-input">

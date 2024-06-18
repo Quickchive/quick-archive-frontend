@@ -3,6 +3,7 @@
     <modal-header-step
       :modalTitle="modalTitle"
       :isBtnOnLeft="true"
+      :titlePosition="'left'"
       :closeModal="closeModal"
       :goBack="goBack"
     ></modal-header-step>

@@ -1,6 +1,10 @@
 <template>
   <dialog class="category-add__modal">
-    <modal-header :modalTitle="'카테고리 추가'" :closeModal="closeEvent"></modal-header>
+    <modal-header
+      :modalTitle="'카테고리 추가'"
+      :closeModal="closeEvent"
+      :titlePosition="'right'"
+    ></modal-header>
     <div class="wrapper__category-change">
       <button class="btn--transparent category-change__button" @click="openSelectCategoryModal()">
         <div class="icon__category-change">
