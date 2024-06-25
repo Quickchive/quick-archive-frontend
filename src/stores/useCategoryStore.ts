@@ -340,7 +340,7 @@ export const useCategoryStore = defineStore('category', () => {
       toastStore.executeDefaultToast(toastData)
       modalViewStore.closeAddCategoryModal()
       modalViewStore.closeSelectModal()
-      await updateUserCategoryList()
+      await getUserCategoryList()
       resetParentCategory()
     } catch (error: any) {
       if (error.response.data.statusCode === 409) {
