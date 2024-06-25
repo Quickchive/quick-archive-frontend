@@ -145,6 +145,7 @@ import ContentsItem from '@/components/home/ContentsItem.vue'
 import MoreButton from '@/components/button/MoreButton.vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
+import { searchCategoryDataById } from '@/utils/search.js'
 
 const searchStore = useSearchStore()
 const categoryStore = useCategoryStore()
@@ -169,7 +170,10 @@ const showMoreButton = (categoryData) => {
     categoryStore.moreBtnCategoryIdTree__search,
     categoryData.id
   )
-  categoryStore.setFocusedCategory(categoryData)
+  const parentData = searchCategoryDataById(categoryStore.categoryList, categoryData.parentId)
+  categoryStore.setFocusedCategory(categoryData, parentData)
+  categoryStore.setParentCategory(parentData)
+  categoryStore.setFocusedCategory(categoryData, parentData)
 }
 
 const btnList = [

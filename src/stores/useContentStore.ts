@@ -51,8 +51,7 @@ export const useContentStore = defineStore('content', () => {
     categoryIconName: '',
     categoryId: -1,
     parentId: -1,
-    coverImg: '',
-    focused: false
+    coverImg: ''
   })
 
   // 사용: 콘텐츠 추가 모달
@@ -102,7 +101,7 @@ export const useContentStore = defineStore('content', () => {
     contentObj.description = ''
     contentObj.siteName = ''
     contentObj.favorite = false
-    contentObj.categoryName = ''
+    contentObj.categoryName = '전체 콘텐츠'
     contentObj.categoryId = -1
     contentObj.categoryIconName = ''
   }
@@ -160,7 +159,7 @@ export const useContentStore = defineStore('content', () => {
   function setCategory() {
     contentObj.categoryName = categoryStore.parentCategory.name
     contentObj.categoryIconName = categoryStore.parentCategory.iconName
-    contentObj.categoryId = categoryStore.parentCategory.id
+    contentObj.parentId = categoryStore.parentCategory.id
   }
 
   /*************** api 함수 ***************/
@@ -209,6 +208,9 @@ export const useContentStore = defineStore('content', () => {
         modalViewStore.closeSelectModal()
         modalViewStore.closeAddContentModal()
         modalViewStore.closeAddContentSingle()
+        categoryStore.resetParentCategory()
+        resetContentObj()
+
         if (route.params.id !== undefined) {
           // 특정 콘텐츠 페이지인 경우
           fetchContents(Number(route.params.id))
@@ -234,8 +236,6 @@ export const useContentStore = defineStore('content', () => {
     } catch (error: any) {
       console.log(error)
       toastStore.executeErrorToast(error.message)
-    } finally {
-      resetContentObj()
     }
   }
 
@@ -274,6 +274,7 @@ export const useContentStore = defineStore('content', () => {
         modalViewStore.closeSelectModal()
         modalViewStore.hideModalWithOverlay('editContent', 'default')
         modalViewStore.hideModalWithOverlay('editContentDetail', 'default')
+        categoryStore.resetParentCategory()
         if (route.params.id !== undefined) {
           // 특정 콘텐츠 페이지인 경우
           fetchContents(Number(route.params.id))
@@ -289,7 +290,7 @@ export const useContentStore = defineStore('content', () => {
 
   async function deleteContent() {
     try {
-      const response: any = await deleteContents(focusedContent.value.id)
+      const response: any = await deleteContents(contentObj.id)
       console.log('deleteContent', response)
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
         modalViewStore.hideModalWithOverlay('deleteContent', 'default')

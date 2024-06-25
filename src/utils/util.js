@@ -1,5 +1,5 @@
 const deleteNullContentProp = (contentObj) => {
-  let contentData = contentObj
+  let contentData = { ...contentObj }
 
   delete contentData.id
   delete contentData.categoryId
@@ -19,7 +19,7 @@ const deleteNullContentProp = (contentObj) => {
 }
 
 const deleteNullEditContentProp = (contentObj) => {
-  let contentData = contentObj
+  let contentData = { ...contentObj }
 
   delete contentData.categoryId
   delete contentData.categoryIconName
@@ -38,7 +38,7 @@ const deleteNullEditContentProp = (contentObj) => {
 }
 
 const deleteNullCategoryProp = (categoryObj) => {
-  let categoryData = categoryObj
+  let categoryData = { ...categoryObj }
 
   if (categoryData.parentId === -1) {
     delete categoryData.parentId
@@ -48,7 +48,7 @@ const deleteNullCategoryProp = (categoryObj) => {
 }
 
 const formatAddCategoryData = (categoryObj) => {
-  let categoryData = categoryObj
+  let categoryData = { ...categoryObj }
 
   delete categoryData.parentIconName
   delete categoryData.parentCategoryName
@@ -61,7 +61,7 @@ const formatAddCategoryData = (categoryObj) => {
 }
 
 const formatEditCategoryData = (categoryObj) => {
-  let categoryData = categoryObj
+  let categoryData = { ...categoryObj }
 
   delete categoryData.parentIconName
   delete categoryData.parentCategoryName

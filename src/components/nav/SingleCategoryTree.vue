@@ -37,6 +37,7 @@ import { useRouter } from 'vue-router'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
+import { searchCategoryDataById } from '@/utils/search.js'
 
 const categoryStore = useCategoryStore()
 const contentStore = useContentStore()
@@ -83,7 +84,9 @@ const showMoreButton = (categoryData) => {
     categoryStore.moreBtnCategoryIdTree,
     categoryData.id
   )
-  categoryStore.setFocusedCategory(categoryData)
+  const parentData = searchCategoryDataById(categoryStore.categoryList, categoryData.parentId)
+  categoryStore.setFocusedCategory(categoryData, parentData)
+  categoryStore.setParentCategory(parentData)
 }
 
 const clickArrowEvent = () => {

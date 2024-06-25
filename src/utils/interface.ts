@@ -44,12 +44,12 @@ interface ContentObj {
   categoryName: string
   categoryIconName?: string
   categoryId?: number
-  parentId?: number
+  parentId: number
   createdAt?: number
   updatedAt?: number
   coverImg?: string
   checked?: boolean
-  focused: boolean
+  focused?: boolean
 }
 
 interface OgContent {

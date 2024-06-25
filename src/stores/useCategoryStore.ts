@@ -83,7 +83,7 @@ export const useCategoryStore = defineStore('category', () => {
     iconName: '',
     parentId: -1,
     parentIconName: '',
-    parentCategoryName: ''
+    parentCategoryName: '전체 콘텐츠'
   })
 
   // 카테고리 트리 depth show/hide 컨트롤 용
@@ -100,18 +100,27 @@ export const useCategoryStore = defineStore('category', () => {
     curCategoryName.value = categoryName
   }
 
-  function setFocusedCategory(categoryData: any) {
+  function setFocusedCategory(categoryData: any, parentData: any) {
     console.log('categoryData', categoryData)
     focusedCategory.value.children = categoryData.children
     focusedCategory.value.iconName = categoryData.iconName
     focusedCategory.value.name = categoryData.name
-    focusedCategory.value.parentId = categoryData.parentId
     focusedCategory.value.id = categoryData.id
 
     editCategoryObj.value.iconName = categoryData.iconName
     editCategoryObj.value.name = categoryData.name
-    editCategoryObj.value.parentId = categoryData.parentId
     editCategoryObj.value.categoryId = categoryData.id
+
+    if (parentData) {
+      // parent
+      focusedCategory.value.parentId = parentData.id
+      focusedCategory.value.parentCategoryName = parentData.name
+      focusedCategory.value.parentIconName = parentData.iconName
+
+      editCategoryObj.value.parentId = parentData.id
+      editCategoryObj.value.parentCategoryName = parentData.name
+      editCategoryObj.value.parentIconName = parentData.iconName
+    }
   }
 
   function resetParentCategory() {
@@ -265,11 +274,19 @@ export const useCategoryStore = defineStore('category', () => {
   function setCategory() {
     focusedCategory.value.parentCategoryName = parentCategory.value.name
     focusedCategory.value.parentIconName = parentCategory.value.iconName
-    focusedCategory.value.parentId = parentCategory.value.iconName
+    focusedCategory.value.parentId = parentCategory.value.id
+
+    editCategoryObj.value.parentCategoryName = parentCategory.value.name
+    editCategoryObj.value.parentIconName = parentCategory.value.iconName
+    editCategoryObj.value.parentId = parentCategory.value.id
   }
 
   function setCategoryIcon() {
     editCategoryObj.value.iconName = getSelectedCategory.value.iconName
+  }
+
+  function resetCategoryIcon() {
+    editCategoryObj.value.iconName = focusedCategory.value.iconName
   }
 
   /*** api 함수 ***/
@@ -324,6 +341,7 @@ export const useCategoryStore = defineStore('category', () => {
       modalViewStore.closeAddCategoryModal()
       modalViewStore.closeSelectModal()
       await updateUserCategoryList()
+      resetParentCategory()
     } catch (error: any) {
       if (error.response.data.statusCode === 409) {
         if (error.response.data.message === 'Category already exists') {
@@ -366,6 +384,7 @@ export const useCategoryStore = defineStore('category', () => {
       if (response.data.statusCode === 200) {
         modalViewStore.hideModalWithOverlay('editCategory', 'default')
         await updateUserCategoryList()
+        resetParentCategory()
       }
     } catch (error: any) {
       if (error.response.data.statusCode === 409) {
@@ -453,6 +472,7 @@ export const useCategoryStore = defineStore('category', () => {
     addCategoryObj,
     editCategoryObj,
     setCategoryIcon,
-    resetEditCategoryName
+    resetEditCategoryName,
+    resetCategoryIcon
   }
 })
