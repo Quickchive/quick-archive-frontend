@@ -99,13 +99,6 @@ const reset = () => {
   categoryStore.resetEditCategoryName()
 }
 
-// 카테고리 아이콘 감시
-// categoryStore.$subscribe(() => {
-//   categoryStore.editCategoryObj.parentId = categoryStore.parentCategory.id
-//   categoryStore.editCategoryObj.parentCategoryName = categoryStore.parentCategory.name
-//   categoryStore.editCategoryObj.parentIconName = categoryStore.parentCategory.iconName
-// })
-
 const setCategoryName = (e) => {
   categoryStore.editCategoryObj.name = e.target.value
 }

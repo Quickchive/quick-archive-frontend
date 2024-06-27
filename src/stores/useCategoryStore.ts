@@ -282,6 +282,7 @@ export const useCategoryStore = defineStore('category', () => {
   }
 
   function setCategoryIcon() {
+    addCategoryObj.value.iconName = getSelectedCategory.value.iconName
     editCategoryObj.value.iconName = getSelectedCategory.value.iconName
   }
 

@@ -96,7 +96,6 @@ const isCategoryNameValid = computed(() => {
 
 // 카테고리 아이콘 감시
 categoryStore.$subscribe(() => {
-  categoryStore.addCategoryObj.iconName = categoryStore.getSelectedCategory.iconName
   categoryStore.addCategoryObj.parentId = categoryStore.parentCategory.id
   categoryStore.addCategoryObj.parentCategoryName = categoryStore.parentCategory.name
   categoryStore.addCategoryObj.parentIconName = categoryStore.parentCategory.iconName
