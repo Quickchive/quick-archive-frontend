@@ -26,7 +26,23 @@
     <!-- 카테고리 -->
     <div class="wrapper__category-list">
       <category-list></category-list>
+      <div class="wrapper__banner">
+        <a
+          href="https://www.notion.so/Quick-Archive-Team-Space-f3185cc8ad6a48cb95398b181fefdd58"
+          target="_blank"
+        >
+          <img :src="banner2" />
+        </a>
+        <a
+          href="https://www.notion.so/Quick-Archive-Team-Space-f3185cc8ad6a48cb95398b181fefdd58"
+          target="_blank"
+        >
+          <img :src="banner1" />
+        </a>
+      </div>
     </div>
+    <!-- 배너 -->
+
     <!-- divider -->
     <div class="navbar__divider--bottom"></div>
     <!-- 버튼 -->
@@ -55,6 +71,8 @@ import { useRouter, useRoute } from 'vue-router'
 import mainLogo from '@/assets/logo/logo_black_20px.svg'
 import { onMounted } from 'vue'
 import { useToastStore } from '@/stores/useToastStore.ts'
+import banner1 from '@/assets/img/banner/banner_1.png'
+import banner2 from '@/assets/img/banner/banner_2.png'
 
 const categoryStore = useCategoryStore()
 const userStore = useUserStore()

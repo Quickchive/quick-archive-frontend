@@ -79,3 +79,14 @@
   overscroll-behavior: none;
   height: calc(100% - 305px);
 }
+
+.wrapper__banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+  img {
+    width: 288px;
+  }
+}
