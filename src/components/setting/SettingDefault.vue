@@ -14,7 +14,7 @@
         <div class="setting-main-button">
           <div class="wrapper__button-icon"><img :src="automaticIcon" />카테고리 추천</div>
           <toggle-button
-            :value="userStore.recommendationMode"
+            :value="getAutoCategorizeSettingFromCookie"
             :toggleOn="userStore.enableRecommendationMode"
           ></toggle-button>
         </div>
@@ -55,6 +55,7 @@ import TitleHeader from '@/components/header/TitleHeader.vue'
 import { useUserStore } from '@/stores/useUserStore.ts'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { getAutoCategorizeSettingFromCookie } from '@/utils/cookies.js'
 
 const userStore = useUserStore()
 const router = useRouter()
