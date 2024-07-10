@@ -8,7 +8,8 @@ import {
   getRefreshTokenFromCookie,
   deleteCookie,
   saveHideAlertToCookie,
-  saveAutoCategorizeSettingFromCookie
+  saveAutoCategorizeSettingFromCookie,
+  getAutoCategorizeSettingFromCookie
 } from '@/utils/cookies'
 import { useRouter } from 'vue-router'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
@@ -172,6 +173,12 @@ export const useUserStore = defineStore('user', () => {
     saveAutoCategorizeSettingFromCookie(recommendationMode.value)
     // 카테고리 추천 모드 요청 로직
   }
+
+  function getRecommendationMode() {
+    recommendationMode.value = JSON.parse(getAutoCategorizeSettingFromCookie())
+    return recommendationMode.value
+  }
+
   // 프로필 수정(닉네임 수정)
   async function editNickname(newNickname: string) {
     const profileData = {
@@ -224,6 +231,7 @@ export const useUserStore = defineStore('user', () => {
     setSocialLoginInfo,
     testerLogin,
     getRefreshToken,
-    getSocialLoginInfo
+    getSocialLoginInfo,
+    getRecommendationMode
   }
 })
