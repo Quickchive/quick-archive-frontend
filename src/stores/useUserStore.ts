@@ -7,7 +7,8 @@ import {
   saveRefreshTokenToCookie,
   getRefreshTokenFromCookie,
   deleteCookie,
-  saveHideAlertToCookie
+  saveHideAlertToCookie,
+  saveAutoCategorizeSettingFromCookie
 } from '@/utils/cookies'
 import { useRouter } from 'vue-router'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
@@ -168,6 +169,7 @@ export const useUserStore = defineStore('user', () => {
   // 카테고리 추천
   function enableRecommendationMode() {
     recommendationMode.value = !recommendationMode.value
+    saveAutoCategorizeSettingFromCookie(recommendationMode.value)
     // 카테고리 추천 모드 요청 로직
   }
   // 프로필 수정(닉네임 수정)

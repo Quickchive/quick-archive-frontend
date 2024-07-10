@@ -13,6 +13,10 @@ function saveHideAlertToCookie(value) {
   document.cookie = `hide_alert=${value}; path=/`
 }
 
+function saveAutoCategorizeSettingFromCookie(value) {
+  document.cookie = `auto_categorized=${value}; path=/`
+}
+
 function getAccessTokenFromCookie() {
   return document.cookie.replace(/(?:(?:^|.*;\s*)accessToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
 }
@@ -29,6 +33,10 @@ function getHideAlertFromCookie() {
   return document.cookie.replace(/(?:(?:^|.*;\s*)hide_alert\s*=\s*([^;]*).*$)|^.*$/, '$1')
 }
 
+function getAutoCategorizeSettingFromCookie() {
+  return document.cookie.replace(/(?:(?:^|.*;\s*)auto_categorized\s*=\s*([^;]*).*$)|^.*$/, '$1')
+}
+
 function deleteCookie(value) {
   document.cookie = `${value}=; expires=Thu, 01 Jan 1970 00:00:01 GMT;`
 }
@@ -42,5 +50,7 @@ export {
   getUserFromCookie,
   deleteCookie,
   saveHideAlertToCookie,
-  getHideAlertFromCookie
+  getHideAlertFromCookie,
+  saveAutoCategorizeSettingFromCookie,
+  getAutoCategorizeSettingFromCookie
 }
