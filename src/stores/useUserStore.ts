@@ -24,7 +24,7 @@ export const useUserStore = defineStore('user', () => {
   const nickname = ref('testnickname')
   const email = ref('tester@naver.com')
   // 마이페이지
-  const recommendationMode = ref(true)
+  const recommendationMode: any = ref(true)
   const socialLoginInfo: any = ref('')
   function getRefreshToken() {
     return refreshToken.value
@@ -175,7 +175,7 @@ export const useUserStore = defineStore('user', () => {
   }
 
   function getRecommendationMode() {
-    recommendationMode.value = JSON.parse(getAutoCategorizeSettingFromCookie())
+    recommendationMode.value = getAutoCategorizeSettingFromCookie()
     return recommendationMode.value
   }
 
