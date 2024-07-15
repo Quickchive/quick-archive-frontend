@@ -1,11 +1,20 @@
 <template>
   <dialog class="content-add__modal">
     <modal-header-step
+      v-if="props.modalTitle === '콘텐츠 추가'"
       :modalTitle="modalTitle"
       :isBtnOnLeft="true"
       :closeModal="closeModal"
       :goBack="goBack"
     ></modal-header-step>
+    <modal-header
+      v-else
+      :modalTitle="modalTitle"
+      :isBtnOnLeft="false"
+      :closeModal="closeModal"
+      :titlePosition="'right'"
+      :btnPosition="'left'"
+    ></modal-header>
     <!-- 썸네일 -->
     <thumbnail-item></thumbnail-item>
     <!-- 카테고리 -->
@@ -53,6 +62,7 @@
 
 <script setup>
 import ModalHeaderStep from '@/components/header/ModalHeaderStep.vue'
+import ModalHeader from '@/components/header/ModalHeader.vue'
 import nextBlackIcon from '@/assets/ic/ic-next-black.svg'
 import ToggleButton from '@/components/button/ToggleButton.vue'
 import ThumbnailItem from '../ThumbnailItem.vue'
