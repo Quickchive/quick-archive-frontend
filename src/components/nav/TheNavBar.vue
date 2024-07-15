@@ -67,6 +67,7 @@ import { useUserStore } from '@/stores/useUserStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useSearchStore } from '@/stores/useSearchStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+import { useContentStore } from '@/stores/useContentStore.ts'
 import { useRouter, useRoute } from 'vue-router'
 import mainLogo from '@/assets/logo/logo_black_20px.svg'
 import { onMounted } from 'vue'
@@ -75,6 +76,7 @@ import banner1 from '@/assets/img/banner/banner_1.png'
 import banner2 from '@/assets/img/banner/banner_2.png'
 
 const categoryStore = useCategoryStore()
+const contentStore = useContentStore()
 const userStore = useUserStore()
 const searchStore = useSearchStore()
 const modalViewStore = useModalViewStore()
