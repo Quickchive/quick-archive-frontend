@@ -53,6 +53,10 @@ const formatAddCategoryData = (categoryObj) => {
   delete categoryData.parentIconName
   delete categoryData.parentCategoryName
 
+  if (categoryData.iconName === '') {
+    categoryData.iconName = 'Folder'
+  }
+
   if (categoryData.parentId === -1) {
     delete categoryData.parentId
   }

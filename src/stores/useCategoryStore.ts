@@ -6,7 +6,7 @@ import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import { useToastStore } from '@/stores/useToastStore.ts'
 import { defaultCategoryList } from '@/assets/model/defaultCategory'
-import categoryWatch from '@/assets/img/category/img_category_watch.png'
+import categoryFolder from '@/assets/img/category/img_category_folder.png'
 import { ref, reactive, computed } from 'vue'
 import {
   filterByCategoryIsNull,
@@ -125,7 +125,7 @@ export const useCategoryStore = defineStore('category', () => {
 
   function resetParentCategory() {
     parentCategory.value.name = '전체 콘텐츠'
-    parentCategory.value.iconName = 'watch'
+    parentCategory.value.iconName = 'Folder'
     parentCategory.value.id = -1
   }
 
@@ -251,7 +251,7 @@ export const useCategoryStore = defineStore('category', () => {
   const getCategoryImgByIconName = (iconName: string) => {
     const icon: any = defaultCategory.find((e) => e.iconName === iconName)
     if (icon === undefined) {
-      return categoryWatch
+      return categoryFolder
     }
     return icon.img
   }

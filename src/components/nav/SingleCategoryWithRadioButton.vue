@@ -82,7 +82,7 @@ const selectRadioButton = (categoryDepth) => {
 const convertedIconName = computed(() => {
   console.log(props.category)
   if (props.category.iconName == 'None') {
-    return categoryStore.getCategoryImgByIconName('Watch')
+    return categoryStore.getCategoryImgByIconName('Folder')
   } else {
     return categoryStore.getCategoryImgByIconName(props.category.iconName)
   }
