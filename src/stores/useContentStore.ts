@@ -295,10 +295,10 @@ export const useContentStore = defineStore('content', () => {
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
         modalViewStore.hideModalWithOverlay('deleteContent', 'default')
         const toastData = {
-          message: '콘텐츠가 삭제되었습니다.',
-          func: {
-            message: '취소하기'
-          }
+          message: '콘텐츠가 삭제되었습니다.'
+          // func: {
+          //   message: '취소하기'
+          // }
         }
         toastStore.executeDefaultToast(toastData)
 
