@@ -175,8 +175,8 @@ export const useUserStore = defineStore('user', () => {
   }
 
   function getRecommendationMode() {
-    recommendationMode.value = JSON.parse(getAutoCategorizeSettingFromCookie())
-    return JSON.parse(recommendationMode.value)
+    recommendationMode.value = getAutoCategorizeSettingFromCookie()
+    return recommendationMode.value
   }
 
   // 프로필 수정(닉네임 수정)

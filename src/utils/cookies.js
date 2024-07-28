@@ -34,7 +34,9 @@ function getHideAlertFromCookie() {
 }
 
 function getAutoCategorizeSettingFromCookie() {
-  return document.cookie.replace(/(?:(?:^|.*;\s*)auto_categorized\s*=\s*([^;]*).*$)|^.*$/, '$1')
+  return JSON.parse(
+    document.cookie.replace(/(?:(?:^|.*;\s*)auto_categorized\s*=\s*([^;]*).*$)|^.*$/, '$1')
+  )
 }
 
 function deleteCookie(value) {
