@@ -175,7 +175,7 @@ export const useUserStore = defineStore('user', () => {
   }
 
   function getRecommendationMode() {
-    recommendationMode.value = getAutoCategorizeSettingFromCookie()
+    recommendationMode.value = JSON.parse(getAutoCategorizeSettingFromCookie())
     return JSON.parse(recommendationMode.value)
   }
 

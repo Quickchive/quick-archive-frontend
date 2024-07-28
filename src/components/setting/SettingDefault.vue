@@ -14,7 +14,7 @@
         <div class="setting-main-button">
           <div class="wrapper__button-icon"><img :src="automaticIcon" />카테고리 추천</div>
           <toggle-button
-            :value="JSON.parse(userStore.recommendationMode)"
+            :value="userStore.recommendationMode"
             :toggleOn="userStore.enableRecommendationMode"
           ></toggle-button>
         </div>
