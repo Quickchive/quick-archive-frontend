@@ -124,6 +124,7 @@ onMounted(async () => {
       await userStore.googleSocialLogin(code)
       await userStore.getUserProfile()
       await categoryStore.getUserCategoryList()
+      await userStore.getRecommendationMode()
     } catch (error) {
       console.error(error)
     }
@@ -136,6 +137,7 @@ onMounted(async () => {
       await userStore.kakaoSocialLogin(code)
       await userStore.getUserProfile()
       await categoryStore.getUserCategoryList()
+      await userStore.getRecommendationMode()
     } catch (error) {
       console.error(error)
     }
@@ -148,12 +150,14 @@ onMounted(async () => {
       await userStore.appleSocialLogin(code)
       await userStore.getUserProfile()
       await categoryStore.getUserCategoryList()
+      await userStore.getRecommendationMode()
     } catch (error) {
       console.error(error)
     }
   } else {
     await userStore.getUserProfile()
     await categoryStore.getUserCategoryList()
+    await userStore.getRecommendationMode()
   }
 })
 </script>

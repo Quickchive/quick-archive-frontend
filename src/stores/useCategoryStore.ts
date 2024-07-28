@@ -14,7 +14,7 @@ import {
   filterByFavorite
 } from '@/utils/filter.js'
 import type { CategoryIdMap } from '@/utils/interface'
-import { getCategories } from '@/api/category'
+import { getCategories, getRecommendedCategory } from '@/api/category'
 import {
   deleteNullCategoryProp,
   formatAddCategoryData,
@@ -417,6 +417,15 @@ export const useCategoryStore = defineStore('category', () => {
     }
   }
 
+  async function getAutoCategorizedName(link: string) {
+    try {
+      const response = await getRecommendedCategory(link)
+      console.log('카테고리 자동 추천', response)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   // 카테고리 추가 관련
   function resetAddCategoryName() {
     addCategoryObj.value.categoryName = ''
@@ -474,6 +483,7 @@ export const useCategoryStore = defineStore('category', () => {
     editCategoryObj,
     setCategoryIcon,
     resetEditCategoryName,
-    resetCategoryIcon
+    resetCategoryIcon,
+    getAutoCategorizedName
   }
 })

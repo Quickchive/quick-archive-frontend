@@ -19,14 +19,22 @@ function getCategories() {
 function deleteCategories(categoryId, deleteContentFlag) {
   return authInstance.delete(`categories/${categoryId}?deleteContentFlag=${deleteContentFlag}`)
 }
+
 // 최근 저장한 카테고리 조회
 function getFrequentSavedCategories() {
   return authInstance.get('categories/frequent')
 }
+
+// 카테고리 자동 추천
+function getRecommendedCategory(link) {
+  return authInstance.get(`categories/auto-categorize?link=${link}`)
+}
+
 export {
   addCategories,
   updateCategories,
   deleteCategories,
   getCategories,
-  getFrequentSavedCategories
+  getFrequentSavedCategories,
+  getRecommendedCategory
 }
