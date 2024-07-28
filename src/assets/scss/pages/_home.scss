@@ -21,3 +21,29 @@
     margin: 0;
   }
 }
+
+.wrapper__banner-ai {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 406px;
+  height: 56px;
+  background: #fff8ef;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 16px;
+  // margin-top: 16px;
+  margin: 0px 0 40px 0;
+  span {
+    color: #ff7a00;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px; /* 153.846% */
+    letter-spacing: -0.3px;
+  }
+  img {
+    margin-right: 16px;
+    width: 24px;
+  }
+}

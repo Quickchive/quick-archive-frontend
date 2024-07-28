@@ -7,7 +7,9 @@
       :closeModal="closeModal"
       :margin="left"
     ></modal-header>
-    <div class="wrapper__search-input">
+    <div
+      :class="userStore.recommendationMode ? 'wrapper__search-input-ai' : 'wrapper__search-input'"
+    >
       <search-input
         :keyword="'modal'"
         :location="searchStore.keyword.modal"
@@ -15,6 +17,14 @@
         :isSizeSm="false"
       ></search-input>
     </div>
+
+    <!-- 추천 배너 -->
+
+    <div v-if="userStore.recommendationMode" class="wrapper__banner-ai">
+      <img :src="icAutomatic" />
+      <span>퀵카이브와 AI가 카테고리를 추천했어요.</span>
+    </div>
+
     <div class="wrapper__add-new-category__button">
       <button
         class="add-new-category__btn btn--transparent"
@@ -23,9 +33,17 @@
         <img :src="addCategoryIcon" />새 카테고리 만들기
       </button>
     </div>
+
     <!-- 카테고리 목록 (라디오 버튼) -->
     <template v-if="searchStore.keyword.modal === ''">
-      <div class="wrapper__modal-category-list">
+      <div
+        class="wrapper__modal-category-list"
+        :class="
+          userStore.recommendationMode
+            ? 'wrapper__modal-category-list--ai'
+            : 'wrapper__modal-category-list'
+        "
+      >
         <category-item-with-radio-button></category-item-with-radio-button>
       </div>
     </template>
@@ -39,7 +57,7 @@
 
     <!-- divider -->
     <div class="modal__divider--bottom"></div>
-    <div class="modal-footer">
+    <div class="modal-footer-categoryLocation">
       <button
         class="btn-confirm"
         :class="categoryStore.parentCategory.name !== '전체 콘텐츠' ? 'active' : 'inactive'"
@@ -63,7 +81,10 @@ import { useSearchStore } from '@/stores/useSearchStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { toRaw, onMounted, ref } from 'vue'
 import { useContentStore } from '@/stores/useContentStore.ts'
+import icAutomatic from '@/assets/ic/ic_automatic.svg'
+import { useUserStore } from '@/stores/useUserStore.ts'
 
+const userStore = useUserStore()
 const modalTitle = '현재 위치'
 
 // 스토어 선언

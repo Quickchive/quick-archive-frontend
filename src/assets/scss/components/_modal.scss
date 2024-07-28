@@ -92,6 +92,20 @@ dialog {
   background-color: #fff;
 }
 
+.modal-footer-categoryLocation {
+  position: absolute;
+  bottom: 0;
+  background-color: #fff;
+  height: 120px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 32px 0 32px;
+  box-sizing: border-box;
+  border-radius: 0 0 16px 16px;
+}
+
 .modal__divider--bottom {
   @include size(100%, 48px);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 100%);
@@ -187,17 +201,29 @@ dialog {
     @include size(398px, 50px);
     margin: 16px 0 40px 0;
   }
+  .wrapper__search-input-ai {
+    @include size(398px, 50px);
+    margin: 16px 0 16px 0;
+  }
+
   .wrapper__add-new-category__button {
     margin-bottom: 24px;
     width: 398px;
   }
   .wrapper__modal-category-list {
-    position: absolute;
+    // position: absolute;
     overflow-y: scroll;
     overscroll-behavior: none;
-    top: 230px;
     z-index: 0;
-    @include size(398px, 254px);
+    @include size(398px, 228px);
+  }
+
+  .wrapper__modal-category-list--ai {
+    // position: absolute;
+    overflow-y: scroll;
+    overscroll-behavior: none;
+    z-index: 0;
+    @include size(398px, 150px);
   }
   .wrapper__modal-category-list::-webkit-scrollbar {
     display: none; /* 크롬, 사파리, 오페라, 엣지 */

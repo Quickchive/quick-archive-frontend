@@ -18,17 +18,23 @@
           />
           {{ props.category.name }}
         </button>
-        <!-- 라디오 버튼 -->
-        <div class="radio-buttons">
-          <label :for="props.category.id" class="radio-button">
-            <input
-              type="radio"
-              :id="props.category.id"
-              name="grades"
-              :checked="props.category.name === categoryStore.parentCategory.name"
-            />
-            <span class="custom-radio"></span>
-          </label>
+        <div class="wrapper__radio-btn">
+          <!-- 카테고리 자동 추천 태그 -->
+          <div v-if="userStore.recommendationMode" class="wrapper__ai-tag">
+            <span class="ai-tag"> 추천 </span>
+          </div>
+          <!-- 라디오 버튼 -->
+          <div class="radio-buttons">
+            <label :for="props.category.id" class="radio-button">
+              <input
+                type="radio"
+                :id="props.category.id"
+                name="grades"
+                :checked="props.category.name === categoryStore.parentCategory.name"
+              />
+              <span class="custom-radio"></span>
+            </label>
+          </div>
         </div>
       </div>
     </div>
@@ -40,9 +46,10 @@ import expandMoreIcon from '@/assets/ic/ic-expand-more.svg'
 import expandLessIcon from '@/assets/ic/ic-expand-less.svg'
 import { ref } from 'vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+import { useUserStore } from '@/stores/useUserStore.ts'
 
 const categoryStore = useCategoryStore()
-
+const userStore = useUserStore()
 const isChildrenCategoryShow = ref(false)
 
 const props = defineProps({
