@@ -64,8 +64,7 @@
 }
 
 .box__thumbnail {
-  @include flex(space-between, center);
-  flex-direction: row;
+  @include flex(row, space-between, center);
   width: 398px;
   gap: 8px;
   margin-bottom: 36px;
@@ -87,9 +86,11 @@
 
   .wrapper__thumbnail-content {
     .box__input--content-title {
-      display: flex;
-      flex-direction: row;
+      // display: flex;
+      // flex-direction: row;
       width: 100%;
+      @include flex(row, space-between, center);
+      //
     }
   }
 }

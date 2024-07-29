@@ -3,7 +3,8 @@
     <modal-header
       :modalTitle="modalTitle"
       :isBtnOnLeft="false"
-      :titlePosition="'right'"
+      :titlePosition="'none'"
+      :btnPosition="'rightMore'"
       :closeModal="closeModal"
     ></modal-header>
     <div class="category-modal__btn__wrapper">
