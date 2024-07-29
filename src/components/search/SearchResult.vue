@@ -105,7 +105,7 @@
                 <more-button
                   :btnList="btnList"
                   class="more-button--search"
-                  v-if="categoryStore.categoryStore.moreBtnCategoryIdTree__search[category.id]"
+                  v-if="categoryStore.moreBtnCategoryIdTree__search[category.id]"
                 ></more-button>
               </button>
             </article>
