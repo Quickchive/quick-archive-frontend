@@ -1,3 +1,11 @@
+.wrapper__toast {
+  @include flex(column, center, center);
+  width: 100%;
+  position: absolute;
+  bottom: 40px;
+  left: 0px;
+}
+
 .toast {
   @include size(360px, 54px);
   @include flex(row, space-between, center);
@@ -6,9 +14,6 @@
   backdrop-filter: blur(10px);
   padding: 0 16px;
   box-sizing: border-box;
-  position: absolute;
-  bottom: 40px;
-  left: 540px;
   z-index: 1000;
   .wrapper__main-toast-content {
     @include flex(row, center, center);

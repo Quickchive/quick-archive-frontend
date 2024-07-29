@@ -4,13 +4,15 @@
   </div>
   <RouterView />
   <!-- 토스트 -->
-  <Transition name="toast">
-    <toast-default v-if="toastStore.toastModal"></toast-default>
-  </Transition>
-  <!-- 토스트 -->
-  <Transition name="toast">
-    <toast-error v-if="toastStore.toastErrorModal"></toast-error>
-  </Transition>
+  <div class="wrapper__toast">
+    <Transition name="toast">
+      <toast-default v-if="toastStore.toastModal"></toast-default>
+    </Transition>
+    <!-- 토스트 -->
+    <Transition name="toast">
+      <toast-error v-if="toastStore.toastErrorModal"></toast-error>
+    </Transition>
+  </div>
 </template>
 
 <script setup>
