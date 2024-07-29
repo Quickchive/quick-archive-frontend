@@ -23,6 +23,11 @@
         class="more-button"
         v-if="categoryStore.moreBtnCategoryIdTree[props.category.id]"
       ></more-button>
+      <div
+        v-if="categoryStore.moreBtnCategoryIdTree[props.category.id]"
+        @click="hideButton(props.category.id)"
+        class="outside-click-area"
+      ></div>
     </button>
   </li>
 </template>
@@ -108,6 +113,11 @@ const btnList = [
     clickEvent: () => modalViewStore.showModalWithOverlay('deleteCategory', 'default')
   }
 ]
+
+const hideButton = (id) => {
+  console.log('hide')
+  categoryStore.value.moreBtnContentIdTree[id] = false
+}
 </script>
 
 <style></style>

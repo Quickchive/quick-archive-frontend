@@ -45,7 +45,13 @@
           v-if="contentStore.moreBtnContentIdTree[item.id]"
           :btnList="btnList"
           class="more-button--contents"
-        ></more-button>
+        >
+        </more-button>
+        <div
+          v-if="contentStore.moreBtnContentIdTree[item.id]"
+          @click="hideButton(item.id)"
+          class="outside-click-area"
+        ></div>
       </button>
     </div>
   </article>
@@ -140,6 +146,11 @@ const showMoreButton = (contentData) => {
 
 const handleImageError = (event) => {
   event.target.src = defaultImg
+}
+
+const hideButton = (id) => {
+  console.log('hide')
+  contentStore.value.moreBtnContentIdTree[id] = false
 }
 </script>
 <style></style>
