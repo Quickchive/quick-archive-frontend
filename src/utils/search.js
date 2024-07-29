@@ -10,6 +10,18 @@ const searchCategoryDataById = (arr, id) => {
   return null
 }
 
+const searchCategoryDataByName = (arr, name) => {
+  const result = arr.find((item) => item.name === name)
+  if (result) return result
+  for (const item of arr) {
+    if (item.children) {
+      const found = searchCategoryDataById(item.children, name)
+      if (found) return found
+    }
+  }
+  return null
+}
+
 // 실시간 검색 적용
 // 검색 조건: 제목, 메모, 카테고리명에 검색어에 해당되는 텍스트가 있는 경우
 // 검색결과 정렬 순서: 검색조건에 맞는 콘텐츠 및 카테고리가 최근 추가된 순서대로 노출
@@ -115,5 +127,6 @@ export {
   getCategoryIdWithKeyword,
   getContentIdWithKeyword,
   checkHangulCompletion,
-  isHangul
+  isHangul,
+  searchCategoryDataByName
 }

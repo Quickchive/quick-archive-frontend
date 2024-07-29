@@ -20,7 +20,15 @@
         </button>
         <div class="wrapper__radio-btn">
           <!-- 카테고리 자동 추천 태그 -->
-          <div v-if="userStore.recommendationMode" class="wrapper__ai-tag">
+          <div
+            v-if="
+              userStore.recommendationMode &&
+              modalViewStore.modal.addContent &&
+              categoryStore.isRecommended &&
+              props.category.name === categoryStore.parentCategory.name
+            "
+            class="wrapper__ai-tag"
+          >
             <span class="ai-tag"> 추천 </span>
           </div>
           <!-- 라디오 버튼 -->
@@ -47,9 +55,12 @@ import expandLessIcon from '@/assets/ic/ic-expand-less.svg'
 import { ref } from 'vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useUserStore } from '@/stores/useUserStore.ts'
+import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 
 const categoryStore = useCategoryStore()
 const userStore = useUserStore()
+const modalViewStore = useModalViewStore()
+
 const isChildrenCategoryShow = ref(false)
 
 const props = defineProps({

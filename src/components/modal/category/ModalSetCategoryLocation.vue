@@ -20,7 +20,10 @@
 
     <!-- 추천 배너 -->
 
-    <div v-if="userStore.recommendationMode" class="wrapper__banner-ai">
+    <div
+      v-if="userStore.recommendationMode && modalViewStore.modal.addContent"
+      class="wrapper__banner-ai"
+    >
       <img :src="icAutomatic" />
       <span>퀵카이브와 AI가 카테고리를 추천했어요.</span>
     </div>
@@ -39,7 +42,7 @@
       <div
         class="wrapper__modal-category-list"
         :class="
-          userStore.recommendationMode
+          userStore.recommendationMode && modalViewStore.modal.addContent
             ? 'wrapper__modal-category-list--ai'
             : 'wrapper__modal-category-list'
         "
@@ -91,7 +94,6 @@ const modalTitle = '현재 위치'
 const categoryStore = useCategoryStore()
 const searchStore = useSearchStore()
 const contentStore = useContentStore()
-
 const modalViewStore = useModalViewStore()
 
 const categoryList = ref(categoryStore.categoryList)

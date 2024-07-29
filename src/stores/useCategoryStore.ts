@@ -7,7 +7,7 @@ import { useContentStore } from '@/stores/useContentStore.ts'
 import { useToastStore } from '@/stores/useToastStore.ts'
 import { defaultCategoryList } from '@/assets/model/defaultCategory'
 import categoryFolder from '@/assets/img/category/img_category_folder.png'
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, toRaw } from 'vue'
 import {
   filterByCategoryIsNull,
   filterByFavoriteAndCategoryIsNull,
@@ -20,6 +20,7 @@ import {
   formatAddCategoryData,
   formatEditCategoryData
 } from '@/utils/util.js'
+import { searchCategoryDataByName } from '@/utils/search.js'
 export const useCategoryStore = defineStore('category', () => {
   const modalViewStore = useModalViewStore()
   const alertDataStore = useAlertDataStore()
@@ -33,6 +34,7 @@ export const useCategoryStore = defineStore('category', () => {
   // 상단 필터
   const isUnselectedChipOn = ref(false)
   const isFavoriteChipOn = ref(false)
+  const isRecommended = ref(false)
 
   const curCategoryName = ref('전체 콘텐츠')
 
@@ -421,6 +423,25 @@ export const useCategoryStore = defineStore('category', () => {
     try {
       const response = await getRecommendedCategory(link)
       console.log('카테고리 자동 추천', response)
+      // 추천된 카테고리로 부모 카테고리 선택
+      console.log(
+        '카테고리 자동 추천 결과',
+        toRaw(searchCategoryDataByName(categoryList.value, response.data.category))
+      )
+
+      // 카테고리 추천 정상 완료 여부
+      isRecommended.value = response.data.category == 'None' ? false : true
+
+      const recommendedCategoryObj = searchCategoryDataByName(
+        categoryList.value,
+        response.data.category
+      )
+      const recommendedCategory = {
+        name: response.data.category,
+        iconName: toRaw(recommendedCategoryObj).iconName,
+        id: toRaw(recommendedCategoryObj).id
+      }
+      setParentCategory(recommendedCategory)
     } catch (error) {
       console.log(error)
     }
@@ -484,6 +505,7 @@ export const useCategoryStore = defineStore('category', () => {
     setCategoryIcon,
     resetEditCategoryName,
     resetCategoryIcon,
-    getAutoCategorizedName
+    getAutoCategorizedName,
+    isRecommended
   }
 })
