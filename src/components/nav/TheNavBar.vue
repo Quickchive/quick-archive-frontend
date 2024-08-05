@@ -124,6 +124,7 @@ onMounted(async () => {
       await userStore.googleSocialLogin(code)
       await userStore.getUserProfile()
       await categoryStore.getUserCategoryList()
+      await contentStore.fetchAllContents()
       await userStore.getRecommendationMode()
     } catch (error) {
       console.error(error)
@@ -137,6 +138,7 @@ onMounted(async () => {
       await userStore.kakaoSocialLogin(code)
       await userStore.getUserProfile()
       await categoryStore.getUserCategoryList()
+      await contentStore.fetchAllContents()
       await userStore.getRecommendationMode()
     } catch (error) {
       console.error(error)
@@ -150,6 +152,7 @@ onMounted(async () => {
       await userStore.appleSocialLogin(code)
       await userStore.getUserProfile()
       await categoryStore.getUserCategoryList()
+      await contentStore.fetchAllContents()
       await userStore.getRecommendationMode()
     } catch (error) {
       console.error(error)
@@ -157,6 +160,7 @@ onMounted(async () => {
   } else {
     await userStore.getUserProfile()
     await categoryStore.getUserCategoryList()
+    await contentStore.fetchAllContents()
     await userStore.getRecommendationMode()
   }
 })

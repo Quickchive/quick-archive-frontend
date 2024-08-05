@@ -39,9 +39,9 @@ const contentList = ref({})
 const categoryStore = useCategoryStore()
 
 onMounted(async () => {
-  if (!(categoryStore.isUnselectedChipOn || categoryStore.isFavoriteChipOn)) {
-    await contentStore.fetchAllContents()
-  }
+  // if (!(categoryStore.isUnselectedChipOn || categoryStore.isFavoriteChipOn)) {
+  //   await contentStore.fetchAllContents()
+  // }
   if (contentStore.allContentList.length > 0) {
     contentList.value = toRaw(contentStore.allContentList)
     console.log(contentList, 'contentList')
