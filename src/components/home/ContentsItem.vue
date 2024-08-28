@@ -20,12 +20,9 @@
         <footer class="flex-container__row">
           <div id="thumbnail-category" @click="toCategoryPage()">
             <img
+              v-if="item.category"
               class="ic-category"
-              :src="
-                item.category
-                  ? categoryStore.getCategoryImgByIconName(item.category.iconName)
-                  : categoryIcon
-              "
+              :src="categoryStore.getCategoryImgByIconName(item.category.iconName)"
             />
             {{ item.category ? item.category.name : '전체 콘텐츠' }}
           </div>
