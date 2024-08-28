@@ -5,7 +5,7 @@
       <transition name="fade">
         <div class="wrapper__header-button" v-show="showSmButton">
           <button id="btn__app--sm">모바일 앱 다운로드</button>
-          <button id="btn__web--sm">웹에서 이용하기</button>
+          <button id="btn__web--sm" @click="toLoginPage">웹에서 이용하기</button>
         </div>
       </transition>
     </header>
