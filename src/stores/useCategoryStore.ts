@@ -318,10 +318,10 @@ export const useCategoryStore = defineStore('category', () => {
       await updateUserCategoryList()
       modalViewStore.hideModalWithOverlay('deleteCategory', 'default')
       const toastData = {
-        message: '카테고리가 삭제되었습니다.'
-        // func: {
-        //   message: '취소하기'
-        // }
+        message: '카테고리가 삭제되었습니다.',
+        func: {
+          message: ''
+        }
       }
       toastStore.executeDefaultToast(toastData)
     } catch (error: any) {
