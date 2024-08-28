@@ -8,7 +8,11 @@
       :margin="left"
     ></modal-header>
     <div
-      :class="userStore.recommendationMode ? 'wrapper__search-input-ai' : 'wrapper__search-input'"
+      :class="
+        userStore.recommendationMode && categoryStore.isRecommended
+          ? 'wrapper__search-input-ai'
+          : 'wrapper__search-input'
+      "
     >
       <search-input
         :keyword="'modal'"
@@ -21,7 +25,11 @@
     <!-- 추천 배너 -->
 
     <div
-      v-if="userStore.recommendationMode && modalViewStore.modal.addContent"
+      v-if="
+        userStore.recommendationMode &&
+        categoryStore.isRecommended &&
+        modalViewStore.modal.addContent
+      "
       class="wrapper__banner-ai"
     >
       <img :src="icAutomatic" />
@@ -42,7 +50,9 @@
       <div
         class="wrapper__modal-category-list"
         :class="
-          userStore.recommendationMode && modalViewStore.modal.addContent
+          userStore.recommendationMode &&
+          categoryStore.isRecommended &&
+          modalViewStore.modal.addContent
             ? 'wrapper__modal-category-list--ai'
             : 'wrapper__modal-category-list'
         "
