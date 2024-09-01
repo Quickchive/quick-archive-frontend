@@ -12,6 +12,15 @@
 
       gtag('config', 'G-VKJF76RYPE')
     </script>
+    <!-- amplitude -->
+    <script src="https://cdn.amplitude.com/libs/analytics-browser-2.11.1-min.js.gz"></script>
+    <script src="https://cdn.amplitude.com/libs/plugin-session-replay-browser-1.6.22-min.js.gz"></script>
+    <script>
+      window.amplitude.add(window.sessionReplay.plugin({ sampleRate: 1 }))
+      window.amplitude.init('c3bd084a6dbb3ee4916b752fd2485be5', {
+        autocapture: { elementInteractions: true }
+      })
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" href="/appIcon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
