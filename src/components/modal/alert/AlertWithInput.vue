@@ -2,7 +2,7 @@
   <dialog class="confirm-modal">
     <h1 class="alert-title">{{ props.alertData.title }}</h1>
     <p class="text__confirm-content">
-      {{ props.alertData.message }}
+      <pre>{{ props.alertData.message }}</pre>
     </p>
     <div class="wrapper__confirm-input" v-if="props.alertData.input">
       <input
