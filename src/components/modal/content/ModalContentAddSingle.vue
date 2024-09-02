@@ -49,6 +49,7 @@
           <textarea
             class="textarea__memo"
             placeholder="메모를 남겨보세요"
+            :value="props.modalTitle === '콘텐츠 수정' ? contentStore.contentObj.comment : ''"
             @input="setMemo"
           ></textarea>
         </div>
