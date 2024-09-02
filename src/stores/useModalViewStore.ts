@@ -80,7 +80,7 @@ export const useModalViewStore = defineStore('modalView', () => {
 
   function closeSetNewCategoryModal() {
     modal.addNewCategory = false
-    overlay.default = true
+    overlay.default = false
   }
 
   function closeCompleteAddCategoryModal() {
