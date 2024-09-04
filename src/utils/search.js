@@ -31,15 +31,17 @@ const getContentIdWithKeyword = (keyword, contentData) => {
     return []
   }
   const titleWithKeyword = contentData
-    .filter((data) => data.title.toLowerCase().includes(keyword))
+    .filter((data) => data.title.toLowerCase().includes(keyword.toLowerCase()))
     .map((data) => data)
 
   const commentWithKeyword = contentData
-    .filter((data) => data.comment && data.comment.toLowerCase().includes(keyword))
+    .filter((data) => data.comment && data.comment.toLowerCase().includes(keyword.toLowerCase()))
     .map((data) => data)
 
   const categoryWithKeyword = contentData
-    .filter((data) => data.category && data.category.name.toLowerCase().includes(keyword))
+    .filter(
+      (data) => data.category && data.category.name.toLowerCase().includes(keyword.toLowerCase())
+    )
     .map((data) => data)
 
   const contentIdListWithKeyword = [
@@ -63,7 +65,7 @@ const getCategoryIdWithKeyword = (keyword, categoryData) => {
 
   // 1차 카테고리 검색
   const categoryDepth1WithKeyword = categoryData
-    .filter((data) => data.name.toLowerCase().includes(keyword))
+    .filter((data) => data.name.toLowerCase().includes(keyword.toLowerCase()))
     .map((data) => data)
 
   categoryListWithKeyword.push(...categoryDepth1WithKeyword)
@@ -72,7 +74,7 @@ const getCategoryIdWithKeyword = (keyword, categoryData) => {
   categoryData.forEach((category) => {
     if (category.children) {
       const categoryDepth2WithKeyword = category.children
-        .filter((child) => child && child.name.toLowerCase().includes(keyword))
+        .filter((child) => child && child.name.toLowerCase().includes(keyword.toLowerCase()))
         .map((child) => child)
 
       categoryListWithKeyword.push(...categoryDepth2WithKeyword)
@@ -81,7 +83,7 @@ const getCategoryIdWithKeyword = (keyword, categoryData) => {
         category.children.forEach((child) => {
           // 3차 카테고리 검색
           const categoryDepth3WithKeyword = (child.children || [])
-            .filter((grandChild) => grandChild.name.toLowerCase().includes(keyword))
+            .filter((grandChild) => grandChild.name.toLowerCase().includes(keyword.toLowerCase()))
             .map((grandChild) => grandChild)
 
           categoryListWithKeyword.push(...categoryDepth3WithKeyword)
