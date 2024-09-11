@@ -35,7 +35,14 @@
     </div>
 
     <div class="modal-footer">
-      <button class="btn-confirm active" @click="saveContent">저장</button>
+      <button
+        :class="isValid ? 'active' : 'inactive'"
+        class="btn-confirm"
+        :disabled="!isValid"
+        @click="saveContent"
+      >
+        저장
+      </button>
     </div>
   </dialog>
 </template>
@@ -47,6 +54,7 @@ import ThumbnailItemWithCheckbox from '@/components/modal/ThumbnailItemWithCheck
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+import { computed } from 'vue'
 
 const modalViewStore = useModalViewStore()
 const contentStore = useContentStore()
@@ -65,6 +73,13 @@ const goBack = () => {
   modalViewStore.closeAddContentMultiple()
   modalViewStore.openAddContentModal()
 }
+
+const isValid = computed(() => {
+  return 1 <= contentStore.multipleContentList.filter((item) => item.checked).length > 0 &&
+    !(contentStore.multipleContentList.filter((item) => item.title).length < 0)
+    ? true
+    : false
+})
 </script>
 
 <style></style>
