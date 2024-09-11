@@ -7,7 +7,9 @@
       :closeModal="closeModal"
       :goBack="goBack"
     ></modal-header-step>
-    <div class="wrapper__content-num">{{ contentStore.multipleContentList.length }}개 콘텐츠</div>
+    <div class="wrapper__content-num">
+      {{ contentStore.multipleContentList.filter((item) => item.checked).length }}개 콘텐츠
+    </div>
     <!-- 썸네일 -->
     <template v-if="contentStore.multipleContentList.length > 0">
       <div class="wrapper__multiple-thumbnail">
