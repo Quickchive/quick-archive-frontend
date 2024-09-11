@@ -68,7 +68,7 @@ export const useAlertDataStore = defineStore('alertData', () => {
 
   const addNewCategoryAlertData = reactive({
     title: '새 카테고리',
-    message: '새 카테고리 이름을 입력해 주세요.\n생성 위치는 카테고리 수정 시 변경할 수 있어요.',
+    message: '새 카테고리 이름을 입력해 주세요.\n현재 위치는 카테고리 수정 시 변경할 수 있어요.',
     placeholder: '이름을 입력해주세요(2~15글자)',
     input: true,
     leftButtonMessage: '닫기',
