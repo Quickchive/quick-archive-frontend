@@ -55,7 +55,7 @@
                   class="img-search-category-result"
                 />
                 <!-- 1차 카테고리만 존재 -->
-                <div class="searchResult-category-text-box" v-if="category.parentId === null">
+                <div class="searchResult-category-text-box" v-if="category.categoryId === null">
                   <h1 class="searchResult-category-title">{{ category.name }}</h1>
                   <div class="searchResult-category-detail">
                     <!-- 카테고리 위치 -->
@@ -65,7 +65,7 @@
                 <!-- 1차 카테고리 && 2차 카테고리 존재 -->
                 <div
                   class="searchResult-category-text-box"
-                  v-if="category.parentId !== null && !category.children"
+                  v-if="category.categoryId !== null && !category.children"
                 >
                   <h1 class="searchResult-category-title">{{ category.name }}</h1>
                   <div class="searchResult-category-detail">
@@ -89,12 +89,12 @@
                 <!-- 1차 카테고리 && 2차 카테고리 && 3차 카테고리 존재  -->
                 <div
                   class="searchResult-category-text-box"
-                  v-if="category.parentId !== null && category.children"
+                  v-if="category.categoryId !== null && category.children"
                 >
                   <h1 class="searchResult-category-title">{{ category.name }}</h1>
                   <div class="searchResult-category-detail">
                     <!-- 카테고리 위치 -->
-                    <span>{{ searchStore.getCategoryDepth2NameById(category.parentId) }} </span>
+                    <span>{{ searchStore.getCategoryDepth2NameById(category.categoryId) }} </span>
                     <img :src="dividerIcon" />
                     <span>{{ category.contents.length }}개 콘텐츠</span>
                   </div>
@@ -170,7 +170,7 @@ const showMoreButton = (categoryData) => {
     categoryStore.moreBtnCategoryIdTree__search,
     categoryData.id
   )
-  const parentData = searchCategoryDataById(categoryStore.categoryList, categoryData.parentId)
+  const parentData = searchCategoryDataById(categoryStore.categoryList, categoryData.categoryId)
   categoryStore.setFocusedCategory(categoryData, parentData)
   categoryStore.setParentCategory(parentData)
   categoryStore.setFocusedCategory(categoryData, parentData)

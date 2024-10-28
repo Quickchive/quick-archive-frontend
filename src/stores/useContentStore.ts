@@ -50,7 +50,6 @@ export const useContentStore = defineStore('content', () => {
     categoryName: '전체 콘텐츠',
     categoryIconName: '',
     categoryId: -1,
-    parentId: -1,
     coverImg: ''
   })
 
@@ -159,7 +158,7 @@ export const useContentStore = defineStore('content', () => {
   function setCategory() {
     contentObj.categoryName = categoryStore.parentCategory.name
     contentObj.categoryIconName = categoryStore.parentCategory.iconName
-    contentObj.parentId = categoryStore.parentCategory.id
+    contentObj.categoryId = categoryStore.parentCategory.id
   }
 
   /*************** api 함수 ***************/

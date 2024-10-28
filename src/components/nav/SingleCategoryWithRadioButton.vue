@@ -2,7 +2,7 @@
 
 <template>
   <!-- 1차 카테고리인 경우 -->
-  <template v-if="props.category.parentId == undefined">
+  <template v-if="props.category.categoryId == undefined">
     <li class="category-list__first-ul">
       <div class="flex-container__row--align-center">
         <div class="btn--transparent category-list__btn--radio">
@@ -29,7 +29,7 @@
     </li>
   </template>
   <!-- 2차 카테고리인 경우 -->
-  <template v-if="props.category.parentId !== null && props.children">
+  <template v-if="props.category.categoryId !== null && props.children">
     <li class="category-list__first-ul">
       <div class="flex-container__row--align-center">
         <div class="btn--transparent category-list__btn--radio">
@@ -39,7 +39,7 @@
             <span class="category-item-radio__category-name">{{ props.category.name }}</span>
             <!-- 카테고리 위치 -->
             <span class="category-item-radio__category-parent-name">
-              {{ searchStore.getCategoryDepth2NameById(props.category.parentId) }}</span
+              {{ searchStore.getCategoryDepth2NameById(props.category.categoryId) }}</span
             >
           </div>
         </div>

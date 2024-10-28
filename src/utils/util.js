@@ -2,7 +2,6 @@ const deleteNullContentProp = (contentObj) => {
   let contentData = { ...contentObj }
 
   delete contentData.id
-  delete contentData.categoryId
   delete contentData.categoryIconName
   delete contentData.siteName
 
@@ -12,7 +11,7 @@ const deleteNullContentProp = (contentObj) => {
   if (contentObj.comment === '') {
     delete contentData.comment
   }
-  if (contentObj.parentId === -1) {
+  if (contentObj.categoryId === -1) {
     delete contentData.parentId
   }
   return contentData

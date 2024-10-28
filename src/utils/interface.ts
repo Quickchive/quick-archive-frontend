@@ -44,7 +44,6 @@ interface ContentObj {
   categoryName: string
   categoryIconName?: string
   categoryId?: number
-  parentId: number
   createdAt?: number
   updatedAt?: number
   coverImg?: string
