@@ -9,9 +9,14 @@
     <modal-category-add v-if="modalViewStore.modal.addCategory"></modal-category-add>
     <modal-category-select v-if="modalViewStore.modal.selectCategory"></modal-category-select>
 
-    <!-- 콘텐츠 추가 & 카테고리 추가 공통 사용: 카테고리 지정 모달 -->
+    <!-- 카테고리 추가 시 사용: 카테고리 지정 모달(세부 카테고리까지 노출) -->
     <modal-set-category-location
       v-if="modalViewStore.modal.categoryLocation"
+    ></modal-set-category-location>
+
+    <!-- 콘텐츠 추가 시 사용: 카테고리 지정 모달(세세부 카테고리까지 노출) -->
+    <modal-set-category-location
+      v-if="modalViewStore.modal.contentLocation"
     ></modal-set-category-location>
 
     <!-- 카테고리 수정 모달 -->

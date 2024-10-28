@@ -110,7 +110,7 @@ const categoryList = ref(categoryStore.categoryList)
 
 const closeModal = () => {
   // categoryStore.resetParentCategory()
-  modalViewStore.hideModal('categoryLocation')
+  modalViewStore.hideModalWithOverlay('categoryLocation', 'default')
 }
 
 onMounted(async () => {
@@ -122,9 +122,13 @@ onMounted(async () => {
 
 // 완료 버튼 클릭
 const setLocation = () => {
-  categoryStore.setCategory()
-  contentStore.setCategory()
-  modalViewStore.hideModal('categoryLocation')
+  if (modalViewStore.modal.contentLocation) {
+    contentStore.setCategory()
+    modalViewStore.hideModal('contentLocation')
+  } else {
+    categoryStore.setCategory()
+    modalViewStore.hideModal('categoryLocation')
+  }
 }
 </script>
 <style></style>

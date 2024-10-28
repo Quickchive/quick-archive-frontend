@@ -89,7 +89,7 @@ const showMoreButton = (categoryData) => {
     categoryStore.moreBtnCategoryIdTree,
     categoryData.id
   )
-  const parentData = searchCategoryDataById(categoryStore.categoryList, categoryData.parentId)
+  const parentData = searchCategoryDataById(categoryStore.categoryList, categoryData.categoryId)
   categoryStore.setFocusedCategory(categoryData, parentData)
   categoryStore.setParentCategory(parentData)
 }

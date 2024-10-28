@@ -28,7 +28,7 @@
     <div class="wrapper__modal-inner">
       <div class="flex-container__row--space-between">
         <label class="label__modal"> 카테고리 </label>
-        <button class="button--go-next" @click="modalViewStore.showModal('categoryLocation')">
+        <button class="button--go-next" @click="modalViewStore.showModal('contentLocation')">
           {{ categoryStore.parentCategory.name }}<img :src="nextBlackIcon" />
         </button>
       </div>

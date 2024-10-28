@@ -22,6 +22,7 @@ export const useModalViewStore = defineStore('modalView', () => {
     select: ref(false),
     selectCategory: ref(false),
     categoryLocation: ref(false),
+    contentLocation: ref(false),
     editContentTitle: ref(false),
     completeAddNewCategory: ref(false),
     logout: ref(false),
@@ -73,6 +74,7 @@ export const useModalViewStore = defineStore('modalView', () => {
   function openSetNewCategoryModal() {
     modal.addNewCategory = true
     modal.categoryLocation = false
+    modal.addContentMultiple = false
     modal.addCategory = false
     modal.addContentDetail = false
     modal.addContent = false
@@ -80,7 +82,7 @@ export const useModalViewStore = defineStore('modalView', () => {
 
   function closeSetNewCategoryModal() {
     modal.addNewCategory = false
-    overlay.default = false
+    modal.categoryLocation = true
   }
 
   function closeCompleteAddCategoryModal() {

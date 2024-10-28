@@ -26,9 +26,24 @@
                 :category="categoryItem2"
                 :children="categoryItem2.children ? categoryItem2.children : null"
                 :treeWidth="treeWidth2"
-                :activeExpandButton="false"
+                :activeExpandButton="true"
               ></single-category-tree-with-radio-button>
             </li>
+            <!-- 3차 카테고리 -->
+            <template v-if="modalViewStore.modal.contentLocation">
+              <ul v-for="categoryItem3 in categoryItem2.children" :key="categoryItem3">
+                <template v-if="categoryStore.categoryIdTreeRadio[categoryItem3.id]">
+                  <li>
+                    <single-category-tree-with-radio-button
+                      :category="categoryItem3"
+                      :children="categoryItem3.children ? categoryItem3.children : null"
+                      :treeWidth="treeWidth3"
+                      :activeExpandButton="false"
+                    ></single-category-tree-with-radio-button>
+                  </li>
+                </template>
+              </ul>
+            </template>
           </template>
         </ul>
       </ul>
@@ -39,10 +54,13 @@
 <script setup>
 import SingleCategoryTreeWithRadioButton from '@/components/nav/SingleCategoryTreeWithRadioButton.vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 
 // 스토어 선언
 const categoryStore = useCategoryStore()
-const treeWidth2 = 'liDepth2'
+const modalViewStore = useModalViewStore()
+const treeWidth2 = 'category-list__first-ul'
+const treeWidth3 = 'category-list__second-ul'
 </script>
 
 <style></style>

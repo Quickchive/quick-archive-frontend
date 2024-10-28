@@ -75,7 +75,6 @@ export const useAlertDataStore = defineStore('alertData', () => {
     rightButtonMessage: '저장',
     leftButtonEvent: () => {
       modalViewStore.closeSetNewCategoryModal()
-      modalViewStore.showModal('categoryLocation')
     },
     rightButtonEvent: async () => {
       // 카테고리 생성
