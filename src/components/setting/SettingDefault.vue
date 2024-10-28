@@ -19,14 +19,14 @@
           ></toggle-button>
         </div>
         <button class="setting-main-button">
-          <a href="">
+          <a href="https://smore.im/form/cNH45wRGpS">
             <div class="wrapper__button-icon"><img :src="errorIcon" />오류신고</div>
             <img :src="nextIcon" />
           </a>
         </button>
 
         <button class="setting-main-button">
-          <a href="https://www.notion.so/6bf8991d981b440bafe3c6bb9dfe3ba1?pvs=4">
+          <a href="https://www.notion.so/97624d059f044e26aeea371b2108c47d">
             <div class="wrapper__button-icon"><img :src="makerIcon" />서비스 만든 사람들</div>
             <img :src="nextIcon" />
           </a>
