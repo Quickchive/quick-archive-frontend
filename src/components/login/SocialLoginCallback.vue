@@ -47,9 +47,11 @@ onMounted(async () => {
   try {
     const { provider, code } = props
 
-    if (!socialLoginConfig[provider]) {
-      throw new Error('지원하지 않는 로그인 방식입니다.')
-    }
+    console.log(provider, code)
+
+    // if (!socialLoginConfig[provider]) {
+    //   throw new Error('지원하지 않는 로그인 방식입니다.')
+    // }
 
     loadingMessage.value = socialLoginConfig[provider].message
 
