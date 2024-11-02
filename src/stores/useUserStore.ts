@@ -236,6 +236,7 @@ export const useUserStore = defineStore('user', () => {
     testerLogin,
     getRefreshToken,
     getSocialLoginInfo,
-    getRecommendationMode
+    getRecommendationMode,
+    profileChecked
   }
 })
