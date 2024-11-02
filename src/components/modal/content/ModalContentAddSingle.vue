@@ -23,8 +23,20 @@
         <label class="label__modal"> 카테고리 </label>
 
         <button class="button--go-next" @click="gotoCategoryLocation">
+          <!-- 카테고리 자동 추천 태그 -->
+          <div
+            v-if="
+              userStore.recommendationMode &&
+              modalViewStore.modal.addContent &&
+              categoryStore.isRecommended &&
+              categoryStore.recommendedCategoryId === contentStore.contentObj.categoryId
+            "
+            class="wrapper__ai-tag"
+          >
+            <span class="ai-tag"> 추천 </span>
+          </div>
           <img
-            v-if="contentStore.contentObj.categoryName !== ('전체 콘텐츠' || -1)"
+            v-if="categoryStore.hasSelectedCategory"
             class="category-select-icon"
             :src="categoryStore.getCategoryImgByIconName(contentStore.contentObj.categoryIconName)"
           />{{ contentStore.contentObj.categoryName }}<img :src="nextBlackIcon" />
@@ -70,10 +82,12 @@ import ThumbnailItem from '../ThumbnailItem.vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
+import { useUserStore } from '@/stores/useUserStore.ts'
 
 const modalViewStore = useModalViewStore()
 const contentStore = useContentStore()
 const categoryStore = useCategoryStore()
+const userStore = useUserStore()
 
 const props = defineProps({
   modalTitle: String,

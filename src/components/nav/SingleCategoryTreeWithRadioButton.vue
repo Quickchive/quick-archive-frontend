@@ -1,12 +1,12 @@
 <template>
   <li :class="props.treeWidth">
     <div class="singleCategoryTreeWithRadio">
-      <button class="btn--transparent expand-button" @click="clickArrowEvent()">
+      <button class="btn--transparent expand-button" @click.stop="clickArrowEvent()">
         <img v-if="isChildrenCategoryShow" :src="expandLessIcon" />
         <img v-if="!isChildrenCategoryShow" :src="expandMoreIcon" />
       </button>
 
-      <div class="category-list__btn-wrapper" @click="selectRadioButton(props.category)">
+      <div class="category-list__btn-wrapper" @click="handleRadioClick(props.category)">
         <button class="btn--transparent category-list__btn--radio">
           <img
             :src="
@@ -25,7 +25,7 @@
               userStore.recommendationMode &&
               modalViewStore.modal.addContent &&
               categoryStore.isRecommended &&
-              props.category.name === categoryStore.parentCategory.name
+              categoryStore.recommendedCategoryId === props.category.id
             "
             class="wrapper__ai-tag"
           >
@@ -38,7 +38,8 @@
                 type="radio"
                 :id="props.category.id"
                 name="grades"
-                :checked="props.category.name === categoryStore.parentCategory.name"
+                :checked="isSelected"
+                @click="handleRadioClick(props.category)"
               />
               <span class="custom-radio"></span>
             </label>
@@ -52,7 +53,7 @@
 <script setup>
 import expandMoreIcon from '@/assets/ic/ic-expand-more.svg'
 import expandLessIcon from '@/assets/ic/ic-expand-less.svg'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useUserStore } from '@/stores/useUserStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
@@ -60,7 +61,6 @@ import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 const categoryStore = useCategoryStore()
 const userStore = useUserStore()
 const modalViewStore = useModalViewStore()
-
 const isChildrenCategoryShow = ref(false)
 
 const props = defineProps({
@@ -72,6 +72,8 @@ const props = defineProps({
   activeExpandButton: Boolean
 })
 
+const isSelected = computed(() => props.category.name === categoryStore.parentCategory?.name)
+
 const clickArrowEvent = () => {
   if (props.activeExpandButton === false) return
   if (props.children) {
@@ -80,9 +82,30 @@ const clickArrowEvent = () => {
   }
 }
 
+// 라디오 영역 클릭 처리
+const handleRadioClick = (category) => {
+  selectRadioButton(category)
+}
+
 const selectRadioButton = (categoryDepth) => {
-  categoryStore.setParentCategory(categoryDepth)
+  if (categoryStore.parentCategory?.name === categoryDepth.name) {
+    categoryStore.resetParentCategory()
+  } else {
+    categoryStore.setParentCategory(categoryDepth)
+  }
 }
 </script>
 
-<style></style>
+<style scoped>
+.radio-button input[type='radio'] {
+  cursor: pointer;
+}
+
+.custom-radio {
+  cursor: pointer;
+}
+
+.category-list__btn-wrapper {
+  cursor: pointer;
+}
+</style>

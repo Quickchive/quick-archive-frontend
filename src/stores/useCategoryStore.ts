@@ -38,6 +38,9 @@ export const useCategoryStore = defineStore('category', () => {
 
   const curCategoryName = ref('전체 콘텐츠')
 
+  // 현재 추천된 카테고리 아이디
+  const recommendedCategoryId = ref(-1)
+
   // 기본 카테고리 아이콘 정보
   const defaultCategory = reactive(defaultCategoryList)
 
@@ -67,6 +70,11 @@ export const useCategoryStore = defineStore('category', () => {
       return e.selected == true
     })
     return selectedCategory
+  })
+
+  // 카테고리 라디오 버튼 선택 여부
+  const hasSelectedCategory: any = computed(() => {
+    return parentCategory.value.name.length > 0 && !(parentCategory.value.name === '전체 콘텐츠')
   })
 
   // 사용: 카테고리 추가
@@ -435,6 +443,7 @@ export const useCategoryStore = defineStore('category', () => {
           iconName: toRaw(recommendedCategoryObj).iconName,
           id: response.data.id
         }
+        recommendedCategoryId.value = response.data.id
         setParentCategory(recommendedCategory)
         contentStore.setContentCategory(recommendedCategory)
       }
@@ -505,6 +514,8 @@ export const useCategoryStore = defineStore('category', () => {
     resetEditCategoryName,
     resetCategoryIcon,
     getAutoCategorizedName,
-    isRecommended
+    isRecommended,
+    hasSelectedCategory,
+    recommendedCategoryId
   }
 })

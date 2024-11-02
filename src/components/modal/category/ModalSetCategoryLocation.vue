@@ -71,14 +71,7 @@
     <!-- divider -->
     <div class="modal__divider--bottom"></div>
     <div class="modal-footer-categoryLocation">
-      <button
-        class="btn-confirm"
-        :class="categoryStore.parentCategory.name !== '전체 콘텐츠' ? 'active' : 'inactive'"
-        :disabled="!categoryStore.parentCategory.name == '전체 콘텐츠'"
-        @click="setLocation"
-      >
-        완료
-      </button>
+      <button class="btn-confirm active" @click="setLocation">완료</button>
     </div>
   </dialog>
 </template>

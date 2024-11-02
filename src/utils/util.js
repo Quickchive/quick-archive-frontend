@@ -12,7 +12,7 @@ const deleteNullContentProp = (contentObj) => {
     delete contentData.comment
   }
   if (contentObj.categoryId === -1) {
-    delete contentData.parentId
+    delete contentData.categoryId
   }
   return contentData
 }
