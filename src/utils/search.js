@@ -15,7 +15,7 @@ const searchCategoryDataByName = (arr, name) => {
   if (result) return result
   for (const item of arr) {
     if (item.children) {
-      const found = searchCategoryDataById(item.children, name)
+      const found = searchCategoryDataByName(item.children, name)
       if (found) return found
     }
   }

@@ -8,6 +8,7 @@ import { useToastStore } from '@/stores/useToastStore.ts'
 import { defaultCategoryList } from '@/assets/model/defaultCategory'
 import categoryFolder from '@/assets/img/category/img_category_folder.png'
 import { ref, reactive, computed, toRaw } from 'vue'
+import { useRouter } from 'vue-router'
 import {
   filterByCategoryIsNull,
   filterByFavoriteAndCategoryIsNull,
@@ -15,17 +16,14 @@ import {
 } from '@/utils/filter.js'
 import type { CategoryIdMap } from '@/utils/interface'
 import { getCategories, getRecommendedCategory } from '@/api/category'
-import {
-  deleteNullCategoryProp,
-  formatAddCategoryData,
-  formatEditCategoryData
-} from '@/utils/util.js'
-import { searchCategoryDataById } from '@/utils/search.js'
+import { formatAddCategoryData, formatEditCategoryData } from '@/utils/util.js'
+import { searchCategoryDataById, searchCategoryDataByName } from '@/utils/search.js'
 export const useCategoryStore = defineStore('category', () => {
   const modalViewStore = useModalViewStore()
   const alertDataStore = useAlertDataStore()
   const contentStore = useContentStore()
   const toastStore = useToastStore()
+  const router = useRouter()
 
   /*** state ***/
   // 사용: 카테고리 조회
@@ -342,16 +340,30 @@ export const useCategoryStore = defineStore('category', () => {
     try {
       const response = await addCategories(formatAddCategoryData(addCategoryObj.value))
       console.log(response)
+
+      await getUserCategoryList()
+
+      const searchedCategory = searchCategoryDataByName(
+        toRaw(categoryList.value),
+        addCategoryObj.value.categoryName
+      )
+      console.log('searchedCategory', searchedCategory)
+
       const toastData = {
         message: '카테고리가 추가되었습니다.',
         func: {
-          message: '보러가기'
+          message: '보러가기',
+          execute: () => {
+            setCategoryName(addCategoryObj.value.categoryName)
+            router.push({
+              name: 'categoryDetail',
+              params: { id: searchedCategory.id }
+            })
+          }
         }
       }
       toastStore.executeDefaultToast(toastData)
-      modalViewStore.closeAddCategoryModal()
-      modalViewStore.closeSelectModal()
-      await getUserCategoryList()
+      modalViewStore.resetAll()
       resetParentCategory()
     } catch (error: any) {
       if (error.response.data.statusCode === 409) {

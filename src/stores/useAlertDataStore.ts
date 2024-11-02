@@ -9,6 +9,7 @@ import { useContentStore } from '@/stores/useContentStore.ts'
 import { searchCategoryDataByName } from '@/utils/search.js'
 import { useToastStore } from '@/stores/useToastStore.ts'
 import { deleteNullContentProp } from '@/utils/util.js'
+import { useRouter } from 'vue-router'
 
 export const useAlertDataStore = defineStore('alertData', () => {
   const userStore = useUserStore()
@@ -17,6 +18,7 @@ export const useAlertDataStore = defineStore('alertData', () => {
   const contentStore = useContentStore()
   const checkboxChecked = ref(false)
   const toastStore = useToastStore()
+  const router = useRouter()
 
   const defaultAlertData = reactive({
     title: '',
@@ -94,15 +96,16 @@ export const useAlertDataStore = defineStore('alertData', () => {
         categoryName: newCategoryName.value,
         iconName: 'Book'
       }
+
       // 카테고리 추가
       try {
         const response = await addCategories(categoryData)
         console.log(response)
         const toastData = {
-          message: '카테고리가 추가되었습니다.',
-          func: {
-            message: '보러가기'
-          }
+          message: '카테고리가 추가되었습니다.'
+          // func: {
+          //   message: '보러가기',
+          // }
         }
         toastStore.executeDefaultToast(toastData)
         modalViewStore.resetAllModal()
