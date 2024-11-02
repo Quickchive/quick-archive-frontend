@@ -6,7 +6,10 @@
       v-if="modalViewStore.modal.select"
     ></modal-select-category-or-content>
     <!-- 카테고리 추가 모달 -->
-    <modal-category-add v-if="modalViewStore.modal.addCategory"></modal-category-add>
+    <modal-category-add
+      v-if="modalViewStore.modal.addCategory"
+      :closeModal="gobackSelectModal"
+    ></modal-category-add>
     <modal-category-select v-if="modalViewStore.modal.selectCategory"></modal-category-select>
 
     <!-- 카테고리 추가 시 사용: 카테고리 지정 모달(세부 카테고리까지 노출) -->
@@ -52,17 +55,10 @@
     ></modal-content-multiple>
 
     <!-- 콘텐츠 수정 모달 -->
-    <modal-content-step-01
-      v-if="modalViewStore.modal.editContent"
-      :modalTitle="'콘텐츠 수정'"
-      :closeModal="closeEditContentStep01Modal"
-    ></modal-content-step-01>
-
     <modal-content-single
       v-if="modalViewStore.modal.editContentDetail"
       :modalTitle="'콘텐츠 수정'"
       :closeModal="closeEditContentSingle"
-      :goBack="gobackEditContentStep01"
     ></modal-content-single>
 
     <alert-confirm
@@ -126,20 +122,21 @@ const closeAddContentStep01Modal = () => {
   modalViewStore.closeAddContentModal()
 }
 
-const closeEditContentStep01Modal = () => {
-  modalViewStore.closeEditContentModal()
-}
+// const closeEditContentStep01Modal = () => {
+//   modalViewStore.closeEditContentModal()
+// }
 
 const closeEditContentSingle = () => {
-  modalViewStore.hideModalWithOverlay('editContentDetail', 'default')
-  modalViewStore.hideModalWithOverlay('editContent')
+  modalViewStore.resetAll()
 }
 
 const closeLoader = () => {
-  modalViewStore.hideModalWithOverlay('loader', 'default')
-  modalViewStore.hideModalWithOverlay('select', 'default')
-  modalViewStore.hideModalWithOverlay('addContentDetail', 'default')
-  closeAddContentStep01Modal()
+  modalViewStore.resetAll()
+
+  // modalViewStore.hideModalWithOverlay('loader', 'default')
+  // modalViewStore.hideModalWithOverlay('select', 'default')
+  // modalViewStore.hideModalWithOverlay('addContentDetail', 'default')
+  // closeAddContentStep01Modal()
 }
 
 const gobackAddContentStep01 = () => {
@@ -147,9 +144,9 @@ const gobackAddContentStep01 = () => {
   modalViewStore.openAddContentModal()
 }
 
-const gobackEditContentStep01 = () => {
-  modalViewStore.hideModal('editContentDetail')
-  modalViewStore.openEditContentModal()
+const gobackSelectModal = () => {
+  modalViewStore.resetAllModal()
+  modalViewStore.showModal('select')
 }
 </script>
 

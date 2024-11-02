@@ -2,7 +2,7 @@
   <dialog class="category-add__modal">
     <modal-header
       :modalTitle="'카테고리 추가'"
-      :closeModal="closeEvent"
+      :closeModal="closeModal"
       :titlePosition="'right'"
     ></modal-header>
     <div class="wrapper__category-change">
@@ -69,16 +69,16 @@ import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 const modalViewStore = useModalViewStore()
 const categoryStore = useCategoryStore()
 
-const closeEvent = () => {
-  modalViewStore.hideModalWithOverlay('addCategory', 'default')
-}
 const input = ref(null)
 const inputText = ref('')
+
+const props = defineProps({
+  closeModal: Function
+})
 
 onMounted(() => {
   // 카테고리 추가
   categoryStore.resetAddCategoryObj()
-  closeEvent.value = () => modalViewStore.closeAddCategoryModal()
 })
 
 const openSelectCategoryModal = () => {

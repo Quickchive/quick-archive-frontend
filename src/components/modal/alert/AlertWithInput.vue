@@ -19,7 +19,7 @@
     </div>
     <div class="wrapper__confirm-button">
       <div class="alert-btn__wrapper">
-        <button class="alert-btn cancel btn-48" @click="props.alertData.leftButtonEvent()">
+        <button class="alert-btn cancel btn-48" @click="handleLeftButtonClick">
           {{ props.alertData.leftButtonMessage }}
         </button>
       </div>
@@ -28,7 +28,7 @@
           class="alert-btn btn-48"
           :class="isCategoryNameValid ? 'confirm' : 'inactive'"
           :disabled="!isCategoryNameValid"
-          @click="props.alertData.rightButtonEvent()"
+          @click="handleRightButtonClick"
         >
           {{ props.alertData.rightButtonMessage }}
         </button>
@@ -43,7 +43,10 @@ import { computed, ref } from 'vue'
 import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
 
 const props = defineProps({
-  alertData: Object
+  alertData: {
+    type: Object,
+    required: true
+  }
 })
 
 const alertDataStore = useAlertDataStore()
@@ -64,6 +67,32 @@ const clearInput = () => {
   alertDataStore.newCategoryName = ''
   if (input.value) {
     input.value.focus()
+  }
+}
+
+
+// 버튼 이벤트 핸들러
+const handleLeftButtonClick = () => {
+  try {
+    console.log('Left button clicked') // 디버깅용
+    if (typeof props.alertData.leftButtonEvent === 'function') {
+      props.alertData.leftButtonEvent()
+    }
+  } catch (error) {
+    console.error('Left button event error:', error)
+  }
+}
+
+const handleRightButtonClick = async () => {
+  try {
+    console.log('Right button clicked') // 디버깅용
+    if (!isCategoryNameValid.value) return
+
+    if (typeof props.alertData.rightButtonEvent === 'function') {
+      await props.alertData.rightButtonEvent()
+    }
+  } catch (error) {
+    console.error('Right button event error:', error)
   }
 }
 </script>

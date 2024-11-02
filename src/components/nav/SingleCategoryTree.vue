@@ -110,7 +110,7 @@ const btnList = [
 
   {
     name: '삭제하기',
-    clickEvent: () => modalViewStore.showModalWithOverlay('deleteCategory', 'default')
+    clickEvent: () => modalViewStore.openDeleteCategoryModal()
   }
 ]
 

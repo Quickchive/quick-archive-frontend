@@ -4,7 +4,11 @@ import { useUserStore } from '@/stores/useUserStore.ts'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { addCategories } from '@/api/category.js'
+import { addContents } from '@/api/contents'
 import { useContentStore } from '@/stores/useContentStore.ts'
+import { searchCategoryDataByName } from '@/utils/search.js'
+import { useToastStore } from '@/stores/useToastStore.ts'
+import { deleteNullContentProp } from '@/utils/util.js'
 
 export const useAlertDataStore = defineStore('alertData', () => {
   const userStore = useUserStore()
@@ -12,6 +16,7 @@ export const useAlertDataStore = defineStore('alertData', () => {
   const categoryStore = useCategoryStore()
   const contentStore = useContentStore()
   const checkboxChecked = ref(false)
+  const toastStore = useToastStore()
 
   const defaultAlertData = reactive({
     title: '',
@@ -44,6 +49,7 @@ export const useAlertDataStore = defineStore('alertData', () => {
       userStore.withdrawal()
     },
     rightButtonEvent: () => {
+      modalViewStore.resetAll()
       modalViewStore.hideModalWithOverlay('withdrawal', 'settingAlert')
     }
   })
@@ -56,10 +62,11 @@ export const useAlertDataStore = defineStore('alertData', () => {
     leftButtonMessage: '닫기',
     rightButtonMessage: '삭제',
     leftButtonEvent: () => {
-      modalViewStore.hideModalWithOverlay('deleteCategory', 'default')
+      modalViewStore.resetAll()
     },
     rightButtonEvent: () => {
       categoryStore.deleteCategory()
+      modalViewStore.resetAll()
     }
   })
 
@@ -74,7 +81,12 @@ export const useAlertDataStore = defineStore('alertData', () => {
     leftButtonMessage: '닫기',
     rightButtonMessage: '저장',
     leftButtonEvent: () => {
-      modalViewStore.closeSetNewCategoryModal()
+      modalViewStore.resetAllModal()
+      if (modalViewStore.setCategoryLocation === 'category') {
+        modalViewStore.showModal('categoryLocation')
+      } else {
+        modalViewStore.showModal('contentLocation')
+      }
     },
     rightButtonEvent: async () => {
       // 카테고리 생성
@@ -85,17 +97,48 @@ export const useAlertDataStore = defineStore('alertData', () => {
       // 카테고리 추가
       try {
         const response = await addCategories(categoryData)
-        // 상태코드로 에러 처리 하기
-        if (response.data.statusCode === 201) {
-          modalViewStore.closeSetNewCategoryModal()
-          modalViewStore.showModal('completeAddNewCategory')
-
-          await categoryStore.updateUserCategoryList()
+        console.log(response)
+        const toastData = {
+          message: '카테고리가 추가되었습니다.',
+          func: {
+            message: '보러가기'
+          }
         }
+        toastStore.executeDefaultToast(toastData)
+        modalViewStore.resetAllModal()
+        modalViewStore.showModal('completeAddNewCategory')
+        await categoryStore.getUserCategoryList()
+        categoryStore.resetParentCategory()
       } catch (error: any) {
         if (error.response.data.statusCode === 409) {
-          modalViewStore.setDuplicatedCategoryName(categoryStore.parentCategory.name)
-          modalViewStore.showModalWithOverlay('alert', 'alert')
+          if (error.response.data.message === 'Category already exists') {
+            modalViewStore.setDuplicatedCategoryName(categoryStore.parentCategory.value.name)
+            const alertData = {
+              title: '알림',
+              content: [
+                '동일한 이름의 카테고리가',
+                `${modalViewStore.duplicatedCategoryLocation}내에 있어요.`,
+                '카테고리 이름을 변경해주세요.'
+              ]
+            }
+            setDefaultAlertData(alertData)
+            modalViewStore.showModalWithOverlay('alert', 'alert')
+          }
+          if (error.response.data.message === "Root categories can't be more than 10 in one user") {
+            const alertData = {
+              title: '알림',
+              content: [
+                '무료 버전에서는 메인 카테고리를',
+                '10개까지만 만들 수 있어요.',
+                '단, 서브 카테고리는 개수 제한 없이 만들 수 있어요.'
+              ]
+            }
+
+            setDefaultAlertData(alertData)
+            modalViewStore.showModalWithOverlay('alert', 'alert')
+          }
+        } else {
+          toastStore.executeErrorToast(error.message)
         }
       }
     }
@@ -109,20 +152,33 @@ export const useAlertDataStore = defineStore('alertData', () => {
     leftButtonMessage: '닫기',
     rightButtonMessage: '저장',
     leftButtonEvent: () => {
-      modalViewStore.closeCompleteAddCategoryModal()
+      modalViewStore.resetAllModal()
+      if (modalViewStore.setCategoryLocation === 'category') {
+        modalViewStore.showModal('categoryLocation')
+      } else {
+        modalViewStore.showModal('contentLocation')
+      }
     },
     rightButtonEvent: async () => {
       // 콘텐츠 추가
       try {
-        categoryStore.selectCategoryLocation(newCategoryName.value)
-        const response: any = await contentStore.addContent()
+        const newCategoryInfo = searchCategoryDataByName(
+          categoryStore.categoryList,
+          newCategoryName.value
+        )
+
+        contentStore.setContentCategory(newCategoryInfo)
+        const contentData = deleteNullContentProp(contentStore.contentObj)
+
+        // categoryStore.selectCategoryLocation(newCategoryName.value)
+        const response: any = await addContents(contentData)
         // 상태코드로 에러 처리 하기
         if (response.data.statusCode === 201) {
-          modalViewStore.closeSelectModal()
+          console.log('닫았다')
+          modalViewStore.resetAll()
         }
-        modalViewStore.closeCompleteAddCategoryModal()
       } catch (error: any) {
-        console.log(error)
+        console.error(error)
       }
     }
   })
@@ -135,10 +191,11 @@ export const useAlertDataStore = defineStore('alertData', () => {
     leftButtonMessage: '닫기',
     rightButtonMessage: '삭제',
     leftButtonEvent: () => {
-      modalViewStore.hideModalWithOverlay('deleteCategory', 'default')
+      modalViewStore.resetAll()
     },
     rightButtonEvent: () => {
       contentStore.deleteContent()
+      modalViewStore.resetAll()
     }
   })
 

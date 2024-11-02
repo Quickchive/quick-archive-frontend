@@ -365,7 +365,6 @@ export const useCategoryStore = defineStore('category', () => {
               '카테고리 이름을 변경해주세요.'
             ]
           }
-
           alertDataStore.setDefaultAlertData(alertData)
           modalViewStore.showModalWithOverlay('alert', 'alert')
         }
@@ -378,7 +377,6 @@ export const useCategoryStore = defineStore('category', () => {
               '단, 서브 카테고리는 개수 제한 없이 만들 수 있어요.'
             ]
           }
-          modalViewStore.setDuplicatedCategoryName(parentCategory.value.name)
 
           alertDataStore.setDefaultAlertData(alertData)
           modalViewStore.showModalWithOverlay('alert', 'alert')

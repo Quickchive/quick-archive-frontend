@@ -117,7 +117,7 @@ const btnList = [
     clickEvent: () =>
       getHideAlertFromCookie()
         ? contentStore.deleteContent()
-        : modalViewStore.showModalWithOverlay('deleteContent', 'default')
+        : modalViewStore.openDeleteContentModal()
   }
 ]
 

@@ -30,7 +30,7 @@ const modalTitle = '추가'
 const modalViewStore = useModalViewStore()
 
 const closeModal = () => {
-  modalViewStore.closeSelectModal()
+  modalViewStore.resetAll()
 }
 </script>
 

@@ -35,6 +35,9 @@ export const useModalViewStore = defineStore('modalView', () => {
     loader: ref(false)
   })
 
+  // 카테고리 위치 선택 모달이 콘텐츠/카테고리에서 열렸는지 여부
+  const setCategoryLocation = ref('category')
+
   function showModalWithOverlay(modalName: keyof Modal, overlayName: keyof Overlay) {
     if (modal[modalName] !== undefined) {
       modal[modalName] = true
@@ -62,6 +65,7 @@ export const useModalViewStore = defineStore('modalView', () => {
   }
 
   function openAddCategoryModal() {
+    setCategoryLocation.value = 'category'
     modal.select = false
     modal.addCategory = true
     overlay.default = true
@@ -75,6 +79,7 @@ export const useModalViewStore = defineStore('modalView', () => {
   function openSetNewCategoryModal() {
     modal.addNewCategory = true
     modal.categoryLocation = false
+    modal.contentLocation = false
     modal.addContentMultiple = false
     modal.addCategory = false
     modal.addContentDetail = false
@@ -83,16 +88,19 @@ export const useModalViewStore = defineStore('modalView', () => {
 
   function closeSetNewCategoryModal() {
     modal.addNewCategory = false
-    modal.categoryLocation = true
+    // modal.categoryLocation = true
   }
 
   function closeCompleteAddCategoryModal() {
+    console.log('@@@@@@@@')
+    resetAllModal()
+    overlay.alert = false
+    modal.contentLocation = true
     modal.completeAddNewCategory = false
-    overlay.default = true
-    modal.categoryLocation = true
   }
 
   function openAddContentModal() {
+    setCategoryLocation.value = 'content'
     modal.select = false
     modal.addContent = true
     overlay.default = true
@@ -132,8 +140,38 @@ export const useModalViewStore = defineStore('modalView', () => {
     modal.selectCategory = false
     overlay.default = false
   }
+
+  function openDeleteContentModal() {
+    resetAllModal()
+    modal.deleteContent = true
+    overlay.default = true
+  }
+
+  function openDeleteCategoryModal() {
+    resetAllModal()
+    modal.deleteCategory = true
+    overlay.default = true
+  }
+
   function setDuplicatedCategoryName(categoryName: string) {
     duplicatedCategoryLocation.value = categoryName
+  }
+
+  function resetAll() {
+    Object.keys(modal).forEach((key) => {
+      modal[key as keyof Modal] = false
+    })
+
+    Object.keys(overlay).forEach((key) => {
+      overlay[key as keyof Overlay] = false
+    })
+  }
+
+  function resetAllModal() {
+    console.log('@@@@@@@@')
+    Object.keys(modal).forEach((key) => {
+      modal[key as keyof Modal] = false
+    })
   }
 
   return {
@@ -160,6 +198,11 @@ export const useModalViewStore = defineStore('modalView', () => {
     showModalWithOverlay,
     hideModalWithOverlay,
     showModal,
-    hideModal
+    hideModal,
+    resetAll,
+    resetAllModal,
+    setCategoryLocation,
+    openDeleteContentModal,
+    openDeleteCategoryModal
   }
 })
