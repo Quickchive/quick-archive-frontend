@@ -34,9 +34,22 @@ function getHideAlertFromCookie() {
 }
 
 function getAutoCategorizeSettingFromCookie() {
-  return JSON.parse(
-    document.cookie.replace(/(?:(?:^|.*;\s*)auto_categorized\s*=\s*([^;]*).*$)|^.*$/, '$1')
+  const cookieValue = document.cookie.replace(
+    /(?:(?:^|.*;\s*)auto_categorized\s*=\s*([^;]*).*$)|^.*$/,
+    '$1'
   )
+
+  // 쿠키 값이 비어있는 경우 기본값 반환
+  if (!cookieValue) {
+    return false // 또는 적절한 기본값
+  }
+
+  try {
+    return JSON.parse(cookieValue)
+  } catch (error) {
+    console.warn('자동 분류 설정 쿠키 파싱 실패:', error)
+    return false // 또는 적절한 기본값
+  }
 }
 
 function deleteCookie(value) {

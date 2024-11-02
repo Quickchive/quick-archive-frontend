@@ -31,7 +31,8 @@ export const useModalViewStore = defineStore('modalView', () => {
     addCategory: ref(false),
     editCategory: ref(false),
     addNewCategory: ref(false),
-    deleteCategory: ref(false)
+    deleteCategory: ref(false),
+    loader: ref(false)
   })
 
   function showModalWithOverlay(modalName: keyof Modal, overlayName: keyof Overlay) {

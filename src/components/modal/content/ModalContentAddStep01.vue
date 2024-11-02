@@ -1,5 +1,6 @@
 <template>
   <dialog class="content-add__modal">
+    <template></template>
     <modal-header
       :modalTitle="modalTitle"
       :isBtnOnLeft="false"
@@ -42,13 +43,14 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
+import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import textfieldCancelIcon from '@/assets/ic/ic-text-field-cancel.svg'
 import spaceRectangle from '@/assets/img/spacebar-rectangle.png'
-
 import ModalHeader from '@/components/header/ModalHeader.vue'
+import { getAutoCategorizeSettingFromCookie } from '@/utils/cookies.js'
 import {} from '@/api/contents.js'
 const input = ref(null)
 
@@ -59,6 +61,7 @@ const props = defineProps({
 
 const modalViewStore = useModalViewStore()
 const contentStore = useContentStore()
+const categoryStore = useCategoryStore()
 
 const link = ref('')
 
@@ -125,8 +128,11 @@ const submitLink = async () => {
 
   // 링크 1개인 경우
   if (numOfLink === 1) {
-    contentStore.setSingleLink(linkStr)
-    modalViewStore.showModalWithOverlay('addContentDetail', 'default')
+    if (getAutoCategorizeSettingFromCookie()) {
+      await handleSingleLinkProcess(linkStr, true)
+    } else {
+      await handleSingleLinkProcess(linkStr)
+    }
 
     // 링크 2개인 경우
   } else if (numOfLink > 1) {
@@ -134,6 +140,66 @@ const submitLink = async () => {
     const multipleLink = await contentStore.fetchMultipleLinksOgData(linkArr)
     contentStore.setMultipleLinks(multipleLink)
     modalViewStore.showModalWithOverlay('addContentMultiple', 'default')
+  }
+}
+
+async function handleSingleLinkProcess(linkStr, shouldAutoCategorize = false) {
+  const abortController = new AbortController()
+  modalViewStore.modal.loader = true
+
+  // loader 상태 변경 감시
+  const unwatch = watch(
+    () => modalViewStore.modal.loader,
+    (newValue) => {
+      if (!newValue) {
+        abortController.abort()
+      }
+    }
+  )
+
+  try {
+    // 링크 정보 가져오기
+    const linkResult = await contentStore
+      .setSingleLink(linkStr, abortController.signal)
+      .catch((error) => {
+        if (error.name === 'AbortError') {
+          console.log('요청이 취소되었습니다')
+          return
+        }
+        console.error('링크 정보 가져오기 실패:', error)
+        throw new Error('링크 정보 가져오기 실패')
+      })
+
+    // 요청이 취소되었다면 여기서 중단
+    if (abortController.signal.aborted) {
+      return
+    }
+
+    // 자동 분류 실행 (조건부)
+    if (shouldAutoCategorize) {
+      try {
+        await categoryStore.getAutoCategorizedName(linkStr, abortController.signal)
+      } catch (error) {
+        if (error.name === 'AbortError') {
+          console.log('자동 분류 요청이 취소되었습니다')
+          return
+        }
+        console.error('카테고리 자동 분류 실패:', error)
+      }
+    }
+
+    // 요청이 취소되었다면 여기서 중단
+    if (abortController.signal.aborted) {
+      return
+    }
+
+    // 링크 정보를 성공적으로 가져왔으므로 모달 표시
+    modalViewStore.showModalWithOverlay('addContentDetail', 'default')
+  } catch (error) {
+    console.error('처리 중 예상치 못한 오류 발생:', error)
+  } finally {
+    unwatch() // watch 해제
+    modalViewStore.modal.loader = false
   }
 }
 </script>

@@ -95,8 +95,6 @@ const saveContent = () => {
 }
 
 const gotoCategoryLocation = () => {
-  // 카테고리 자동 추천이 켜있는 경우
-  categoryStore.getAutoCategorizedName(contentStore.contentObj.link)
   modalViewStore.showModal('contentLocation')
 }
 </script>

@@ -20,7 +20,7 @@ import {
   formatAddCategoryData,
   formatEditCategoryData
 } from '@/utils/util.js'
-import { searchCategoryDataByName } from '@/utils/search.js'
+import { searchCategoryDataById } from '@/utils/search.js'
 export const useCategoryStore = defineStore('category', () => {
   const modalViewStore = useModalViewStore()
   const alertDataStore = useAlertDataStore()
@@ -422,28 +422,27 @@ export const useCategoryStore = defineStore('category', () => {
   async function getAutoCategorizedName(link: string) {
     try {
       const response = await getRecommendedCategory(link)
-      console.log('카테고리 자동 추천', response)
-      // 추천된 카테고리로 부모 카테고리 선택
-      console.log(
-        '카테고리 자동 추천 결과',
-        toRaw(searchCategoryDataByName(categoryList.value, response.data.category))
-      )
 
       // 카테고리 추천 정상 완료 여부
-      isRecommended.value = response.data.category == 'None' ? false : true
+      isRecommended.value = response.data.name !== 'None'
+      console.log('카테고리 추천 정상 완료 여부: ', isRecommended.value)
+      console.log('카테고리 자동 추천 결과', response)
 
-      const recommendedCategoryObj = searchCategoryDataByName(
-        categoryList.value,
-        response.data.category
-      )
-      const recommendedCategory = {
-        name: response.data.category,
-        iconName: toRaw(recommendedCategoryObj).iconName,
-        id: toRaw(recommendedCategoryObj).id
+      if (isRecommended.value === true) {
+        const recommendedCategoryObj = searchCategoryDataById(categoryList.value, response.data.id)
+        const recommendedCategory = {
+          name: response.data.name,
+          iconName: toRaw(recommendedCategoryObj).iconName,
+          id: response.data.id
+        }
+        setParentCategory(recommendedCategory)
+        contentStore.setContentCategory(recommendedCategory)
       }
-      setParentCategory(recommendedCategory)
-    } catch (error) {
-      console.log(error)
+    } catch (error: any) {
+      if (error.name === 'AbortError') {
+        throw error
+      }
+      console.error('카테고리 추천 중 오류 발생:', error)
     }
   }
 

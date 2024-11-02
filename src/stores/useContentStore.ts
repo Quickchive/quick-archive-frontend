@@ -87,6 +87,12 @@ export const useContentStore = defineStore('content', () => {
     contentObj.siteName = content.siteName
   }
 
+  function setContentCategory(category: any) {
+    contentObj.categoryName = category.name
+    contentObj.categoryId = category.id
+    contentObj.categoryIconName = category.iconName
+  }
+
   function setContentTitle(title: string) {
     contentObj.title = title
   }
@@ -334,18 +340,44 @@ export const useContentStore = defineStore('content', () => {
   }
 
   async function setSingleLink(link: string) {
-    const ogData = await fetchOgData(link)
-    const singleLinkObj: OgContent = {
-      link: link,
-      coverImg: ogData.coverImg,
-      title: ogData.title,
-      description: ogData.description,
-      siteName: ogData.siteName
+    try {
+      const ogData = await fetchOgData(link)
+
+      const singleLinkObj: OgContent = {
+        link: link,
+        coverImg: ogData.coverImg,
+        title: ogData.title,
+        description: ogData.description,
+        siteName: ogData.siteName
+      }
+
+      setContentObj(singleLinkObj)
+    } catch (error: any) {
+      if (error.name === 'AbortError') {
+        throw error
+      }
+      // 구체적인 에러 타입 체크
+      if (error instanceof Error) {
+        console.error('OG 데이터 가져오기 실패:', error.message)
+      } else {
+        console.error('알 수 없는 오류 발생:', error)
+      }
+
+      // 기본값으로 설정
+      const fallbackLinkObj: OgContent = {
+        link: link,
+        coverImg: '', // 또는 기본 이미지 URL
+        title: '제목을 가져올 수 없습니다',
+        description: '설명을 가져올 수 없습니다',
+        siteName: '사이트 이름을 가져올 수 없습니다'
+      }
+
+      setContentObj(fallbackLinkObj)
+
+      // 필요한 경우 에러를 상위로 전파
+      // throw error
     }
-
-    setContentObj(singleLinkObj)
   }
-
   async function fetchMultipleLinksOgData(links: any) {
     const multipleLinksArr = <OgContent[]>[]
 
@@ -390,6 +422,7 @@ export const useContentStore = defineStore('content', () => {
     fetchMultipleLinksOgData,
     setFavoriteToggle,
     setMemo,
-    setCategory
+    setCategory,
+    setContentCategory
   }
 })

@@ -29,6 +29,13 @@
       :modalTitle="'콘텐츠 추가'"
     ></modal-content-step-01>
 
+    <!-- 로딩 바 모달 -->
+    <modal-loader
+      v-if="modalViewStore.modal.loader"
+      :closeModal="closeLoader"
+      :modalTitle="'콘텐츠 추가'"
+    ></modal-loader>
+
     <modal-content-single
       v-if="modalViewStore.modal.addContentDetail"
       :closeModal="modalViewStore.closeAddContentSingle"
@@ -111,7 +118,7 @@ import AlertConfirm from '@/components/modal/alert/AlertConfirm.vue'
 import ModalEditContentTitle from '@/components/modal/content/ModalEditContentTitle.vue'
 import AlertWithInput from '@/components/modal/alert/AlertWithInput.vue'
 import ModalContentShare from '@/components/modal/content/ModalContentShare.vue'
-
+import ModalLoader from '@/components/modal/ModalLoader.vue'
 const modalViewStore = useModalViewStore()
 const alertDataStore = useAlertDataStore()
 
@@ -126,6 +133,13 @@ const closeEditContentStep01Modal = () => {
 const closeEditContentSingle = () => {
   modalViewStore.hideModalWithOverlay('editContentDetail', 'default')
   modalViewStore.hideModalWithOverlay('editContent')
+}
+
+const closeLoader = () => {
+  modalViewStore.hideModalWithOverlay('loader', 'default')
+  modalViewStore.hideModalWithOverlay('select', 'default')
+  modalViewStore.hideModalWithOverlay('addContentDetail', 'default')
+  closeAddContentStep01Modal()
 }
 
 const gobackAddContentStep01 = () => {

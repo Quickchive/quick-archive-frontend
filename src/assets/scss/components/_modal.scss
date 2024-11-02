@@ -303,6 +303,22 @@ dialog {
   bottom: 50%;
 }
 
+/* 콘텐츠 추가 - 로더 */
+.loader__modal {
+  @extend .category-add__modal;
+  height: 608px;
+  display: flex;
+  z-index: 10000;
+  padding: 0 28px;
+}
+
+.wrapper__loader {
+  display: flex;
+  justify-content: center;
+  height: 500px;
+  background-color: #fff;
+}
+
 // 콘텐츠 추가 - 카테고리 추가
 .content-add__set-new-category {
   @extend .category-add__modal;

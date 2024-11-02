@@ -26,8 +26,14 @@ function getFrequentSavedCategories() {
 }
 
 // 카테고리 자동 추천
+// function getRecommendedCategory(link) {
+//   return authInstance.get(`categories/auto-categorize?link=${link}`)
+// }
+
+// 카테고리 자동 추천 v2
+// 카테고리 이름과 id를 반환
 function getRecommendedCategory(link) {
-  return authInstance.get(`categories/auto-categorize?link=${link}`)
+  return authInstance.get(`v2/categories/auto-categorize?link=${link}`)
 }
 
 export {
