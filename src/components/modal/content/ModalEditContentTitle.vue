@@ -13,6 +13,7 @@
         :value="title"
         placeholder="제목을 1자 이상 입력해주세요"
         @input="setTitle"
+        ref="inputRef"
         autofocus
       />
     </div>
@@ -38,7 +39,7 @@ import { ref, computed } from 'vue'
 const modalViewStore = useModalViewStore()
 const contentStore = useContentStore()
 const isMultipleContent = ref(contentStore.multipleContentList.length >= 1 ? true : false)
-
+const inputRef = ref(null) // inputRef 선언 추가
 const title = ref(
   isMultipleContent.value
     ? contentStore.multipleContentList[contentStore.focusedContent.index].title
@@ -64,6 +65,7 @@ const saveContentTitle = () => {
 
 const clearTitle = () => {
   title.value = ''
+  inputRef.value?.focus()
 }
 </script>
 
