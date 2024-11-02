@@ -23,6 +23,7 @@ export const useUserStore = defineStore('user', () => {
   const isLogin = ref(false)
   const nickname = ref('testnickname')
   const email = ref('tester@naver.com')
+  const profileChecked = ref(false)
   // 마이페이지
   const recommendationMode: any = ref(true)
   const socialLoginInfo: any = ref('')
@@ -136,12 +137,15 @@ export const useUserStore = defineStore('user', () => {
       email.value = response.data.email
       if (response.status === 201 || response.status === 200) {
         isLogin.value = true
+        profileChecked.value = true
       }
     } catch (error) {
       isLogin.value = false
+      profileChecked.value = false
       console.error(error)
     }
   }
+
   // 회원 탈퇴
   async function withdrawal() {
     try {
