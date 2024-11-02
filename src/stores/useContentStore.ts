@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, reactive, toRaw } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import {
   getContents,
@@ -68,6 +68,15 @@ export const useContentStore = defineStore('content', () => {
   })
 
   const moreBtnContentIdTree = ref<CategoryIdMap>({})
+
+  // 전체 카테고리 리스트가 갱신될 때 더보기 버튼용 카테고리 id 리스트 맵도 갱신한다.
+  watch(
+    () => contentList.value,
+    (newContentList) => {
+      moreBtnContentIdTree.value = createContentIdMap(newContentList)
+    },
+    { deep: true }
+  )
 
   /*** actions ***/
 
@@ -169,13 +178,12 @@ export const useContentStore = defineStore('content', () => {
 
   /*************** api 함수 ***************/
   async function fetchAllContents() {
+    console.log('fetchAllContents')
     try {
       const response: any = await getAllContents()
       if (response.data.statusCode === 200) {
         setAllContentList(sortByCreatedAtDescending(response.data.contents))
         setContentList(allContentList.value)
-        const contentIdMap = createContentIdMap(contentList.value)
-        moreBtnContentIdTree.value = contentIdMap
       }
     } catch (error: any) {
       toastStore.executeErrorToast(error.message)
@@ -183,13 +191,13 @@ export const useContentStore = defineStore('content', () => {
   }
 
   async function fetchContents(categoryId: number) {
+    console.log('fetchContents')
+
     try {
       const response: any = await getContents(categoryId)
       console.log('콘텐츠 조회', response.data.statusCode)
       if (response.data.statusCode === 200) {
         setContentList(response.data.contents)
-        const contentIdMap = createContentIdMap(contentList.value)
-        moreBtnContentIdTree.value = contentIdMap
       }
     } catch (error: any) {
       toastStore.executeErrorToast(error.message)
