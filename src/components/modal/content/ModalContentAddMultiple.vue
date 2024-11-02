@@ -29,7 +29,11 @@
       <div class="flex-container__row--space-between">
         <label class="label__modal"> 카테고리 </label>
         <button class="button--go-next" @click="modalViewStore.showModal('contentLocation')">
-          {{ categoryStore.parentCategory.name }}<img :src="nextBlackIcon" />
+          <img
+            v-if="categoryStore.hasSelectedCategory"
+            class="category-select-icon"
+            :src="categoryStore.getCategoryImgByIconName(contentStore.contentObj.categoryIconName)"
+          />{{ contentStore.contentObj.categoryName }}<img :src="nextBlackIcon" />
         </button>
       </div>
     </div>

@@ -98,12 +98,11 @@ const searchStore = useSearchStore()
 const contentStore = useContentStore()
 const modalViewStore = useModalViewStore()
 
-const categoryList = ref(categoryStore.categoryList)
+const props = defineProps({
+  closeModal: Function
+})
 
-const closeModal = () => {
-  // categoryStore.resetParentCategory()
-  modalViewStore.hideModalWithOverlay('categoryLocation', 'default')
-}
+const categoryList = ref(categoryStore.categoryList)
 
 onMounted(async () => {
   await categoryStore.getUserCategoryList()

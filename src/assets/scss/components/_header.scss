@@ -46,7 +46,7 @@
   @include flex(column, space-between, center);
   flex-direction: row;
   @include size(100%, 88px);
-  padding: 0 28px;
+  // padding: 0 28px;
   box-sizing: border-box;
   button {
     text-align: right;

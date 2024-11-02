@@ -15,11 +15,13 @@
     <!-- 카테고리 추가 시 사용: 카테고리 지정 모달(세부 카테고리까지 노출) -->
     <modal-set-category-location
       v-if="modalViewStore.modal.categoryLocation"
+      :closeModal="gobackAddCategoryModal"
     ></modal-set-category-location>
 
-    <!-- 콘텐츠 추가 시 사용: 카테고리 지정 모달(세세부 카테고리까지 노출) -->
+    <!-- 단일 콘텐츠 추가 시 사용: 카테고리 지정 모달(세세부 카테고리까지 노출) -->
     <modal-set-category-location
       v-if="modalViewStore.modal.contentLocation"
+      :closeModal="gobackAddContentModal"
     ></modal-set-category-location>
 
     <!-- 카테고리 수정 모달 -->
@@ -49,7 +51,7 @@
     <!-- 콘텐츠 추가 - 다중 링크 -->
     <modal-content-multiple
       v-if="modalViewStore.modal.addContentMultiple"
-      :closeModal="modalViewStore.closeAddContentMultiple"
+      :closeModal="gobackSelectModal"
       :modalTitle="'콘텐츠 추가'"
       :goBack="gobackAddContentStep01"
     ></modal-content-multiple>
@@ -147,6 +149,14 @@ const gobackAddContentStep01 = () => {
 const gobackSelectModal = () => {
   modalViewStore.resetAllModal()
   modalViewStore.showModal('select')
+}
+
+const gobackAddCategoryModal = () => {
+  modalViewStore.hideModal('categoryLocation')
+}
+
+const gobackAddContentModal = () => {
+  modalViewStore.hideModal('contentLocation')
 }
 </script>
 

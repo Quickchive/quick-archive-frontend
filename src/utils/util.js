@@ -17,6 +17,12 @@ const deleteNullContentProp = (contentObj) => {
   return contentData
 }
 
+// 다중 콘텐츠 배열을 받아 선택된 항목의 링크만을 모은 배열로 반환한다.
+const formatMultipleLinks = (multipleContentList) => {
+  const links = multipleContentList.filter((item) => item.checked).map((item) => item.link)
+  return links
+}
+
 const deleteNullEditContentProp = (contentObj) => {
   let contentData = { ...contentObj }
 
@@ -81,5 +87,6 @@ export {
   deleteNullEditContentProp,
   deleteNullCategoryProp,
   formatAddCategoryData,
-  formatEditCategoryData
+  formatEditCategoryData,
+  formatMultipleLinks
 }

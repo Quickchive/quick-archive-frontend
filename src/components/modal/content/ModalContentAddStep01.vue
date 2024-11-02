@@ -136,10 +136,10 @@ const submitLink = async () => {
 
     // 링크 2개인 경우
   } else if (numOfLink > 1) {
+    // 다중 링크일 경우에는 카테고리 추천을 제공하지 않음
+    categoryStore.isRecommended = false
     const linkArr = setMultipleLinkArr(linkStr)
-    const multipleLink = await contentStore.fetchMultipleLinksOgData(linkArr)
-    contentStore.setMultipleLinks(multipleLink)
-    modalViewStore.showModalWithOverlay('addContentMultiple', 'default')
+    await handleMultipleLinkProcess(linkArr)
   }
 }
 
@@ -195,6 +195,50 @@ async function handleSingleLinkProcess(linkStr, shouldAutoCategorize = false) {
 
     // 링크 정보를 성공적으로 가져왔으므로 모달 표시
     modalViewStore.showModalWithOverlay('addContentDetail', 'default')
+  } catch (error) {
+    console.error('처리 중 예상치 못한 오류 발생:', error)
+  } finally {
+    unwatch() // watch 해제
+    modalViewStore.modal.loader = false
+  }
+}
+
+async function handleMultipleLinkProcess(linkArr) {
+  const abortController = new AbortController()
+  modalViewStore.modal.loader = true
+
+  // loader 상태 변경 감시
+  const unwatch = watch(
+    () => modalViewStore.modal.loader,
+    (newValue) => {
+      if (!newValue) {
+        abortController.abort()
+      }
+    }
+  )
+
+  try {
+    // 링크 정보 가져오기
+    const linkResult = await contentStore
+      .fetchMultipleLinksOgData(linkArr, abortController.signal)
+      .catch((error) => {
+        if (error.name === 'AbortError') {
+          console.log('요청이 취소되었습니다')
+          return
+        }
+        console.error('링크 정보 가져오기 실패:', error)
+        throw new Error('링크 정보 가져오기 실패')
+      })
+
+    // 요청이 취소되었다면 여기서 중단
+    if (abortController.signal.aborted) {
+      return
+    }
+
+    contentStore.setMultipleLinks(linkResult)
+
+    // 링크 정보를 성공적으로 가져왔으므로 모달 표시
+    modalViewStore.showModalWithOverlay('addContentMultiple', 'default')
   } catch (error) {
     console.error('처리 중 예상치 못한 오류 발생:', error)
   } finally {

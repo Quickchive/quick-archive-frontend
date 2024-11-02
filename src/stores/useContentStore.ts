@@ -5,6 +5,7 @@ import {
   getContents,
   getAllContents,
   addContents,
+  addMultipleContents,
   deleteContents,
   addFavorite,
   updateContents
@@ -23,7 +24,11 @@ import {
 } from '@/utils/interface'
 import { saveHideAlertToCookie } from '@/utils/cookies'
 import { sortByCreatedAtDescending } from '@/utils/sort.js'
-import { deleteNullContentProp, deleteNullEditContentProp } from '@/utils/util.js'
+import {
+  deleteNullContentProp,
+  deleteNullEditContentProp,
+  formatMultipleLinks
+} from '@/utils/util.js'
 import { useRouter } from 'vue-router'
 import { json } from 'stream/consumers'
 
@@ -218,9 +223,7 @@ export const useContentStore = defineStore('content', () => {
       const response: any = await addContents(contentData)
       console.log('addContent', response)
       if (response.data.statusCode === 201) {
-        modalViewStore.closeSelectModal()
-        modalViewStore.closeAddContentModal()
-        modalViewStore.closeAddContentSingle()
+        modalViewStore.resetAll()
         categoryStore.resetParentCategory()
         resetContentObj()
 
@@ -254,20 +257,20 @@ export const useContentStore = defineStore('content', () => {
 
   async function addMultipleContent() {
     try {
-      for (let i = 0; i < multipleContentList.value.length; i++) {
-        if (multipleContentList.value[i].checked) {
-          const contentData = deleteNullContentProp(multipleContentList.value[i])
-          const response: any = await addContents(contentData)
-          console.log('addContent', response)
-        }
+      const contentLinks = formatMultipleLinks(multipleContentList.value)
+      const contentData = {
+        contentLinks: contentLinks,
+        categoryName: contentObj.categoryName,
+        parentId: contentObj.categoryId
       }
+      const response: any = await addMultipleContents(contentData)
+      console.log('addMultipleContent', response)
     } catch (error: any) {
       // 토스트
       toastStore.executeErrorToast(error.message)
     } finally {
-      modalViewStore.closeSelectModal()
-      modalViewStore.closeAddContentModal()
-      modalViewStore.closeAddContentMultiple()
+      modalViewStore.resetAll()
+      categoryStore.resetParentCategory()
       if (route.params.id !== undefined) {
         // 특정 콘텐츠 페이지인 경우
         fetchContents(Number(route.params.id))
