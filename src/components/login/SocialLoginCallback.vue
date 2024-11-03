@@ -5,25 +5,15 @@
     <p>{{ loadingMessage }}</p>
   </div>
 </template>
-
+<!-- views/auth/SocialLoginCallback.vue -->
 <script setup>
 import { onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router' // useRoute 추가
 import { useUserStore } from '@/stores/useUserStore'
 import JumpingLoader from '@/components/loading/JumpingLoader.vue'
 
-const props = defineProps({
-  provider: {
-    type: String,
-    required: true,
-    validator: (value) => ['kakao', 'google', 'apple'].includes(value)
-  },
-  code: {
-    type: String,
-    required: true
-  }
-})
-
+// props 제거하고 route 사용
+const route = useRoute()
 const router = useRouter()
 const userStore = useUserStore()
 const loadingMessage = ref('')
@@ -45,13 +35,14 @@ const socialLoginConfig = {
 
 onMounted(async () => {
   try {
-    const { provider, code } = props
+    const provider = route.params.provider?.toString()
+    const code = route.query.code?.toString()
 
-    console.log(provider, code)
+    console.log('Provider:', provider, 'Code:', code)
 
-    // if (!socialLoginConfig[provider]) {
-    //   throw new Error('지원하지 않는 로그인 방식입니다.')
-    // }
+    if (!provider || !code || !socialLoginConfig[provider]) {
+      throw new Error('유효하지 않은 로그인 시도입니다.')
+    }
 
     loadingMessage.value = socialLoginConfig[provider].message
 
@@ -69,14 +60,3 @@ onMounted(async () => {
   }
 })
 </script>
-
-<style scoped>
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  gap: 1rem;
-}
-</style>

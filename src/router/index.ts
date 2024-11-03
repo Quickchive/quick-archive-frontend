@@ -77,30 +77,18 @@ const publicRoutes = [
   {
     path: '/home',
     name: 'socialCallback',
-    component: () => import('@/components/login/SocialLoginCallback.vue'),
-    props: (route: any) => ({
-      provider: route.params.provider,
-      code: route.query.code
-    })
+    component: () => import('@/components/login/SocialLoginCallback.vue')
   },
   // 소셜 로그인 콜백 라우트
   {
     path: '/home/:code',
     name: 'socialCallback',
-    component: () => import('@/components/login/SocialLoginCallback.vue'),
-    props: (route: any) => ({
-      provider: route.params.provider,
-      code: route.query.code
-    })
+    component: () => import('@/components/login/SocialLoginCallback.vue')
   },
   {
     path: '/home/kakao',
     name: 'socialCallback',
-    component: () => import('@/components/login/SocialLoginCallback.vue'),
-    props: (route: any) => ({
-      provider: route.params.provider,
-      code: route.query.code
-    })
+    component: () => import('@/components/login/SocialLoginCallback.vue')
   }
 ]
 
