@@ -3,7 +3,7 @@
     <div class="navbar__top-container">
       <button @click="toMainPage()" class="btn--transparent"><img :src="mainLogo" /></button>
       <!-- profile -->
-      <router-link to="/home/setting">
+      <router-link to="/main/setting">
         <div class="profile__wrapper">
           <div class="img-profile">
             <img :src="profileImg" />

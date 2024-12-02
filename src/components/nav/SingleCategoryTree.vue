@@ -66,7 +66,7 @@ const moreButton = reactive([])
 const toCategoryPage = async (categoryId, categoryName) => {
   await contentStore.fetchContents(categoryId)
   //
-  router.push(`/home/detail/${categoryId}`)
+  router.push(`/main/detail/${categoryId}`)
   categoryStore.setCategoryName(categoryName)
 }
 
