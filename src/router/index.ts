@@ -108,7 +108,7 @@ router.beforeEach(async (to, from, next) => {
 
     // 비로그인 사용자만 접근 가능한 페이지
     if (requiresGuest && isAuthenticated) {
-      next('/home')
+      next('/main')
       return
     }
 
