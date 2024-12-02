@@ -27,7 +27,7 @@
       v-if="
         userStore.recommendationMode &&
         categoryStore.isRecommended &&
-        modalViewStore.modal.addContent
+        (modalViewStore.modal.addContent || modalViewStore.modal.addContentDetail)
       "
       class="wrapper__banner-ai"
     >

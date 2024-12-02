@@ -70,10 +70,11 @@ import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import { useRouter, useRoute } from 'vue-router'
 import mainLogo from '@/assets/logo/logo_black_20px.svg'
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import { useToastStore } from '@/stores/useToastStore.ts'
 import banner1 from '@/assets/img/banner/banner_1.png'
 import banner2 from '@/assets/img/banner/banner_2.png'
+import { getAutoCategorizeSettingFromCookie } from '@/utils/cookies.js'
 
 const categoryStore = useCategoryStore()
 const contentStore = useContentStore()
@@ -99,15 +100,76 @@ const showAddModal = () => {
         func: {
           message: '저장하기',
           execute: () => {
-            modalViewStore.hideModalWithOverlay('select', 'default')
-            contentStore.setSingleLink(text)
-            modalViewStore.showModalWithOverlay('addContentDetail', 'default')
+            modalViewStore.hideModal('select')
+            handleSingleLinkProcess(text, getAutoCategorizeSettingFromCookie())
+            // contentStore.setSingleLink(text)
+            // modalViewStore.showModalWithOverlay('addContentDetail', 'default')
           }
         }
       }
       toastStore.executeDefaultToast(toastData)
     }
   })
+}
+
+async function handleSingleLinkProcess(linkStr, shouldAutoCategorize = false) {
+  const abortController = new AbortController()
+  modalViewStore.modal.loader = true
+
+  // loader 상태 변경 감시
+  const unwatch = watch(
+    () => modalViewStore.modal.loader,
+    (newValue) => {
+      if (!newValue) {
+        abortController.abort()
+      }
+    }
+  )
+
+  try {
+    // 링크 정보 가져오기
+    const linkResult = await contentStore
+      .setSingleLink(linkStr, abortController.signal)
+      .catch((error) => {
+        if (error.name === 'AbortError') {
+          console.log('요청이 취소되었습니다')
+          return
+        }
+        console.error('링크 정보 가져오기 실패:', error)
+        throw new Error('링크 정보 가져오기 실패')
+      })
+
+    // 요청이 취소되었다면 여기서 중단
+    if (abortController.signal.aborted) {
+      return
+    }
+
+    // 자동 분류 실행 (조건부)
+    if (shouldAutoCategorize) {
+      try {
+        await categoryStore.getAutoCategorizedName(linkStr, abortController.signal)
+      } catch (error) {
+        if (error.name === 'AbortError') {
+          console.log('자동 분류 요청이 취소되었습니다')
+          return
+        }
+        console.error('카테고리 자동 분류 실패:', error)
+      }
+    }
+
+    // 요청이 취소되었다면 여기서 중단
+    if (abortController.signal.aborted) {
+      return
+    }
+
+    // 링크 정보를 성공적으로 가져왔으므로 모달 표시
+    modalViewStore.showModalWithOverlay('addContentDetail', 'default')
+  } catch (error) {
+    console.error('처리 중 예상치 못한 오류 발생:', error)
+  } finally {
+    unwatch() // watch 해제
+    modalViewStore.modal.loader = false
+  }
 }
 
 const toMainPage = () => {

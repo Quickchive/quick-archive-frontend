@@ -27,7 +27,7 @@
           <div
             v-if="
               userStore.recommendationMode &&
-              modalViewStore.modal.addContent &&
+              (modalViewStore.modal.addContent || modalViewStore.modal.addContentDetail) &&
               categoryStore.isRecommended &&
               categoryStore.recommendedCategoryId === contentStore.contentObj.categoryId
             "
