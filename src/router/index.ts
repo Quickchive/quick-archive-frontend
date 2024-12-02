@@ -75,28 +75,7 @@ const publicRoutes = [
   },
   // 소셜 로그인 콜백 라우트
   {
-    path: '/home',
-    name: 'socialCallback',
-    component: () => import('@/components/login/SocialLoginCallback.vue')
-  },
-  // 소셜 로그인 콜백 라우트
-  {
-    path: '/home/:code',
-    name: 'socialCallback',
-    component: () => import('@/components/login/SocialLoginCallback.vue')
-  },
-  {
-    path: '/home/kakao',
-    name: 'socialCallback',
-    component: () => import('@/components/login/SocialLoginCallback.vue')
-  },
-  {
-    path: '/home/google',
-    name: 'socialCallback',
-    component: () => import('@/components/login/SocialLoginCallback.vue')
-  },
-  {
-    path: '/home/apple',
+    path: '/home/:provider?/:code?',
     name: 'socialCallback',
     component: () => import('@/components/login/SocialLoginCallback.vue')
   }
