@@ -35,12 +35,22 @@ const socialLoginConfig = {
 
 onMounted(async () => {
   try {
-    const provider = route.params.provider?.toString()
+    let provider = ''
+    if (route.fullPath.includes('google')) {
+      provider = 'google'
+    }
+    if (route.fullPath.includes('kakao')) {
+      provider = 'kakao'
+    }
+    if (route.fullPath.includes('apple')) {
+      provider = 'apple'
+    }
+
     const code = route.query.code?.toString()
 
     console.log('Provider:', provider, 'Code:', code)
 
-    if (!provider || !code || !socialLoginConfig[provider]) {
+    if (!code) {
       throw new Error('유효하지 않은 로그인 시도입니다.')
     }
 
@@ -55,7 +65,7 @@ onMounted(async () => {
     router.replace('/home')
   } catch (error) {
     console.error('소셜 로그인 실패:', error)
-    userStore.setLoginError(error.message)
+    // userStore.setLoginError(error.message)
     router.replace('/login')
   }
 })
