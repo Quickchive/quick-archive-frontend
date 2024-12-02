@@ -48,7 +48,7 @@ onMounted(async () => {
     await socialLoginConfig[provider].method(code)
     await userStore.getUserProfile()
 
-    router.replace('/home')
+    router.push('/home')
   } catch (error) {
     console.error('소셜 로그인 실패:', error)
     router.replace('/login')
