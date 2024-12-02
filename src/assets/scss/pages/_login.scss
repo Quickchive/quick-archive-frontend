@@ -20,7 +20,7 @@ p {
 }
 
 .login-form {
-  @include flex(column, _, center);
+  @include flex(column, start, center);
   @include size(462px, 501px);
   border-radius: 16px;
   background-color: #ffffff;
@@ -30,13 +30,14 @@ p {
 }
 
 .login__btn__wrapper {
-  @include flex(column, _, _);
+  @include flex(column, center, center);
   width: 398px;
   margin: 0px 0 32px 0;
   gap: 12px;
   a {
     color: $color-grey-100;
     text-decoration: none;
+    width: 100%;
   }
 }
 
