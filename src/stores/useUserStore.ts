@@ -206,13 +206,13 @@ export const useUserStore = defineStore('user', () => {
   }
 
   function getSocialLoginInfo() {
-    console.log('oauthInfo', localStorage.getItem('oauthInfo'))
+    console.log('oauthInfo', getSocialInfoFromCookie())
 
     if (getSocialInfoFromCookie() !== null) {
       socialLoginInfo.value = getSocialInfoFromCookie()
     }
 
-    return localStorage.getItem('oauthInfo')
+    return getSocialInfoFromCookie()
   }
 
   return {
