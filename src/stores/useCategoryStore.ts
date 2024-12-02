@@ -358,10 +358,7 @@ export const useCategoryStore = defineStore('category', () => {
           message: '보러가기',
           execute: () => {
             setCategoryName(addCategoryObj.value.categoryName)
-            router.push({
-              name: 'categoryDetail',
-              params: { id: searchedCategory.id }
-            })
+            router.push(`/main/detail/${searchedCategory.id}`)
           }
         }
       }
