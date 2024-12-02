@@ -44,7 +44,7 @@ export const useUserStore = defineStore('user', () => {
       refreshToken.value = response.data.refresh_token
       isLogin.value = true
       if (response.data.statusCode === 201) {
-        router.push('/home')
+        router.push('/main')
       }
     } catch (error) {
       console.error(error)

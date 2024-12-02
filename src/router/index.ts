@@ -6,7 +6,7 @@ import { useRoute } from 'vue-router'
 // 인증이 필요한 라우트
 const authenticatedRoutes = [
   {
-    path: '/home',
+    path: '/main',
     component: () => import('@/views/AuthenticatedView.vue'),
     meta: { requiresAuth: true },
     children: [

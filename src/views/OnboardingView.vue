@@ -115,7 +115,7 @@ const toLoginPage = () => {
 }
 
 const toMainPage = () => {
-  router.push('/home')
+  router.push('/main')
 }
 
 onMounted(() => {

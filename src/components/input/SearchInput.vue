@@ -52,13 +52,13 @@ const setKeyword = (e) => {
     if (isHangul(e.target.value)) {
       if (checkHangulCompletion(e.target.value)) {
         searchStore.searchEvent()
-        router.push('/home/search')
+        router.push('/main/search')
       }
     }
     // 영문 검색
     else {
       searchStore.searchEvent()
-      router.push('/home/search')
+      router.push('/main/search')
     }
   }
   // 2. 모달 검색 인풋(카테고리 명 검색)

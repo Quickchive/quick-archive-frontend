@@ -111,7 +111,7 @@ const showAddModal = () => {
 }
 
 const toMainPage = () => {
-  router.push('/home')
+  router.push('/main')
 }
 
 onMounted(async () => {
