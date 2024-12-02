@@ -32,10 +32,16 @@ const socialLoginConfig = {
     message: '애플 계정으로 로그인 중...'
   }
 }
-
 onMounted(async () => {
   try {
-    const provider = route.params.provider
+    // URL에서 provider 추출
+    let provider = route.params.provider
+
+    // provider가 없을 경우 query code 존재 시 google로 설정
+    if (!provider && route.query.code) {
+      provider = 'google'
+    }
+
     const code = route.query.code
 
     if (!code || !socialLoginConfig[provider]) {
