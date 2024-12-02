@@ -15,6 +15,8 @@ import {
   filterByFavorite
 } from '@/utils/filter.js'
 import type { CategoryIdMap } from '@/utils/interface'
+import { saveCustomPageNameToCookie } from '@/utils/cookies'
+
 import { getCategories, getRecommendedCategory } from '@/api/category'
 import { formatAddCategoryData, formatEditCategoryData } from '@/utils/util.js'
 import { searchCategoryDataById, searchCategoryDataByName } from '@/utils/search.js'
@@ -105,6 +107,7 @@ export const useCategoryStore = defineStore('category', () => {
   /*** actions ***/
 
   function setCategoryName(categoryName: string) {
+    saveCustomPageNameToCookie(categoryName)
     curCategoryName.value = categoryName
   }
 

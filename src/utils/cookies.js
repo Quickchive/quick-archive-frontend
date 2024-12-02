@@ -21,6 +21,10 @@ function saveSocialInfoToCookie(value) {
   document.cookie = `social_info=${value}; path=/`
 }
 
+function saveCustomPageNameToCookie(value) {
+  document.cookie = `custompage_name=${value}; path=/`
+}
+
 function getAccessTokenFromCookie() {
   return document.cookie.replace(/(?:(?:^|.*;\s*)accessToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
 }
@@ -39,6 +43,10 @@ function getHideAlertFromCookie() {
 
 function getSocialInfoFromCookie() {
   return document.cookie.replace(/(?:(?:^|.*;\s*)social_info\s*=\s*([^;]*).*$)|^.*$/, '$1')
+}
+
+function getCustomPageNameToCookie() {
+  return document.cookie.replace(/(?:(?:^|.*;\s*)custompage_name\s*=\s*([^;]*).*$)|^.*$/, '$1')
 }
 
 function getAutoCategorizeSettingFromCookie() {
@@ -77,5 +85,7 @@ export {
   saveAutoCategorizeSettingFromCookie,
   getAutoCategorizeSettingFromCookie,
   saveSocialInfoToCookie,
-  getSocialInfoFromCookie
+  getSocialInfoFromCookie,
+  getCustomPageNameToCookie,
+  saveCustomPageNameToCookie
 }

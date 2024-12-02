@@ -39,6 +39,8 @@ const contentList = ref({})
 const categoryStore = useCategoryStore()
 
 onMounted(async () => {
+  await contentStore.fetchAllContents()
+
   // if (!(categoryStore.isUnselectedChipOn || categoryStore.isFavoriteChipOn)) {
   //   await contentStore.fetchAllContents()
   // }

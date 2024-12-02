@@ -161,7 +161,7 @@ onMounted(async () => {
 
   await userStore.getUserProfile()
   await categoryStore.getUserCategoryList()
-  await contentStore.fetchAllContents()
+  // await contentStore.fetchAllContents()
   await userStore.getRecommendationMode()
   // }
 })

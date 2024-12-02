@@ -19,7 +19,7 @@ const authenticatedRoutes = [
             component: () => import('@/components/home/DefaultCategoryPage.vue')
           },
           {
-            path: 'detail/:id',
+            path: '/main/detail/:id',
             component: () => import('@/components/home/CustomCategoryPage.vue')
           }
         ]

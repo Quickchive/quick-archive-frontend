@@ -39,14 +39,20 @@ const contentStore = useContentStore()
 //   await contentStore.fetchContents(Number(route.params.id))
 // })
 
-watch(
-  () => route.params.id,
-  async (newId) => {
-    if (newId) {
-      await fetchData()
-    }
+onMounted(async () => {
+  if (route.params.id) {
+    await fetchData()
   }
-)
+})
+
+// watch(
+//   () => route.params.id,
+//   async (newId) => {
+//     if (newId) {
+//       await fetchData()
+//     }
+//   }
+// )
 
 const fetchData = async () => {
   try {
@@ -56,12 +62,12 @@ const fetchData = async () => {
   }
 }
 
-watch(
-  () => contentStore.contentList,
-  () => {
-    // 적절한 화면 갱신 로직 추가
-    console.log('myState가 변경되었습니다. 화면을 갱신합니다.')
-  }
-)
+// watch(
+//   () => contentStore.contentList,
+//   () => {
+//     // 적절한 화면 갱신 로직 추가
+//     console.log('myState가 변경되었습니다. 화면을 갱신합니다.')
+//   }
+// )
 </script>
 <style></style>
