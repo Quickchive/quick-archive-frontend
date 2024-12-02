@@ -17,6 +17,10 @@ function saveAutoCategorizeSettingFromCookie(value) {
   document.cookie = `auto_categorized=${value}; path=/`
 }
 
+function saveSocialInfoToCookie(value) {
+  document.cookie = `social_info=${value}; path=/`
+}
+
 function getAccessTokenFromCookie() {
   return document.cookie.replace(/(?:(?:^|.*;\s*)accessToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
 }
@@ -31,6 +35,10 @@ function getUserFromCookie() {
 
 function getHideAlertFromCookie() {
   return document.cookie.replace(/(?:(?:^|.*;\s*)hide_alert\s*=\s*([^;]*).*$)|^.*$/, '$1')
+}
+
+function getSocialInfoFromCookie() {
+  return document.cookie.replace(/(?:(?:^|.*;\s*)social_info\s*=\s*([^;]*).*$)|^.*$/, '$1')
 }
 
 function getAutoCategorizeSettingFromCookie() {
@@ -67,5 +75,7 @@ export {
   saveHideAlertToCookie,
   getHideAlertFromCookie,
   saveAutoCategorizeSettingFromCookie,
-  getAutoCategorizeSettingFromCookie
+  getAutoCategorizeSettingFromCookie,
+  saveSocialInfoToCookie,
+  getSocialInfoFromCookie
 }

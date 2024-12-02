@@ -9,7 +9,9 @@ import {
   deleteCookie,
   saveHideAlertToCookie,
   saveAutoCategorizeSettingFromCookie,
-  getAutoCategorizeSettingFromCookie
+  getAutoCategorizeSettingFromCookie,
+  saveSocialInfoToCookie,
+  getSocialInfoFromCookie
 } from '@/utils/cookies'
 import { useRouter } from 'vue-router'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
@@ -200,14 +202,14 @@ export const useUserStore = defineStore('user', () => {
 
   function setSocialLoginInfo(snsName: string) {
     socialLoginInfo.value = snsName
-    localStorage.setItem('oauthInfo', snsName)
+    saveSocialInfoToCookie(snsName)
   }
 
   function getSocialLoginInfo() {
     console.log('oauthInfo', localStorage.getItem('oauthInfo'))
 
-    if (localStorage.getItem('oauthInfo') !== null) {
-      socialLoginInfo.value = localStorage.getItem('oauthInfo')
+    if (getSocialInfoFromCookie() !== null) {
+      socialLoginInfo.value = getSocialInfoFromCookie()
     }
 
     return localStorage.getItem('oauthInfo')

@@ -89,6 +89,16 @@ const publicRoutes = [
     path: '/home/kakao',
     name: 'socialCallback',
     component: () => import('@/components/login/SocialLoginCallback.vue')
+  },
+  {
+    path: '/home/google',
+    name: 'socialCallback',
+    component: () => import('@/components/login/SocialLoginCallback.vue')
+  },
+  {
+    path: '/home/apple',
+    name: 'socialCallback',
+    component: () => import('@/components/login/SocialLoginCallback.vue')
   }
 ]
 
