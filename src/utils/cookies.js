@@ -55,9 +55,10 @@ function getAutoCategorizeSettingFromCookie() {
     '$1'
   )
 
-  // 쿠키 값이 비어있는 경우 기본값 반환
+  // 쿠키 값이 비어있는 경우 기본값(true) 반환
   if (!cookieValue) {
-    return false // 또는 적절한 기본값
+    saveAutoCategorizeSettingFromCookie(true)
+    return true
   }
 
   try {
