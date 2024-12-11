@@ -116,16 +116,16 @@ export const useUserStore = defineStore('user', () => {
       const response = await logoutUser(refresh_token)
       if (response.data.statusCode === 201 || response.data.statusCode === 200) {
         modalViewStore.hideModalWithOverlay('logout', 'settingAlert')
+        nickname.value = ''
+        email.value = ''
+        accessToken.value = ''
+        refreshToken.value = ''
+        deleteCookie('accessToken')
+        deleteCookie('refreshToken')
+        localStorage.removeItem('oauthInfo')
+        isLogin.value = false
         router.push('/login')
       }
-      nickname.value = ''
-      email.value = ''
-      accessToken.value = ''
-      refreshToken.value = ''
-      deleteCookie('accessToken')
-      deleteCookie('refreshToken')
-      localStorage.removeItem('oauthInfo')
-      isLogin.value = false
     } catch (error) {
       console.error(error)
     }
