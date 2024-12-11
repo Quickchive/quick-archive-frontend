@@ -85,8 +85,21 @@ export const useAlertDataStore = defineStore('alertData', () => {
     leftButtonEvent: () => {
       modalViewStore.resetAllModal()
       if (modalViewStore.setCategoryLocation === 'category') {
+        modalViewStore.showModal('addCategory')
         modalViewStore.showModal('categoryLocation')
-      } else {
+      }
+      if (modalViewStore.setCategoryLocation === 'editCategory') {
+        modalViewStore.showModal('editCategory')
+        modalViewStore.showModal('categoryLocation')
+      }
+      if (modalViewStore.setCategoryLocation === 'content') {
+        modalViewStore.showModal('addContent')
+        modalViewStore.showModal('addContentDetail')
+        modalViewStore.showModal('contentLocation')
+      }
+      if (modalViewStore.setCategoryLocation === 'editContent') {
+        modalViewStore.showModal('editContent')
+        modalViewStore.showModal('editContentDetail')
         modalViewStore.showModal('contentLocation')
       }
     },

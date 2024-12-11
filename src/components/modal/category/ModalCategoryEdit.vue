@@ -83,6 +83,7 @@ const openSelectCategoryModal = () => {
 
 const openSetCategoryLocationModal = () => {
   modalViewStore.showModal('categoryLocation')
+  modalViewStore.setCategoryLocation = 'editCategory'
 }
 
 // 카테고리 명 유효성 검사

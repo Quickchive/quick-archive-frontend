@@ -109,6 +109,7 @@ const saveContent = () => {
 }
 
 const gotoCategoryLocation = () => {
+  modalViewStore.setCategoryLocation = 'editContent'
   modalViewStore.showModal('contentLocation')
 }
 </script>

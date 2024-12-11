@@ -84,6 +84,9 @@ export const useModalViewStore = defineStore('modalView', () => {
     modal.addCategory = false
     modal.addContentDetail = false
     modal.addContent = false
+    modal.editCategory = false
+    modal.editContent = false
+    modal.editContentDetail = false
   }
 
   function closeSetNewCategoryModal() {
