@@ -131,6 +131,14 @@ export const useCategoryStore = defineStore('category', () => {
       editCategoryObj.value.parentId = parentData.id
       editCategoryObj.value.parentCategoryName = parentData.name
       editCategoryObj.value.parentIconName = parentData.iconName
+    } else {
+      focusedCategory.value.parentId = -1
+      focusedCategory.value.parentCategoryName = '전체 콘텐츠'
+      focusedCategory.value.parentIconName = ''
+
+      editCategoryObj.value.parentId = -1
+      editCategoryObj.value.parentCategoryName = '전체 콘텐츠'
+      editCategoryObj.value.parentIconName = ''
     }
   }
 
