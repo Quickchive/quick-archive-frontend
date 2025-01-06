@@ -27,14 +27,11 @@
     <div class="wrapper__category-list">
       <category-list></category-list>
       <div class="wrapper__banner">
-        <a
-          href="https://cream-pharaoh-d66.notion.site/AI-11107f7f59b348a8afdd2d8f2f762fc1?pvs=74"
-          target="_blank"
-        >
+        <a href="https://www.notion.so/AI-11107f7f59b348a8afdd2d8f2f762fc1?pvs=4" target="_blank">
           <img :src="banner2" />
         </a>
         <a
-          href="https://www.notion.so/Quick-Archive-Team-Space-f3185cc8ad6a48cb95398b181fefdd58"
+          href="https://chromewebstore.google.com/detail/quick-archive/phdbepngmohoalnmhjjjbbjijdjgnpoo?hl=ko"
           target="_blank"
         >
           <img :src="banner1" />
