@@ -3,13 +3,13 @@ import { setInterceptors } from './common/interceptors'
 
 function createInstance() {
   return axios.create({
-    baseURL: import.meta.env.VITE_APP_API_URI
+    baseURL: import.meta.env.VITE_API_URL
   })
 }
 
 function createInstanceWithAuth() {
   const instance = axios.create({
-    baseURL: import.meta.env.VITE_APP_API_URI
+    baseURL: import.meta.env.VITE_API_URL
   })
   return setInterceptors(instance)
 }
