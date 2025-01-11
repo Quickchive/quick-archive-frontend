@@ -22,19 +22,21 @@
           <span><strong>3초만에</strong> 빠른 회원가입!</span>
         </div>
         <div class="login__btn__wrapper">
-          <a href="https://test.quickarchive.co.kr/api/oauth/kakao-auth" target="_blank">
+          <a :href="apiUrl + 'oauth/kakao-auth'" target="_blank">
             <button class="btn--kakao btn-56">
               <img :src="logoKakao" />
               카카오톡으로 시작하기
             </button>
           </a>
-          <a href="https://test.quickarchive.co.kr/api/oauth/google-auth" target="_blank">
+
+          <a :href="apiUrl + 'oauth/google-auth'" target="_blank">
             <button class="btn--google btn-56">
               <img :src="logoGoogle" />
               Google로 시작하기
             </button>
           </a>
-          <a href="https://test.quickarchive.co.kr/api/oauth/apple-auth" target="_blank">
+
+          <a :href="apiUrl + 'oauth/apple-auth'" target="_blank">
             <button class="btn--apple btn-56"><img :src="logoApple" />Apple로 시작하기</button>
           </a>
         </div>
@@ -64,7 +66,8 @@ export default {
       logoGoogle,
       logoApple,
       union,
-      isVisible: false
+      isVisible: false,
+      apiUrl: import.meta.env.VITE_API_URL
     }
   },
   mounted() {
