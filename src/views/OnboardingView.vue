@@ -70,7 +70,7 @@
       <div class="wrapper__footer-onboarding">
         <ul>
           <button class="btn-main">
-            <a href="https://quickarchive.co.kr/">퀵카이브</a>
+            <a :href="import.meta.env.VITE_APP_URL">퀵카이브</a>
           </button>
 
           <li>
