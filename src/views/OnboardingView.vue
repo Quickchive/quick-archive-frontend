@@ -70,7 +70,7 @@
       <div class="wrapper__footer-onboarding">
         <ul>
           <button class="btn-main">
-            <a :href="import.meta.env.VITE_APP_URL">퀵카이브</a>
+            <a :href="appUrl">퀵카이브</a>
           </button>
 
           <li>
@@ -109,6 +109,7 @@ import instagramLogo from '@/assets/ic/ic-instagram.svg'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
+const appUrl = import.meta.env.VITE_APP_URL
 
 const toLoginPage = () => {
   router.push('/login')
