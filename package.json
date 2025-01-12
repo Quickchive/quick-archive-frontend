@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "vercel-build": "if [ \"$VERCEL_ENV\" = \"production\" ]; then npm run build:prod; else npm run build:dev; fi",
     "dev": "vite --mode development",
     "build": "run-p type-check build-only",
     "build-only": "vite build --mode production",
