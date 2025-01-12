@@ -27,6 +27,9 @@
       #btn__app--sm {
         color: $color-grey-80;
         border: 1px solid $color-grey-20;
+        a {
+          color: $color-grey-80;
+        }
       }
       #btn__web--sm {
         color: $color-white;
@@ -78,6 +81,9 @@
             border: 1px solid $color-grey-10;
             color: $color-grey-80;
             letter-spacing: -0.3px;
+            a {
+              color: $color-grey-80;
+            }
           }
           #btn__web {
             background: $color-blue;
@@ -202,4 +208,8 @@
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
   opacity: 0;
+}
+
+.text-onboarding-mail {
+  color: #515253;
 }
