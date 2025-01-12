@@ -41,7 +41,7 @@
           </a>
         </div>
         <div class="desc__wrapper">
-          <a href="https://www.notion.so/fabc4b39c85b446bab8f2bb8549926b7"
+          <a href="https://quick-archive.notion.site/quick-archive-terms-policy"
             >서비스 이용약관 및 개인정보처리방침</a
           ><span> 안내</span>
         </div>

@@ -74,11 +74,11 @@
           </button>
 
           <li>
-            <a href="https://www.notion.so/fabc4b39c85b446bab8f2bb8549926b7?pvs=4">약관 및 정책</a>
+            <a href="https://quick-archive.notion.site/quick-archive-terms-policy">약관 및 정책</a>
           </li>
           <img :src="divider" />
           <li>
-            <a href="https://www.notion.so/6bf8991d981b440bafe3c6bb9dfe3ba1?pvs=4">
+            <a href="https://www.notion.so/97624d059f044e26aeea371b2108c47d?pvs=25">
               서비스 만든 사람</a
             >
           </li>

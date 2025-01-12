@@ -33,7 +33,7 @@
         </button>
 
         <button class="setting-main-button">
-          <a href="https://www.notion.so/fabc4b39c85b446bab8f2bb8549926b7?pvs=4">
+          <a href="https://quick-archive.notion.site/quick-archive-terms-policy">
             <div class="wrapper__button-icon"><img :src="policyIcon" />약관 및 정책</div>
             <img :src="nextIcon" />
           </a>
