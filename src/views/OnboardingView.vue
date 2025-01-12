@@ -4,7 +4,13 @@
       <button @click="toMainPage()" class="btn--transparent"><img :src="mainLogo" /></button>
       <transition name="fade">
         <div class="wrapper__header-button" v-show="showSmButton">
-          <button id="btn__app--sm">모바일 앱 다운로드</button>
+          <button id="btn__app--sm">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdyHz30flYLSk4FUwDNnvP18br6vMFIbOqdHP5JOhZk2f_djw/viewform"
+              target="_blank"
+              >모바일 앱 출시알람</a
+            >
+          </button>
           <button id="btn__web--sm" @click="toLoginPage">웹에서 이용하기</button>
         </div>
       </transition>
@@ -18,7 +24,13 @@
           </h2>
           <p>저장만 해주세요. 귀찮은 카테고리 정리는 대신해 드릴게요.</p>
           <div class="wrapper__section-button" v-show="showLgButton">
-            <button id="btn__app">모바일 앱 다운로드</button>
+            <button id="btn__app">
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSdyHz30flYLSk4FUwDNnvP18br6vMFIbOqdHP5JOhZk2f_djw/viewform"
+                target="_blank"
+                >모바일 앱 출시알람</a
+              >
+            </button>
             <button id="btn__web" @click="toLoginPage">웹에서 이용하기</button>
           </div>
         </section>
@@ -83,7 +95,7 @@
             >
           </li>
           <img :src="divider" />
-          <li>이메일 문의</li>
+          <li>quickarchive.official@gmail.com</li>
         </ul>
         <button class="btn--instagram">
           <a
