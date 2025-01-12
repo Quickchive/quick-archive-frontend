@@ -1,6 +1,10 @@
 <template>
   <div class="box__thumbnail">
-    <img class="thumbnail__sm" :src="contentStore.contentObj.coverImg" @error="handleImageError" />
+    <img
+      class="thumbnail__sm"
+      :src="contentStore.contentObj.coverImg ? contentStore.contentObj.coverImg : ''"
+      @error="handleImageError"
+    />
     <div class="wrapper__thumbnail-content">
       <div class="box__input--content-title">
         <span class="text__contentTitle">{{ contentStore.contentObj.title }}</span>

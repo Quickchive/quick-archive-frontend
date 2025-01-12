@@ -3,7 +3,11 @@
     <div class="box__thumbnail-img" @click="contentStore.checkLinkInMultipleLink(index)">
       <img
         class="thumbnail__sm"
-        :src="contentStore.multipleContentList[index].coverImg"
+        :src="
+          contentStore.multipleContentList[index].coverImg
+            ? contentStore.multipleContentList[index].coverImg
+            : ''
+        "
         @error="handleImageError"
       />
       <!-- <img v-if="contentData.checked" class="thumbnail__checkbox" :src="checkboxOn" /> -->

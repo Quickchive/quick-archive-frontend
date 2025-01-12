@@ -3,7 +3,11 @@
     <div class="item-container">
       <div class="thumbnail__wrapper">
         <a :href="item.link" target="_self">
-          <img :src="item.coverImg" class="thumbnail" @error="handleImageError" />
+          <img
+            :src="item.coverImg ? item.coverImg : ''"
+            class="thumbnail"
+            @error="handleImageError"
+          />
         </a>
         <button class="btn--transparent btn-favorite" @click="favoriteEvent()">
           <img :src="favoriteSelectedIcon" v-if="item.favorite" />
