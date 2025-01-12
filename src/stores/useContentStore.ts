@@ -345,8 +345,11 @@ export const useContentStore = defineStore('content', () => {
       if (response.data.statusCode === 200 || response.data.statusCode === 201) {
         return response.data
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error)
+      // if (error.response.data.statusCode === 403) {
+      throw error
+      // }
     }
   }
 
@@ -364,27 +367,21 @@ export const useContentStore = defineStore('content', () => {
 
       setContentObj(singleLinkObj)
     } catch (error: any) {
+      if (error.response.data.statusCode === 403) {
+        console.error('OG 데이터 가져오기 실패:', error.message)
+        // 기본값으로 설정
+        const fallbackLinkObj: OgContent = {
+          link: link,
+          coverImg: '', // 또는 기본 이미지 URL
+          title: '제목을 가져올 수 없습니다',
+          description: '설명을 가져올 수 없습니다',
+          siteName: '사이트 이름을 가져올 수 없습니다'
+        }
+        setContentObj(fallbackLinkObj)
+      }
       if (error.name === 'AbortError') {
         throw error
       }
-      // 구체적인 에러 타입 체크
-      if (error instanceof Error) {
-        console.error('OG 데이터 가져오기 실패:', error.message)
-      } else {
-        console.error('알 수 없는 오류 발생:', error)
-      }
-
-      // 기본값으로 설정
-      const fallbackLinkObj: OgContent = {
-        link: link,
-        coverImg: '', // 또는 기본 이미지 URL
-        title: '제목을 가져올 수 없습니다',
-        description: '설명을 가져올 수 없습니다',
-        siteName: '사이트 이름을 가져올 수 없습니다'
-      }
-
-      setContentObj(fallbackLinkObj)
-
       // 필요한 경우 에러를 상위로 전파
       // throw error
     }
