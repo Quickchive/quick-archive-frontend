@@ -367,25 +367,20 @@ export const useContentStore = defineStore('content', () => {
 
       setContentObj(singleLinkObj)
     } catch (error: any) {
-      if (error.response.data.statusCode === 403) {
-        console.error('OG 데이터 가져오기 실패:', error.message)
-        // 기본값으로 설정
-        const fallbackLinkObj: OgContent = {
-          link: link,
-          coverImg: '', // 또는 기본 이미지 URL
-          title: '제목을 가져올 수 없습니다',
-          description: '설명을 가져올 수 없습니다',
-          siteName: '사이트 이름을 가져올 수 없습니다'
-        }
-        setContentObj(fallbackLinkObj)
+      // 기본값으로 설정
+      const fallbackLinkObj: OgContent = {
+        link: link,
+        coverImg: '', // 또는 기본 이미지 URL
+        title: '제목을 가져올 수 없습니다',
+        description: '설명을 가져올 수 없습니다',
+        siteName: '사이트 이름을 가져올 수 없습니다'
       }
-      if (error.name === 'AbortError') {
-        throw error
-      }
-      // 필요한 경우 에러를 상위로 전파
-      // throw error
+      setContentObj(fallbackLinkObj)
+
+      return error.response
     }
   }
+
   async function fetchMultipleLinksOgData(links: any) {
     const multipleLinksArr = <OgContent[]>[]
 
