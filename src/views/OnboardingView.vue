@@ -95,7 +95,7 @@
             >
           </li>
           <img :src="divider" />
-          <li>quickarchive.official@gmail.com</li>
+          <li class="text-onboarding-mail">quickarchive.official@gmail.com</li>
         </ul>
         <button class="btn--instagram">
           <a
