@@ -46,6 +46,7 @@
     <div class="modal-footer">
       <button
         class="btn-confirm"
+        id="btn-web__save-category"
         :class="isCategoryNameValid ? 'active' : 'inactive'"
         @click="categoryStore.addCategory"
         :disabled="!isCategoryNameValid"

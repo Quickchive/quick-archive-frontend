@@ -42,6 +42,7 @@
       <button
         :class="isValid ? 'active' : 'inactive'"
         class="btn-confirm"
+        id="btn-web__save-content-multiple"
         :disabled="!isValid"
         @click="saveContent"
       >

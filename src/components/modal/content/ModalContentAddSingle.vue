@@ -68,7 +68,9 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn-confirm active" @click="saveContent">저장</button>
+      <button class="btn-confirm active" id="btn-web__save-content-single" @click="saveContent">
+        저장
+      </button>
     </div>
   </dialog>
 </template>
