@@ -144,36 +144,28 @@ const submitLink = async () => {
 }
 
 async function handleSingleLinkProcess(linkStr, shouldAutoCategorize = false) {
-  const abortController = new AbortController()
   modalViewStore.modal.loader = true
 
-  // loader 상태 변경 감시
-  const unwatch = watch(
-    () => modalViewStore.modal.loader,
-    (newValue) => {
-      if (!newValue) {
-        abortController.abort()
-      }
-    }
-  )
-
   try {
-    // 링크 정보 가져오기
-    const linkResult = await contentStore.setSingleLink(linkStr, abortController.signal)
+    const result = await contentStore.setSingleLink(link)
 
-    if (linkResult.data.statusCode !== (200 || 201)) {
+    if (result.statusCode === 403) {
+      // OG 데이터를 가져오는데 실패한 경우
+      console.log('OG 데이터를 가져오는데 실패했습니다. 기본값 노출 및 자동분류 하지 않음')
       shouldAutoCategorize = false
+      // 필요한 경우 추가적인 에러 처리나 사용자 알림을 여기서 수행
+      // return false;
+    } else {
+      // OG 데이터를 성공적으로 가져온 경우
+      console.log('OG 데이터를 성공적으로 가져왔습니다.')
+      shouldAutoCategorize = true
     }
 
     // 자동 분류 실행 (조건부)
     if (shouldAutoCategorize) {
       try {
-        await categoryStore.getAutoCategorizedName(linkStr, abortController.signal)
+        await categoryStore.getAutoCategorizedName(linkStr)
       } catch (error) {
-        if (error.name === 'AbortError') {
-          console.log('자동 분류 요청이 취소되었습니다')
-          return
-        }
         console.error('카테고리 자동 분류 실패:', error)
       }
     }
@@ -181,9 +173,10 @@ async function handleSingleLinkProcess(linkStr, shouldAutoCategorize = false) {
     // 링크 정보를 성공적으로 가져왔으므로 모달 표시
     modalViewStore.showModalWithOverlay('addContentDetail', 'default')
   } catch (error) {
-    console.error('처리 중 예상치 못한 오류 발생:', error)
+    // setSingleLink 함수 자체가 실패한 경우 (예: 잘못된 URL 형식 등)
+    console.error('링크 처리 중 오류 발생:', error)
+    return false
   } finally {
-    unwatch() // watch 해제
     modalViewStore.modal.loader = false
   }
 }
