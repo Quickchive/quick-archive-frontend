@@ -55,6 +55,7 @@ export const useContentStore = defineStore('content', () => {
     categoryName: '전체 콘텐츠',
     categoryIconName: '',
     categoryId: -1,
+    prevCategoryId: -1,
     coverImg: ''
   })
 
@@ -104,6 +105,7 @@ export const useContentStore = defineStore('content', () => {
   function setContentCategory(category: any) {
     contentObj.categoryName = category.name
     contentObj.categoryId = category.id
+    contentObj.prevCategoryId = category.id
     contentObj.categoryIconName = category.iconName
   }
 
@@ -122,6 +124,7 @@ export const useContentStore = defineStore('content', () => {
     contentObj.favorite = false
     contentObj.categoryName = '전체 콘텐츠'
     contentObj.categoryId = -1
+    contentObj.prevCategoryId = -1
     contentObj.categoryIconName = ''
   }
 
@@ -144,6 +147,7 @@ export const useContentStore = defineStore('content', () => {
     if (content.category !== null) {
       contentObj.categoryName = content.category.name
       contentObj.categoryId = content.category.id
+      contentObj.prevCategoryId = content.category.id
       contentObj.categoryIconName = content.category.iconName
     }
   }
@@ -283,7 +287,8 @@ export const useContentStore = defineStore('content', () => {
 
   async function editContent() {
     try {
-      const contentData = deleteNullEditContentProp(contentObj)
+      const isCategoryChanged = contentObj.prevCategoryId !== contentObj.categoryId
+      const contentData = deleteNullEditContentProp(contentObj, isCategoryChanged)
       const response: any = await updateContents(contentData)
       console.log('editContent', response)
       if (response.data.statusCode === 200) {
