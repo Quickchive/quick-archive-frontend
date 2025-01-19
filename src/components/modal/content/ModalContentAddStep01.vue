@@ -147,7 +147,7 @@ async function handleSingleLinkProcess(linkStr, shouldAutoCategorize = false) {
   modalViewStore.modal.loader = true
 
   try {
-    const result = await contentStore.setSingleLink(link)
+    const result = await contentStore.setSingleLink(linkStr)
 
     if (result.statusCode === 403) {
       // OG 데이터를 가져오는데 실패한 경우
