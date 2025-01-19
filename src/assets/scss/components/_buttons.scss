@@ -250,6 +250,7 @@ button {
 /* 1번 그룹 라디오 버튼 선택 시 배경 색상 변경, 외부 원 */
 .radio-buttons .radio-button input[type='radio']:checked ~ .custom-radio {
   background-color: #146eff;
+  border: 1px solid #146eff;
 }
 
 /* 1번 그룹 라디오 버튼, 내부 원 */

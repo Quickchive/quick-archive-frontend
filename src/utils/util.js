@@ -23,10 +23,18 @@ const formatMultipleLinks = (multipleContentList) => {
   return links
 }
 
-const deleteNullEditContentProp = (contentObj) => {
+const deleteNullEditContentProp = (contentObj, isCategoryChanged) => {
   let contentData = { ...contentObj }
 
-  delete contentData.categoryId
+  // 카테고리 변경 없을 시
+  if (contentData.categoryId !== -1 && !isCategoryChanged) {
+    delete contentData.categoryId
+  } else if (contentData.categoryId == -1) {
+    // 최상위 카테고리로 수정
+    contentData.categoryId = null
+  }
+
+  delete contentData.prevCategoryId
   delete contentData.categoryIconName
   delete contentData.siteName
 

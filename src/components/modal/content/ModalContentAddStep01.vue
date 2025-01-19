@@ -159,20 +159,10 @@ async function handleSingleLinkProcess(linkStr, shouldAutoCategorize = false) {
 
   try {
     // 링크 정보 가져오기
-    const linkResult = await contentStore
-      .setSingleLink(linkStr, abortController.signal)
-      .catch((error) => {
-        if (error.name === 'AbortError') {
-          console.log('요청이 취소되었습니다')
-          return
-        }
-        console.error('링크 정보 가져오기 실패:', error)
-        throw new Error('링크 정보 가져오기 실패')
-      })
+    const linkResult = await contentStore.setSingleLink(linkStr, abortController.signal)
 
-    // 요청이 취소되었다면 여기서 중단
-    if (abortController.signal.aborted) {
-      return
+    if (linkResult.data.statusCode !== (200 || 201)) {
+      shouldAutoCategorize = false
     }
 
     // 자동 분류 실행 (조건부)
@@ -186,11 +176,6 @@ async function handleSingleLinkProcess(linkStr, shouldAutoCategorize = false) {
         }
         console.error('카테고리 자동 분류 실패:', error)
       }
-    }
-
-    // 요청이 취소되었다면 여기서 중단
-    if (abortController.signal.aborted) {
-      return
     }
 
     // 링크 정보를 성공적으로 가져왔으므로 모달 표시

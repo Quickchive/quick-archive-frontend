@@ -55,6 +55,7 @@ export const useContentStore = defineStore('content', () => {
     categoryName: '전체 콘텐츠',
     categoryIconName: '',
     categoryId: -1,
+    prevCategoryId: -1,
     coverImg: ''
   })
 
@@ -104,6 +105,7 @@ export const useContentStore = defineStore('content', () => {
   function setContentCategory(category: any) {
     contentObj.categoryName = category.name
     contentObj.categoryId = category.id
+    contentObj.prevCategoryId = category.id
     contentObj.categoryIconName = category.iconName
   }
 
@@ -122,6 +124,7 @@ export const useContentStore = defineStore('content', () => {
     contentObj.favorite = false
     contentObj.categoryName = '전체 콘텐츠'
     contentObj.categoryId = -1
+    contentObj.prevCategoryId = -1
     contentObj.categoryIconName = ''
   }
 
@@ -144,6 +147,7 @@ export const useContentStore = defineStore('content', () => {
     if (content.category !== null) {
       contentObj.categoryName = content.category.name
       contentObj.categoryId = content.category.id
+      contentObj.prevCategoryId = content.category.id
       contentObj.categoryIconName = content.category.iconName
     }
   }
@@ -283,7 +287,8 @@ export const useContentStore = defineStore('content', () => {
 
   async function editContent() {
     try {
-      const contentData = deleteNullEditContentProp(contentObj)
+      const isCategoryChanged = contentObj.prevCategoryId !== contentObj.categoryId
+      const contentData = deleteNullEditContentProp(contentObj, isCategoryChanged)
       const response: any = await updateContents(contentData)
       console.log('editContent', response)
       if (response.data.statusCode === 200) {
@@ -367,25 +372,20 @@ export const useContentStore = defineStore('content', () => {
 
       setContentObj(singleLinkObj)
     } catch (error: any) {
-      if (error.response.data.statusCode === 403) {
-        console.error('OG 데이터 가져오기 실패:', error.message)
-        // 기본값으로 설정
-        const fallbackLinkObj: OgContent = {
-          link: link,
-          coverImg: '', // 또는 기본 이미지 URL
-          title: '제목을 가져올 수 없습니다',
-          description: '설명을 가져올 수 없습니다',
-          siteName: '사이트 이름을 가져올 수 없습니다'
-        }
-        setContentObj(fallbackLinkObj)
+      // 기본값으로 설정
+      const fallbackLinkObj: OgContent = {
+        link: link,
+        coverImg: '', // 또는 기본 이미지 URL
+        title: '제목을 가져올 수 없습니다',
+        description: '설명을 가져올 수 없습니다',
+        siteName: '사이트 이름을 가져올 수 없습니다'
       }
-      if (error.name === 'AbortError') {
-        throw error
-      }
-      // 필요한 경우 에러를 상위로 전파
-      // throw error
+      setContentObj(fallbackLinkObj)
+
+      return error.response
     }
   }
+
   async function fetchMultipleLinksOgData(links: any) {
     const multipleLinksArr = <OgContent[]>[]
 
