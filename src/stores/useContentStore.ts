@@ -357,32 +357,51 @@ export const useContentStore = defineStore('content', () => {
       // }
     }
   }
+  interface OgContent {
+    link: string
+    coverImg: string
+    title: string
+    description: string
+    siteName: string
+    statusCode?: number // 실패 시에만 포함될 상태 코드
+  }
 
-  async function setSingleLink(link: string) {
+  const DEFAULT_OG_CONTENT = {
+    coverImg: '/images/default-thumbnail.png',
+    title: '제목을 가져올 수 없습니다.',
+    description: '',
+    siteName: ''
+  } as const
+
+  async function setSingleLink(link: string): Promise<OgContent> {
+    if (!link) {
+      throw new Error('링크가 제공되지 않았습니다')
+    }
+
     try {
       const ogData = await fetchOgData(link)
 
-      const singleLinkObj: OgContent = {
-        link: link,
-        coverImg: ogData.coverImg,
-        title: ogData.title,
-        description: ogData.description,
-        siteName: ogData.siteName
+      const contentObj: OgContent = {
+        link,
+        coverImg: ogData?.coverImg || DEFAULT_OG_CONTENT.coverImg,
+        title: ogData?.title || DEFAULT_OG_CONTENT.title,
+        description: ogData?.description || DEFAULT_OG_CONTENT.description,
+        siteName: ogData?.siteName || DEFAULT_OG_CONTENT.siteName
       }
 
-      setContentObj(singleLinkObj)
-    } catch (error: any) {
-      // 기본값으로 설정
-      const fallbackLinkObj: OgContent = {
-        link: link,
-        coverImg: '', // 또는 기본 이미지 URL
-        title: '제목을 가져올 수 없습니다',
-        description: '설명을 가져올 수 없습니다',
-        siteName: '사이트 이름을 가져올 수 없습니다'
-      }
-      setContentObj(fallbackLinkObj)
+      setContentObj(contentObj)
+      return contentObj // 성공 시 상태 코드 없이 반환
+    } catch (error) {
+      console.error('OG 데이터 가져오기 실패:', error)
 
-      return error.response
+      const fallbackContent: OgContent = {
+        link,
+        ...DEFAULT_OG_CONTENT,
+        statusCode: 403 // 실패 시 403 상태 코드 포함
+      }
+
+      setContentObj(fallbackContent)
+      return fallbackContent
     }
   }
 
