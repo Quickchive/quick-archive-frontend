@@ -105,6 +105,18 @@ const setMemo = (e) => {
 const saveContent = () => {
   if (props.modalTitle === '콘텐츠 추가') {
     contentStore.addContent()
+    const isCategoryRecommended =
+      userStore.recommendationMode &&
+      (modalViewStore.modal.addContent || modalViewStore.modal.addContentDetail) &&
+      categoryStore.isRecommended &&
+      categoryStore.recommendedCategoryId === contentStore.contentObj.categoryId
+
+    // gtag
+    const isTagShown = isCategoryRecommended ? 'y' : 'n'
+    console.log('isTagShown', isTagShown)
+    gtag('event', 'ai_pick_save', {
+      ai_pick_badge: isTagShown
+    })
   } else {
     contentStore.editContent()
   }

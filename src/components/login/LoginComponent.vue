@@ -41,9 +41,10 @@
           </a>
         </div>
         <div class="desc__wrapper">
-          <a href="https://quick-archive.notion.site/quick-archive-terms-policy"
-            >서비스 이용약관 및 개인정보처리방침</a
-          ><span> 안내</span>
+          <span>로그인 시 </span>
+          <a href="https://quick-archive.notion.site/quick-archive-terms-policy">
+            서비스 이용약관 및 개인정보처리방침</a
+          ><span>에 동의한 것으로 간주됩니다.</span>
         </div>
       </div>
     </div>
