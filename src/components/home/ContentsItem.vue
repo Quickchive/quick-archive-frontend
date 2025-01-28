@@ -2,7 +2,7 @@
   <article class="contents-item">
     <div class="item-container">
       <div class="thumbnail__wrapper">
-        <a :href="item.link" target="_self">
+        <a :href="item.link" target="_blank">
           <img
             :src="item.coverImg ? item.coverImg : ''"
             class="thumbnail"
@@ -15,7 +15,7 @@
         </button>
       </div>
       <footer class="item__wrapper">
-        <a :href="item.link" target="_self">
+        <a :href="item.link" target="_blank">
           <h1>
             {{ item.title }}
           </h1>
@@ -30,7 +30,7 @@
             />
             {{ item.category ? item.category.name : '전체 콘텐츠' }}
           </div>
-          <a v-if="item.siteName" :href="item.link" target="_self">
+          <a v-if="item.siteName" :href="item.link" target="_blank">
             <img :src="divider" />
             {{ item.siteName }}
           </a>
