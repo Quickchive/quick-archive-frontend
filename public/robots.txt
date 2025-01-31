@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /reset/
+Disallow: /home/
+Disallow: /main/detail/
+
+Sitemap: https://quickarchive.co.kr/sitemap.xml
