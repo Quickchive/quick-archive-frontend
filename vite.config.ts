@@ -18,7 +18,6 @@ export default defineConfig({
         const routes = [
           { url: '/', changefreq: 'monthly', priority: 1.0 },
           { url: '/login', changefreq: 'monthly', priority: 0.8 },
-          { url: '/login/tester', changefreq: 'monthly', priority: 0.5 },
           { url: '/main', changefreq: 'daily', priority: 0.9 },
           { url: '/main/search', changefreq: 'daily', priority: 0.8 },
           { url: '/main/setting', changefreq: 'monthly', priority: 0.6 },
