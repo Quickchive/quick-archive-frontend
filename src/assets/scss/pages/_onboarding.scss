@@ -34,6 +34,14 @@
       #btn__web--sm {
         color: $color-white;
         background: #146eff;
+        a {
+          color: $color-white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+        }
       }
     }
   }
@@ -82,7 +90,12 @@
             color: $color-grey-80;
             letter-spacing: -0.3px;
             a {
+              display: flex;
+              align-items: center;
+              justify-content: center;
               color: $color-grey-80;
+              width: 100%;
+              height: 100%;
             }
           }
           #btn__web {
@@ -158,9 +171,9 @@
     height: 140px;
     box-sizing: border-box;
     a {
-      color: $color-grey-80;
+      color: #79797c;
       &:visited {
-        color: $color-grey-80;
+        color: #79797c;
       }
     }
     ul {
@@ -211,5 +224,172 @@
 }
 
 .text-onboarding-mail {
-  color: #515253;
+  color: #79797c;
+}
+
+// 모바일 미디어 쿼리 추가
+@media screen and (max-width: 768px) {
+  .onboarding {
+    .header {
+      padding: 16px 20px;
+
+      .wrapper__header-button {
+        button {
+          @include size(100px, 36px);
+          font-size: 15px;
+          line-height: 1.2;
+        }
+        height: 100%;
+      }
+      #header-button-show {
+        button {
+          padding: 8px 14px;
+          font-size: 13px;
+          border-radius: 900px;
+          word-break: keep-all;
+          font-weight: 600;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          line-height: 1.3;
+        }
+        #btn__app--sm {
+          max-width: 70px;
+        }
+        #btn__web--sm {
+          max-width: 90px;
+          a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+
+    .wrapper__article {
+      padding: 61px 20px 0px 20px;
+
+      .wrapper__article-main {
+        height: auto;
+        padding: 93px 0;
+
+        .section__main {
+          height: auto;
+          padding: 0 16px;
+          width: 100%;
+
+          h2 {
+            font-size: 22px;
+            line-height: 32px;
+          }
+
+          p {
+            font-size: 13px;
+            line-height: 20px;
+          }
+
+          .wrapper__section-button {
+            flex-direction: row;
+            margin-top: 40px;
+            width: 100%;
+            gap: 8px;
+
+            button {
+              @include size(50%, 56px);
+              font-size: 15px;
+              line-height: 24px;
+              font-weight: 600;
+              border-radius: 16px;
+            }
+          }
+        }
+      }
+    }
+
+    #wrapper__article__sub-rev {
+      flex-direction: column;
+    }
+
+    .wrapper__article__sub {
+      flex-direction: column-reverse;
+      gap: 24px;
+      margin-bottom: 54px;
+
+      .article__img-background {
+        width: 100%;
+        height: 400px;
+      }
+
+      .article__text,
+      .article__text-reversed {
+        width: 100%;
+        align-items: flex-start;
+        padding: 0 20px;
+
+        h3 {
+          font-size: 24px;
+          line-height: 32px;
+        }
+
+        p {
+          font-size: 16px;
+          line-height: 24px;
+        }
+      }
+
+      #onboarding_img-1 img {
+        width: 280px;
+      }
+
+      #onboarding_img-2 img {
+        width: 370px;
+      }
+
+      #onboarding_img-3 img {
+        width: 380%;
+        height: unset;
+      }
+
+      .article__text img {
+        width: 20px;
+      }
+
+      .article__text h3 {
+        font-size: 18px;
+        line-height: 28px;
+      }
+
+      .article__text p {
+        font-size: 13px;
+        line-height: 20px;
+      }
+    }
+
+    .footer__onboarding {
+      padding: 28px 20px 62px 20px;
+      height: auto;
+
+      .wrapper__footer-onboarding {
+        flex-direction: column;
+        gap: 24px;
+        align-items: flex-start;
+      }
+
+      ul {
+        flex-wrap: wrap;
+        gap: 8px;
+
+        .btn-main {
+          margin-right: 0;
+          width: 100%;
+          text-align: left;
+          padding: 0;
+        }
+      }
+    }
+  }
 }

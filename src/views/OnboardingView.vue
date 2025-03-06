@@ -3,15 +3,15 @@
     <header class="header">
       <button @click="toMainPage()" class="btn--transparent"><img :src="mainLogo" /></button>
       <transition name="fade">
-        <div class="wrapper__header-button" v-show="showSmButton">
-          <button id="btn__app--sm">
+        <div class="wrapper__header-button" id="header-button-show" v-show="showSmButton">
+          <button id="btn__app--sm" @click="toLoginPage()">로그인</button>
+          <button id="btn__web--sm">
             <a
               href="https://docs.google.com/forms/d/e/1FAIpQLSdyHz30flYLSk4FUwDNnvP18br6vMFIbOqdHP5JOhZk2f_djw/viewform"
               target="_blank"
-              >모바일 앱 출시알람</a
+              >앱 출시알림</a
             >
           </button>
-          <button id="btn__web--sm" @click="toLoginPage">웹에서 이용하기</button>
         </div>
       </transition>
     </header>
@@ -35,7 +35,7 @@
           </div>
         </section>
       </article>
-      <article class="wrapper__article__sub">
+      <article class="wrapper__article__sub" id="wrapper__article__sub-rev">
         <article class="article__img-background" id="onboarding_img-1">
           <img :src="onboarding1" />
         </article>
@@ -61,7 +61,7 @@
           <img :src="onboarding2" />
         </article>
       </article>
-      <article class="wrapper__article__sub">
+      <article class="wrapper__article__sub" id="wrapper__article__sub-rev">
         <article class="article__img-background" id="onboarding_img-3">
           <img :src="onboarding3" />
         </article>
