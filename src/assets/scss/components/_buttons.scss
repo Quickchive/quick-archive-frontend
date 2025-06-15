@@ -392,18 +392,6 @@ button {
   }
 }
 
-// 콘텐츠 공유 버튼
-.content-copy__btn {
-  @include size(61px, 26px);
-  @include color($color-white, $color-blue);
-  @include font(13px, 600, 18px, $color-white);
-  @include flex(row, center, center);
-  padding: 4px 8px;
-  text-align: right;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
 // size 요소만 분리
 // height 기준으로 네이밍
 // width값은 wrapper로 정하기
