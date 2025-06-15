@@ -48,6 +48,10 @@ export const useSearchStore = defineStore('search', () => {
     }
   }
 
+  function clearSearchModalInput() {
+    keyword.value.modal = ''
+  }
+
   function searchCategoryEvent() {
     // 카테고리
     searchedCategory2.value = getCategoryIdWithKeyword(
@@ -125,6 +129,7 @@ export const useSearchStore = defineStore('search', () => {
     findParentAndGrandParent,
     searchCategoryEvent,
     searchedCategory2,
-    getContentCountByCategory
+    getContentCountByCategory,
+    clearSearchModalInput
   }
 })

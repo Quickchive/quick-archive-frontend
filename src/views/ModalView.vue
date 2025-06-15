@@ -103,6 +103,7 @@ import ModalCategoryEdit from '@/components/modal/category/ModalCategoryEdit.vue
 import ModalSelectCategoryOrContent from '@/components/modal/ModalSelectCategoryOrContent.vue'
 import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useAlertDataStore } from '@/stores/useAlertDataStore.ts'
+import { useSearchStore } from '@/stores/useSearchStore.ts'
 import ModalCategorySelect from '@/components/modal/category/ModalCategorySelect.vue'
 import ModalSetCategoryLocation from '@/components/modal/category/ModalSetCategoryLocation.vue'
 import ModalContentStep01 from '@/components/modal/content/ModalContentAddStep01.vue'
@@ -115,6 +116,7 @@ import AlertWithInput from '@/components/modal/alert/AlertWithInput.vue'
 import ModalLoader from '@/components/modal/ModalLoader.vue'
 const modalViewStore = useModalViewStore()
 const alertDataStore = useAlertDataStore()
+const searchStore = useSearchStore()
 
 const closeAddContentStep01Modal = () => {
   modalViewStore.closeAddContentModal()
@@ -139,10 +141,12 @@ const gobackSelectModal = () => {
 }
 
 const gobackAddCategoryModal = () => {
+  searchStore.clearSearchModalInput()
   modalViewStore.hideModal('categoryLocation')
 }
 
 const gobackAddContentModal = () => {
+  searchStore.clearSearchModalInput()
   modalViewStore.hideModal('contentLocation')
 }
 </script>
