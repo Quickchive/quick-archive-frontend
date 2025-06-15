@@ -369,18 +369,3 @@ dialog {
     color: black;
   }
 }
-
-// 콘텐츠 공유 모달
-.content-share__modal {
-  padding: 0 32px 32px 32px;
-  .wrapper__content-share-input {
-    position: relative;
-    @include size(398px, 50px);
-    margin-top: 24px;
-    button {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-    }
-  }
-}

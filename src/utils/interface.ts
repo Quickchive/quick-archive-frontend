@@ -15,7 +15,6 @@ interface Modal {
   // addContent: Ref<boolean>
   // addContentDetail: Ref<boolean>
   // addContentMultiple: Ref<boolean>
-  // shareContent: Ref<boolean>
   // deleteContent: Ref<boolean>
   // editContent: Ref<boolean>
   // editContentDetail: Ref<boolean>

@@ -74,9 +74,6 @@
       :alertData="alertDataStore.deleteContentAlertData"
     ></alert-confirm>
 
-    <!-- 콘텐츠 공유 얼럿 -->
-    <modal-content-share v-if="modalViewStore.modal.shareContent"></modal-content-share>
-
     <!-- 콘텐츠 제목 수정 모달 -->
     <modal-edit-content-title
       v-if="modalViewStore.modal.editContentTitle"
@@ -115,7 +112,6 @@ import AlertDefault from '@/components/modal/alert/AlertDefault.vue'
 import AlertConfirm from '@/components/modal/alert/AlertConfirm.vue'
 import ModalEditContentTitle from '@/components/modal/content/ModalEditContentTitle.vue'
 import AlertWithInput from '@/components/modal/alert/AlertWithInput.vue'
-import ModalContentShare from '@/components/modal/content/ModalContentShare.vue'
 import ModalLoader from '@/components/modal/ModalLoader.vue'
 const modalViewStore = useModalViewStore()
 const alertDataStore = useAlertDataStore()
