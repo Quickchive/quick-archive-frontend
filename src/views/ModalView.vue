@@ -120,21 +120,12 @@ const closeAddContentStep01Modal = () => {
   modalViewStore.closeAddContentModal()
 }
 
-// const closeEditContentStep01Modal = () => {
-//   modalViewStore.closeEditContentModal()
-// }
-
 const closeEditContentSingle = () => {
   modalViewStore.resetAll()
 }
 
 const closeLoader = () => {
   modalViewStore.resetAll()
-
-  // modalViewStore.hideModalWithOverlay('loader', 'default')
-  // modalViewStore.hideModalWithOverlay('select', 'default')
-  // modalViewStore.hideModalWithOverlay('addContentDetail', 'default')
-  // closeAddContentStep01Modal()
 }
 
 const gobackAddContentStep01 = () => {
