@@ -39,7 +39,10 @@
             v-if="categoryStore.hasSelectedCategory"
             class="category-select-icon"
             :src="categoryStore.getCategoryImgByIconName(contentStore.contentObj.categoryIconName)"
-          />{{ contentStore.contentObj.categoryName }}<img :src="nextBlackIcon" />
+          />
+          <span class="category-name-text">
+            {{ contentStore.contentObj.categoryName }} </span
+          ><img :src="nextBlackIcon" />
         </button>
       </div>
     </div>

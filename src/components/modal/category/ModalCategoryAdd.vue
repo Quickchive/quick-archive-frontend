@@ -40,7 +40,10 @@
           v-if="categoryStore.addCategoryObj.parentCategoryName !== '전체 콘텐츠'"
           class="category-select-icon"
           :src="categoryStore.getCategoryImgByIconName(categoryStore.addCategoryObj.parentIconName)"
-        />{{ categoryStore.addCategoryObj.parentCategoryName }}<img :src="nextBlackIcon" />
+        />
+        <span class="category-name-text">
+          {{ categoryStore.addCategoryObj.parentCategoryName }} </span
+        ><img :src="nextBlackIcon" />
       </button>
     </div>
     <div class="modal-footer">
