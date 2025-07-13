@@ -114,7 +114,7 @@ const btnList = [
     clickEvent: () => modalViewStore.showModalWithOverlay('editContentDetail', 'default')
   },
   {
-    name: '공유하기',
+    name: '링크복사',
     clickEvent: () => copyLinkToClipboard()
   },
   {
@@ -134,7 +134,7 @@ const copyLinkToClipboard = async () => {
     await navigator.clipboard.writeText(contentLink)
 
     const toastData = {
-      message: 'URL이 복사되었습니다.',
+      message: '링크가 복사되었습니다.',
       func: {
         message: ''
       }
