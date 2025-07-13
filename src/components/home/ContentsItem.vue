@@ -61,7 +61,6 @@
 </template>
 
 <script setup>
-import categoryIcon from '@/assets/img/category/img_category_watch.png'
 import divider from '@/assets/img/divider_14px.svg'
 import moreIcon from '@/assets/ic/ic_more-32px.svg'
 import MoreButton from '@/components/button/MoreButton.vue'
@@ -75,10 +74,12 @@ import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { getHideAlertFromCookie } from '@/utils/cookies.js'
 import defaultImg from '@/assets/img/img_default.png'
+import { useToastStore } from '@/stores/useToastStore.ts'
 
 const modalViewStore = useModalViewStore()
 const contentStore = useContentStore()
 const categoryStore = useCategoryStore()
+const toastStore = useToastStore()
 
 const router = useRouter()
 const props = defineProps({
@@ -113,8 +114,8 @@ const btnList = [
     clickEvent: () => modalViewStore.showModalWithOverlay('editContentDetail', 'default')
   },
   {
-    name: '공유하기',
-    clickEvent: () => modalViewStore.showModalWithOverlay('shareContent', 'default')
+    name: '링크복사',
+    clickEvent: () => copyLinkToClipboard()
   },
   {
     name: '삭제하기',
@@ -124,6 +125,25 @@ const btnList = [
         : modalViewStore.openDeleteContentModal()
   }
 ]
+
+/* 공유하기 */
+const copyLinkToClipboard = async () => {
+  const contentLink = contentStore.contentObj.link
+
+  try {
+    await navigator.clipboard.writeText(contentLink)
+
+    const toastData = {
+      message: '링크가 복사되었습니다.',
+      func: {
+        message: ''
+      }
+    }
+    toastStore.executeDefaultToast(toastData)
+  } catch (err) {
+    console.error('복사 실패:', err)
+  }
+}
 
 const excludeItem = (obj, excludedKey) => {
   let result = {}

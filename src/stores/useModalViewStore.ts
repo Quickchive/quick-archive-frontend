@@ -15,7 +15,6 @@ export const useModalViewStore = defineStore('modalView', () => {
     addContent: ref(false),
     addContentDetail: ref(false),
     addContentMultiple: ref(false),
-    shareContent: ref(false),
     deleteContent: ref(false),
     editContent: ref(false),
     editContentDetail: ref(false),

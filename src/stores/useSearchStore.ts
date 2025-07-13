@@ -48,6 +48,10 @@ export const useSearchStore = defineStore('search', () => {
     }
   }
 
+  function clearSearchModalInput() {
+    keyword.value.modal = ''
+  }
+
   function searchCategoryEvent() {
     // 카테고리
     searchedCategory2.value = getCategoryIdWithKeyword(
@@ -66,35 +70,6 @@ export const useSearchStore = defineStore('search', () => {
       return categoryName.name
     }
     return 0
-  }
-
-  function getCategoryDepth3NameById(parentId: number) {
-    const grandParentName = getCategoryDepth2NameById(parentId)
-    console.log('grandParentName', grandParentName)
-    const categoryName = categoryStore.categoryList.find((e: any) => e.name === grandParentName)
-    if (categoryName) {
-      return categoryName.name
-    }
-  }
-
-  // 3차 카테고리인지 체크
-  function isCategoryDepth3(id: number) {
-    // ex) parentId = 6 (3차 카테고리)
-
-    // 1차만 있는 카테고리는 여기에 넘기지 않음
-    // 고로 이 함수로 체크하는 값은 2 또는 3인 값
-    // 3차 카테고리라면 true를, 2차 카테고리라면 false를 반환.
-
-    // 1. id로 현재 위치를 찾음
-    // result가 있다면 2차 카테고리임.
-    // result가 없다면 3차 카테고리임.
-    const result = categoryStore.categoryList.find((e: any) => e.id === id)
-    if (result) {
-      // console.log('2차 카테고리')
-      return false
-    }
-    // console.log('3차 카테고리')
-    return true
   }
 
   function findParentAndGrandParent(id: number) {
@@ -150,12 +125,11 @@ export const useSearchStore = defineStore('search', () => {
     searchedCategory,
     searchedContent,
     searchEvent,
-    getCategoryDepth3NameById,
-    isCategoryDepth3,
     getCategoryDepth2NameById,
     findParentAndGrandParent,
     searchCategoryEvent,
     searchedCategory2,
-    getContentCountByCategory
+    getContentCountByCategory,
+    clearSearchModalInput
   }
 })

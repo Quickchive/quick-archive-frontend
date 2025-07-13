@@ -55,17 +55,17 @@
                   class="img-search-category-result"
                 />
                 <!-- 1차 카테고리만 존재 -->
-                <div class="searchResult-category-text-box" v-if="category.categoryId === null">
+                <div class="searchResult-category-text-box" v-if="category.parentId === null">
                   <h1 class="searchResult-category-title">{{ category.name }}</h1>
                   <div class="searchResult-category-detail">
                     <!-- 카테고리 위치 -->
                     <span>{{ category.contents.length }}개 콘텐츠</span>
                   </div>
                 </div>
-                <!-- 1차 카테고리 && 2차 카테고리 존재 -->
+                <!-- 1차 카테고리 && 2차 카테고리 존재 && 3차 -->
                 <div
                   class="searchResult-category-text-box"
-                  v-if="category.categoryId !== null && !category.children"
+                  v-if="category.parentId !== null && !category.children"
                 >
                   <h1 class="searchResult-category-title">{{ category.name }}</h1>
                   <div class="searchResult-category-detail">
@@ -86,15 +86,15 @@
                     <span>{{ category.contents.length }}개 콘텐츠</span>
                   </div>
                 </div>
-                <!-- 1차 카테고리 && 2차 카테고리 && 3차 카테고리 존재  -->
+                <!-- 1차 카테고리 && 2차 카테고리 존재  -->
                 <div
                   class="searchResult-category-text-box"
-                  v-if="category.categoryId !== null && category.children"
+                  v-if="category.parentId !== null && category.children"
                 >
                   <h1 class="searchResult-category-title">{{ category.name }}</h1>
                   <div class="searchResult-category-detail">
                     <!-- 카테고리 위치 -->
-                    <span>{{ searchStore.getCategoryDepth2NameById(category.categoryId) }} </span>
+                    <span>{{ searchStore.getCategoryDepth2NameById(category.parentId) }} </span>
                     <img :src="dividerIcon" />
                     <span>{{ category.contents.length }}개 콘텐츠</span>
                   </div>

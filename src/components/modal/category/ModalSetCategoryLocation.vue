@@ -44,7 +44,7 @@
       </button>
     </div>
 
-    <!-- 카테고리 목록 (라디오 버튼) -->
+    <!-- 카테고리 목록 전체(라디오 버튼) -->
     <template v-if="searchStore.keyword.modal === ''">
       <div
         class="wrapper__modal-category-list"
@@ -59,6 +59,7 @@
         <category-item-with-radio-button></category-item-with-radio-button>
       </div>
     </template>
+    <!-- 카테고리 목록 검색 결과(라디오 버튼) -->
     <template v-else>
       <div>
         <category-item-with-radio-button-search
