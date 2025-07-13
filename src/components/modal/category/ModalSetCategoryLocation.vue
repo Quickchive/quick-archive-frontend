@@ -5,6 +5,7 @@
       :isBtnOnLeft="true"
       :titlePosition="'left'"
       :closeModal="closeModal"
+      :useBackIcon="true"
     ></modal-header>
     <div
       :class="
