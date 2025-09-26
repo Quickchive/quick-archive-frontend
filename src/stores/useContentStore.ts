@@ -29,8 +29,7 @@ import {
   deleteNullEditContentProp,
   formatMultipleLinks
 } from '@/utils/util.js'
-import { useRouter } from 'vue-router'
-import { json } from 'stream/consumers'
+import { sendContentSaveEvent } from '@/utils/analytics'
 
 export const useContentStore = defineStore('content', () => {
   const alertDataStore = useAlertDataStore()
@@ -39,7 +38,6 @@ export const useContentStore = defineStore('content', () => {
   const categoryStore = useCategoryStore()
 
   const route = useRoute()
-  const router = useRouter()
 
   /*** state ***/
 
@@ -215,7 +213,7 @@ export const useContentStore = defineStore('content', () => {
 
   async function favoriteContent(contentId: number) {
     try {
-      const response = await addFavorite(contentId)
+      await addFavorite(contentId)
     } catch (error) {
       console.log(error)
     }
@@ -226,7 +224,17 @@ export const useContentStore = defineStore('content', () => {
       const contentData = deleteNullContentProp(contentObj)
       const response: any = await addContents(contentData)
       console.log('addContent', response)
+
       if (response.data.statusCode === 201) {
+        // GA4 content_save 이벤트 전송
+        const requestData = JSON.parse(response.config.data)
+        await sendContentSaveEvent({
+          content_id: response.data.content?.id || 'unknown',
+          category_id: contentObj.categoryId || -1,
+          ai_category_suggested: false, // AI 추천 카테고리 사용 여부 (필요시 실제 로직으로 변경)
+          is_category_modified: contentObj.prevCategoryId !== contentObj.categoryId
+        })
+
         modalViewStore.resetAll()
         categoryStore.resetParentCategory()
         resetContentObj()
@@ -238,7 +246,6 @@ export const useContentStore = defineStore('content', () => {
           // 전체 콘텐츠 페이지인 경우
           fetchAllContents()
         }
-        const jsonResponse = JSON.parse(response.config.data)
         const toastData = {
           message: '콘텐츠가 추가되었습니다.',
           func: {
@@ -247,7 +254,7 @@ export const useContentStore = defineStore('content', () => {
               // 해당 카테고리로 이동 후 (categoryName으로 categoryId 찾는 로직 구현 필요)
               // router.push(`/home/detail/${categoryId}`)
               // 새탭에서 해당 콘텐츠 열기 처리
-              window.open(jsonResponse.link)
+              window.open(requestData.link)
             }
           }
         }
@@ -269,6 +276,19 @@ export const useContentStore = defineStore('content', () => {
       }
       const response: any = await addMultipleContents(contentData)
       console.log('addMultipleContent', response)
+      
+      // GA4 content_save 이벤트 전송 (다중 콘텐츠)
+      if (response.data?.statusCode === 201 && response.data?.contents) {
+        // 저장된 각 콘텐츠에 대해 이벤트 전송
+        for (const content of response.data.contents) {
+          await sendContentSaveEvent({
+            content_id: content.id || 'unknown',
+            category_id: contentObj.categoryId || -1,
+            ai_category_suggested: false,
+            is_category_modified: false // 다중 콘텐츠는 기본적으로 카테고리 변경 없음
+          })
+        }
+      }
     } catch (error: any) {
       // 토스트
       toastStore.executeErrorToast(error.message)
@@ -357,7 +377,7 @@ export const useContentStore = defineStore('content', () => {
       // }
     }
   }
-  interface OgContent {
+  interface LocalOgContent {
     link: string
     coverImg: string
     title: string
@@ -373,7 +393,7 @@ export const useContentStore = defineStore('content', () => {
     siteName: ''
   } as const
 
-  async function setSingleLink(link: string): Promise<OgContent> {
+  async function setSingleLink(link: string): Promise<LocalOgContent> {
     if (!link) {
       throw new Error('링크가 제공되지 않았습니다')
     }
@@ -381,7 +401,7 @@ export const useContentStore = defineStore('content', () => {
     try {
       const ogData = await fetchOgData(link)
 
-      const contentObj: OgContent = {
+      const contentObj: LocalOgContent = {
         link,
         coverImg: ogData?.coverImg || DEFAULT_OG_CONTENT.coverImg,
         title: ogData?.title || DEFAULT_OG_CONTENT.title,
@@ -394,7 +414,7 @@ export const useContentStore = defineStore('content', () => {
     } catch (error) {
       console.error('OG 데이터 가져오기 실패:', error)
 
-      const fallbackContent: OgContent = {
+      const fallbackContent: LocalOgContent = {
         link,
         ...DEFAULT_OG_CONTENT,
         statusCode: 403 // 실패 시 403 상태 코드 포함
@@ -406,7 +426,7 @@ export const useContentStore = defineStore('content', () => {
   }
 
   async function fetchMultipleLinksOgData(links: any) {
-    const multipleLinksArr = <OgContent[]>[]
+    const multipleLinksArr = <LocalOgContent[]>[]
 
     for (let i = 0; i < links.length; i++) {
       const ogData = await fetchOgData(links[i])
