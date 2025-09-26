@@ -8,7 +8,7 @@
     <!-- 카테고리 추가 모달 -->
     <modal-category-add
       v-if="modalViewStore.modal.addCategory"
-      :closeModal="gobackSelectModal"
+      :closeModal="closeModal"
     ></modal-category-add>
     <modal-category-select v-if="modalViewStore.modal.selectCategory"></modal-category-select>
 
@@ -30,7 +30,7 @@
     <!-- 콘텐츠 추가 - 단일 링크 -->
     <modal-content-step-01
       v-if="modalViewStore.modal.addContent"
-      :closeModal="closeAddContentStep01Modal"
+      :closeModal="closeModal"
       :modalTitle="'콘텐츠 추가'"
     ></modal-content-step-01>
 
@@ -43,7 +43,7 @@
 
     <modal-content-single
       v-if="modalViewStore.modal.addContentDetail"
-      :closeModal="modalViewStore.closeAddContentSingle"
+      :closeModal="closeModal"
       :modalTitle="'콘텐츠 추가'"
       :goBack="gobackAddContentStep01"
     ></modal-content-single>
@@ -51,7 +51,7 @@
     <!-- 콘텐츠 추가 - 다중 링크 -->
     <modal-content-multiple
       v-if="modalViewStore.modal.addContentMultiple"
-      :closeModal="gobackSelectModal"
+      :closeModal="closeModal"
       :modalTitle="'콘텐츠 추가'"
       :goBack="gobackAddContentStep01"
     ></modal-content-multiple>
@@ -118,10 +118,6 @@ const modalViewStore = useModalViewStore()
 const alertDataStore = useAlertDataStore()
 const searchStore = useSearchStore()
 
-const closeAddContentStep01Modal = () => {
-  modalViewStore.closeAddContentModal()
-}
-
 const closeEditContentSingle = () => {
   modalViewStore.resetAll()
 }
@@ -135,9 +131,8 @@ const gobackAddContentStep01 = () => {
   modalViewStore.openAddContentModal()
 }
 
-const gobackSelectModal = () => {
-  modalViewStore.resetAllModal()
-  modalViewStore.showModal('select')
+const closeModal = () => {
+  modalViewStore.resetAll()
 }
 
 const gobackAddCategoryModal = () => {

@@ -74,12 +74,13 @@ const editNicknameButton = ref('변경하기')
 const userStore = useUserStore()
 const modalViewStore = useModalViewStore()
 const nickname = ref(userStore.nickname)
+const input = ref(null)
 
 const clearText = () => {
+  nickname.value = ''
   if (input.value) {
     input.value.focus()
   }
-  nickname.value = ''
 }
 
 const editNickname = async () => {

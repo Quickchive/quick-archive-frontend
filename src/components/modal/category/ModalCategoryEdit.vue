@@ -38,7 +38,11 @@
           :src="
             categoryStore.getCategoryImgByIconName(categoryStore.editCategoryObj.parentIconName)
           "
-        />{{ categoryStore.editCategoryObj.parentCategoryName }}<img :src="nextBlackIcon" />
+        />
+        <span class="category-name-text">
+          {{ categoryStore.editCategoryObj.parentCategoryName }}
+        </span>
+        <img :src="nextBlackIcon" />
       </button>
     </div>
     <div class="modal-footer">

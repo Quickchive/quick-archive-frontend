@@ -2,6 +2,9 @@
   "name": "quick-archive-frontend",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "vercel-build": "if [ \"$VERCEL_ENV\" = \"production\" ]; then npm run build:prod; else npm run build:dev; fi",
     "dev": "vite --mode development",
@@ -25,9 +28,9 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
-    "@tsconfig/node18": "^2.0.1",
+    "@tsconfig/node22": "^22.0.2",
     "@types/jsdom": "^21.1.1",
-    "@types/node": "^18.16.17",
+    "@types/node": "^22.18.6",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.3",
