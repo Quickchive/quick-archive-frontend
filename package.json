@@ -2,6 +2,9 @@
   "name": "quick-archive-frontend",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "vercel-build": "if [ \"$VERCEL_ENV\" = \"production\" ]; then npm run build:prod; else npm run build:dev; fi",
     "dev": "vite --mode development",
