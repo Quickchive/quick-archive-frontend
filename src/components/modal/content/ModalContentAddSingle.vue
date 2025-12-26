@@ -88,6 +88,7 @@ import { useModalViewStore } from '@/stores/useModalViewStore.ts'
 import { useContentStore } from '@/stores/useContentStore.ts'
 import { useCategoryStore } from '@/stores/useCategoryStore.ts'
 import { useUserStore } from '@/stores/useUserStore.ts'
+import { sendGA4Event } from '@/utils/analytics'
 
 const modalViewStore = useModalViewStore()
 const contentStore = useContentStore()
@@ -105,21 +106,19 @@ const setMemo = (e) => {
   contentStore.setMemo(e.target.value)
 }
 
-const saveContent = () => {
+const saveContent = async () => {
   if (props.modalTitle === '콘텐츠 추가') {
-    contentStore.addContent()
+    const isSaved = await contentStore.addContent()
     const isCategoryRecommended =
       userStore.recommendationMode &&
       (modalViewStore.modal.addContent || modalViewStore.modal.addContentDetail) &&
       categoryStore.isRecommended &&
       categoryStore.recommendedCategoryId === contentStore.contentObj.categoryId
 
-    // gtag
     const isTagShown = isCategoryRecommended ? 'y' : 'n'
-    console.log('isTagShown', isTagShown)
-    gtag('event', 'ai_pick_save', {
-      ai_pick_badge: isTagShown
-    })
+    if (isSaved) {
+      void sendGA4Event('ai_pick_save', { ai_pick_badge: isTagShown, debug_mode: true })
+    }
   } else {
     contentStore.editContent()
   }
