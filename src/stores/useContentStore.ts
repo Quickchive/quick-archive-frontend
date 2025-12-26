@@ -219,7 +219,7 @@ export const useContentStore = defineStore('content', () => {
     }
   }
 
-  async function addContent(): Promise<boolean> {
+  async function addContent() {
     try {
       const contentData = deleteNullContentProp(contentObj)
       const response: any = await addContents(contentData)
@@ -259,13 +259,10 @@ export const useContentStore = defineStore('content', () => {
           }
         }
         toastStore.executeDefaultToast(toastData)
-        return true
       }
-      return false
     } catch (error: any) {
       console.log(error)
       toastStore.executeErrorToast(error.message)
-      return false
     }
   }
 
